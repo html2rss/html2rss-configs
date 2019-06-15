@@ -3,13 +3,6 @@ RSpec.describe Html2rss::Configs do
     expect(Html2rss::Configs::VERSION).not_to be nil
   end
 
-  describe '::PREFIX' do
-    subject { described_class::PREFIX }
-
-    it { is_expected.to eq File.join('lib', 'html2rss', 'configs') }
-    it { is_expected.to be_frozen }
-  end
-
   describe '.file_names' do
     subject { described_class.file_names }
 
