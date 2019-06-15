@@ -3,7 +3,7 @@ language: ruby
 cache: bundler
 
 before_install:
-  - sudo apt-get install yamllint
+  - sudo apt-get install -y yamllint
   - gem update --system
   - gem install bundler
 
