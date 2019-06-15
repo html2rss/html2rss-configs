@@ -1,0 +1,26 @@
+channel:
+  title: mopo kb-fh
+  url: https://www.morgenpost.de/bezirke/friedrichshain-kreuzberg/
+  ttl: 720
+selectors:
+  items:
+    selector: 'article.teaser'
+  title:
+    selector: '.teaser__headline'
+    post_process:
+      name: 'template'
+      string: '%s: %s'
+      methods:
+        - kicker
+        - self
+  kicker:
+    selector: '.teaser__kicker'
+  link:
+    selector: 'a'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'
+  description:
+    selector: '.teaser__body__text'
+  categories:
+    - kicker

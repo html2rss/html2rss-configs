@@ -1,0 +1,14 @@
+channel:
+  title: 'Phys.org Weekly'
+  url: https://phys.org/weekly-news/
+  ttl: 120
+selectors:
+  items:
+    selector: '.news-box.news-latest'
+  title:
+    selector: 'h5 > a'
+  link:
+    selector: 'h5 > a'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'

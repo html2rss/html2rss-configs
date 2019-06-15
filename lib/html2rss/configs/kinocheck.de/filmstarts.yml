@@ -1,0 +1,23 @@
+channel:
+  title: 'Kinocheck Filmstarts'
+  url: https://kinocheck.de/filmstarts
+  ttl: 720
+selectors:
+  items:
+    selector: '.filmstart'
+  title:
+    selector: 'h1 > a'
+    post_process:
+      name: 'template'
+      string: '%s (%s)'
+      methods:
+        - self
+        - start_date
+  link:
+    selector: 'h1 > a'
+    extractor: 'href'
+  description:
+    selector: '.info'
+    extractor: 'html'
+  start_date:
+    selector: 'h1 > div'
