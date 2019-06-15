@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+
+yamllint lib/html2rss/configs/
