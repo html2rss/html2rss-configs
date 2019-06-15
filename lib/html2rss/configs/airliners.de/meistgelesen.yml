@@ -1,0 +1,19 @@
+channel:
+  title: 'airliners meistgelesen'
+  url: https://www.airliners.de
+  ttl: 180
+selectors:
+  items:
+    selector: '.me-article-toplist li'
+  title:
+    selector: 'a'
+    post_process:
+      name: substring
+      start: 2
+  subtitle:
+    selector: '.article__subtitle'
+  link:
+    selector: 'a'
+    extractor: 'href'
+  categories:
+    - subtitle

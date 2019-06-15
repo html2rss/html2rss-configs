@@ -1,0 +1,18 @@
+channel:
+  title: 'f1'
+  url: https://www.formula1.com/en/latest/all.html
+  ttl: 600
+selectors:
+  items:
+    selector: '.f1-latest-listing .f1-latest-listing--grid-item'
+  title:
+    selector: '.f1--s'
+  link:
+    selector: 'a.f1-cc'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'
+  categories:
+    - category
+  category:
+    selector: '.misc--tag'

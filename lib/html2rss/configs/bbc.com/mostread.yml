@@ -1,0 +1,14 @@
+channel:
+  title: bbc-mostread
+  url: https://www.bbc.com/news/popular/read
+  ttl: 600
+selectors:
+  items:
+    selector: '.most-popular__list > li'
+  title:
+    selector: '.most-popular-list-item__headline'
+  link:
+    selector: '.most-popular-list-item__link'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'

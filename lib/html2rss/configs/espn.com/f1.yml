@@ -1,0 +1,12 @@
+channel:
+  title: 'ESPN F1 Top Headlines'
+  url: http://www.espn.com/f1/
+  ttl: 180
+selectors:
+  items:
+    selector: '.headlineStack__list > li'
+  title:
+    selector: 'a'
+  link:
+    selector: 'a'
+    extractor: 'href'

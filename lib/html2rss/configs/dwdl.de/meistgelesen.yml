@@ -1,0 +1,12 @@
+channel:
+  title: 'DWDL.de meistgelesen'
+  url: https://www.dwdl.de/core/marginal/ajax.nbox-2.php
+  ttl: 720
+selectors:
+  items:
+    selector: 'tr'
+  title:
+    selector: 'a'
+  link:
+    selector: 'a'
+    extractor: 'href'
