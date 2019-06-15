@@ -3,23 +3,40 @@
 This repository contains [html2rss](https://github.com/gildesmarais/html2rss)
 configs for several websites.
 
-## Usage
+[Find all provided configs in `configs/`.](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs)
 
-`Html2rss::Configs.find_by_name('domainname.tld/whatever')` returns a Hash.
-
-## Usage with html2rss-web
+## Usage from html2rss-web
 
 If you're using [html2rss-web](https://github.com/gildesmarais/html2rss-web),
-you have nothing more to do than adding this to your `config.yml`:
+you have nothing more to do! 🎉
 
-# TODO: add instructions 🙈
+Request a feed via: `/domainname.tld/whatever.rss`.
 
-Do not forget to fetch the latest version regularly to profit from the changes
-made in this repository.
+Your full URL might looks like this:
+`http://my.server/html2rss/domainname.tld/whatever.rss`
+
+## Usage without html2rss-web
+
+Add this line to your Gemfile:
+
+`gem 'html2rss-configs', git: 'https://github.com/gildesmarais/html2rss-configs.git'`
+
+Use it in your code:
+
+```
+require 'html2rss/configs'
+
+Html2rss::Configs.find_by_name('domainname.tld/whatever')
+```
+
+This will return the feed config as a Hash with String keys.
 
 ## Creating a new config
 
-Create a file in `lib/html2rss/configs/domainname.tld/whatever.yml`.
+Create the file in `lib/html2rss/configs/domainname.tld/whatever.yml`.
+It only requires a `channel` and a `selectors` object.
+
+Peek into the existing files and the [html2rss test config](https://github.com/gildesmarais/html2rss/blob/master/spec/config.test.yml).
 
 Some tips and tricks:
 
