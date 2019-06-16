@@ -21,5 +21,6 @@ config:
 		exit 1; \
 	fi
 	mkdir -p "lib/html2rss/configs/$(domain)/"
-	bin/template_gen_config_spec "$(domain)/$(name).yml" > "lib/html2rss/configs/$(domain)/$(name)_spec.rb"
+	mkdir -p "spec/html2rss/configs/$(domain)"
+	bin/template_gen_config_spec "$(domain)/$(name).yml" > "spec/html2rss/configs/$(domain)/$(name).yml_spec.rb"
 	bin/template_gen_config "$(domain)" "$(name)" > "lib/html2rss/configs/$(domain)/$(name).yml"

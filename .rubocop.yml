@@ -22,3 +22,4 @@ Style/BlockDelimiters:
 RSpec/DescribeClass:
   Exclude:
     - "spec/html2rss/configs/**/*.yml_spec.rb"
+    - "spec/bin/*_spec.rb"
