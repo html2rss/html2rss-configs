@@ -9,7 +9,7 @@ specs_to_run = changed_files.map do |file|
 end.compact
 
 if specs_to_run.count.positive?
-  `bundle exec rspec --tag fetch #{specs_to_run.join(' ')}`
+  exec "bundle exec rspec --tag fetch #{specs_to_run.join(' ')}"
 else
   exit 0
 end
