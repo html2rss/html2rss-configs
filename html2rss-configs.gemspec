@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'html2rss-configs'
   spec.version       = Html2rss::Configs::VERSION
   spec.authors       = ['Gil Desmarais']
-  spec.email         = ['gil@desmarais.de']
+  spec.email         = ['html2rss-configs@desmarais.de']
 
   spec.summary       = 'Collection of ready-to-use html2rss configs.'
   spec.description   = 'Configs which contain information how to generate RSS items from websites.'

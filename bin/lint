@@ -2,3 +2,4 @@
 set -e
 
 yamllint lib/html2rss/configs/
+bundle exec rubocop -P -f quiet
