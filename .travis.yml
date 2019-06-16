@@ -15,6 +15,6 @@ rvm:
   - 2.6.3
 
 script:
-  - bin/lint
-  - bundle exec rspec
-  - 'if [[ "$TRAVIS_PULL_REQUEST" != false ]]; then bin/rspec_changed_configs; fi'
+  - make lint
+  - make test
+  - 'if [[ "$TRAVIS_PULL_REQUEST" != false ]]; then make test_changed_configs fi'
