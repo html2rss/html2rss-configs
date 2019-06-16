@@ -31,10 +31,19 @@ Html2rss::Configs.find_by_name('domainname.tld/whatever')
 
 This will return the feed config as a Hash with String keys.
 
-## Creating a new config
+## Development
 
-Create the file in `lib/html2rss/configs/domainname.tld/whatever.yml`.
-It only requires a `channel` and a `selectors` object.
+All YAML files are linted with [yamllint](https://github.com/adrienverge/yamllint).
+More specific linting of configs will surely come.
+
+Modified or added configs will additionally `rspec`'d and fetch the feed.
+
+### Adding a new config
+
+1. create a yml file in `lib/html2rss/configs/domainname.tld/whatever.yml`.
+2. create a rspec file in `spec/html2rss/configs/domainname.tld/whatever.yml_spec.rb`.
+
+The yml file only requires a `channel` and a `selectors` object.
 
 Peek into the existing files and the [html2rss test config](https://github.com/gildesmarais/html2rss/blob/master/spec/config.test.yml).
 
@@ -46,10 +55,9 @@ Some tips and tricks:
   [`pup`](https://github.com/ericchiang/pup) to find the selectors seems quite
   efficient
 
-## Development
+### Check all configs work
 
-All YAML files are linted with [yamllint](https://github.com/adrienverge/yamllint).
-More specific linting of configs will surely come.
+Run `bundle exec rspec --tag fetch spec/html2rss/configs`.
 
 ## Contributions
 
