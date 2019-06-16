@@ -1,9 +1,14 @@
-Html2rss::Configs.file_names.each do |file_name|
-  RSpec.describe file_name do
-    subject(:yaml) { YAML.safe_load(file) }
+RSpec.shared_examples 'config.yml' do |file_name|
+  subject(:yaml) { YAML.safe_load(file) }
 
-    let(:file) { File.open(file_name) }
+  let!(:file) {
+    path = File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
+    File.open(path)
+  }
 
+  let(:feed_name) { file.path.split(File::Separator)[-2..-1].join(File::Separator) }
+
+  context 'with the file' do
     it 'is parseable' do
       expect { yaml }.not_to raise_error
     end
@@ -14,7 +19,9 @@ Html2rss::Configs.file_names.each do |file_name|
 
       expect(dirname).to eq(host_name)
     end
+  end
 
+  context 'with file contents' do
     it 'has channel' do
       expect(yaml).to have_key 'channel'
     end
@@ -39,6 +46,26 @@ Html2rss::Configs.file_names.each do |file_name|
           expect(yaml['selectors'][required_attribute]).not_to be_empty
         end
       end
+    end
+  end
+
+  context 'with fetching', :fetch do
+    subject(:feed) { Html2rss.feed(config) }
+
+    let(:global_config) {
+      { 'headers' => {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
+      } }
+    }
+
+    let(:config) { Html2rss::Config.new(global_config, feed_name) }
+
+    before do
+      global_config['feeds'] = { feed_name => Html2rss::Configs.find_by_name(feed_name) }
+    end
+
+    it 'has positive amount of items' do
+      expect(feed.items.count).to be_positive
     end
   end
 end

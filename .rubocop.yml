@@ -18,3 +18,7 @@ Style/FrozenStringLiteralComment:
 
 Style/BlockDelimiters:
   Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/html2rss/configs/**/*.yml_spec.rb"
