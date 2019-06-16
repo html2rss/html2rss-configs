@@ -16,11 +16,12 @@ test-fetch-all-configs:
 test-all: test test-fetch-all-configs
 
 config:
-	@if [ -z "$(domain)" ] || [ -z "$(name)" ]; then \
-		echo "Usage: make config domain=domain.tld name=latest" \
-		exit 1; \
-	fi
-	mkdir -p "lib/html2rss/configs/$(domain)/"
-	mkdir -p "spec/html2rss/configs/$(domain)"
-	bin/template_gen_config_spec "$(domain)/$(name).yml" > "spec/html2rss/configs/$(domain)/$(name).yml_spec.rb"
-	bin/template_gen_config "$(domain)" "$(name)" > "lib/html2rss/configs/$(domain)/$(name).yml"
+	@if [ -z "$(domain)" ] || [ -z "$(name)" ]; \
+	then \
+		echo "Usage: make config domain=domain.tld name=latest"; \
+	else \
+		mkdir -p "lib/html2rss/configs/$(domain)/" && \
+		mkdir -p "spec/html2rss/configs/$(domain)/" && \
+		bin/template_gen_config_spec "$(domain)/$(name).yml" > "spec/html2rss/configs/$(domain)/$(name).yml_spec.rb" && \
+		bin/template_gen_config "$(domain)" "$(name)" > "lib/html2rss/configs/$(domain)/$(name).yml"; \
+	fi;

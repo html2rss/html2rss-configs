@@ -35,19 +35,16 @@ This will return the feed config as a Hash with String keys.
 
 Contributions are more than welcome!
 
-### Adding a new config.yml
+### Adding a new config
 
-1. create a yml file in `lib/html2rss/configs/domainname.tld/whatever.yml`.
-2. create a rspec file in `spec/html2rss/configs/domainname.tld/whatever.yml_spec.rb`.
+There's a generator for that! 🆒
 
-The yml file only requires a `channel` and a `selectors` object.
+`make config domain=domainname.tld name=whatever`
 
-Peek into the existing files and the [html2rss test config](https://github.com/gildesmarais/html2rss/blob/master/spec/config.test.yml).
+Change `domain` and `name` values to desired values. Then head to the generated
+files and add the selectors etc.
 
-Modified or added configs will be used on CI to fetch the feed and check
-for the presence of feed items.
-
-See [.travis.yml -> scripts](https://github.com/gildesmarais/html2rss-configs/blob/master/.travis.yml) which commands will be executed during build.
+Look around in the existing config.yml files, e.g. the extensive [github.com/nuxt.js_releases.yml](https://github.com/gildesmarais/html2rss-configs/blob/master/lib/html2rss/configs/github.com/nuxt.js_releases.yml).
 
 ### Gotchas and tips & tricks
 
@@ -58,3 +55,10 @@ When creating a config,
 - fiddling with [`curl`](https://github.com/curl/curl) and
   [`pup`](https://github.com/ericchiang/pup) to find the selectors seems quite
   efficient.
+
+## Building on the CI
+
+Modifying existing or adding new configs will trigger the CI to fetch the feed
+and check for the presence of feed items.
+
+See [.travis.yml -> script](https://github.com/gildesmarais/html2rss-configs/blob/master/.travis.yml) which commands will be executed during build.
