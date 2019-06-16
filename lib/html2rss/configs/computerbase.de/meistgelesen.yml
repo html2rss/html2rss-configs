@@ -1,0 +1,25 @@
+channel:
+  title: 'computerbase.de meistgelesen'
+  url: https://www.computerbase.de
+  ttl: 720
+selectors:
+  items:
+    selector: '.charts > li'
+  title:
+    selector: '.charts__title'
+    post_process:
+      name: 'template'
+      string: '%s: %s'
+      methods:
+        - context
+        - self
+  context:
+    selector: '.charts__context'
+  link:
+    selector: '.charts__link'
+    extractor: 'href'
+  author:
+    selector: '.invisible'
+  description:
+    selector: '.text-subtle'
+    extractor: 'html'

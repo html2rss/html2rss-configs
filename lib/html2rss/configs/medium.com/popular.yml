@@ -1,0 +1,16 @@
+channel:
+  title: 'medium.com popular'
+  url: https://medium.com/topic/popular
+  ttl: 120
+selectors:
+  items:
+    selector: 'h2:contains("Latest") + div > section'
+  title:
+    selector: 'h3 a'
+  link:
+    selector: 'h3 a'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'
+  author:
+    selector: 'div a span'

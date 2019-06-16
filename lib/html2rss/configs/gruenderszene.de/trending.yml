@@ -1,0 +1,14 @@
+channel:
+  title: 'Gründerszene Trending'
+  url: https://www.gruenderszene.de
+  ttl: 120
+selectors:
+  items:
+    selector: '.sidebar_trending .top-sidebar-entries-wrapper'
+  title:
+    selector: 'a'
+  link:
+    selector: 'a'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'
