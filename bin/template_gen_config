@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+exit(-1) if !ARGV[0] || !ARGV[1]
+
+domain = ARGV[0]
+name = ARGV[1]
+
+puts <<~YML
+  channel:
+    title: '#{domain}: #{name}'
+    url: https://#{domain}/
+    ttl: 720
+  selectors:
+    items:
+      selector: 'ul.items > li'
+    title:
+      selector: 'h1'
+    link:
+      selector: 'a'
+      extractor: 'href'
+YML

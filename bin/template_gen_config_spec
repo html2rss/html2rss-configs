@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+exit(-1) unless ARGV[0]
+
+file_name = ARGV[0]
+
+puts <<~RSPEC
+  RSpec.describe '#{file_name}' do
+    include_examples 'config.yml', '#{file_name}'
+  end
+RSPEC
