@@ -4,11 +4,15 @@ channel:
   ttl: 120
 selectors:
   items:
-    selector: '.news-box.news-latest'
+    selector: '.sorted-news-list .sorted-article-content'
   title:
-    selector: 'h5 > a'
+    selector: 'h4'
+  category:
+    selector: '.text-info'
+  categories:
+    - category
   link:
-    selector: 'h5 > a'
+    selector: '.news-link'
     extractor: 'href'
     post_process:
       name: 'parse_uri'

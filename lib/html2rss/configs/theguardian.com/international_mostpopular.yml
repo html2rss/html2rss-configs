@@ -4,9 +4,9 @@ channel:
   ttl: 60
 selectors:
   items:
-    selector: '#tabs-popular-1 li .headline-list__text'
+    selector: '.most-popular > li'
   title:
     selector: '.js-headline-text'
   link:
-    selector: 'a'
+    selector: '.fc-item__link'
     extractor: 'href'
