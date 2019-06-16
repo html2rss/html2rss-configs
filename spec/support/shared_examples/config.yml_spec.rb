@@ -1,7 +1,11 @@
 RSpec.shared_examples 'config.yml' do |file_name|
   subject(:yaml) { YAML.safe_load(file) }
 
-  let(:file) { File.open(file_name) }
+  let!(:file) {
+    path = File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
+    File.open(path)
+  }
+
   let(:feed_name) { file.path.split(File::Separator)[-2..-1].join(File::Separator) }
 
   context 'with the file' do
@@ -60,7 +64,8 @@ RSpec.shared_examples 'config.yml' do |file_name|
       global_config['feeds'] = { feed_name => Html2rss::Configs.find_by_name(feed_name) }
     end
 
-    it { expect(feed).to respond_to(:items) }
-    it { expect(feed.items.count).to be_positive }
+    it 'has positive amount of items' do
+      expect(feed.items.count).to be_positive
+    end
   end
 end
