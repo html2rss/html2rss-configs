@@ -12,10 +12,8 @@ The recommended method to use them is via [html2rss-web](https://github.com/gild
 If you're running [html2rss-web](https://github.com/gildesmarais/html2rss-web),
 you have nothing more to do! 🎉
 
-Request a feed via: `/domainname.tld/whatever.rss`.
-
-Your full URL might looks like this:
-`http://my.server/html2rss/domainname.tld/whatever.rss`
+Your full request URL might looks like this:
+`http://my.server/html2rss/github.com/nuxt.js_releases.rss`
 
 ## Usage without html2rss-web
 
