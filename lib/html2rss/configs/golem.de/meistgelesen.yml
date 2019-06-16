@@ -1,0 +1,13 @@
+channel:
+  title: 'golem.de meistgelesen'
+  url: https://www.golem.de/
+  ttl: 180
+selectors:
+  items:
+    selector: '#recent-articles li'
+  title:
+    selector: 'a'
+    extractor: 'text'
+  link:
+    selector: 'a'
+    extractor: 'href'

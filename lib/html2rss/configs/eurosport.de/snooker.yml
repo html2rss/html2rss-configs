@@ -1,0 +1,18 @@
+channel:
+  title: 'es snooker'
+  url: https://www.eurosport.de/snooker/
+  ttl: 600
+selectors:
+  items:
+    selector: '[data-navtab-content-id="navtab_storylist_latest_news"] .storylist-container-latest'
+  title:
+    selector: '.storylist-latest__main-title > a'
+  link:
+    selector: '.storylist-latest__main-title > a'
+    extractor: 'href'
+    post_process:
+      name: 'parse_uri'
+  categories:
+    - category
+  category:
+    selector: '.storylist-latest__category-title > span'
