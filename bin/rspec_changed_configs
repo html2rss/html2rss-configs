@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+changed_files = `git diff --name-only master | grep 'lib/html2rss/configs/.*/.*.yml'`.split("\n")
+
+specs_to_run = changed_files.map do |file|
+  filepath = File.expand_path File.join(__dir__, '..', file)
+
+  file.gsub('lib/', 'spec/') + '_spec.rb' if File.exist?(filepath)
+end.compact
+
+`bundle exec rspec --tag fetch #{specs_to_run.join(' ')}`
