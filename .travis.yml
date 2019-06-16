@@ -17,4 +17,4 @@ rvm:
 script:
   - make lint
   - make test
-  - 'if [[ "$TRAVIS_PULL_REQUEST" != false ]]; then make test_changed_configs; fi'
+  - 'if [[ "$TRAVIS_PULL_REQUEST" != false ]]; then make test-fetch-changed-configs; fi'
