@@ -9,11 +9,12 @@ body='{
     "message": "Trigger build to update html2rss-configs",
     "branch": "master",
     "config": {
+      "merge_mode": "replace",
+      "services": [],
       "language": "ruby",
-      "cache": "bundler",
       "install": "echo No install needed.",
       "before_script": "echo No before_script needed.",
-      "script": "echo script needed.",
+      "script": "echo No script needed.",
       "after_script": "ci/update-git-repo"
     }
   }
