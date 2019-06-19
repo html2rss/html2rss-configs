@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+
+# trigger a build on html2rss-web to 'bundle update' html2rss-configs
+# https://docs.travis-ci.com/user/triggering-builds#Customizing-the-build-configuration
+
+# "env": {
+#   "matrix": ["TEST=unit"]
+# },
+
+body='{
+  "request": {
+    "message": "Trigger build to update html2rss-configs",
+    "branch": "master",
+    "config": {
+      "install": "echo No install needed."
+      "before_script": "ci/update-html2rss-configs",
+      "script": "echo The following git commit push will trigger a normal build.",
+      "after_script": "ci/update-git-repo"
+    }
+  }
+}'
+
+curl -s -X POST \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "Authorization: token $TRAVIS_API_TOKEN" \
+  -d "$body" \
+  https://api.travis-ci.com/repo/gildesmarais%2Fhtml2rss-web/requests
