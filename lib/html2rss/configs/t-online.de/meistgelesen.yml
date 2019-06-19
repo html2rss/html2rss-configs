@@ -1,0 +1,12 @@
+channel:
+  title: 't-online.de: meistgelesen'
+  url: https://www.t-online.de/
+  ttl: 720
+selectors:
+  items:
+    selector: '.Tllc > ul > li'
+  title:
+    selector: 'a'
+  link:
+    selector: 'a'
+    extractor: 'href'
