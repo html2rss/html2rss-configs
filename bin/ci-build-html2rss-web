@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 # trigger a build on html2rss-web to 'bundle update' html2rss-configs
@@ -10,9 +9,11 @@ body='{
     "message": "Trigger build to update html2rss-configs",
     "branch": "master",
     "config": {
+      "language": "ruby",
+      "cache": "bundler",
       "install": "echo No install needed.",
-      "before_script": "ci/update-html2rss-configs",
-      "script": "echo The following git commit push will trigger a normal build.",
+      "before_script": "echo No before_script needed.",
+      "script": "echo script needed.",
       "after_script": "ci/update-git-repo"
     }
   }
