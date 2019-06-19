@@ -5,16 +5,12 @@ set -e
 # trigger a build on html2rss-web to 'bundle update' html2rss-configs
 # https://docs.travis-ci.com/user/triggering-builds#Customizing-the-build-configuration
 
-# "env": {
-#   "matrix": ["TEST=unit"]
-# },
-
 body='{
   "request": {
     "message": "Trigger build to update html2rss-configs",
     "branch": "master",
     "config": {
-      "install": "echo No install needed."
+      "install": "echo No install needed.",
       "before_script": "ci/update-html2rss-configs",
       "script": "echo The following git commit push will trigger a normal build.",
       "after_script": "ci/update-git-repo"
