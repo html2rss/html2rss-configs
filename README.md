@@ -1,11 +1,8 @@
 # html2rss-configs
 
-This repository contains [html2rss](https://github.com/gildesmarais/html2rss)
-configs for several websites.
+This repository contains [html2rss](https://github.com/gildesmarais/html2rss) configs for several websites. Find all provided configs in the [`configs/` directory](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs).
 
-[Find all provided configs in `configs/`.](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs)
-
-The recommended method to use them is via [html2rss-web](https://github.com/gildesmarais/html2rss-web).
+A handy method to use these configs is via [html2rss-web](https://github.com/gildesmarais/html2rss-web).
 
 ## Usage via html2rss-web
 
@@ -39,26 +36,23 @@ Contributions are more than welcome!
 
 There's a generator for that! 🆒
 
-`make config domain=domainname.tld name=whatever`
+1. `make config domain=domainname.tld name=whatever`  
+    (Change `domain` and `name` values to desired values.)
+2. Head to the generated files and add the selectors etc.
+    Look around in the existing config.yml files for examples, e.g. the extensive [github.com/nuxt.js_releases.yml](https://github.com/gildesmarais/html2rss-configs/blob/master/lib/html2rss/configs/github.com/nuxt.js_releases.yml).
 
-Change `domain` and `name` values to desired values. Then head to the generated
-files and add the selectors etc.
-
-Look around in the existing config.yml files, e.g. the extensive [github.com/nuxt.js_releases.yml](https://github.com/gildesmarais/html2rss-configs/blob/master/lib/html2rss/configs/github.com/nuxt.js_releases.yml).
+3. To see the generated feed, run:  
+    `bin/fetch domainname.tld/whatever`
 
 ### Gotchas and tips & tricks
 
-When creating a config,
-
-- check that the channel URL does not redirect to a mobile page with a different
-  markup structure.
-- fiddling with [`curl`](https://github.com/curl/curl) and
-  [`pup`](https://github.com/ericchiang/pup) to find the selectors seems quite
-  efficient.
+- Check that the channel URL does not redirect to a mobile page with a different markup structure.
+- Do not rely on your web browser's developer console. html2rss does not execute JavaScript.
+- Fiddling with [`curl`](https://github.com/curl/curl) and [`pup`](https://github.com/ericchiang/pup) to find the selectors seems efficient.
 
 ## Building on the CI
 
 Modifying existing or adding new configs will trigger the CI to fetch the feed
 and check for the presence of feed items.
 
-See [.travis.yml -> script](https://github.com/gildesmarais/html2rss-configs/blob/master/.travis.yml) which commands will be executed during build.
+See [.travis.yml -> script](https://github.com/gildesmarais/html2rss-configs/blob/master/.travis.yml) which commands execute during build.
