@@ -38,7 +38,7 @@ There's a generator for that! 🆒
 
 1. `make config domain=domainname.tld name=whatever`  
     (Change `domain` and `name` values to desired values.)
-2. Head to the generated files and add the selectors etc.
+2. Head to the generated files and add the selectors and options.  
     Look around in the existing config.yml files for examples, e.g. the extensive [github.com/nuxt.js_releases.yml](https://github.com/gildesmarais/html2rss-configs/blob/master/lib/html2rss/configs/github.com/nuxt.js_releases.yml).
 
 3. To see the generated feed, run:  
