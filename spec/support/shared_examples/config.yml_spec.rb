@@ -57,12 +57,8 @@ RSpec.shared_examples 'config.yml' do |file_name|
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
       } }
     }
-
-    let(:config) { Html2rss::Config.new(global_config, feed_name) }
-
-    before do
-      global_config['feeds'] = { feed_name => Html2rss::Configs.find_by_name(feed_name) }
-    end
+    let(:feed_config) { Html2rss::Configs.find_by_name(feed_name) }
+    let(:config) { Html2rss::Config.new(feed_config, global_config) }
 
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive

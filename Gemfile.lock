@@ -13,7 +13,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
-    html2rss (0.2.2)
+    html2rss (0.3.0)
       faraday (~> 0.15)
       faraday_middleware (~> 0.13)
       nokogiri (>= 1.10)
@@ -65,7 +65,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.17)
-  html2rss
+  html2rss (~> 0.3)
   html2rss-configs!
   rspec (~> 3.0)
   rubocop
