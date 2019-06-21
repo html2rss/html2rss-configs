@@ -1,0 +1,12 @@
+channel:
+  title: 'truthdig.com: most_popular'
+  url: https://truthdig.com/
+  ttl: 720
+selectors:
+  items:
+    selector: '#am2-accordion-trending .content-list__list > li'
+  title:
+    selector: '.content-list__item-title'
+  link:
+    selector: '> a'
+    extractor: 'href'
