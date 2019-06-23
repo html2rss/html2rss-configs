@@ -1,0 +1,11 @@
+channel:
+  title: 'nwzonline.de: meistgelesen'
+  url: https://www.nwzonline.de/ammerland
+  ttl: 3600
+selectors:
+  items:
+    selector: 'a.teaser--card-ticker'
+  title:
+    selector: 'h3'
+  link:
+    extractor: 'href'
