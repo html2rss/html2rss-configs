@@ -1,0 +1,18 @@
+channel:
+  title: 'StackOverflow: Hot Network Questions'
+  url: https://stackoverflow.com/questions
+  ttl: 360
+selectors:
+  items:
+    selector: "#hot-network-questions ul > li"
+  title:
+    selector: a
+  link:
+    selector: a
+    extractor: href
+  network:
+    selector: '.favicon'
+    extractor: attribute
+    attribute: title
+  categories:
+    - network
