@@ -1,5 +1,5 @@
 channel:
-  name: 'StackOverflow: Hot Network Questions'
+  title: 'StackOverflow: Hot Network Questions'
   url: https://stackoverflow.com/questions
   ttl: 360
 selectors:
