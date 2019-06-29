@@ -1,6 +1,7 @@
 channel:
   title: 'getpocket.com: trending'
   url: https://getpocket.com/explore/trending
+  ttl: 1800
 selectors:
   items:
     selector: '.best_of_list ul > li'
