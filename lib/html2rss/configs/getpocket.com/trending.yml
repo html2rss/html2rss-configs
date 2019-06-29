@@ -1,0 +1,24 @@
+channel:
+  title: 'getpocket.com: trending'
+  url: https://getpocket.com/explore/trending
+selectors:
+  items:
+    selector: '.best_of_list ul > li'
+  title:
+    selector: 'h3'
+  link:
+    selector: 'h3 a'
+    extractor: 'attribute'
+    attribute: 'data-saveurl'
+    post_process:
+      name: 'parse_uri'
+  description:
+    selector: '.excerpt'
+  domain:
+    selector: '.domain a'
+  updated:
+    selector: '.read_time'
+    post_process:
+      name: 'parse_time'
+  categories:
+    - domain
