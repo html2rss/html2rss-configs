@@ -1,4 +1,4 @@
-RSpec.shared_examples 'config.yml' do |file_name|
+RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load(file) }
 
   let!(:file) {
@@ -15,7 +15,7 @@ RSpec.shared_examples 'config.yml' do |file_name|
 
     it 'resides in topfolder named after channel.url\'s host' do
       dirname = File.dirname(file.path).split(File::Separator).last
-      host_name = URI(yaml['channel']['url']).host.gsub('www.', '')
+      host_name = URI(yaml['channel']['url'].split('/')[0..2].join('/')).host.gsub('www.', '')
 
       expect(dirname).to eq(host_name)
     end
@@ -49,7 +49,7 @@ RSpec.shared_examples 'config.yml' do |file_name|
     end
   end
 
-  context 'with fetching', :fetch do
+  context "with fetching #{params}", :fetch do
     subject(:feed) { Html2rss.feed(config) }
 
     let(:global_config) {
@@ -57,7 +57,10 @@ RSpec.shared_examples 'config.yml' do |file_name|
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
       } }
     }
-    let(:feed_config) { Html2rss::Configs.find_by_name(feed_name) }
+    let(:feed_config) {
+      params ||= {}
+      Html2rss::Configs.find_by_name(feed_name, params)
+    }
     let(:config) { Html2rss::Config.new(feed_config, global_config) }
 
     it 'has positive amount of items' do

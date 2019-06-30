@@ -12,7 +12,7 @@ module Html2rss
       end.freeze
     end
 
-    def self.find_by_name(name)
+    def self.find_by_name(name, params = {})
       raise 'must give a name as string' unless name.is_a?(String)
 
       name = "#{name}.yml" unless name.end_with?('.yml')
@@ -21,7 +21,24 @@ module Html2rss
 
       raise ConfigNotFound unless file_name
 
-      YAML.safe_load(File.open(file_name)).freeze
+      config = YAML.safe_load(File.open(file_name))
+      format_config(config, params).freeze
     end
+
+    def self.format_config(config, params)
+      return config if params.keys.none?
+
+      symbol_params = {}
+      params.each_pair { |k, v| symbol_params[k.to_sym] = v }
+
+      config['channel'].keys.each do |attribute_name|
+        next unless config['channel'][attribute_name]&.is_a?(String)
+
+        config['channel'][attribute_name] = format(config['channel'][attribute_name], symbol_params)
+      end
+
+      config
+    end
+    private_class_method :format_config
   end
 end
