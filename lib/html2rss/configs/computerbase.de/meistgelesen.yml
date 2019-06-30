@@ -2,6 +2,7 @@ channel:
   title: 'computerbase.de meistgelesen'
   url: https://www.computerbase.de
   ttl: 720
+  language: de
 selectors:
   items:
     selector: '.charts > li'

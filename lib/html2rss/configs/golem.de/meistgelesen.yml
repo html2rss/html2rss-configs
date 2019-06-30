@@ -2,6 +2,7 @@ channel:
   title: 'golem.de meistgelesen'
   url: https://www.golem.de/
   ttl: 180
+  language: de
 selectors:
   items:
     selector: '#recent-articles li'

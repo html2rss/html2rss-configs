@@ -2,6 +2,7 @@ channel:
   title: 'spektrum.de meistgelesen'
   url: https://www.spektrum.de/index/meistgelesen/1374084
   ttl: 180
+  language: de
 selectors:
   items:
     selector: '.teaser__small'

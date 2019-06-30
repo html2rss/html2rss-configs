@@ -2,6 +2,7 @@ channel:
   title: 'airliners meistgelesen'
   url: https://www.airliners.de
   ttl: 180
+  language: de
 selectors:
   items:
     selector: '.me-article-toplist li'
