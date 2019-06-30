@@ -1,0 +1,23 @@
+channel:
+  title: 'solarthermalworld.org: news'
+  url: https://solarthermalworld.org/news
+  ttl: 1800
+selectors:
+  items:
+    selector: '.item-list ul > li > article'
+  title:
+    selector: 'h2 a'
+  link:
+    selector: 'h2 a'
+    extractor: 'href'
+  description:
+    selector: '[property="content:encoded"]'
+    extractor: html
+    post_process:
+      name: 'sanitize_html'
+  updated:
+    selector: '[property="dc:date dc:created"]'
+    extractor: attribute
+    attribute: content
+    post_process:
+      name: 'parse_time'
