@@ -58,7 +58,7 @@ In your config YAML:
 
 ```yaml
 channel:
-  title: 'Domainname.tld: whatever %<id>s'
+  title: 'domainname.tld: whatever %<id>s'
   url: 'http://domainname.tld/whatever/%<id>s.html'
 ```
 
