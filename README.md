@@ -50,6 +50,28 @@ There's a generator for that! 🆒
 - Do not rely on your web browser's developer console. html2rss does not execute JavaScript.
 - Fiddling with [`curl`](https://github.com/curl/curl) and [`pup`](https://github.com/ericchiang/pup) to find the selectors seems efficient.
 
+### Dynamic parameters in `channel` attribute
+
+Sometimes there are structurally equal pages with different URLs. In such a case you can add *variables* to the channel's `url`, `title` and `language` attributes.
+
+In your config YAML:
+
+```yaml
+channel:
+  title: 'Domainname.tld: whatever %<id>s'
+  url: 'http://domainname.tld/whatever/%<id>s.html'
+```
+
+See the *more complex formatting* of the [`sprintf` method](https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-sprintf) for more complex formatting options.
+
+You have to provide the required parameters to the shared rspec example, too:
+
+```ruby
+include_examples 'config.yml', 'domainname.tld/whatever.yml', id: 42
+```
+
+If you're using [html2rss-web](https://github.com/gildesmarais/html2rss-web), you need to add the parameters to the request URL like this: `http://html2rss/domainname.tld/whatever?id=42`
+
 ## Building on the CI
 
 Modifying existing or adding new configs will trigger the CI to fetch the feed
