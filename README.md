@@ -10,7 +10,7 @@ If you're running [html2rss-web](https://github.com/gildesmarais/html2rss-web),
 you have nothing more to do! 🎉
 
 Your full request URL might looks like this:
-`http://my.server/html2rss/github.com/nuxt.js_releases.rss`
+`http://localhost:3000/espn.com/f1.rss`
 
 ## Usage without html2rss-web
 
