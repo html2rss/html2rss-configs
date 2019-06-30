@@ -1,8 +1,8 @@
 channel:
-  title: 'Nuxt.js Releases'
-  url: https://github.com/nuxt/nuxt.js/releases
-  ttl: 60
-  description: 'An example config.'
+  title: 'github.com: %<username>s/%<repository>s releases'
+  url: https://github.com/%<username>s/%<repository>s/releases
+  ttl: 6000
+  description: 'Releases of %<username>s/%<repository>s on github.com.'
 selectors:
   items:
     selector: '.release'
