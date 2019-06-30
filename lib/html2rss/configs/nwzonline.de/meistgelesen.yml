@@ -2,6 +2,7 @@ channel:
   title: 'nwzonline.de: meistgelesen'
   url: https://www.nwzonline.de/ammerland
   ttl: 3600
+  language: de
 selectors:
   items:
     selector: 'a.teaser--card-ticker'

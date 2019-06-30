@@ -2,6 +2,7 @@ channel:
   title: dlfk meistgelesen
   url: https://www.deutschlandfunkkultur.de
   ttl: 720
+  language: de
 selectors:
   items:
     selector: '#tabs-1 > .sidetabs > li'

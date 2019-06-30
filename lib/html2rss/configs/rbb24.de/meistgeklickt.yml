@@ -2,6 +2,7 @@ channel:
   title: 'rbb24.de: meistgeklickt'
   url: https://rbb24.de/
   ttl: 720
+  language: de
 selectors:
   items:
     selector: '.tabmodul_container > li:last-child > ul > li'

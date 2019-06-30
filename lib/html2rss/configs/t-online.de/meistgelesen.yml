@@ -2,6 +2,7 @@ channel:
   title: 't-online.de: meistgelesen'
   url: https://www.t-online.de/
   ttl: 720
+  language: de
 selectors:
   items:
     selector: '.Tllc > ul > li'

@@ -2,6 +2,7 @@ channel:
   title: mopo kb-fh
   url: https://www.morgenpost.de/bezirke/friedrichshain-kreuzberg/
   ttl: 720
+  language: de
 selectors:
   items:
     selector: 'article.teaser'

@@ -2,6 +2,7 @@ channel:
   title: 'DWDL.de meistgelesen'
   url: https://www.dwdl.de/core/marginal/ajax.nbox-2.php
   ttl: 720
+  language: de
 selectors:
   items:
     selector: 'tr'

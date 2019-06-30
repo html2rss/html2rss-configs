@@ -2,6 +2,7 @@ channel:
   title: 'Kinocheck Filmstarts'
   url: https://kinocheck.de/filmstarts
   ttl: 720
+  language: de
 selectors:
   items:
     selector: '.filmstart'

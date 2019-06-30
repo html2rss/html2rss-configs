@@ -2,6 +2,7 @@ channel:
   title: dlf meistgelesen
   url: https://www.deutschlandfunk.de
   ttl: 720
+  language: de
 selectors:
   items:
     selector: '#tabs-1 > .sidetabs > li'
