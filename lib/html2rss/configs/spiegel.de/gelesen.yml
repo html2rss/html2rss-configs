@@ -1,0 +1,15 @@
+channel:
+  title: 'spiegel.de: gelesen'
+  url: https://spiegel.de/
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: '#tabs-1 li .item-text'
+  title:
+    selector: a
+    extractor: attribute
+    attribute: title
+  link:
+    selector: a
+    extractor: href
