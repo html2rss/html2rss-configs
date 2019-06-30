@@ -31,8 +31,8 @@ module Html2rss
       symbol_params = {}
       params.each_pair { |k, v| symbol_params[k.to_sym] = v }
 
-      %w[url title language].each do |attribute_name|
-        next unless config['channel'][attribute_name]
+      config['channel'].keys.each do |attribute_name|
+        next unless config['channel'][attribute_name]&.is_a?(String)
 
         config['channel'][attribute_name] = format(config['channel'][attribute_name], symbol_params)
       end
