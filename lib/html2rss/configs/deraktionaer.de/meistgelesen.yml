@@ -1,0 +1,19 @@
+channel:
+  title: 'deraktionaer.de: meistgelesen'
+  url: https://deraktionaer.de/
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: '#most-viewed ol > li'
+  title:
+    selector: '> a'
+  link:
+    selector: '> a'
+    extractor: 'href'
+  isin:
+    selector: '.stock-info'
+    extractor: attribute
+    attribute: 'data-quote'
+  categories:
+    - isin
