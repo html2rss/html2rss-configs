@@ -70,7 +70,7 @@ You have to provide the parameters to the shared rspec example, too:
 include_examples 'config.yml', 'domainname.tld/whatever.yml', id: 42
 ```
 
-If you're using [html2rss-web](https://github.com/gildesmarais/html2rss-web), you need to add the parameters to the request URL like this: `http://html2rss/domainname.tld/whatever?id=42`
+If you're using [html2rss-web](https://github.com/gildesmarais/html2rss-web), you need to add the parameters to the request URL like this: `http://html2rss/domainname.tld/whatever.rss?id=42`
 
 ## Building on the CI
 
