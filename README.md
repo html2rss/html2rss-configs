@@ -50,7 +50,7 @@ There's a generator for that! 🆒
 - Do not rely on your web browser's developer console. html2rss does not execute JavaScript.
 - Fiddling with [`curl`](https://github.com/curl/curl) and [`pup`](https://github.com/ericchiang/pup) to find the selectors seems efficient.
 
-### Dynamic parameters in `channel` attribute
+### Dynamic parameters in `channel` attributes
 
 Sometimes there are structurally equal pages with different URLs. In such a case you can add *variables* to the channel's `url`, `title` and `language` attributes.
 
@@ -64,7 +64,7 @@ channel:
 
 See the *more complex formatting* of the [`sprintf` method](https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-sprintf) for more complex formatting options.
 
-You have to provide the required parameters to the shared rspec example, too:
+You have to provide the parameters to the shared rspec example, too:
 
 ```ruby
 include_examples 'config.yml', 'domainname.tld/whatever.yml', id: 42
