@@ -43,6 +43,8 @@ There's a generator for that! 🆒
 
 3. To see the generated feed, run:  
     `bin/fetch domainname.tld/whatever`
+    And with dynamic parameters:
+    `bin/fetch domainname.tld/whatever id=42 foo="bar baz"`
 
 ### Gotchas and tips & tricks
 
