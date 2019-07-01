@@ -12,3 +12,22 @@ selectors:
     extractor: 'href'
   descripton:
     selector: '.article-intro'
+  updated:
+    selector: '.source-date'
+    extractor: text
+    post_process:
+      - name: substring
+        start: -21
+        end: -5
+      - name: parse_time
+  category:
+    selector: '.source-date'
+    extractor: text
+    post_process:
+      - name: substring
+        start: 17
+      - name: substring
+        start: 0
+        end: -25
+  categories:
+    - category
