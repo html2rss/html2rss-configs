@@ -1,12 +1,12 @@
 channel:
   title: 'The Guardian International most popular'
   url: https://www.theguardian.com/international
-  ttl: 60
+  ttl: 360
 selectors:
   items:
     selector: '.most-popular > li'
   title:
-    selector: '.js-headline-text'
+    selector: '.fc-item__link .js-headline-text'
   link:
     selector: '.fc-item__link'
     extractor: 'href'
