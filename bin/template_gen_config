@@ -9,6 +9,7 @@ puts <<~YML
   channel:
     title: '#{domain}: #{name}'
     url: https://#{domain}/
+    time_zone: UTC
     ttl: 720
   selectors:
     items:
