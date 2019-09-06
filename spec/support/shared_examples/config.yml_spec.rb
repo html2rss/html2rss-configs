@@ -27,10 +27,16 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     context 'with channel present' do
-      %w[title url ttl].each do |required_attribute|
+      %w[title url ttl time_zone].each do |required_attribute|
         it "has channel.#{required_attribute}" do
           expect(yaml['channel']).to have_key required_attribute
         end
+      end
+
+      it 'has a known time_zone' do
+        expect {
+          Time.find_zone! yaml['channel']['time_zone']
+        }.not_to raise_error
       end
     end
 

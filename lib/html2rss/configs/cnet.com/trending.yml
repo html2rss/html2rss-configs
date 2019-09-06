@@ -1,6 +1,7 @@
 channel:
   title: 'cnet.com: trending'
   url: https://cnet.com/
+  time_zone: UTC
   ttl: 720
 selectors:
   items:

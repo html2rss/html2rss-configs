@@ -1,6 +1,7 @@
 channel:
   title: 'getpocket.com: trending'
   url: https://getpocket.com/explore/trending
+  time_zone: UTC
   ttl: 1800
 selectors:
   items:
