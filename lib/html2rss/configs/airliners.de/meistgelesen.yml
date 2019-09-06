@@ -6,16 +6,16 @@ channel:
   language: de
 selectors:
   items:
-    selector: '.me-article-toplist li'
+    selector: '.list-unstyled.counter li'
   title:
     selector: 'a'
     post_process:
       name: substring
       start: 2
   subtitle:
-    selector: '.article__subtitle'
+    selector: '.d-block'
   link:
-    selector: 'a'
+    selector: '.media-body > a'
     extractor: 'href'
   categories:
     - subtitle
