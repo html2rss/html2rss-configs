@@ -1,6 +1,7 @@
 channel:
   title: 'tagesspiegel mostread'
   url: https://www.tagesspiegel.de
+  time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:

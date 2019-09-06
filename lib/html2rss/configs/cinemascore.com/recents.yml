@@ -1,6 +1,7 @@
 channel:
   title: cinemascore recents
   url: https://www.cinemascore.com
+  time_zone: America/Los_Angeles
   ttl: 720
 selectors:
   items:

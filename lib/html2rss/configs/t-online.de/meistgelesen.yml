@@ -1,6 +1,7 @@
 channel:
   title: 't-online.de: meistgelesen'
   url: https://www.t-online.de/
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:

@@ -1,6 +1,7 @@
 channel:
   title: 'spiegel.de: gelesen'
   url: https://spiegel.de/
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:

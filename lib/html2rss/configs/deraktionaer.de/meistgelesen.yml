@@ -1,6 +1,7 @@
 channel:
   title: 'deraktionaer.de: meistgelesen'
   url: https://deraktionaer.de/
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:

@@ -1,6 +1,7 @@
 channel:
   title: 'rbb24.de: meistgeklickt'
   url: https://rbb24.de/
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:

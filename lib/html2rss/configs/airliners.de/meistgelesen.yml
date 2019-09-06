@@ -1,6 +1,7 @@
 channel:
   title: 'airliners meistgelesen'
   url: https://www.airliners.de
+  time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:

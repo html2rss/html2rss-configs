@@ -1,6 +1,7 @@
 channel:
   title: bbc-mostread
   url: https://www.bbc.com/news/popular/read
+  time_zone: Europe/London
   ttl: 600
 selectors:
   items:

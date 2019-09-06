@@ -1,6 +1,7 @@
 channel:
   title: 'medium.com popular'
   url: https://medium.com/topic/popular
+  time_zone: Europe/Los_Angeles
   ttl: 120
 selectors:
   items:
