@@ -1,6 +1,7 @@
 channel:
   title: dlfk meistgelesen
   url: https://www.deutschlandfunkkultur.de
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:

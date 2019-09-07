@@ -1,6 +1,7 @@
 channel:
   title: 'StackOverflow: Hot Network Questions'
   url: https://stackoverflow.com/questions
+  time_zone: America/New_York
   ttl: 360
 selectors:
   items:

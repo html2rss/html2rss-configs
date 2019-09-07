@@ -1,6 +1,7 @@
 channel:
   title: 'Gründerszene Trending'
   url: https://www.gruenderszene.de
+  time_zone: Europe/Berlin
   ttl: 120
   language: de
 selectors:

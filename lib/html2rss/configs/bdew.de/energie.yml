@@ -1,6 +1,7 @@
 channel:
   title: 'bdew.de: energie'
   url: https://www.bdew.de/energie/
+  time_zone: Europe/Berlin
   ttl: 1800
 selectors:
   items:

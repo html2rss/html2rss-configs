@@ -1,6 +1,7 @@
 channel:
   title: 'nwzonline.de: meistgelesen'
   url: https://www.nwzonline.de/ammerland
+  time_zone: Europe/Berlin
   ttl: 3600
   language: de
 selectors:

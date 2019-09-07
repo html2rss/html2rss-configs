@@ -1,6 +1,7 @@
 channel:
   title: 'Kinocheck Filmstarts'
   url: https://kinocheck.de/filmstarts
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:

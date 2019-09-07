@@ -1,6 +1,7 @@
 channel:
   title: 'computerbase.de meistgelesen'
   url: https://www.computerbase.de
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
