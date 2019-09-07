@@ -6,12 +6,11 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.0.0)
+    activesupport (5.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-      zeitwerk (~> 2.1, >= 2.1.8)
     ast (2.4.0)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
@@ -21,7 +20,8 @@ GEM
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
     hashie (3.6.0)
-    html2rss (0.3.3)
+    html2rss (0.4.0)
+      activesupport (~> 5.0)
       faraday (~> 0.15)
       faraday_middleware (~> 0.13)
       hashie (~> 3.6)
@@ -74,15 +74,13 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
-    zeitwerk (2.1.10)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
   bundler (~> 1.17)
-  html2rss (~> 0.3.3)
+  html2rss (~> 0.4.0)
   html2rss-configs!
   rspec (~> 3.0)
   rubocop

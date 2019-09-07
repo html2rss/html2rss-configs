@@ -12,9 +12,19 @@ selectors:
     extractor: 'href'
     post_process:
       name: 'parse_uri'
-  title:
-    selector: '.Copy'
+  headline:
+    selector: '.Headline > span'
     extractor: 'attribute'
     attribute: 'title'
+  preline:
+    selector: '.Stichwort'
+    extractor: html
+  title:
+    post_process:
+      name: template
+      template: '%s: %s'
+      methods:
+        - preline
+        - headline
   author:
     selector: '.Autor span'
