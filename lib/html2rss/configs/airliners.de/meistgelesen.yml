@@ -9,9 +9,6 @@ selectors:
     selector: '.list-unstyled.counter li'
   title:
     selector: 'a'
-    post_process:
-      name: substring
-      start: 2
   subtitle:
     selector: '.d-block'
   link:
