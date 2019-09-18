@@ -21,5 +21,7 @@ selectors:
   description:
     selector: '.info'
     extractor: 'html'
+    post_process:
+      name: 'sanitize_html'
   start_date:
     selector: 'h1 > div'
