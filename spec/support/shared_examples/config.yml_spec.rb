@@ -78,11 +78,14 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       let(:specified_attributes) { %w[title description author category] & config.attribute_names }
       let(:text_attributes) { %w[title description author] & specified_attributes }
       let(:content_attributes) { specified_attributes - text_attributes }
-
-      # TODO: handle pubdate / updated
+      let(:special_attributes) {
+        [].tap do |arr|
+          arr << :pubDate if config.attribute_names.include?(:updated)
+        end
+      }
 
       it 'has no empty text attributes', :aggregate_failures do
-        text_attributes.each do |attribute_name|
+        (text_attributes + special_attributes).each do |attribute_name|
           expect(item.public_send(attribute_name)).not_to be_empty, attribute_name
         end
       end
