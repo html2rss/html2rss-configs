@@ -72,5 +72,26 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive
     end
+
+    context 'with an item' do
+      let(:item) { feed.items.first }
+      let(:specified_attributes) { %w[title description author category] & config.attribute_names }
+      let(:text_attributes) { %w[title description author] & specified_attributes }
+      let(:content_attributes) { specified_attributes - text_attributes }
+
+      # TODO: handle pubdate / updated
+
+      it 'has no empty text attributes', :aggregate_failures do
+        text_attributes.each do |attribute_name|
+          expect(item.public_send(attribute_name)).not_to be_empty, attribute_name
+        end
+      end
+
+      it 'has no empty content attributes' do
+        content_attributes.each do |attribute_name|
+          expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name
+        end
+      end
+    end
   end
 end
