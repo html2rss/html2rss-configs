@@ -15,7 +15,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     it 'resides in a folder named after channel.url\'s host' do
       dirname = File.dirname(file.path).split(File::Separator).last
-      host_name = URI(yaml['channel']['url'].split('/')[0..2].join('/')).host.gsub('www.', '')
+      host_name = URI(yaml['channel']['url'].split('/')[0..2].join('/')).host.gsub(/(api|www)\./, '')
 
       expect(dirname).to eq(host_name)
     end
