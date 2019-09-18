@@ -13,8 +13,6 @@ selectors:
     post_process:
       name: 'parse_uri'
   title:
-    selector: '.Headline > span'
+    selector: '.TeaserHeadLink'
     extractor: 'attribute'
     attribute: 'title'
-  author:
-    selector: '.Autor span'

@@ -20,8 +20,3 @@ selectors:
   link:
     selector: '.charts__link'
     extractor: 'href'
-  author:
-    selector: '.invisible'
-  description:
-    selector: '.text-subtle'
-    extractor: 'html'

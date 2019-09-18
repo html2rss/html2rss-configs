@@ -16,6 +16,5 @@ selectors:
     selector: '.teaser__small__heading__kicker'
   description:
     selector: '.teaser__small__text'
-    extractor: 'text'
   categories:
     - category
