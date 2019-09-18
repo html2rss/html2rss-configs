@@ -87,7 +87,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         end
       end
 
-      it 'has no empty content attributes' do
+      it 'has no empty content attributes', :aggregate_failures do
         content_attributes.each do |attribute_name|
           expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name
         end
