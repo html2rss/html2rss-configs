@@ -1,0 +1,26 @@
+channel:
+  title: 'welt.de: meistgelesen'
+  url: https://www.welt.de
+  ttl: 180
+  time_zone: Europe/Berlin
+selectors:
+  items:
+    selector: '[data-external-stage-name="most-read"] article'
+  title:
+    selector: '.o-teaser__headline'
+    post_process:
+      name: 'template'
+      string: '%s: %s'
+      methods:
+        - topic
+        - self
+  link:
+    selector: '.o-teaser__link'
+    extractor: 'href'
+  section:
+    selector: '.o-teaser__section'
+  topic:
+    selector: '.o-teaser__topic'
+  categories:
+    - section
+    - topic
