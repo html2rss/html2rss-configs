@@ -15,7 +15,7 @@ selectors:
         - topic
         - self
   link:
-    selector: '.o-teaser__link'
+    selector: '.o-teaser__link[title]'
     extractor: 'href'
   section:
     selector: '.o-teaser__section'
