@@ -2,9 +2,6 @@ require:
   - rubocop-rspec
   - rubocop-performance
 
-Documentation:
-  Enabled: false
-
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
@@ -12,6 +9,9 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 110
+
+Style/Documentation:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
