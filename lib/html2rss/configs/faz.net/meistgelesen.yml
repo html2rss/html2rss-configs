@@ -16,5 +16,3 @@ selectors:
     selector: '.Copy'
     extractor: 'attribute'
     attribute: 'title'
-  author:
-    selector: '.Autor span'
