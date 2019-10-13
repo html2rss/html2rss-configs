@@ -1,20 +1,14 @@
 channel:
   title: 'spektrum.de meistgelesen'
-  url: https://www.spektrum.de/index/meistgelesen/1374084
+  url: https://www.spektrum.de/
   time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:
   items:
-    selector: '.teaser__small'
+    selector: '.teaser.teaser__list_box ol > li'
   title:
-    selector: '.teaser__small__heading'
+    selector: 'a'
   link:
     selector: 'a'
     extractor: 'href'
-  category:
-    selector: '.teaser__small__heading__kicker'
-  description:
-    selector: '.teaser__small__text'
-  categories:
-    - category
