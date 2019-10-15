@@ -1,14 +1,14 @@
 channel:
-  title: 'spektrum.de meistgelesen'
+  title: "spektrum.de meistgelesen"
   url: https://www.spektrum.de/
   time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:
   items:
-    selector: '.teaser.teaser__list_box ol > li'
+    selector: ".teaser.teaser__list_box ol > li"
   title:
-    selector: 'a'
+    selector: "a"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"

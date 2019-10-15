@@ -1,14 +1,14 @@
 channel:
-  title: 'rbb24.de: meistgeklickt'
+  title: "rbb24.de: meistgeklickt"
   url: https://rbb24.de/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: '.tabmodul_container > li:last-child > ul > li'
+    selector: ".tabmodul_container > li:last-child > ul > li"
   title:
-    selector: 'a'
+    selector: "a"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"

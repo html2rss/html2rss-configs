@@ -1,22 +1,22 @@
 channel:
-  title: 'computerbase.de meistgelesen'
+  title: "computerbase.de meistgelesen"
   url: https://www.computerbase.de
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: '.charts > li'
+    selector: ".charts > li"
   title:
-    selector: '.charts__title'
+    selector: ".charts__title"
     post_process:
-      name: 'template'
-      string: '%s: %s'
+      name: "template"
+      string: "%s: %s"
       methods:
         - context
         - self
   context:
-    selector: '.charts__context'
+    selector: ".charts__context"
   link:
-    selector: '.charts__link'
-    extractor: 'href'
+    selector: ".charts__link"
+    extractor: "href"

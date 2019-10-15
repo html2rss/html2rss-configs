@@ -1,18 +1,18 @@
 channel:
-  title: 'faz.de beliebt'
+  title: "faz.de beliebt"
   url: http://www.faz.net/2.300/beliebte-artikel/meistgelesen/
   time_zone: Europe/Berlin
   ttl: 120
   language: de
 selectors:
   items:
-    selector: '#FAZContentLeftInner .Teaser620'
+    selector: "#FAZContentLeftInner .Teaser620"
   link:
-    selector: '.TeaserHeadLink'
-    extractor: 'href'
+    selector: ".TeaserHeadLink"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"
   title:
-    selector: '.Copy'
-    extractor: 'attribute'
-    attribute: 'title'
+    selector: ".Copy"
+    extractor: "attribute"
+    attribute: "title"

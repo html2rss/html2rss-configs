@@ -1,5 +1,5 @@
 channel:
-  title: 'es snooker'
+  title: "es snooker"
   url: https://www.eurosport.de/snooker/
   time_zone: Europe/Berlin
   ttl: 600
@@ -8,13 +8,13 @@ selectors:
   items:
     selector: '[data-navtab-content-id="navtab_storylist_latest_news"] .storylist-container-latest'
   title:
-    selector: '.storylist-latest__main-title > a'
+    selector: ".storylist-latest__main-title > a"
   link:
-    selector: '.storylist-latest__main-title > a'
-    extractor: 'href'
+    selector: ".storylist-latest__main-title > a"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"
   categories:
     - category
   category:
-    selector: '.storylist-latest__category-title > span'
+    selector: ".storylist-latest__category-title > span"

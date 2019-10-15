@@ -1,13 +1,13 @@
 channel:
-  title: 'truthdig.com: most popular'
+  title: "truthdig.com: most popular"
   url: https://truthdig.com/
   time_zone: America/Los_Angeles
   ttl: 720
 selectors:
   items:
-    selector: '#featured-tabs-content-most-popular .content-list__list > li'
+    selector: "#featured-tabs-content-most-popular .content-list__list > li"
   title:
-    selector: '.content-list__item-title'
+    selector: ".content-list__item-title"
   link:
-    selector: '> a'
-    extractor: 'href'
+    selector: "> a"
+    extractor: "href"

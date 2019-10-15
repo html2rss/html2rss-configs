@@ -1,20 +1,20 @@
 channel:
-  title: 'deraktionaer.de: meistgelesen'
+  title: "deraktionaer.de: meistgelesen"
   url: https://deraktionaer.de/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: '#most-viewed ol > li'
+    selector: "#most-viewed ol > li"
   title:
-    selector: '> a'
+    selector: "> a"
   link:
-    selector: '> a'
-    extractor: 'href'
+    selector: "> a"
+    extractor: "href"
   isin:
-    selector: '.stock-info'
+    selector: ".stock-info"
     extractor: attribute
-    attribute: 'data-quote'
+    attribute: "data-quote"
   categories:
     - isin

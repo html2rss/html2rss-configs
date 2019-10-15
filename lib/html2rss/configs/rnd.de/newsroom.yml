@@ -1,18 +1,18 @@
 channel:
-  title: 'rnd.de: newsroom'
+  title: "rnd.de: newsroom"
   url: https://www.rnd.de/
   time_zone: Europe/Berlin
   ttl: 720
 selectors:
   items:
-    selector: '.chn-quickcheck__content .chn-quickcheck__content-element'
+    selector: ".chn-quickcheck__content .chn-quickcheck__content-element"
   title:
-    selector: 'article h3'
+    selector: "article h3"
   link:
-    selector: '.tsr__article-extra-link'
-    extractor: 'href'
+    selector: ".tsr__article-extra-link"
+    extractor: "href"
   description:
-    selector: '.tsr__content'
+    selector: ".tsr__content"
     extractor: html
     post_process:
       name: sanitize_html

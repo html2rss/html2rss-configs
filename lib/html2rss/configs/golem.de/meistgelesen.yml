@@ -1,15 +1,15 @@
 channel:
-  title: 'golem.de meistgelesen'
+  title: "golem.de meistgelesen"
   url: https://www.golem.de/
   time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:
   items:
-    selector: '#recent-articles li'
+    selector: "#recent-articles li"
   title:
-    selector: 'a'
-    extractor: 'text'
+    selector: "a"
+    extractor: "text"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"

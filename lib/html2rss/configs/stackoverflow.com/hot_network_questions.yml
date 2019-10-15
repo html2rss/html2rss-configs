@@ -1,5 +1,5 @@
 channel:
-  title: 'StackOverflow: Hot Network Questions'
+  title: "StackOverflow: Hot Network Questions"
   url: https://stackoverflow.com/questions
   time_zone: America/New_York
   ttl: 360
@@ -12,7 +12,7 @@ selectors:
     selector: a
     extractor: href
   network:
-    selector: '.favicon'
+    selector: ".favicon"
     extractor: attribute
     attribute: title
   categories:

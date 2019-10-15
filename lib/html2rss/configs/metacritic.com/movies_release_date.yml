@@ -1,25 +1,25 @@
 channel:
-  title: 'metacritics movies popular'
+  title: "metacritics movies popular"
   url: https://www.metacritic.com/browse/movies/release-date/theaters/date
   time_zone: America/Los_Angeles
   ttl: 720
 selectors:
   items:
-    selector: '.clamp-list tr .clamp-summary-wrap'
+    selector: ".clamp-list tr .clamp-summary-wrap"
   title:
-    selector: 'h3'
+    selector: "h3"
     post_process:
-      name: 'template'
-      string: '%s (Score: %s)'
+      name: "template"
+      string: "%s (Score: %s)"
       methods:
         - self
         - score
   score:
-    selector: '.clamp-score-wrap > .metascore_anchor > .metascore_w'
-    extractor: 'text'
+    selector: ".clamp-score-wrap > .metascore_anchor > .metascore_w"
+    extractor: "text"
   link:
-    selector: '.metascore_anchor'
-    extractor: 'href'
+    selector: ".metascore_anchor"
+    extractor: "href"
   description:
-    selector: '.summary'
-    extractor: 'html'
+    selector: ".summary"
+    extractor: "html"

@@ -1,38 +1,38 @@
 channel:
-  title: 'Cinemascore.com: start page'
+  title: "Cinemascore.com: start page"
   url: https://api.cinemascore.com/guest/surveys
   ttl: 600
   json: true
   time_zone: America/Los_Angeles
 selectors:
   items:
-    selector: 'new > new, recent > recent'
+    selector: "new > new, recent > recent"
   title:
-    selector: 'title'
+    selector: "title"
     post_process:
-      name: 'template'
-      string: '%s (%s) [Rated %s] (%s)'
+      name: "template"
+      string: "%s (%s) [Rated %s] (%s)"
       methods:
         - self
         - grade
         - mpaa_rating
         - year
   grade:
-    selector: 'grade'
+    selector: "grade"
   movie_title:
-    selector: 'movie-title'
+    selector: "movie-title"
   link:
     post_process:
-      name: 'template'
-      string: 'https://www.metacritic.com/search/movie/%s/results'
+      name: "template"
+      string: "https://www.metacritic.com/search/movie/%s/results"
       methods:
         - movie_title
   mpaa_rating:
-    selector: 'mpaa-rating'
+    selector: "mpaa-rating"
   distributor:
-    selector: 'distributor'
+    selector: "distributor"
   year:
-    selector: 'year'
+    selector: "year"
   categories:
     - mpaa_rating
     - grade

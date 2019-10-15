@@ -1,13 +1,13 @@
 channel:
-  title: 'nwzonline.de: meistgelesen'
+  title: "nwzonline.de: meistgelesen"
   url: https://www.nwzonline.de/ammerland
   time_zone: Europe/Berlin
   ttl: 3600
   language: de
 selectors:
   items:
-    selector: 'a.teaser--card-ticker'
+    selector: "a.teaser--card-ticker"
   title:
-    selector: 'h3'
+    selector: "h3"
   link:
-    extractor: 'href'
+    extractor: "href"

@@ -1,17 +1,17 @@
 channel:
-  title: 'bbc.co.uk: available-episodes'
+  title: "bbc.co.uk: available-episodes"
   url: https://www.bbc.co.uk/programmes/%<id>s/episodes/player
   time_zone: UTC
   ttl: 720
 selectors:
   items:
-    selector: '.highlight-box-wrapper > div'
+    selector: ".highlight-box-wrapper > div"
   title:
-    selector: '.programme__title'
+    selector: ".programme__title"
   link:
-    selector: '.programme__titles > a'
-    extractor: 'href'
+    selector: ".programme__titles > a"
+    extractor: "href"
   description:
-    selector: '.programme__synopsis'
+    selector: ".programme__synopsis"
     post_process:
       name: sanitize_html

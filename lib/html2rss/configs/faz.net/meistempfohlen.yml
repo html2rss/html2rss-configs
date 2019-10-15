@@ -1,18 +1,18 @@
 channel:
-  title: 'faz.de meistempfohlen'
+  title: "faz.de meistempfohlen"
   url: http://www.faz.net/2.300/beliebte-artikel/meistempfohlen/
   time_zone: Europe/Berlin
   ttl: 120
   language: de
 selectors:
   items:
-    selector: '#FAZContentLeftInner .Teaser620'
+    selector: "#FAZContentLeftInner .Teaser620"
   link:
-    selector: '.TeaserHeadLink'
-    extractor: 'href'
+    selector: ".TeaserHeadLink"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"
   title:
-    selector: '.TeaserHeadLink'
-    extractor: 'attribute'
-    attribute: 'title'
+    selector: ".TeaserHeadLink"
+    extractor: "attribute"
+    attribute: "title"

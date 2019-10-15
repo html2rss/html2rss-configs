@@ -1,13 +1,13 @@
 channel:
-  title: 'The Guardian International most popular'
+  title: "The Guardian International most popular"
   url: https://www.theguardian.com/international
   time_zone: Europe/London
   ttl: 360
 selectors:
   items:
-    selector: '.most-popular > li'
+    selector: ".most-popular > li"
   title:
-    selector: '.fc-item__link .js-headline-text'
+    selector: ".fc-item__link .js-headline-text"
   link:
-    selector: '.fc-item__link'
-    extractor: 'href'
+    selector: ".fc-item__link"
+    extractor: "href"
