@@ -1,16 +1,16 @@
 channel:
-  title: 'Gründerszene Trending'
+  title: "Gründerszene Trending"
   url: https://www.gruenderszene.de
   time_zone: Europe/Berlin
   ttl: 120
   language: de
 selectors:
   items:
-    selector: '.sidebar_trending .top-sidebar-entries-wrapper'
+    selector: ".sidebar_trending .top-sidebar-entries-wrapper"
   title:
-    selector: 'a'
+    selector: "a"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"

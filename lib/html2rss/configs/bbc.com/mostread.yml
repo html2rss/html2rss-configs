@@ -5,11 +5,11 @@ channel:
   ttl: 600
 selectors:
   items:
-    selector: '.most-popular__list > li'
+    selector: ".most-popular__list > li"
   title:
-    selector: '.most-popular-list-item__headline'
+    selector: ".most-popular-list-item__headline"
   link:
-    selector: '.most-popular-list-item__link'
-    extractor: 'href'
+    selector: ".most-popular-list-item__link"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"

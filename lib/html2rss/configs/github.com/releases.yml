@@ -1,42 +1,42 @@
 channel:
-  title: 'github.com: %<username>s/%<repository>s releases'
+  title: "github.com: %<username>s/%<repository>s releases"
   url: https://github.com/%<username>s/%<repository>s/releases
   time_zone: UTC
   ttl: 6000
-  description: 'Releases of %<username>s/%<repository>s on github.com.'
+  description: "Releases of %<username>s/%<repository>s on github.com."
 selectors:
   items:
-    selector: '.release'
+    selector: ".release"
   title:
-    selector: '.release-header .text-normal a'
+    selector: ".release-header .text-normal a"
     post_process:
-      name: 'template'
-      string: '%s (%s)'
+      name: "template"
+      string: "%s (%s)"
       methods:
         - self
         - author
   author:
-    selector: '.avatar'
-    extractor: 'attribute'
-    attribute: 'alt'
+    selector: ".avatar"
+    extractor: "attribute"
+    attribute: "alt"
     post_process:
       name: substring
       start: 1
   link:
-    selector: '.release-header .text-normal a'
-    extractor: 'href'
+    selector: ".release-header .text-normal a"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"
   description:
-    selector: '.markdown-body'
-    extractor: 'html'
+    selector: ".markdown-body"
+    extractor: "html"
     post_process:
-      name: 'sanitize_html'
+      name: "sanitize_html"
   updated:
-    selector: 'relative-time'
-    extractor: 'attribute'
-    attribute: 'datetime'
+    selector: "relative-time"
+    extractor: "attribute"
+    attribute: "datetime"
     post_process:
-      name: 'parse_time'
+      name: "parse_time"
   categories:
     - author

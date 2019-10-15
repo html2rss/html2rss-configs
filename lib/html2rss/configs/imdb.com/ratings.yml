@@ -1,13 +1,13 @@
 channel:
-  title: 'imdb.com: ratings'
+  title: "imdb.com: ratings"
   url: http://www.imdb.com/user/%<user_id>s/ratings
   time_zone: UTC
   ttl: 720
 selectors:
   items:
-    selector: '#ratings-container .lister-item'
+    selector: "#ratings-container .lister-item"
   title:
-    selector: '.lister-item-header a'
+    selector: ".lister-item-header a"
     post_process:
       name: template
       string: 'Rated: "%s" %s/10'
@@ -15,22 +15,22 @@ selectors:
         - self
         - user_rating
   link:
-    selector: '.lister-item-header a'
-    extractor: 'href'
+    selector: ".lister-item-header a"
+    extractor: "href"
   description:
     selector: '.lister-item-content > p[class=""]'
   updated:
-    selector: '.lister-item-content > p.text-muted:not(.text-small)'
+    selector: ".lister-item-content > p.text-muted:not(.text-small)"
     post_process:
       name: parse_time
   global_rating:
-    selector: '.ipl-rating-star .ipl-rating-star__rating'
+    selector: ".ipl-rating-star .ipl-rating-star__rating"
   user_rating:
-    selector: '.ipl-rating-star--other-user .ipl-rating-star__rating'
+    selector: ".ipl-rating-star--other-user .ipl-rating-star__rating"
   genres:
-    selector: '.genre'
+    selector: ".genre"
   pg_rating:
-    selector: '.certificate'
+    selector: ".certificate"
   categories:
     - genres
     - pg_rating

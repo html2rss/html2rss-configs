@@ -1,12 +1,12 @@
 channel:
-  title: 'spiegel.de: gelesen'
+  title: "spiegel.de: gelesen"
   url: https://spiegel.de/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: '#tabs-1 li .item-text'
+    selector: "#tabs-1 li .item-text"
   title:
     selector: a
     extractor: attribute

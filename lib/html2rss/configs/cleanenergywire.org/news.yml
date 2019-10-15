@@ -1,17 +1,17 @@
 channel:
-  title: 'cleanenergywire.org: news'
+  title: "cleanenergywire.org: news"
   url: https://www.cleanenergywire.org/news-archive
-  time_zone: 'Europe/Berlin'
+  time_zone: "Europe/Berlin"
   ttl: 720
 selectors:
   items:
-    selector: '.view-content article'
+    selector: ".view-content article"
   title:
-    selector: 'h3 a'
+    selector: "h3 a"
   link:
-    selector: 'h3 a'
-    extractor: 'href'
+    selector: "h3 a"
+    extractor: "href"
   updated:
-    selector: '.date-display-single'
+    selector: ".date-display-single"
     post_process:
       name: parse_time

@@ -1,27 +1,27 @@
 channel:
-  title: 'Kinocheck Filmstarts'
+  title: "Kinocheck Filmstarts"
   url: https://kinocheck.de/filmstarts
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: '.filmstart'
+    selector: ".filmstart"
   title:
-    selector: 'h1 > a'
+    selector: "h1 > a"
     post_process:
-      name: 'template'
-      string: '%s (%s)'
+      name: "template"
+      string: "%s (%s)"
       methods:
         - self
         - start_date
   link:
-    selector: 'h1 > a'
-    extractor: 'href'
+    selector: "h1 > a"
+    extractor: "href"
   description:
-    selector: '.info'
-    extractor: 'html'
+    selector: ".info"
+    extractor: "html"
     post_process:
-      name: 'sanitize_html'
+      name: "sanitize_html"
   start_date:
-    selector: 'h1 > div'
+    selector: "h1 > div"

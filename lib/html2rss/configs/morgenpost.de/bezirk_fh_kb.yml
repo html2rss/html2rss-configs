@@ -6,23 +6,23 @@ channel:
   language: de
 selectors:
   items:
-    selector: 'article.teaser'
+    selector: "article.teaser"
   title:
-    selector: '.teaser__headline'
+    selector: ".teaser__headline"
     post_process:
-      name: 'template'
-      string: '%s: %s'
+      name: "template"
+      string: "%s: %s"
       methods:
         - kicker
         - self
   kicker:
-    selector: '.teaser__kicker'
+    selector: ".teaser__kicker"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"
     post_process:
-      name: 'parse_uri'
+      name: "parse_uri"
   description:
-    selector: '.teaser__body__text'
+    selector: ".teaser__body__text"
   categories:
     - kicker

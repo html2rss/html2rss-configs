@@ -1,14 +1,14 @@
 channel:
-  title: 'DWDL.de meistgelesen'
+  title: "DWDL.de meistgelesen"
   url: https://www.dwdl.de/core/marginal/ajax.nbox-2.php
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: 'tr'
+    selector: "tr"
   title:
-    selector: 'a'
+    selector: "a"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"

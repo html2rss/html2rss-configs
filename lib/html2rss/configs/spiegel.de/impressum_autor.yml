@@ -1,20 +1,20 @@
 channel:
-  title: 'spiegel.de: Impressum Autor %<id>s'
-  url: 'https://www.spiegel.de/impressum/autor-%<id>s.html'
+  title: "spiegel.de: Impressum Autor %<id>s"
+  url: "https://www.spiegel.de/impressum/autor-%<id>s.html"
   time_zone: Europe/Berlin
   ttl: 720
 selectors:
   items:
-    selector: '.search-teaser'
+    selector: ".search-teaser"
   title:
-    selector: '.article-title'
+    selector: ".article-title"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"
   descripton:
-    selector: '.article-intro'
+    selector: ".article-intro"
   updated:
-    selector: '.source-date'
+    selector: ".source-date"
     extractor: text
     post_process:
       - name: substring
@@ -22,7 +22,7 @@ selectors:
         end: -5
       - name: parse_time
   category:
-    selector: '.source-date'
+    selector: ".source-date"
     extractor: text
     post_process:
       - name: substring

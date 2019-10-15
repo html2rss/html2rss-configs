@@ -1,18 +1,18 @@
 channel:
-  title: 'airliners meistgelesen'
+  title: "airliners meistgelesen"
   url: https://www.airliners.de
   time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:
   items:
-    selector: '.list-unstyled.counter li'
+    selector: ".list-unstyled.counter li"
   title:
-    selector: 'a'
+    selector: "a"
   subtitle:
-    selector: '.d-block'
+    selector: ".d-block"
   link:
-    selector: '.media-body > a'
-    extractor: 'href'
+    selector: ".media-body > a"
+    extractor: "href"
   categories:
     - subtitle

@@ -1,14 +1,14 @@
 channel:
-  title: 't-online.de: meistgelesen'
+  title: "t-online.de: meistgelesen"
   url: https://www.t-online.de/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: '.Tllc > ul > li'
+    selector: ".Tllc > ul > li"
   title:
-    selector: 'a'
+    selector: "a"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"

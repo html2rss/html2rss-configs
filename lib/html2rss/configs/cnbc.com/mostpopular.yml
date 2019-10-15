@@ -1,13 +1,13 @@
 channel:
-  title: 'CNBC most popular'
-  url: 'https://www.cnbc.com/id/102535788/services/mostpopular?$DEVICE$=web'
+  title: "CNBC most popular"
+  url: "https://www.cnbc.com/id/102535788/services/mostpopular?$DEVICE$=web"
   time_zone: America/New_York
   ttl: 60
 selectors:
   items:
-    selector: '.headline'
+    selector: ".headline"
   title:
-    selector: 'a'
+    selector: "a"
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"

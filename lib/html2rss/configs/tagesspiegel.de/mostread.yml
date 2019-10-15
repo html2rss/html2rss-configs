@@ -1,28 +1,28 @@
 channel:
-  title: 'tagesspiegel mostread'
+  title: "tagesspiegel mostread"
   url: https://www.tagesspiegel.de
   time_zone: Europe/Berlin
   ttl: 180
   language: de
 selectors:
   items:
-    selector: '.ts-most-read li > article'
+    selector: ".ts-most-read li > article"
   overline:
-    selector: '.ts-overline'
+    selector: ".ts-overline"
   title:
-    selector: '.ts-headline'
+    selector: ".ts-headline"
     post_process:
-      name: 'template'
-      string: '%s: %s'
+      name: "template"
+      string: "%s: %s"
       methods:
         - overline
         - self
   link:
-    selector: 'a'
-    extractor: 'href'
+    selector: "a"
+    extractor: "href"
   description:
-    selector: '.ts-img-container img'
-    extractor: 'attribute'
-    attribute: 'alt'
+    selector: ".ts-img-container img"
+    extractor: "attribute"
+    attribute: "alt"
   categories:
     - overline
