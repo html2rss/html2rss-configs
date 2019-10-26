@@ -53,7 +53,7 @@ There's a generator for that! 🆒
 
 ### Dynamic parameters in `channel` attributes
 
-Sometimes there are structurally equal pages with different URLs. In such a case you can add *variables* to the channel's `url`, `title` and `language` attributes.
+Sometimes there are structurally equal pages with different URLs. In such a case you can add _variables_ to the channel's `url`, `title` and `language` attributes.
 
 In your config YAML:
 
@@ -63,7 +63,7 @@ channel:
   url: 'http://domainname.tld/whatever/%<id>s.html'
 ```
 
-See the *more complex formatting* of the [`sprintf` method](https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-sprintf) for more complex formatting options.
+See the _more complex formatting_ of the [`sprintf` method](https://ruby-doc.org/core-2.6.3/Kernel.html#method-i-sprintf) for more complex formatting options.
 
 You have to provide the parameters to the shared rspec example, too:
 
