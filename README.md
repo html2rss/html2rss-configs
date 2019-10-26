@@ -1,6 +1,6 @@
 # html2rss-configs
 
-This repository contains [html2rss](https://github.com/gildesmarais/html2rss) configs for several websites. Find all provided configs in the [`configs/` directory](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs).
+This repository contains [html2rss](https://github.com/gildesmarais/html2rss) configs for many websites. Find all provided configs in the [`configs/` directory](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs).
 
 A handy method to use these configs is via [html2rss-web](https://github.com/gildesmarais/html2rss-web).
 
@@ -9,21 +9,20 @@ A handy method to use these configs is via [html2rss-web](https://github.com/gil
 If you're running [html2rss-web](https://github.com/gildesmarais/html2rss-web),
 you have nothing more to do! 🎉
 
-Your full request URL might looks like this:
-`http://localhost:3000/espn.com/f1.rss`
-
 ## Usage without html2rss-web
 
-Add this line to your Gemfile:
+Add to your Gemfile:
 
-`gem 'html2rss-configs', git: 'https://github.com/gildesmarais/html2rss-configs.git'`
+```
+gem 'html2rss-configs', git: 'https://github.com/gildesmarais/html2rss-configs.git'
+```
 
 Use it in your code:
 
-```
+```ruby
 require 'html2rss/configs'
 
-Html2rss::Configs.find_by_name('domainname.tld/whatever')
+config = Html2rss::Configs.find_by_name('domainname.tld/whatever')
 ```
 
 This will return the feed config as a Hash with String keys.
@@ -72,7 +71,11 @@ You have to provide the parameters to the shared rspec example, too:
 include_examples 'config.yml', 'domainname.tld/whatever.yml', id: 42
 ```
 
-If you're using [html2rss-web](https://github.com/gildesmarais/html2rss-web), you need to add the parameters to the request URL like this: `http://html2rss/domainname.tld/whatever.rss?id=42`
+Programmatic usage:
+
+```ruby
+config = Html2rss::Configs.find_by_name('domainname.tld/whatever', { id: 42 })
+```
 
 ## Building on the CI
 
