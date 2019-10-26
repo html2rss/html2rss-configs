@@ -7,16 +7,16 @@ name = ARGV[1]
 
 puts <<~YML
   channel:
-    title: '#{domain}: #{name}'
+    title: "#{domain}: #{name}"
     url: https://#{domain}/
     time_zone: UTC
     ttl: 720
   selectors:
     items:
-      selector: 'ul.items > li'
+      selector: "ul.items > li"
     title:
-      selector: 'h1'
+      selector: "h1"
     link:
-      selector: 'a'
-      extractor: 'href'
+      selector: "a"
+      extractor: "href"
 YML
