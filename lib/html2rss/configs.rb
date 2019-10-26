@@ -7,7 +7,7 @@ module Html2rss
     class ConfigNotFound < Html2rss::Configs::Error; end
 
     def self.file_names
-      @file_names ||= Dir[File.join(__dir__, '**', '*.yml')].map { |name| name }.freeze
+      @file_names ||= Dir[File.join(__dir__, '**', '*.yml')].freeze
     end
 
     def self.find_by_name(name, params = {})

@@ -1,10 +1,10 @@
 RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load(file) }
 
-  let!(:file) {
+  let!(:file) do
     path = File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
     File.open(path)
-  }
+  end
 
   let(:feed_name) { file.path.split(File::Separator)[-2..-1].join(File::Separator) }
 
@@ -13,7 +13,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       expect { yaml }.not_to raise_error
     end
 
-    it 'resides in a folder named after channel.url\'s host' do
+    it "resides in a folder named after channel.url's host" do
       dirname = File.dirname(file.path).split(File::Separator).last
       host_name = URI(yaml['channel']['url'].split('/')[0..2].join('/')).host.gsub(/(api|www)\./, '')
 
@@ -34,9 +34,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       end
 
       it 'has a known time_zone' do
-        expect {
-          Time.find_zone! yaml['channel']['time_zone']
-        }.not_to raise_error
+        expect { Time.find_zone! yaml['channel']['time_zone'] }.not_to raise_error
       end
     end
 
@@ -58,15 +56,17 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   context "with fetching #{params}", :fetch do
     subject(:feed) { Html2rss.feed(config) }
 
-    let(:global_config) {
-      { 'headers' => {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
-      } }
-    }
-    let(:feed_config) {
+    let(:global_config) do
+      {
+        'headers' => {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
+        }
+      }
+    end
+    let(:feed_config) do
       params ||= {}
       Html2rss::Configs.find_by_name(feed_name, params)
-    }
+    end
     let(:config) { Html2rss::Config.new(feed_config, global_config) }
 
     it 'has positive amount of items' do
@@ -78,11 +78,9 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       let(:specified_attributes) { %w[title description author category] & config.attribute_names }
       let(:text_attributes) { %w[title description author] & specified_attributes }
       let(:content_attributes) { specified_attributes - text_attributes }
-      let(:special_attributes) {
-        [].tap do |arr|
-          arr << :pubDate if config.attribute_names.include?(:updated)
-        end
-      }
+      let(:special_attributes) do
+        [].tap { |arr| arr << :pubDate if config.attribute_names.include?(:updated) }
+      end
 
       it 'has no empty text attributes', :aggregate_failures do
         (text_attributes + special_attributes).each do |attribute_name|

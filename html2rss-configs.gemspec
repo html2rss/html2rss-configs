@@ -3,15 +3,15 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'html2rss/configs/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'html2rss-configs'
-  spec.version       = Html2rss::Configs::VERSION
-  spec.authors       = ['Gil Desmarais']
-  spec.email         = ['html2rss-configs@desmarais.de']
+  spec.name = 'html2rss-configs'
+  spec.version = Html2rss::Configs::VERSION
+  spec.authors = ['Gil Desmarais']
+  spec.email = %w[html2rss-configs@desmarais.de]
 
-  spec.summary       = 'Collection of ready-to-use html2rss configs.'
-  spec.description   = 'Configs which contain information how to generate RSS items from websites.'
-  spec.homepage      = 'https://github.com/gildesmarais/html2rss-configs'
-  spec.license       = 'MIT'
+  spec.summary = 'Collection of ready-to-use html2rss configs.'
+  spec.description = 'Configs which contain information how to generate RSS items from websites.'
+  spec.homepage = 'https://github.com/gildesmarais/html2rss-configs'
+  spec.license = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
