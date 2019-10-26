@@ -1,0 +1,20 @@
+channel:
+  title: "iaapa.org: news"
+  url: https://www.iaapa.org/news
+  time_zone: UTC
+  ttl: 720
+selectors:
+  items:
+    selector: ".block-label-latest-news .teaser"
+  title:
+    selector: ".title"
+  type:
+    selector: ".type"
+  category:
+    selector: "span > strong"
+  link:
+    selector: "a"
+    extractor: "href"
+  categories:
+    - category
+    - type
