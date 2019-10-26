@@ -7,13 +7,12 @@ module Html2rss
     class ConfigNotFound < Html2rss::Configs::Error; end
 
     def self.file_names
-      @file_names ||= Dir[File.join(__dir__, '**', '*.yml')].map do |name|
-        name
-      end.freeze
+      @file_names ||= Dir[File.join(__dir__, '**', '*.yml')].map { |name| name }.freeze
     end
 
     def self.find_by_name(name, params = {})
-      raise 'must give a name as string' unless name.is_a?(String)
+      raise 'name must be a string' unless name.is_a?(String)
+      raise 'name must be in folder/file format' unless name.include?('/')
 
       name = "#{name}.yml" unless name.end_with?('.yml')
 
