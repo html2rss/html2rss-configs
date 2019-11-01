@@ -3,23 +3,23 @@
 # or a link.
 
 channel:
-  title: 'rinse.fm: podcasts'
+  title: "rinse.fm: podcasts"
   url: https://rinse.fm/podcasts/
   time_zone: UTC
   ttl: 120
 selectors:
   items:
-    selector: '#podcasts-listing .podcast-list-item'
+    selector: "#podcasts-listing .podcast-list-item"
   title:
-    selector: 'h3'
+    selector: "h3"
   link:
-    selector: '.listen > a'
-    extractor: 'href'
+    selector: ".listen > a"
+    extractor: "href"
   enclosure:
-    selector: '.download > a'
-    extractor: 'href'
+    selector: ".download > a"
+    extractor: "href"
   time:
-    selector: '.date'
+    selector: ".date"
   categories:
     - title
   description:
