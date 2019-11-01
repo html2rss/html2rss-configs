@@ -1,0 +1,37 @@
+# Sadly the RinseFM feed is useless.
+# It links to wrong pages, it does not have enclosure
+# or a link.
+
+channel:
+  title: 'rinse.fm: podcasts'
+  url: https://rinse.fm/podcasts/
+  time_zone: UTC
+  ttl: 120
+selectors:
+  items:
+    selector: '#podcasts-listing .podcast-list-item'
+  title:
+    selector: 'h3'
+  link:
+    selector: '.listen > a'
+    extractor: 'href'
+  enclosure:
+    selector: '.download > a'
+    extractor: 'href'
+  time:
+    selector: '.date'
+  categories:
+    - title
+  description:
+    post_process:
+      - name: template
+        string: |
+          # %s
+
+          **(%s)**
+
+          ![File](%s)
+        methods:
+          - title
+          - time
+          - enclosure
