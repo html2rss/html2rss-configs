@@ -23,3 +23,9 @@ selectors:
       - name: gsub
         pattern: fpthumb
         replacement: lg
+  description:
+    post_process:
+      - name: template
+        string: |
+          ![${title}](${enclosure})
+      - name: markdown_to_html

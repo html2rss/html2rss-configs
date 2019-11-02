@@ -35,3 +35,17 @@ selectors:
     - mpaa_rating
     - grade
     - year
+  description:
+    post_process:
+      - name: template
+        string: |
+          # %{movie_title}
+
+          Grade: %{grade}
+
+          MPAA Rating: %{mpaa_rating}
+
+          Distributor: %{distributor}
+
+          Year: %{year}
+      - name: markdown_to_html
