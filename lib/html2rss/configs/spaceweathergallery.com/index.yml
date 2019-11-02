@@ -27,5 +27,5 @@ selectors:
     post_process:
       - name: template
         string: |
-          ![${title}](${enclosure})
+          ![%{title}](%{enclosure})
       - name: markdown_to_html
