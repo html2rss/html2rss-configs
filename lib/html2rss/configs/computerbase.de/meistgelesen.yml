@@ -11,10 +11,7 @@ selectors:
     selector: ".charts__title"
     post_process:
       name: "template"
-      string: "%s: %s"
-      methods:
-        - context
-        - self
+      string: "%{context}: %{self}"
   context:
     selector: ".charts__context"
   link:

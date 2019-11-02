@@ -23,10 +23,8 @@ selectors:
     selector: "movie-title"
   link:
     post_process:
-      name: "template"
-      string: "https://www.metacritic.com/search/movie/%s/results"
-      methods:
-        - movie_title
+      - name: "template"
+        string: "https://www.metacritic.com/search/movie/%{movie_title}/results"
   mpaa_rating:
     selector: "mpaa-rating"
   distributor:

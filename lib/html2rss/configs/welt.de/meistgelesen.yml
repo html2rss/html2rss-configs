@@ -10,10 +10,7 @@ selectors:
     selector: ".o-teaser__headline"
     post_process:
       name: "template"
-      string: "%s: %s"
-      methods:
-        - topic
-        - self
+      string: "%{topic}: %{self}"
   link:
     selector: ".o-teaser__link[title]"
     extractor: "href"

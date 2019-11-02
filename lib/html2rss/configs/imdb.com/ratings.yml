@@ -10,10 +10,7 @@ selectors:
     selector: ".lister-item-header a"
     post_process:
       name: template
-      string: 'Rated: "%s" %s/10'
-      methods:
-        - self
-        - user_rating
+      string: 'Rated: "%{self}" %{user_rating}/10'
   link:
     selector: ".lister-item-header a"
     extractor: "href"

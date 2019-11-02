@@ -11,10 +11,7 @@ selectors:
     selector: "h1 > a"
     post_process:
       name: "template"
-      string: "%s (%s)"
-      methods:
-        - self
-        - start_date
+      string: "%{self} (%{start_date})"
   link:
     selector: "h1 > a"
     extractor: "href"

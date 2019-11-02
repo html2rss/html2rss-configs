@@ -13,10 +13,7 @@ selectors:
     selector: ".tabsarticle p a"
     post_process:
       name: "template"
-      string: "%s: %s"
-      methods:
-        - section
-        - self
+      string: "%{section}: %{self}"
   link:
     selector: ".tabsarticle h3 a"
     extractor: "href"

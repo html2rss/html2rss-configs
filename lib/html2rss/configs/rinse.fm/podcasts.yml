@@ -26,12 +26,6 @@ selectors:
     post_process:
       - name: template
         string: |
-          # %s
+          # %{title}
 
-          **(%s)**
-
-          ![File](%s)
-        methods:
-          - title
-          - time
-          - enclosure
+          **(%{time})**
