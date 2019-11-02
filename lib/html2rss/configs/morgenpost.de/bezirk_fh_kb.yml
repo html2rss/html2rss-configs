@@ -11,10 +11,7 @@ selectors:
     selector: ".teaser__headline"
     post_process:
       name: "template"
-      string: "%s: %s"
-      methods:
-        - kicker
-        - self
+      string: "%{kicker}: %{self}"
   kicker:
     selector: ".teaser__kicker"
   link:

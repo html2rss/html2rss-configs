@@ -13,10 +13,7 @@ selectors:
     selector: ".ts-headline"
     post_process:
       name: "template"
-      string: "%s: %s"
-      methods:
-        - overline
-        - self
+      string: "%{overline}: %{self}"
   link:
     selector: "a"
     extractor: "href"

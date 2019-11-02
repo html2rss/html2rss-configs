@@ -10,10 +10,7 @@ selectors:
     selector: "h3"
     post_process:
       name: "template"
-      string: "%s (Score: %s)"
-      methods:
-        - self
-        - score
+      string: "%{self} (Score: %{score})"
   score:
     selector: ".clamp-score-wrap > .metascore_anchor > .metascore_w"
     extractor: "text"
