@@ -50,6 +50,37 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
           expect(yaml['selectors'][required_attribute]).not_to be_empty
         end
       end
+
+      context 'with sanitize_html post_processor' do
+        it 'is used for description selector' do
+          if (description_selector = yaml['selectors']['description'])
+            post_processors = [description_selector['post_process']].flatten.compact
+            sanitize_html = post_processors.select { |p| p['name'] == 'sanitize_html' }
+
+            expect(sanitize_html).not_to be_nil
+          end
+        end
+      end
+
+      context 'with template post_processor' do
+        it 'references available selectors only', aggregate_failures: true do
+          selectors_in_template(yaml['selectors']).each do |referenced_selector|
+            next if referenced_selector == 'self'
+
+            expect(yaml['selectors'][referenced_selector])
+              .not_to be_nil, "selector `#{referenced_selector}` referenced, but is missing"
+          end
+        end
+      end
+
+      context 'with categories' do
+        it 'references available selectors only', aggregate_failures: true do
+          yaml['selectors'].fetch('categories', []).each do |selector_name|
+            expect(yaml['selectors'][selector_name])
+              .not_to be_nil, "categories references `#{selector_name}`, but is missing"
+          end
+        end
+      end
     end
   end
 
