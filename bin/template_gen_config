@@ -7,8 +7,7 @@ name = ARGV[1]
 
 puts <<~YML
   channel:
-    title: "#{domain}: #{name}"
-    url: https://#{domain}/
+    url: https://#{domain}/#{name}
     time_zone: UTC
     ttl: 720
   selectors:
