@@ -2,13 +2,10 @@
 
 # html2rss-configs [![Build Status](https://travis-ci.org/gildesmarais/html2rss-configs.svg?branch=master)](https://travis-ci.org/gildesmarais/html2rss-configs)
 
-This repository contains [`html2rss`](https://github.com/gildesmarais/html2rss) _feed configs_ for many websites.
-
-Find all _feed configs_ in the [`configs/` directory](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs).
-
-A handy usage method is via [`html2rss-web`](https://github.com/gildesmarais/html2rss-web).
-
-Contributions are more than welcome!
+✌️This repository contains [`html2rss`](https://github.com/gildesmarais/html2rss) _feed configs_ for many websites.  
+👉Find all _feed configs_ in the [`configs/` directory](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs).  
+☝️A handy usage method is via [`html2rss-web`](https://github.com/gildesmarais/html2rss-web).  
+💪 Contributions are more than welcome!
 [Fork this repository](https://help.github.com/en/github/getting-started-with-github/fork-a-repo),
 add your _feed config_ and
 [create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
@@ -36,7 +33,6 @@ In your _feed config_:
 
 ```yml
 channel:
-  title: "domainname.tld: whatever %{id}"
   url: "http://domainname.tld/whatever/%{id}.html"
 ```
 

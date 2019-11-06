@@ -8,6 +8,6 @@ RSpec.describe 'bin/template_gen_config' do
     subject { `#{executable} #{domain} #{name}` }
 
     it { is_expected.to start_with 'channel:' }
-    it { is_expected.to include "  title: \"#{domain}: #{name}\"" }
+    it { is_expected.to include "url: https://#{domain}/#{name}" }
   end
 end

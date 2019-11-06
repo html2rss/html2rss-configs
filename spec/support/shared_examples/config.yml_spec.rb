@@ -27,9 +27,9 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     context 'with channel present' do
-      %w[title url ttl time_zone].each do |required_attribute|
-        it "has channel.#{required_attribute}" do
-          expect(yaml['channel']).to have_key required_attribute
+      it 'has channel required attributes', :aggregate_failures do
+        %w[url ttl time_zone].each do |required_attribute|
+          expect(yaml['channel']).to(have_key(required_attribute), required_attribute)
         end
       end
 
@@ -43,11 +43,9 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     context 'with selectors present' do
-      it { expect(yaml['selectors']).to have_key 'items' }
-
-      %w[items title].each do |required_attribute|
-        it "has selectors.#{required_attribute}" do
-          expect(yaml['selectors'][required_attribute]).not_to be_empty
+      it 'has required selectors', :aggregate_failures do
+        %w[items title].each do |required_attribute|
+          expect(yaml['selectors'][required_attribute]).not_to(be_empty, required_attribute)
         end
       end
 
