@@ -2,7 +2,7 @@ channel:
   title: "f1"
   url: https://www.formula1.com/en/latest/all.html
   time_zone: UTC
-  ttl: 600
+  ttl: 120
 selectors:
   items:
     selector: ".f1-latest-listing .f1-latest-listing--grid-item"

@@ -2,7 +2,7 @@ channel:
   title: "spektrum.de meistgelesen"
   url: https://www.spektrum.de/
   time_zone: Europe/Berlin
-  ttl: 180
+  ttl: 60
   language: de
 selectors:
   items:

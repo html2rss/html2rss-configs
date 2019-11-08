@@ -1,7 +1,7 @@
 channel:
   title: "welt.de: meistgelesen"
   url: https://www.welt.de
-  ttl: 180
+  ttl: 60
   time_zone: Europe/Berlin
 selectors:
   items:
