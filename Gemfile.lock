@@ -21,7 +21,7 @@ GEM
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
     hashie (3.6.0)
-    html2rss (0.8.0)
+    html2rss (0.8.1)
       activesupport (~> 5.0)
       builder
       faraday (~> 0.15)
