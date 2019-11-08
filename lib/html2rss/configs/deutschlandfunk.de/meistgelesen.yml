@@ -1,5 +1,5 @@
 channel:
-  title: dlf meistgelesen
+  title: "deutschlandfunk.de: meistgelesen"
   url: https://www.deutschlandfunk.de
   time_zone: Europe/Berlin
   ttl: 60

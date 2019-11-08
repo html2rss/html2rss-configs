@@ -1,5 +1,5 @@
 channel:
-  title: "spektrum.de meistgelesen"
+  title: "spektrum.de: meistgelesen"
   url: https://www.spektrum.de/
   time_zone: Europe/Berlin
   ttl: 60

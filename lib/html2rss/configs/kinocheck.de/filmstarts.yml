@@ -1,5 +1,4 @@
 channel:
-  title: "Kinocheck Filmstarts"
   url: https://kinocheck.de/filmstarts
   time_zone: Europe/Berlin
   ttl: 1440

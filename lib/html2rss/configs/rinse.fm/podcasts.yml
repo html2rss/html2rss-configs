@@ -3,7 +3,6 @@
 # or a link.
 
 channel:
-  title: "rinse.fm: podcasts"
   url: https://rinse.fm/podcasts/
   time_zone: UTC
   ttl: 120

@@ -1,5 +1,5 @@
 channel:
-  title: "tagesspiegel mostread"
+  title: "tagesspiegel.de: mostread"
   url: https://www.tagesspiegel.de
   time_zone: Europe/Berlin
   ttl: 15

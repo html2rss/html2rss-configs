@@ -1,5 +1,5 @@
 channel:
-  title: "StackOverflow: Hot Network Questions"
+  title: "stackoverflow.com: Hot Network Questions"
   url: https://stackoverflow.com/questions
   time_zone: America/New_York
   ttl: 30

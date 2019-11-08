@@ -1,5 +1,4 @@
 channel:
-  title: "bbc.co.uk: available-episodes"
   url: https://www.bbc.co.uk/programmes/%<id>s/episodes/player
   time_zone: UTC
   ttl: 720

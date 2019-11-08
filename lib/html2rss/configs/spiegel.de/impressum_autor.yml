@@ -1,5 +1,4 @@
 channel:
-  title: "spiegel.de: Impressum Autor %<id>s"
   url: "https://www.spiegel.de/impressum/autor-%<id>s.html"
   time_zone: Europe/Berlin
   ttl: 180

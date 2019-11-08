@@ -1,5 +1,5 @@
 channel:
-  title: "golem.de meistgelesen"
+  title: "golem.de: meistgelesen"
   url: https://www.golem.de/
   time_zone: Europe/Berlin
   ttl: 60

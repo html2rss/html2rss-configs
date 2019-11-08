@@ -1,5 +1,5 @@
 channel:
-  title: "The Guardian International most popular"
+  title: "theguardian.com: International most popular"
   url: https://www.theguardian.com/international
   time_zone: Europe/London
   ttl: 60

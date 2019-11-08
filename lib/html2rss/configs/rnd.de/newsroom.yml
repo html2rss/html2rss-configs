@@ -1,5 +1,4 @@
 channel:
-  title: "rnd.de: newsroom"
   url: https://www.rnd.de/
   time_zone: Europe/Berlin
   ttl: 15

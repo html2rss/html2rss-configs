@@ -1,5 +1,5 @@
 channel:
-  title: "Gründerszene Trending"
+  title: "gruenderszene.de: trending"
   url: https://www.gruenderszene.de
   time_zone: Europe/Berlin
   ttl: 60

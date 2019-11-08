@@ -1,5 +1,4 @@
 channel:
-  title: "f1"
   url: https://www.formula1.com/en/latest/all.html
   time_zone: UTC
   ttl: 120
