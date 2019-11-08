@@ -2,7 +2,7 @@ channel:
   title: "solarthermalworld.org: news"
   url: https://solarthermalworld.org/news
   time_zone: UTC
-  ttl: 1800
+  ttl: 180
 selectors:
   items:
     selector: ".item-list ul > li > article"

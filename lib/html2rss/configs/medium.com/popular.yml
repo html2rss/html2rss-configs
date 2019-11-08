@@ -2,7 +2,7 @@ channel:
   title: "medium.com popular"
   url: https://medium.com/topic/popular
   time_zone: America/Los_Angeles
-  ttl: 120
+  ttl: 60
 selectors:
   items:
     selector: 'h2:contains("Latest") + div > section'

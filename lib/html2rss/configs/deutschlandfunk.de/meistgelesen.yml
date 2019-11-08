@@ -2,7 +2,7 @@ channel:
   title: dlf meistgelesen
   url: https://www.deutschlandfunk.de
   time_zone: Europe/Berlin
-  ttl: 720
+  ttl: 60
   language: de
 selectors:
   items:

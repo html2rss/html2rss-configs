@@ -2,7 +2,7 @@ channel:
   title: "github.com: %<username>s/%<repository>s releases"
   url: https://github.com/%<username>s/%<repository>s/releases
   time_zone: UTC
-  ttl: 6000
+  ttl: 720
   description: "Releases of %<username>s/%<repository>s on github.com."
 selectors:
   items:

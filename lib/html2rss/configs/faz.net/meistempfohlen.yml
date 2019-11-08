@@ -2,7 +2,7 @@ channel:
   title: "faz.de meistempfohlen"
   url: http://www.faz.net/2.300/beliebte-artikel/meistempfohlen/
   time_zone: Europe/Berlin
-  ttl: 120
+  ttl: 60
   language: de
 selectors:
   items:

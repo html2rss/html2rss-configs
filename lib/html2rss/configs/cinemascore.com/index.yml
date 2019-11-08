@@ -1,7 +1,7 @@
 channel:
   title: "Cinemascore.com: start page"
   url: https://api.cinemascore.com/guest/surveys
-  ttl: 600
+  ttl: 720
   json: true
   time_zone: America/Los_Angeles
 selectors:

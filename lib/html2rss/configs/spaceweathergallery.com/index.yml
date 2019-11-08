@@ -2,7 +2,7 @@ channel:
   title: "spaceweathergallery.com: index"
   url: https://spaceweathergallery.com/
   time_zone: UTC
-  ttl: 720
+  ttl: 180
 selectors:
   items:
     selector: div#sidebar table tr

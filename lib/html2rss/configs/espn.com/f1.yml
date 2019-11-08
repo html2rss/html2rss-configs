@@ -2,7 +2,7 @@ channel:
   title: "ESPN F1 Top Headlines"
   url: http://www.espn.com/f1/
   time_zone: UTC
-  ttl: 180
+  ttl: 60
 selectors:
   items:
     selector: ".headlineStack__list > li"

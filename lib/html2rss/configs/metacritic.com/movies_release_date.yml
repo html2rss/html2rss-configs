@@ -2,7 +2,7 @@ channel:
   title: "metacritics movies popular"
   url: https://www.metacritic.com/browse/movies/release-date/theaters/date
   time_zone: America/Los_Angeles
-  ttl: 720
+  ttl: 180
 selectors:
   items:
     selector: ".clamp-list tr .clamp-summary-wrap"

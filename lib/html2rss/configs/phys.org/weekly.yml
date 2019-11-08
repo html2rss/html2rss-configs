@@ -2,7 +2,7 @@ channel:
   title: "Phys.org Weekly"
   url: https://phys.org/weekly-news/
   time_zone: Europe/London
-  ttl: 120
+  ttl: 1440
 selectors:
   items:
     selector: ".sorted-news-list .sorted-article-content"

@@ -2,7 +2,7 @@ channel:
   title: "DWDL.de meistgelesen"
   url: https://www.dwdl.de/core/marginal/ajax.nbox-2.php
   time_zone: Europe/Berlin
-  ttl: 720
+  ttl: 60
   language: de
 selectors:
   items:
