@@ -17,15 +17,15 @@ selectors:
     extractor: "attribute"
     attribute: "title"
   image:
-    selector: 'img'
+    selector: "img"
     extractor: "attribute"
     attribute: "data-retina-src"
   image_alt:
-    selector: 'img'
+    selector: "img"
     extractor: "attribute"
     attribute: "alt"
   description:
-    selector: '.tsr-Base_Content'
+    selector: ".tsr-Base_Content"
     post_process:
       - name: template
         string: |

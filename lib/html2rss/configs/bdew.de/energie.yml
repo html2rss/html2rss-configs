@@ -13,6 +13,6 @@ selectors:
     extractor: "href"
   description:
     selector: ".rich-text"
-    extractor: 'html'
+    extractor: "html"
     post_process:
       - name: sanitize_html
