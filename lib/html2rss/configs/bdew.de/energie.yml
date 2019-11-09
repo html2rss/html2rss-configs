@@ -2,6 +2,7 @@ channel:
   url: https://www.bdew.de/energie/
   time_zone: Europe/Berlin
   ttl: 720
+  language: de
 selectors:
   items:
     selector: ".bdew__contentportlet__box"

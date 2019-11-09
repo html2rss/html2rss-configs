@@ -2,6 +2,7 @@ channel:
   url: https://www.rnd.de/
   time_zone: Europe/Berlin
   ttl: 15
+  language: de
 selectors:
   items:
     selector: ".c-quickcheck__content-scroll .c-quickcheck__content-element"

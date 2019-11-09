@@ -2,6 +2,7 @@ channel:
   url: "https://www.spiegel.de/impressum/autor-%<id>s.html"
   time_zone: Europe/Berlin
   ttl: 180
+  language: de
 selectors:
   items:
     selector: ".search-teaser"
