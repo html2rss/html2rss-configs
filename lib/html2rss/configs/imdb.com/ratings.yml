@@ -1,5 +1,4 @@
 channel:
-  title: "imdb.com: ratings"
   url: http://www.imdb.com/user/%<user_id>s/ratings
   time_zone: UTC
   ttl: 1440

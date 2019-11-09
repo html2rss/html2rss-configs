@@ -113,13 +113,13 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
       it 'has no empty text attributes', :aggregate_failures do
         (text_attributes + special_attributes).each do |attribute_name|
-          expect(item.public_send(attribute_name)).not_to be_empty, attribute_name
+          expect(item.public_send(attribute_name).to_s).not_to be_empty, attribute_name.to_s
         end
       end
 
       it 'has no empty content attributes', :aggregate_failures do
         content_attributes.each do |attribute_name|
-          expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name
+          expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
         end
       end
     end

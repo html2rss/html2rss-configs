@@ -1,5 +1,4 @@
 channel:
-  title: mopo kb-fh
   url: https://www.morgenpost.de/bezirke/friedrichshain-kreuzberg/
   time_zone: Europe/Berlin
   ttl: 60

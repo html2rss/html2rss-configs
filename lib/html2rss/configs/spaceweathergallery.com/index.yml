@@ -1,5 +1,4 @@
 channel:
-  title: "spaceweathergallery.com: index"
   url: https://spaceweathergallery.com/
   time_zone: UTC
   ttl: 180

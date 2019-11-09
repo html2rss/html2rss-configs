@@ -1,5 +1,4 @@
 channel:
-  title: "cleanenergywire.org: news"
   url: https://www.cleanenergywire.org/news-archive
   time_zone: "Europe/Berlin"
   ttl: 360

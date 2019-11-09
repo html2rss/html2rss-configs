@@ -3,6 +3,7 @@ channel:
   url: https://www.welt.de
   ttl: 60
   time_zone: Europe/Berlin
+  language: de
 selectors:
   items:
     selector: '[data-external-stage-name="most-read"] article'

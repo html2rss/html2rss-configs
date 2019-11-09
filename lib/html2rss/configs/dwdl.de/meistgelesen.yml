@@ -1,5 +1,5 @@
 channel:
-  title: "DWDL.de meistgelesen"
+  title: "dwdl.de: meistgelesen"
   url: https://www.dwdl.de/core/marginal/ajax.nbox-2.php
   time_zone: Europe/Berlin
   ttl: 60

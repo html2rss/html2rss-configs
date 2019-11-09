@@ -1,5 +1,4 @@
 channel:
-  title: "iaapa.org: news"
   url: https://www.iaapa.org/news
   time_zone: UTC
   ttl: 720

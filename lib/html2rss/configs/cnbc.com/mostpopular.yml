@@ -1,5 +1,4 @@
 channel:
-  title: "CNBC most popular"
   url: "https://www.cnbc.com/id/102535788/services/mostpopular?$DEVICE$=web"
   time_zone: America/New_York
   ttl: 60

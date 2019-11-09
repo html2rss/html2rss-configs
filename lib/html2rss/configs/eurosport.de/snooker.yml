@@ -1,5 +1,4 @@
 channel:
-  title: "es snooker"
   url: https://www.eurosport.de/snooker/
   time_zone: Europe/Berlin
   ttl: 360

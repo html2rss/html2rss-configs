@@ -1,5 +1,4 @@
 channel:
-  title: "github.com: %<username>s/%<repository>s releases"
   url: https://github.com/%<username>s/%<repository>s/releases
   time_zone: UTC
   ttl: 720

@@ -3,6 +3,7 @@ channel:
   url: https://ran.de/news
   time_zone: Europe/Berlin
   ttl: 720
+  language: de
 selectors:
   items:
     selector: ".recommendations-component .teaser"
