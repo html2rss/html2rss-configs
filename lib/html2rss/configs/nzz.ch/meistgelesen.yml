@@ -3,6 +3,8 @@ channel:
   time_zone: Europe/Berlin
   ttl: 720
   language: de
+  headers:
+    Accept-Language: de-de
 selectors:
   items:
     selector: '.pageblock[data-source-element$="Meistgelesen-in-Deutschland"] .columns > .column'
