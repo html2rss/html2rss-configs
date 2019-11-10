@@ -1,0 +1,21 @@
+channel:
+  url: https://www.nzz.ch
+  time_zone: Europe/Berlin
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: '.pageblock[data-source-element$="Meistgelesen-in-Deutschland"] .columns > .column'
+  title:
+    selector: "h2 span"
+  link:
+    selector: ".teaser__content a"
+    extractor: "href"
+  author:
+    selector: ".metainfo__item--author"
+  updated:
+    selector: ".metainfo__item--date"
+    extractor: "attribute"
+    attribute: "datetime"
+    post_process:
+      - name: parse_time
