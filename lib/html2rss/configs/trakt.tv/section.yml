@@ -1,0 +1,64 @@
+# section: shows, movies
+# filter: trending, popular, watched/weekly, anticipated
+channel:
+  url: https://trakt.tv/%{section}/%{filter}
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: ".grid-item[itemscope]"
+  title:
+    selector: 'meta[itemprop="name"]'
+    extractor: attribute
+    attribute: "content"
+    post_process:
+      - name: template
+        string: "%{self} [%{rating}/10]"
+  link:
+    selector: "a"
+    extractor: "href"
+  image:
+    selector: "img.real"
+    extractor: "attribute"
+    attribute: "data-original"
+    post_process:
+      - name: parse_uri
+  percentage:
+    selector: ".percentage"
+  rating:
+    post_process:
+      - name: template
+        string: "%{percentage}"
+      - name: gsub
+        pattern: "%"
+        replacement: ""
+      - name: template
+        string: "%<self>02d"
+      - name: substring
+        start: 0
+        end: 0
+  year:
+    selector: ".year"
+  categories:
+    - year
+    - percentage
+    - rating
+  watchers:
+    selector: ".titles *:first-child"
+  plays:
+    selector: ".titles *:last-child"
+  description:
+    post_process:
+      - name: template
+        string: |
+          [![](%{image})](%{link})
+
+          year:        %{year}
+
+          percentage:  %{percentage}
+
+          %{watchers}
+
+          %{plays}
+
+      - name: markdown_to_html
