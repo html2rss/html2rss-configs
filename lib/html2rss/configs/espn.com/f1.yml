@@ -1,5 +1,5 @@
 channel:
-  url: http://www.espn.com/f1/
+  url: https://www.espn.com/f1/
   time_zone: UTC
   ttl: 60
 selectors:
