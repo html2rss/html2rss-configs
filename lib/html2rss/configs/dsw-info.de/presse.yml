@@ -15,6 +15,6 @@ selectors:
     post_process:
       - name: parse_time
   description:
-    selector: '.bt small'
+    selector: ".bt small"
     post_process:
-      - name: 'sanitize_html'
+      - name: "sanitize_html"
