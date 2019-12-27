@@ -1,0 +1,25 @@
+channel:
+  url: https://www.teneriffa-news.com/news
+  time_zone: "Europe/Lisbon"
+  ttl: 720
+selectors:
+  items:
+    selector: ".main-content article"
+  title:
+    selector: "h2"
+  link:
+    selector: "a"
+    extractor: "href"
+  img_url:
+    selector: "img"
+    extractor: "attribute"
+    attribute: "data-lazy-src"
+  description:
+    selector: ".excerpt"
+    post_process:
+      - name: template
+        string: |
+          ![](%{img_url})
+
+          %{self}
+      - name: markdown_to_html
