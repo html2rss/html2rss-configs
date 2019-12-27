@@ -1,0 +1,20 @@
+channel:
+  url: https://www.dsw-info.de/presse
+  time_zone: Europe/Berlin
+  ttl: 720
+selectors:
+  items:
+    selector: ".cesprop-0 .container.zw-01 .frame:nth-child(2) ul > li"
+  title:
+    selector: "a"
+  link:
+    selector: "a"
+    extractor: "href"
+  update:
+    selector: ".vd small"
+    post_process:
+      - name: parse_time
+  description:
+    selector: '.bt small'
+    post_process:
+      - name: 'sanitize_html'
