@@ -12,8 +12,15 @@ selectors:
     extractor: "href"
   img:
     selector: "img"
-    extractor: "src"
+    extractor: "attribute"
+    attribute: "src"
   updated:
     selector: ".note"
     post_process:
       - name: parse_time
+  description:
+    post_process:
+      - name: template
+        string: |
+          # ![](%{img})
+      - name: markdown_to_html
