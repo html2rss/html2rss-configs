@@ -1,0 +1,19 @@
+channel:
+  url: https://support.apple.com/exchange_repair
+  time_zone: America/Los_Angeles
+  ttl: 720
+selectors:
+  items:
+    selector: ".main .as-columns--2up-extended"
+  title:
+    selector: "a"
+  link:
+    selector: "a"
+    extractor: "href"
+  img:
+    selector: "img"
+    extractor: "src"
+  updated:
+    selector: ".note"
+    post_process:
+      - name: parse_time
