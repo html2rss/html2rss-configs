@@ -10,6 +10,7 @@ puts <<~YML
     url: https://#{domain}/#{name}
     time_zone: UTC
     ttl: 720
+    # language: en
   selectors:
     items:
       selector: "ul.items > li"
