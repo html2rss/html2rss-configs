@@ -2,6 +2,7 @@ channel:
   url: https://www.dsw-info.de/presse
   time_zone: Europe/Berlin
   ttl: 720
+  language: de
 selectors:
   items:
     selector: ".cesprop-0 .container.zw-01 .frame:nth-child(2) ul > li"
