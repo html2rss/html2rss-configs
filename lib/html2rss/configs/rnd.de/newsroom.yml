@@ -11,6 +11,11 @@ selectors:
   link:
     selector: "a"
     extractor: "href"
+  description:
+    selector: ".js-quickcheck-accordion-element-content"
+    extractor: html
+    post_process:
+      name: sanitize_html
   tag1:
     selector: ".tags > li:nth-child(1)"
   tag2:
