@@ -5,14 +5,19 @@ channel:
   language: de
 selectors:
   items:
-    selector: ".c-quickcheck__content-scroll .c-quickcheck__content-element"
+    selector: ".c-qck article"
   title:
-    selector: "article.tsr h3"
+    selector: "h3"
   link:
-    selector: ".tsr__article-extra-link"
+    selector: "a"
     extractor: "href"
-  description:
-    selector: ".tsr__content"
-    extractor: html
-    post_process:
-      name: sanitize_html
+  tag1:
+    selector: ".tags > li:nth-child(1)"
+  tag2:
+    selector: ".tags > li:nth-child(2)"
+  tag3:
+    selector: ".tags > li:nth-child(3)"
+  categories:
+    - tag1
+    - tag2
+    - tag3
