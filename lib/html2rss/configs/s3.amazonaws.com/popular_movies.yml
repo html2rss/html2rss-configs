@@ -1,0 +1,25 @@
+# This generates a RSS of the daily updated
+# https://github.com/sjlu/popular-movies
+channel:
+  url: https://s3.amazonaws.com/popular-movies/movies.json
+  time_zone: UTC
+  ttl: 1440
+  json: true
+selectors:
+  items:
+    selector: "objects > object"
+  title:
+    selector: "title"
+  imdb_id:
+    selector: "imdb-id"
+  poster_url:
+    selector: "poster-url"
+  link:
+    post_process:
+      - name: template
+        string: "https://imdb.com/title/%{imdb_id}"
+  description:
+    post_process:
+      - name: template
+        string: "![](%{poster_url})"
+      - name: markdown_to_html
