@@ -1,12 +1,9 @@
 RSpec.describe 'bin/fetch' do
+  subject { `#{executable} #{name}` }
+
   let(:executable) { 'bin/fetch' }
+  let(:name) { 'stackoverflow.com/hot_network_questions' }
 
-  let(:name) { 'spiegel.de/impressum_autor' }
-
-  context 'with one argument' do
-    subject { `#{executable} #{name} id=14051` }
-
-    it { is_expected.to start_with '<?xml version="1.0" encoding="UTF-8"?>' }
-    it { is_expected.to include '<link>https://www.spiegel.de/impressum/autor-14051.html</link>' }
-  end
+  it { is_expected.to start_with '<?xml version="1.0" encoding="UTF-8"?>' }
+  it { is_expected.to include '<link>https://stackoverflow.com/questions</link>' }
 end
