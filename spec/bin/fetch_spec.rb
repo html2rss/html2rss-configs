@@ -5,5 +5,5 @@ RSpec.describe 'bin/fetch' do
   let(:name) { 'stackoverflow.com/hot_network_questions' }
 
   it { is_expected.to start_with '<?xml version="1.0" encoding="UTF-8"?>' }
-  it { is_expected.to include '<link>https://www.stackoverflow.com/questions</link>' }
+  it { is_expected.to include '<link>https://stackoverflow.com/questions</link>' }
 end
