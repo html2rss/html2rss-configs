@@ -5,7 +5,7 @@ channel:
   language: de
 selectors:
   items:
-    selector: ".article-teaser-list article"
+    selector: "[data-area='article-teaser-list'] [data-area]"
   title:
     selector: "h2 .mb-12"
   prefixed_title:
