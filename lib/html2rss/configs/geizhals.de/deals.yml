@@ -12,7 +12,7 @@ selectors:
       - name: "template"
         string: "%{self} [%{price}] [%{merchant}] %{bestprice}"
   link:
-    selector: "a"
+    selector: ".galleryview__image-link"
     extractor: "href"
   description:
     post_process:
