@@ -1,0 +1,18 @@
+channel:
+  url: https://www.adfc.de/presse/pressemitteilungen/
+  time_zone: Europe/Berlin
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: ".articleteasercontainer .articleteaser"
+  title:
+    selector: ".articleteaser-header-container h4"
+  link:
+    selector: "a:first"
+    extractor: "href"
+  description:
+    selector: ".articleteaser-header-container p"
+    extractor: "html"
+    post_process:
+      - name: sanitize_html
