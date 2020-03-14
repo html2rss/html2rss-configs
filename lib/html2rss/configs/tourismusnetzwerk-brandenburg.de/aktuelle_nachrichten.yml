@@ -1,0 +1,27 @@
+channel:
+  url: https://www.tourismusnetzwerk-brandenburg.de/nc/aktuelle-nachrichten/
+  time_zone: Europe/Berlin
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: ".module-news-overview .module-news-overview__list__item"
+  title:
+    selector: "h4"
+  link:
+    selector: "a"
+    extractor: "href"
+  updated:
+    selector: ".module-news-overview__list__item__text__meta"
+    post_process:
+      - name: "parse_time"
+        time_zone: "Europe/Berlin"
+  location:
+    selector: ".module-news-overview__list__item__text__location"
+  topic:
+    selector: ".module-internships-overview__list__item__topic"
+  categories:
+    - location
+    - topic
+  description:
+    selector: "p"
