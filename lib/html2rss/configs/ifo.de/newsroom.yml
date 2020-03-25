@@ -1,0 +1,29 @@
+channel:
+  url: https://www.ifo.de/get-template/pressemitteilungen/false/de
+  time_zone: Europe/Berlin
+  ttl: 720
+  language: de
+  json: true
+selectors:
+  items:
+    selector: "field"
+  title:
+    selector: "title"
+  link:
+    selector: "url"
+    post_process:
+      - name: template
+        string: "https://www.ifo.de%{self}"
+      - name: "parse_uri"
+  categories:
+    - type
+  type:
+    selector: ".type"
+  description:
+    selector: "field-kurztext"
+    post_process:
+      - name: sanitize_html
+  updated:
+    selector: "field-date default"
+    post_process:
+      name: parse_time
