@@ -1,0 +1,20 @@
+channel:
+  url: https://www.robinwood.de/was-gibt-es-neues/aktuelles
+  time_zone: UTC
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: ".view-content article"
+  title:
+    selector: ".outer-link__title"
+  link:
+    selector: "a"
+    extractor: "href"
+  category:
+    selector: ".teaser__category"
+  description:
+    selector: ".teaser__text"
+  updated:
+    selector: '[property="dc:date"]'
+    attribute: "content"
