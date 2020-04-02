@@ -1,0 +1,12 @@
+channel:
+  url: https://softwareleadweekly.com/issues
+  time_zone: UTC
+  ttl: 720
+selectors:
+  items:
+    selector: ".table-issue"
+  title:
+    selector: "a"
+  link:
+    selector: "a"
+    extractor: "href"
