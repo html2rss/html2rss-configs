@@ -11,7 +11,7 @@ Metrics/BlockLength:
     - "spec/**/*_spec.rb"
     - html2rss-configs.gemspec
 
-Layout/LineLength:
+Metrics/LineLength:
   Max: 110
 
 Style/Documentation:
@@ -22,15 +22,6 @@ Style/FrozenStringLiteralComment:
 
 Style/BlockDelimiters:
   Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
 
 RSpec/DescribeClass:
   Exclude:
