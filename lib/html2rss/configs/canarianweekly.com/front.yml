@@ -1,0 +1,21 @@
+channel:
+  url: https://www.canarianweekly.com/
+  time_zone: Europe/London
+  ttl: 720
+  language: en
+selectors:
+  items:
+    selector: ".grid-post"
+  title:
+    selector: "h4 > a"
+  link:
+    selector: "h4 > a"
+    extractor: "href"
+  description:
+    selector: "p"
+    post_process:
+      - name: "sanitize_html"
+  updated:
+    selector: ".date"
+    post_process:
+      - name: "parse_time"
