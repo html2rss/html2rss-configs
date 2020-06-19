@@ -1,0 +1,22 @@
+channel:
+  url: https://www.dfs.de/dfs_homepage/de/Presse/Pressemitteilungen/
+  time_zone: Europe/Berlin
+  ttl: 1440
+  language: de
+selectors:
+  items:
+    selector: "ul.documentList > li"
+  title:
+    selector: "a"
+    extractor: "attribute"
+    attribute: "title"
+  link:
+    selector: "a"
+    extractor: "href"
+  updated:
+    selector: "a"
+    post_process:
+      - name: substring
+        start: 0
+        end: 9
+      - name: "parse_time"
