@@ -1,0 +1,19 @@
+channel:
+  url: https://www.steuerzahler.de/news
+  time_zone: Europe/Berlin
+  ttl: 720
+  language: en
+selectors:
+  items:
+    selector: ".bdst_presslist .bdst_presslist__block"
+  title:
+    selector: "h4"
+  link:
+    selector: "a"
+    extractor: "href"
+  description:
+    selector: ".bdst_presslist__block__teaser"
+  updated:
+    selector: ".bdst_presslist__block__date"
+    post_process:
+      name: "parse_time"
