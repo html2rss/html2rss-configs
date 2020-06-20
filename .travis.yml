@@ -14,9 +14,3 @@ script:
   - make lint
   - make test
   - make test-fetch-changed-configs
-
-deploy:
-  provider: script
-  script: bin/ci-build-html2rss-web
-  on:
-    branch: master
