@@ -2,7 +2,7 @@ channel:
   url: https://www.steuerzahler.de/news
   time_zone: Europe/Berlin
   ttl: 720
-  language: en
+  language: de
 selectors:
   items:
     selector: ".bdst_presslist .bdst_presslist__block"
