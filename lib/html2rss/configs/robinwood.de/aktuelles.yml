@@ -1,6 +1,6 @@
 channel:
   url: https://www.robinwood.de/was-gibt-es-neues/aktuelles
-  time_zone: UTC
+  time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
