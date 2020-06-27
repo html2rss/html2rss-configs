@@ -2,6 +2,7 @@ channel:
   url: https://www.teneriffa-news.com/news
   time_zone: "Europe/Lisbon"
   ttl: 720
+  language: de
 selectors:
   items:
     selector: ".main-content article"
