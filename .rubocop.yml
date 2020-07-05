@@ -3,8 +3,9 @@ require:
   - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: 2.4
   DisplayCopNames: true
+  NewCops: enable
+  TargetRubyVersion: 2.4
 
 Metrics/BlockLength:
   Exclude:
