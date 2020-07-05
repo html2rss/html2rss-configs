@@ -1,0 +1,27 @@
+channel:
+  url: https://goodjobs.eu/de/jobs
+  time_zone: Europe/Berlin
+  ttl: 720
+  language: de
+selectors:
+  items:
+    selector: ".jobCard"
+  title:
+    selector: ".jobCard-title"
+    post_process:
+      name: "template"
+      string: "%s (%s, %s)"
+      methods:
+        - self
+        - city
+        - employer
+  city:
+    selector: ".jobCard-meta:not(.jobCard-meta--expires):not(.jobCard-meta--approved)"
+  employer:
+    selector: ".jobCard-employer"
+  updated:
+    selector: "time"
+    extractor: attribute
+    attribute: datetime
+  link:
+    extractor: "href"
