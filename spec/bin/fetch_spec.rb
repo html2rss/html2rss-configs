@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'bin/fetch' do
   subject { `#{executable} #{name}` }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'html2rss/configs/version'
 require 'yaml'
 

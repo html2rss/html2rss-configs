@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 changed_files = `git diff --name-only master | grep 'lib/html2rss/configs/.*/.*.yml'`.split("\n")
 

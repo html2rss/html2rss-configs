@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 exit(-1) if !ARGV[0] || !ARGV[1]
 
