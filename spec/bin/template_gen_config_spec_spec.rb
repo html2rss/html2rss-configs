@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'bin/template_gen_config_spec' do
   let(:executable) { 'bin/template_gen_config_spec' }
 

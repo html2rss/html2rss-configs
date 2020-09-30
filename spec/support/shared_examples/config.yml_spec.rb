@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load(file) }
 
