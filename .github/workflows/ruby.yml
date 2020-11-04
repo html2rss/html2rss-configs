@@ -37,7 +37,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install -yq yamllint
-          bundle install
+          bundle config path vendor/bundle
+          bundle config --global frozen 1
+          bundle install --jobs 4 --retry 3
+          yarn install --frozen-lockfile --no-progress --non-interactive
 
       - name: Run linters
         run: make lint
