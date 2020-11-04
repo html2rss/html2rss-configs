@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-changed_files = `git diff --name-only master | grep 'lib/html2rss/configs/.*/.*.yml'`.split("\n")
+changed_files = `git diff --name-only origin/master | grep 'lib/html2rss/configs/.*/.*.yml'`.split("\n")
 
 specs_to_run = changed_files.map do |file|
   filepath = File.expand_path File.join(__dir__, '..', file)
 
-  file.gsub('lib/', 'spec/') + '_spec.rb' if File.exist?(filepath)
+  "#{file.gsub('lib/', 'spec/')}_spec.rb" if File.exist?(filepath)
 end.compact
 
 if specs_to_run.count.positive?
