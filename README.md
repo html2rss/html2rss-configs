@@ -1,9 +1,9 @@
 ![html2rss logo](https://github.com/gildesmarais/html2rss/raw/master/support/logo.png)
 
-# html2rss-configs [![Build Status](https://travis-ci.org/gildesmarais/html2rss-configs.svg?branch=master)](https://travis-ci.org/gildesmarais/html2rss-configs)
+# html2rss-configs
 
 ✌️This repository contains [`html2rss`](https://github.com/gildesmarais/html2rss) _feed configs_ for many websites.  
-👉Find all _feed configs_ in the [`configs/` directory](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs).  
+👉Find all _feed configs_ in the [`configs/` directory](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs).  
 ☝️A handy usage method is via [`html2rss-web`](https://github.com/gildesmarais/html2rss-web).  
 💪 Contributions are more than welcome!
 [Fork this repository](https://help.github.com/en/github/getting-started-with-github/fork-a-repo),
@@ -19,7 +19,7 @@ There's a generator for that! 🆒
 2. Head to the generated files and add the selectors and options.  
    [`html2rss`'s README](https://github.com/gildesmarais/html2rss/blob/master/README.md)
    explains how to build a _feed config_.
-   Or browse [the existing ones](https://github.com/gildesmarais/html2rss-configs/tree/master/lib/html2rss/configs) for inspiration.
+   Or browse [the existing ones](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs) for inspiration.
 3. Fetch the feed, run:  
    `bin/fetch domainname.tld/whatever`  
    And with dynamic parameters:  
@@ -55,7 +55,7 @@ config = Html2rss::Configs.find_by_name('domainname.tld/whatever', { id: 42 })
 Add to your Gemfile:
 
 ```ruby
-gem 'html2rss-configs', git: 'https://github.com/gildesmarais/html2rss-configs.git'
+gem 'html2rss-configs', git: 'https://github.com/html2rss/html2rss-configs.git'
 ```
 
 Use it in your code:
@@ -78,4 +78,4 @@ you have nothing more to do! 🎉
 Modifying existing or adding new _feed configs_ will trigger the CI to fetch the feed
 and check for the presence of feed items.
 
-See [.travis.yml -> script](https://github.com/gildesmarais/html2rss-configs/blob/master/.travis.yml) which commands execute during build.
+See [.travis.yml -> script](https://github.com/html2rss/html2rss-configs/blob/master/.travis.yml) which commands execute during build.
