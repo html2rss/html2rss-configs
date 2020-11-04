@@ -19,5 +19,8 @@ RSpec/DescribeClass:
     - "spec/html2rss/configs/**/*.yml_spec.rb"
     - "spec/bin/*_spec.rb"
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false

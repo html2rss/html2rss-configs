@@ -33,7 +33,7 @@ module Html2rss
       params.each_pair { |k, v| symbol_params[k.to_sym] = v }
 
       config['channel'].each_key do |attribute_name|
-        next unless config['channel'][attribute_name]&.is_a?(String)
+        next unless config['channel'][attribute_name].is_a?(String)
 
         config['channel'][attribute_name] = format(config['channel'][attribute_name], symbol_params)
       end
