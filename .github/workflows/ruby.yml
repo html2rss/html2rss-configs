@@ -47,3 +47,6 @@ jobs:
 
       - name: Run tests
         run: make test
+
+      - name: Test changed configs with fetching
+        run: make test-fetch-changed-configs
