@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Collection of ready-to-use html2rss configs.'
   spec.description = 'Configs which contain information how to generate RSS items from websites.'
-  spec.homepage = 'https://github.com/gildesmarais/html2rss-configs'
+  spec.homepage = 'https://github.com/html2rss/html2rss-configs'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.4.4'
 
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata['homepage_uri'] = spec.homepage
-    spec.metadata['source_code_uri'] = 'https://github.com/gildesmarais/html2rss-configs'
+    spec.metadata['source_code_uri'] = 'https://github.com/html2rss/html2rss-configs'
     # spec.metadata['changelog_uri'] = "TODO: Put your gem's CHANGELOG.md URL here."
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
