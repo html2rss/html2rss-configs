@@ -48,5 +48,8 @@ jobs:
       - name: Run tests
         run: make test
 
+      - name: setup remote origin
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
       - name: Test changed configs with fetching
         run: make test-fetch-changed-configs
