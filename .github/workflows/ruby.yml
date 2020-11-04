@@ -52,6 +52,7 @@ jobs:
         run: >-
           git remote set-url origin
           https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
       - name: Test changed configs with fetching
         run: |
           git fetch origin master --depth 1
