@@ -1,9 +1,9 @@
 default: lint test
 
 lint:
-	yamllint lib/html2rss/configs/
+	yamllint lib/html2rss/configs/ .github/
 	bundle exec rubocop -P -f quiet
-	yarn exec prettier -- --check lib/**/*.yml
+	yarn exec prettier -- --check lib/**/*.yml .github/**/*.yml
 
 test:
 	bundle exec rspec
@@ -18,7 +18,7 @@ test-all: test test-fetch-all-configs
 
 lintfix:
 	bundle exec rubocop -a
-	yarn exec prettier -- --write lib/**/*.yml
+	yarn exec prettier -- --write lib/**/*.yml .github/**/*.yml
 
 config:
 	@if [ -z "$(domain)" ] || [ -z "$(name)" ]; \
