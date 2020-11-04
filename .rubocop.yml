@@ -6,6 +6,8 @@ AllCops:
   DisplayCopNames: true
   NewCops: enable
   TargetRubyVersion: 2.4
+  Exclude:
+    - vendor/**/*
 
 Metrics/BlockLength:
   Exclude:

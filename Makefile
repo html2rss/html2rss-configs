@@ -25,10 +25,10 @@ config:
 	then \
 		echo "Usage: make config domain=domain.tld name=latest"; \
 	else \
-		git stash && \
+		git stash; \
 		git checkout master && \
 		git pull && \
-		git stash pop && \
+		git stash pop; \
 		git checkout -b "feat/add-$(domain)-$(name)" && \
 		mkdir -p "lib/html2rss/configs/$(domain)/" && \
 		mkdir -p "spec/html2rss/configs/$(domain)/" && \

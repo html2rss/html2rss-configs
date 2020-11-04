@@ -20,11 +20,35 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.6
+
+    - name: Cache gems
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Get yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
     - name: Install dependencies
-      run: bundle install
+      run: |
+        sudo apt-get install -yq yamllint
+        bundle install
+
+    - name: Run linters
+      run: make lint
+
     - name: Run tests
       run: make test
