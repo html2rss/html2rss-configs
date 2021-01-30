@@ -1,0 +1,36 @@
+channel:
+  url: https://entwickler.de/jobs
+  time_zone: Europe/Berlin
+  ttl: 30
+  language: de
+selectors:
+  items:
+    selector: ".jobpost"
+  title:
+    selector: "h3 > a"
+  link:
+    selector: "h3 > a"
+    extractor: "href"
+  time:
+    selector: ".job-time-type"
+  enclosure:
+    selector: ".wppl-thumb > img"
+    extractor: "attribute"
+    attribute: src
+  company:
+    selector: ".job-company-name"
+  skill1:
+    selector: ".single-skill-items-block :nth-child(1) .cat-skills-name"
+  skill2:
+    selector: ".single-skill-items-block :nth-child(2) .cat-skills-name"
+  skill3:
+    selector: ".single-skill-items-block :nth-child(3) .cat-skills-name"
+  address:
+    selector: ".address-wrapper > .wppl-address"
+  categories:
+    - time
+    - address
+    - company
+    - skill1
+    - skill2
+    - skill3
