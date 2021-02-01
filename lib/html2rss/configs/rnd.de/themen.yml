@@ -1,0 +1,26 @@
+channel:
+  url: https://www.rnd.de/themen/%<thema>s/
+  time_zone: Europe/Berlin
+  ttl: 60
+  language: de
+selectors:
+  items:
+    selector: "article"
+  title:
+    selector: "h3"
+  link:
+    selector: "a"
+    extractor: "href"
+  description:
+    selector: ".tsr__txt"
+    extractor: "text"
+  tag1:
+    selector: ".tags > li:nth-child(1)"
+  tag2:
+    selector: ".tags > li:nth-child(2)"
+  tag3:
+    selector: ".tags > li:nth-child(3)"
+  categories:
+    - tag1
+    - tag2
+    - tag3
