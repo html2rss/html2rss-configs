@@ -6,13 +6,14 @@ require 'yaml'
 module Html2rss
   module Configs
     class Error < StandardError; end
+
     class ConfigNotFound < Html2rss::Configs::Error; end
 
     def self.file_names
       @file_names ||= Dir[File.join(__dir__, '**', '*.yml')].freeze
     end
 
-    def self.find_by_name(name, params = {})
+    def self.find_by_name(name)
       raise 'name must be a string' unless name.is_a?(String)
       raise 'name must be in folder/file format' unless name.include?('/')
 
@@ -22,24 +23,7 @@ module Html2rss
 
       raise ConfigNotFound unless file_name
 
-      config = YAML.safe_load(File.open(file_name))
-      format_config(config, params).freeze
+      YAML.safe_load(File.open(file_name)).freeze
     end
-
-    def self.format_config(config, params)
-      return config if params.keys.none?
-
-      symbol_params = {}
-      params.each_pair { |k, v| symbol_params[k.to_sym] = v }
-
-      config['channel'].each_key do |attribute_name|
-        next unless config['channel'][attribute_name].is_a?(String)
-
-        config['channel'][attribute_name] = format(config['channel'][attribute_name], symbol_params)
-      end
-
-      config
-    end
-    private_class_method :format_config
   end
 end
