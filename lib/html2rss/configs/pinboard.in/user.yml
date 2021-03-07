@@ -1,5 +1,5 @@
 channel:
-  url: https://pinboard.in/u:%{username}?per_page=160
+  url: https://pinboard.in/u:%<username>s?per_page=160
   time_zone: UTC
   ttl: 720
   language: en

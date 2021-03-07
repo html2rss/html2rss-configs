@@ -1,7 +1,7 @@
 # section: shows, movies
 # filter: trending, popular, watched/weekly, anticipated
 channel:
-  url: https://trakt.tv/%{section}/%{filter}
+  url: https://trakt.tv/%<section>s/%<filter>s
   time_zone: UTC
   ttl: 360
 selectors:
