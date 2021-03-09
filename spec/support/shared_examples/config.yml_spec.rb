@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'html2rss/configs/helper'
+
 RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load(file) }
 
@@ -17,7 +19,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     it "resides in a folder named after channel.url's host" do
       dirname = File.dirname(file.path).split(File::Separator).last
-      host_name = URI(yaml['channel']['url'].split('/')[0..2].join('/')).host.gsub(/(api|www)\./, '')
+      host_name = Html2rss::Configs::Helper.url_to_directory_name yaml['channel']['url']
 
       expect(dirname).to eq(host_name)
     end
