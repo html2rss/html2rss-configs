@@ -23,12 +23,9 @@ module Html2rss
 
           questionnaire.store('item', item, :meta)
 
-          puts "First match for selector: `#{input}`:"
-          puts
-          puts HtmlBeautifier.beautify(item&.to_xhtml)
-          puts
-          puts "Use selector `#{input}`? [Y/n] "
+          print_tag(input, item)
 
+          puts "Use selector `#{input}`? [Y/n] "
           $stdin.getch.casecmp('y').zero?
         end
 

@@ -21,12 +21,9 @@ module Html2rss
 
           return false unless tag
 
-          puts "First match for selector: `#{input}`:"
-          puts
-          puts HtmlBeautifier.beautify(tag&.to_xhtml)
-          puts
-          puts "Use selector `#{input}`? [Y/n] "
+          print_tag(input, tag)
 
+          puts "Use selector `#{input}`? [Y/n] "
           $stdin.getch.casecmp('y').zero?
         end
 
@@ -40,6 +37,13 @@ module Html2rss
 
         def item
           questionnaire.fetch('item')
+        end
+
+        def print_tag(input, tag)
+          puts "First match for selector: `#{input}`:"
+          puts
+          puts HtmlBeautifier.beautify(tag&.to_xhtml)
+          puts
         end
       end
     end
