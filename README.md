@@ -15,16 +15,27 @@ add your _feed config_ and
 There's a generator for that! 🆒
 
 1. Fork this repo and run `bundle install`.
-2. `make config domain=domainname.tld name=whatever`  
-   Change `domain` and `name` values to desired values.
-3. Head to the generated files and add the selectors and options.  
-   [`html2rss`'s README](https://github.com/html2rss/html2rss/blob/master/README.md)
-   explains how to build a _feed config_.
-   Or browse [the existing ones](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs) for inspiration.
-4. To fetch generate the feed, run:  
+2. Start the generator by typing: `bin/generator`  
+3. Build your feed config and answer 'y' in the last step to create the files.
+4. Optionally, edit the created files. Read [`html2rss`'s README](https://github.com/html2rss/html2rss/blob/master/README.md) what is possible or browse [existing configs](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs) for inspiration.
+4. To test, run:
    `bundle exec html2rss feed lib/html2rss/configs/domainname.tld/whatever`  
 
-## Usage
+## Using dynamic parameters in `channel` attributes
+
+When you're using dynamic parameters, you have to provide the parameters to the spec, too:
+
+```ruby
+include_examples 'config.yml', 'domainname.tld/whatever.yml', id: 42
+```
+
+CLI usage:
+
+```
+bundle exec html2rss feed lib/html2rss/configs/domainname.tld/whatever id=42
+```
+
+## Programmatic usage
 
 Add to your Gemfile:
 
@@ -46,20 +57,6 @@ This will return the _feed config_.
 
 If you're running [`html2rss-web`](https://github.com/gildesmarais/html2rss-web),
 you have nothing more to do! 🎉
-
-## Using dynamic parameters in `channel` attributes
-
-When you're using dynamic parameters, you have to provide the parameters to the spec, too:
-
-```ruby
-include_examples 'config.yml', 'domainname.tld/whatever.yml', id: 42
-```
-
-CLI usage:
-
-```
-bundle exec html2rss feed lib/html2rss/configs/domainname.tld/whatever id=42
-```
 
 ## Building on the CI
 

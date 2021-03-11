@@ -44,6 +44,8 @@ module Html2rss
         puts files[:spec_file]
         puts
         puts 'Feel free to edit them further and submit the files to html2rss-configs.'
+        puts
+        puts "Test with:\n  bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}"
       end
 
       def self.write_to_yml(files, yaml)

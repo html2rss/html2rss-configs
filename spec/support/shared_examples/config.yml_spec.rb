@@ -96,11 +96,8 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         }
       }
     end
-    let(:feed_config) do
-      params ||= {}
-      Html2rss::Configs.find_by_name(feed_name, params)
-    end
-    let(:config) { Html2rss::Config.new(feed_config, global_config) }
+    let(:feed_config) { Html2rss::Configs.find_by_name(feed_name) }
+    let(:config) { Html2rss::Config.new(feed_config, global_config, (params || {})) }
 
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive
@@ -125,6 +122,10 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         content_attributes.each do |attribute_name|
           expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
         end
+      end
+
+      it 'has link content beginning with "http" when config has a link selector' do
+        expect(item.link).to start_with('http') if config.attribute_names.include?(:link)
       end
     end
   end
