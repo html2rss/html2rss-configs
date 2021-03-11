@@ -27,7 +27,7 @@ module Html2rss
         def process(url)
           questionnaire.store('doc', doc, :meta)
 
-          value = { url: url, language: doc.css('html').first['lang'] }
+          value = { url: url, language: doc.css('html').first['lang'], ttl: 360, time_zone: 'UTC' }
 
           value.keep_if { |_k, v| v.to_s != '' }
         end

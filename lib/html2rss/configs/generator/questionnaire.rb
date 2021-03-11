@@ -15,8 +15,8 @@ module Html2rss
           @questions ||= [
             ChannelQuestion.new(self, path: 'channel', question: 'Please enter the URL to scrape'),
             ItemsSelectorQuestion.new(self, path: 'selectors.items', question: 'Items selector'),
-            SelectorQuestion.new(self, path: 'selectors.title', question: 'Title selector'),
-            SelectorQuestion.new(self, path: 'selectors.url', question: 'URL selector')
+            SelectorQuestion.new(self, path: 'selectors.title', question: "Item's Title selector"),
+            SelectorQuestion.new(self, path: 'selectors.link', question: "Item's URL selector")
           ]
         end
 

@@ -19,16 +19,13 @@ module Html2rss
           @questionnaire = questionnaire
         end
 
+        # rubocop:disable Metrics/MethodLength
         def ask
           done = false
 
           before_ask
           while !done && (input = Readline.readline("#{question}:\t", true))
-            before_validation(input)
-
             if validate(input)
-              before_processing(input)
-
               processed = process(input)
 
               questionnaire.store(path, processed) if path
@@ -38,21 +35,14 @@ module Html2rss
               validation_failed(input)
             end
           end
-
-          after_ask(input)
         end
+        # rubocop:enable Metrics/MethodLength
 
         private
 
         def before_ask; end
 
-        def before_validation(input); end
-
-        def before_processing(input); end
-
         def validation_failed(input); end
-
-        def after_ask(input); end
 
         protected
 

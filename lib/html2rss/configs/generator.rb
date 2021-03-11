@@ -25,8 +25,10 @@ module Html2rss
         puts
         puts 'Do you want to create a file alongside a corresponding spec for this feed config? [Y/n]'
 
-        return unless $stdin.getch.casecmp('y').zero?
+        save_to_files(questionnaire) if $stdin.getch.casecmp('y').zero?
+      end
 
+      def self.save_to_files(questionnaire)
         files = files(questionnaire.channel_url)
         write_to_yml(files, questionnaire.to_yaml)
         scaffold_spec(files)
@@ -40,6 +42,8 @@ module Html2rss
         puts
         puts 'Created spec at:'
         puts files[:spec_file]
+        puts
+        puts 'Feel free to edit them further and submit the files to html2rss-configs.'
       end
 
       def self.write_to_yml(files, yaml)
