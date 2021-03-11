@@ -35,18 +35,18 @@ module Html2rss
         print_files(files)
       end
 
+      # rubocop:disable Metrics/AbcSize
       def self.print_files(files)
-        puts
-        puts 'Created feed config at:'
-        puts files[:yml_file]
+        puts "\nCreated feed config at:"
+        puts "  #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}"
         puts
         puts 'Created spec at:'
-        puts files[:spec_file]
+        puts "  #{files[:spec_file].gsub(files[:gem_root], '')[1..-1]}"
         puts
         puts 'Feel free to edit them further and submit the files to html2rss-configs.'
-        puts
         puts "Test with:\n  bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}"
       end
+      # rubocop:enable Metrics/AbcSize
 
       def self.write_to_yml(files, yaml)
         raise 'yml file already exists' if File.exist? files[:yml_file]

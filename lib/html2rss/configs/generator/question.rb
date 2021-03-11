@@ -6,12 +6,10 @@ module Html2rss
   module Configs
     module Generator
       ##
-      # Asks a questions and stores the answer as a string in the questionnaire
+      # Asks a questions and stores the answer as a string in the questionnaire under the path.
       class Question
         attr_reader :questionnaire, :path, :question, :answer
 
-        ##
-        #
         def initialize(questionnaire, **options)
           @options = options
           @path = options[:path]

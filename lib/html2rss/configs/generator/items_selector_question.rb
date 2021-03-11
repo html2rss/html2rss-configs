@@ -16,9 +16,6 @@ module Html2rss
           puts
         end
 
-        # Show the first item's HTML which would be extracted
-        # Display 'key elements' (w/o head, empty tags, link, style, script, etc).
-        # without html comments
         def validate(input)
           item = doc.css(input)&.first
 
