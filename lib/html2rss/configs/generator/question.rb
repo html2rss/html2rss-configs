@@ -6,15 +6,15 @@ module Html2rss
   module Configs
     module Generator
       ##
-      # Asks a questions and stores the answer as a string in the questionnaire under the path.
+      # Asks a questions and stores the answer as a string in the state under the path.
       class Question
-        attr_reader :questionnaire, :path, :question, :answer
+        attr_reader :state, :path, :question, :answer
 
-        def initialize(questionnaire, **options)
+        def initialize(state, **options)
           @options = options
           @path = options[:path]
           @question = options[:question]
-          @questionnaire = questionnaire
+          @state = state
         end
 
         # rubocop:disable Metrics/MethodLength
@@ -26,7 +26,7 @@ module Html2rss
             if validate(input)
               processed = process(input)
 
-              questionnaire.store(path, processed) if path
+              state.store(path, processed) if path
 
               done = true
             else

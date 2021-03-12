@@ -21,7 +21,7 @@ module Html2rss
 
           return false unless item
 
-          questionnaire.store('item', item, :meta)
+          state.store('item', item)
 
           print_tag(input, item)
 
@@ -30,7 +30,7 @@ module Html2rss
         end
 
         def doc
-          questionnaire.fetch('doc')
+          state.fetch('doc')
         end
       end
     end

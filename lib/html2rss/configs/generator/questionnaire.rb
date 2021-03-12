@@ -1,22 +1,28 @@
 # frozen_string_literal: true
 
 require 'yaml'
-require 'active_support/core_ext/hash'
+require 'json'
 
 require_relative './channel_question'
 require_relative './items_selector_question'
 require_relative './selector_question'
+require_relative './state'
 
 module Html2rss
   module Configs
     module Generator
+      # TODO: rename to FeedConfig
       class Questionnaire
+        def initialize
+          @state = State.new(feed: {})
+        end
+
         def questions
           @questions ||= [
-            ChannelQuestion.new(self, path: 'channel', question: 'Please enter the URL to scrape'),
-            ItemsSelectorQuestion.new(self, path: 'selectors.items', question: 'Items selector'),
-            SelectorQuestion.new(self, path: 'selectors.title', question: "Item's Title selector"),
-            SelectorQuestion.new(self, path: 'selectors.link', question: "Item's URL selector")
+            ChannelQuestion.new(state, path: 'feed.channel', question: 'Please enter the URL to scrape'),
+            ItemsSelectorQuestion.new(state, path: 'feed.selectors.items', question: 'Items selector'),
+            SelectorQuestion.new(state, path: 'feed.selectors.title', question: "Item's Title selector"),
+            SelectorQuestion.new(state, path: 'feed.selectors.link', question: "Item's URL selector")
           ]
         end
 
@@ -24,48 +30,19 @@ module Html2rss
           questions.each(&:ask)
         end
 
-        def store(path, value, store = :feed)
-          case (splits = path.split('.')).size
-          when 1
-            config[store][path] = value
-          when 2
-            first, second = splits
-            config[store][first] ||= {}
-            config[store][first][second] = value
-          else
-            raise "Path #{path} is nested too deep. Must be max 2 levels deep"
-          end
-        end
-
-        def fetch(path, store = :meta)
-          case (splits = path.split('.')).size
-          when 1
-            config[store].fetch(path)
-          when 2
-            first, second = splits
-            config[store][first].fetch(second)
-          else
-            raise "Path #{path} is nested too deep. Must be max 2 levels deep"
-          end
-        end
-
         def to_yaml
-          YAML.dump(feed_config)
+          # To get rid of yaml class annotations regarding HashWithIndifferentAccess,
+          # watch this poor dump/parse/dump approach:
+          YAML.dump(JSON.parse(JSON.generate(state.fetch('feed'))))
         end
 
         def channel_url
-          feed_config.dig('channel', 'url')
+          state.fetch 'feed.channel.url'
         end
 
         private
 
-        def feed_config
-          config[:feed].deep_stringify_keys
-        end
-
-        def config
-          @config ||= { feed: {}, meta: {} }
-        end
+        attr_reader :state
       end
     end
   end

@@ -36,7 +36,7 @@ module Html2rss
         end
 
         def item
-          questionnaire.fetch('item')
+          state.fetch('item')
         end
 
         def print_tag(input, tag)

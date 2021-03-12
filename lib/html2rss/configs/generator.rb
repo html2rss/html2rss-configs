@@ -19,7 +19,6 @@ module Html2rss
       def self.start
         questionnaire = Questionnaire.new
         questionnaire.ask_questions
-
         puts 'This is your config:'
         puts questionnaire.to_yaml
         puts
