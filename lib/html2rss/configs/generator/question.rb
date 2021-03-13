@@ -22,7 +22,7 @@ module Html2rss
           done = false
 
           before_ask
-          while !done && (input = Readline.readline("#{question}:\t", true))
+          while !done && (input = Readline.readline("#{question}: ", true))
             if validate(input)
               processed = process(input)
 
@@ -42,6 +42,10 @@ module Html2rss
 
         def validation_failed(input); end
 
+        def item
+          state.fetch('item')
+        end
+
         protected
 
         def validate(input)
@@ -50,6 +54,15 @@ module Html2rss
 
         def process(input)
           input
+        end
+
+        def ask_yes_no_with_yes_default(question)
+          puts "#{question} [Y/n]"
+          inchar = $stdin.getch
+
+          puts inchar
+
+          inchar.chomp == '' || inchar.casecmp('y').zero?
         end
       end
     end

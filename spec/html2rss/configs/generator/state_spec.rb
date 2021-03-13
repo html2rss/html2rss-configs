@@ -12,6 +12,11 @@ RSpec.describe Html2rss::Configs::Generator::State do
         .from(:a)
         .to([])
     end
+
+    it 'merges into existing values' do
+      instance.store('key.another', 'e')
+      expect(instance.fetch('key')).to eq('another' => 'e', 'subkey' => :a)
+    end
   end
 
   describe '.fetch' do

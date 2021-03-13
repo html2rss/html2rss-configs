@@ -33,7 +33,7 @@ module Html2rss
         def to_yaml
           # To get rid of yaml class annotations regarding HashWithIndifferentAccess,
           # watch this poor dump/parse/dump approach:
-          YAML.dump(JSON.parse(JSON.generate(state.fetch('feed'))))
+          YAML.dump JSON.parse(JSON.generate(state.fetch('feed')))
         end
 
         def channel_url

@@ -4,6 +4,7 @@ require 'htmlbeautifier'
 require 'io/console'
 
 require_relative './question'
+require_relative './item_extractor_question'
 
 module Html2rss
   module Configs
@@ -17,14 +18,15 @@ module Html2rss
         end
 
         def validate(input)
-          tag = item.css(input)&.first
+          tag = item.css(input)
 
           return false unless tag
 
           print_tag(input, tag)
 
-          puts "Use selector `#{input}`? [Y/n] "
-          $stdin.getch.casecmp('y').zero?
+          ItemExtractorQuestion.new(state, path: path, selector: input).ask
+
+          ask_yes_no_with_yes_default('Looks good?')
         end
 
         def process(input)
@@ -35,12 +37,13 @@ module Html2rss
           puts "No match for `#{input}` or was discarded"
         end
 
-        def item
-          state.fetch('item')
-        end
-
         def print_tag(input, tag)
-          puts "First match for selector: `#{input}`:"
+          if tag.count > 1
+            puts '*' * 80
+            puts "`#{input}` selects multiple elements! Please write a selector as precise as possible."
+            puts '*' * 80
+          end
+          puts "Match for selector: `#{input}`:"
           puts
           puts HtmlBeautifier.beautify(tag&.to_xhtml)
           puts

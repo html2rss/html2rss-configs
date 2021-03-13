@@ -25,8 +25,7 @@ module Html2rss
 
           print_tag(input, item)
 
-          puts "Use selector `#{input}`? [Y/n] "
-          $stdin.getch.casecmp('y').zero?
+          ask_yes_no_with_yes_default("Use selector `#{input}`?")
         end
 
         def doc

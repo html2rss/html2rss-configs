@@ -10,23 +10,31 @@ module Html2rss
           @state = (initial_state || {}).with_indifferent_access
         end
 
-        # TODO: refactor to support arbitrary path levels
+        # rubocop:disable Metrics/MethodLength
         def store(path, value)
-          case (splits = path.to_s.split('.')).size
-          when 1
-            state[splits[0]] = value
-          when 2
-            first, second = splits
-            state[first] ||= {}
-            state[first][second] = value
-          when 3
-            state[splits[0]] ||= {}
-            state[splits[0]][splits[1]] ||= {}
-            state[splits[0]][splits[1]][splits[2]] = value
-          else
-            raise "Path #{path} is nested too deep. Must be max 3 levels deep"
+          splits = path.to_s.split('.')
+
+          # This is a Hash which automatically creates values (hashes) on access.
+          # It allows e.g. `new_hash[:a][:b][:c][:d] = 'something'`.
+          hash = Hash.new { |h, k| h[k] = h.dup.clear }
+
+          # Now, traverse down the given path. `node` acts as our reference.
+          node = hash
+          splits.each_with_index do |key, index|
+            # Traverse further 'down' (or to the right, however you like it),
+            # until we've found the place where to assign value to.
+
+            if index < splits.size - 1
+              node = node[key]
+            else
+              node[key] = value
+            end
           end
+
+          # Finally, merge the new hash into our state.
+          state.deep_merge!(hash)
         end
+        # rubocop:enable Metrics/MethodLength
 
         def fetch(path)
           case (splits = path.to_s.split('.')).size

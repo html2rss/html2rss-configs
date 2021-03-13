@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'io/console'
-
+require 'html2rss'
 require_relative 'generator/questionnaire'
 require_relative './helper'
 
@@ -19,14 +19,17 @@ module Html2rss
       def self.start
         questionnaire = Questionnaire.new
         questionnaire.ask_questions
+
+        # TODO: move this to a question
         puts 'This is your config:'
         puts questionnaire.to_yaml
         puts
-        puts 'Do you want to create a file alongside a corresponding spec for this feed config? [Y/n]'
+        puts 'Would you like to create a file alongside a corresponding spec for this feed config? [y/N]'
 
         save_to_files(questionnaire) if $stdin.getch.casecmp('y').zero?
       end
 
+      # TODO: move this to questionnaire or a question
       def self.save_to_files(questionnaire)
         files = files(questionnaire.channel_url)
         write_to_yml(files, questionnaire.to_yaml)
