@@ -50,12 +50,12 @@ module Html2rss
           missing = missing.map do |miss|
             print_available_attributes if miss == :attribute
 
-            value = Readline.readline("Enter extractor option value for '#{miss}: ", true)
+            value = Readline.readline("Enter extractor option value for '#{miss}': ", true)
 
             [miss, value.chomp]
           end
 
-          @extractor_options = missing.to_h
+          @extractor_options = missing.to_h || {}
           default_extractor_options.merge(@extractor_options)
         end
 
@@ -66,7 +66,10 @@ module Html2rss
         def process(_index)
           return {} if Html2rss::ItemExtractors::DEFAULT_NAME == @extractor
 
-          { extractor: @extractor }.merge(@extractor_options)
+          extra_options = {}
+          extra_options[:post_process] = :sanitize_html if @extractor == :html
+
+          { extractor: @extractor }.merge(@extractor_options || {}).merge(extra_options)
         end
       end
     end

@@ -22,7 +22,8 @@ module Html2rss
             ChannelQuestion.new(state, path: 'feed.channel', question: 'Please enter the URL to scrape'),
             ItemsSelectorQuestion.new(state, path: 'feed.selectors.items', question: 'Items selector'),
             SelectorQuestion.new(state, path: 'feed.selectors.title', question: "Item's Title selector"),
-            SelectorQuestion.new(state, path: 'feed.selectors.link', question: "Item's URL selector")
+            SelectorQuestion.new(state, path: 'feed.selectors.link', question: "Item's URL selector"),
+            SelectorQuestion.new(state, path: 'feed.selectors.description', question: "Item's description")
           ]
         end
 
