@@ -22,8 +22,10 @@ module Html2rss
 
         # TODO: move this to a question
         puts 'This is your config:'
+        # TODO: prettyprint
         puts questionnaire.to_yaml
         puts
+        # TODO: use prompt.yes?
         puts 'Would you like to create a file alongside a corresponding spec for this feed config? [y/N]'
 
         save_to_files(questionnaire) if $stdin.getch.casecmp('y').zero?
@@ -45,7 +47,7 @@ module Html2rss
         puts 'Created spec at:'
         puts "  #{files[:spec_file].gsub(files[:gem_root], '')[1..-1]}"
         puts
-        puts 'Feel free to edit them further and submit the files to html2rss-configs.'
+        puts 'You can edit them with your editor.'
         puts "Test with:\n  bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}"
       end
       # rubocop:enable Metrics/AbcSize

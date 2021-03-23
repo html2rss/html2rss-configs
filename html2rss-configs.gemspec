@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'faraday'
   spec.add_development_dependency 'html2rss'
   spec.add_development_dependency 'htmlbeautifier'
@@ -47,4 +48,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'tty-prompt'
 end

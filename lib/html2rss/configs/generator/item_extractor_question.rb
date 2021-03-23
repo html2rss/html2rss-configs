@@ -3,50 +3,48 @@
 require 'readline'
 
 require_relative './question'
-
+require 'byebug'
 module Html2rss
   module Configs
     module Generator
-      class ItemExtractorQuestion < Question
+      class ItemExtractorQuestion
+        attr_reader :prompt, :state, :options
+
         def initialize(state, **options)
-          super
-          @question = "Choose [1..#{extractors.size}]"
-          @selector = options[:selector]
+          @prompt = TTY::Prompt.new
+          @state = state
+          @options = options
+        end
+
+        def ask
+          @input = prompt.select('Which extractor would you like to use?', Html2rss::ItemExtractors::NAME_TO_CLASS.keys)
+
+          # TODO: pretty print
+          puts Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get
+
+          if prompt.yes?('Looks good?')
+            state.store(options[:path], extractor_configuration) if options[:path]
+          else
+            ask
+          end
         end
 
         private
 
-        def before_ask
-          puts "\nWhich extractor would you like to use?"
-          extractors.each_with_index do |extractor, index|
-            @default_index = index if extractor == Html2rss::ItemExtractors::DEFAULT_NAME
-
-            puts ["#{index + 1})", extractor, @default_index == index ? '(default)' : ''].join(' ')
-          end
-        end
-
-        def validate(index)
-          index = ['0', ''].include?(index.to_s) ? @default_index : (index.to_i - 1).abs
-          @extractor = extractors[index]
-
-          puts Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get
-
-          true
-        end
-
-        def extractors
-          @extractors ||= Html2rss::ItemExtractors::NAME_TO_CLASS.keys
+        def item
+          state.fetch('item')
         end
 
         def default_extractor_options
-          { extractor: @extractor, selector: @selector, channel: { url: state.fetch('feed.channel.url') } }
+          { extractor: @input, selector: options[:selector], channel: { url: state.fetch('feed.channel.url') } }
         end
 
         def extractor_options
-          missing = Html2rss::ItemExtractors.options_class(@extractor).members - default_extractor_options.keys
+          missing = Html2rss::ItemExtractors.options_class(@input).members - default_extractor_options.keys
 
           return default_extractor_options if missing.none?
 
+          # TODO: use prompt.collect ... etc
           missing = missing.map do |miss|
             print_available_attributes if miss == :attribute
 
@@ -60,16 +58,14 @@ module Html2rss
         end
 
         def print_available_attributes
-          puts "Available attributes: #{item.css(@selector)&.first&.attributes&.keys&.join(', ')}"
+          puts "Available attributes: #{item.css(@selector)&.first&.attributes&.keys&.sort&.join(', ')}"
         end
 
-        def process(_index)
-          return {} if Html2rss::ItemExtractors::DEFAULT_NAME == @extractor
-
+        def extractor_configuration
           extra_options = {}
           extra_options[:post_process] = :sanitize_html if @extractor == :html
 
-          { extractor: @extractor }.merge(@extractor_options || {}).merge(extra_options)
+          { extractor: @input }.merge(@extractor_options || {}).merge(extra_options)
         end
       end
     end

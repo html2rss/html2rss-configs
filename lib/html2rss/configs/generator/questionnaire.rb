@@ -11,7 +11,7 @@ require_relative './state'
 module Html2rss
   module Configs
     module Generator
-      # TODO: rename to FeedConfig
+      # TODO: rename to FeedConfig or StepController or something
       class Questionnaire
         def initialize
           @state = State.new(feed: {})

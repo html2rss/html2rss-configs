@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'readline'
+require 'tty-prompt'
 
 module Html2rss
   module Configs
@@ -8,36 +9,30 @@ module Html2rss
       ##
       # Asks a questions and stores the answer as a string in the state under the path.
       class Question
-        attr_reader :state, :path, :question, :answer
+        attr_reader :state, :path, :question, :answer, :prompt_options, :prompt
 
         def initialize(state, **options)
+          @prompt = TTY::Prompt.new
           @options = options
           @path = options[:path]
           @question = options[:question]
+          @prompt_options = options[:prompt_options] || { required: true }
           @state = state
         end
 
-        # rubocop:disable Metrics/MethodLength
         def ask
-          done = false
-
           before_ask
-          while !done && (input = Readline.readline("#{question}: ", true))
-            if validate(input)
-              processed = process(input)
-
-              state.store(path, processed) if path
-
-              done = true
-            else
-              validation_failed(input)
-            end
+          validated_input = prompt.ask(question, prompt_options) do |q|
+            q.validate ->(input) { validate(input) }
           end
+
+          processed_input = process(validated_input)
+          state.store(path, processed_input) if path
         end
-        # rubocop:enable Metrics/MethodLength
 
         private
 
+        # rename to print banner or print instructions
         def before_ask; end
 
         def validation_failed(input); end
@@ -57,12 +52,7 @@ module Html2rss
         end
 
         def ask_yes_no_with_yes_default(question)
-          puts "#{question} [Y/n]"
-          inchar = $stdin.getch
-
-          puts inchar
-
-          inchar.chomp == '' || inchar.casecmp('y').zero?
+          prompt.yes?(question)
         end
       end
     end

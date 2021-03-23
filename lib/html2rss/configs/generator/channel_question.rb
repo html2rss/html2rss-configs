@@ -20,7 +20,10 @@ module Html2rss
         end
 
         def validate(url)
-          @response = Faraday.new(url: URI(url), headers: {}).get
+          uri = URI(url)
+          return false unless uri.absolute?
+
+          @response = Faraday.new(url: uri, headers: {}).get
           @response.success?
         end
 

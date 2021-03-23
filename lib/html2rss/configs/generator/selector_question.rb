@@ -13,6 +13,7 @@ module Html2rss
         private
 
         def before_ask
+          # TODO: pretty print
           puts HtmlBeautifier.beautify(item.to_xhtml)
           puts
         end
@@ -26,18 +27,15 @@ module Html2rss
 
           ItemExtractorQuestion.new(state, path: path, selector: input).ask
 
-          ask_yes_no_with_yes_default('Looks good?')
+          ask_yes_no_with_yes_default("Use this selector config for #{path}?")
         end
 
         def process(input)
           { selector: input }
         end
 
-        def validation_failed(input)
-          puts "No match for `#{input}` or was discarded"
-        end
-
         def print_tag(input, tag)
+          # TODO: pretty print (by using markdown with tty-something)
           if tag.count > 1
             puts '*' * 80
             puts "`#{input}` selects multiple elements! Please write a selector as precise as possible."
