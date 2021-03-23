@@ -13,9 +13,7 @@ module Html2rss
         private
 
         def before_ask
-          # TODO: pretty print
-          puts HtmlBeautifier.beautify(item.to_xhtml)
-          puts
+          Generator.pretty_print :html, HtmlBeautifier.beautify(item.to_xhtml)
         end
 
         def validate(input)
@@ -35,16 +33,16 @@ module Html2rss
         end
 
         def print_tag(input, tag)
-          # TODO: pretty print (by using markdown with tty-something)
+          lines = []
           if tag.count > 1
-            puts '*' * 80
-            puts "`#{input}` selects multiple elements! Please write a selector as precise as possible."
-            puts '*' * 80
+            lines << '*' * 80
+            lines << "`#{input}` selects multiple elements! Please write a selector as precise as possible."
+            lines << '*' * 80
           end
-          puts "Match for selector: `#{input}`:"
-          puts
-          puts HtmlBeautifier.beautify(tag&.to_xhtml)
-          puts
+          lines << "Match for selector: `#{input}`:"
+
+          Generator.print_markdown lines.join("\n")
+          Generator.pretty_print :html, HtmlBeautifier.beautify(tag&.to_xhtml)
         end
       end
     end

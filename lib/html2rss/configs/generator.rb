@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-require 'io/console'
 require 'html2rss'
+require 'io/console'
+require 'tty-markdown'
+
 require_relative 'generator/questionnaire'
 require_relative './helper'
 
@@ -21,11 +23,10 @@ module Html2rss
         questionnaire.ask_questions
 
         # TODO: move this to a question
-        puts 'This is your config:'
-        # TODO: prettyprint
-        puts questionnaire.to_yaml
-        puts
-        # TODO: use prompt.yes?
+        print_markdown '## This is your config:'
+        pretty_print :yaml, questionnaire.to_yaml
+
+        # TODO: use tty-prompt
         puts 'Would you like to create a file alongside a corresponding spec for this feed config? [y/N]'
 
         save_to_files(questionnaire) if $stdin.getch.casecmp('y').zero?
@@ -39,18 +40,18 @@ module Html2rss
         print_files(files)
       end
 
-      # rubocop:disable Metrics/AbcSize
       def self.print_files(files)
-        puts "\nCreated feed config at:"
-        puts "  #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}"
-        puts
-        puts 'Created spec at:'
-        puts "  #{files[:spec_file].gsub(files[:gem_root], '')[1..-1]}"
-        puts
-        puts 'You can edit them with your editor.'
-        puts "Test with:\n  bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}"
+        Generator.print_markdown <<~MARKDOWN
+          Created feed config at:
+              `#{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}`
+
+          Created spec at:
+              `#{files[:spec_file].gsub(files[:gem_root], '')[1..-1]}`
+
+          Test with:
+              `bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}`
+        MARKDOWN
       end
-      # rubocop:enable Metrics/AbcSize
 
       def self.write_to_yml(files, yaml)
         raise 'yml file already exists' if File.exist? files[:yml_file]
@@ -86,6 +87,14 @@ module Html2rss
         }
       end
       # rubocop:enable Metrics/MethodLength
+
+      def self.print_markdown(markdown)
+        puts TTY::Markdown.parse markdown
+      end
+
+      def self.pretty_print(lang, code)
+        print_markdown ["```#{lang}", code, '```'].join("\n")
+      end
     end
   end
 end

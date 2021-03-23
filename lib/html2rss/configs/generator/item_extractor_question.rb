@@ -19,10 +19,9 @@ module Html2rss
         def ask
           @input = prompt.select('Which extractor would you like to use?', Html2rss::ItemExtractors::NAME_TO_CLASS.keys)
 
-          # TODO: pretty print
-          puts Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get
+          Generator.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
 
-          if prompt.yes?('Looks good?')
+          if prompt.yes?("Use extractor '#{@input}'?")
             state.store(options[:path], extractor_configuration) if options[:path]
           else
             ask

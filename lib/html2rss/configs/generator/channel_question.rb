@@ -12,11 +12,13 @@ module Html2rss
         private
 
         def before_ask
-          puts 'html2rss config generator'
-          puts
-          puts 'This wizard will help you create a feed config.'
-          puts
-          puts 'You can quit at any time by pressing Ctrl+C.'
+          Generator.print_markdown <<~MARKDOWN
+            # html2rss config generator
+
+            This wizard will help you create a feed config.
+
+            You can quit at any time by pressing `Ctrl`+`C`.
+          MARKDOWN
         end
 
         def validate(url)
