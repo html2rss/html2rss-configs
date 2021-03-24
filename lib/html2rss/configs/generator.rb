@@ -10,9 +10,7 @@ require_relative './helper'
 module Html2rss
   module Configs
     module Generator
-      def self.start
-        state = State.new(feed: {})
-        prompt = TTY::Prompt.new
+      def self.start(prompt = TTY::Prompt.new, state = State.new(feed: {}))
         Collector.new(prompt, state).collect
 
         feed_config = state.fetch('feed')

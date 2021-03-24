@@ -44,9 +44,7 @@ module Html2rss
 
           # Make the beautification more beautiful:
           # force line breaks after/before angle brackets.
-          messy_html = @response.body
-          messy_html.gsub!('<', "\n<")
-          messy_html.gsub!('>', ">\n")
+          messy_html = @response.body.gsub('<', "\n<").gsub!('>', ">\n")
 
           doc = Nokogiri.HTML(messy_html, &:noblanks)
 
