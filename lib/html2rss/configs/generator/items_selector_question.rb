@@ -24,7 +24,7 @@ module Html2rss
 
           print_tag(input, item)
 
-          ask_yes_no_with_yes_default("Use selector `#{input}`?")
+          prompt.yes?("Use selector `#{input}`?")
         end
 
         def doc

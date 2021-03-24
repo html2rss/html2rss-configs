@@ -14,15 +14,26 @@ module Html2rss
           @prompt = prompt
         end
 
+        # rubocop:disable Metrics/MethodLength
         def collect
           [
-            ChannelQuestion.new(prompt, state, path: 'feed.channel', question: 'Please enter the URL to scrape:', prompt_options: { default: 'https://gil.desmarais.de/blog' }),
-            ItemsSelectorQuestion.new(prompt, state, path: 'feed.selectors.items', question: 'Items selector:', prompt_options: { default: 'article' }),
-            SelectorQuestion.new(prompt, state, path: 'feed.selectors.title', question: "Item's Title selector:", prompt_options: { default: 'main > a:first' }),
-            SelectorQuestion.new(prompt, state, path: 'feed.selectors.link', question: "Item's URL selector:", prompt_options: { default: 'main > a:first' }),
-            SelectorQuestion.new(prompt, state, path: 'feed.selectors.description', question: "Item's description selector:", prompt_options: { default: '.p-summary' })
+            ChannelQuestion.new(prompt, state, path: 'feed.channel',
+                                               question: 'Please enter the URL to scrape:', prompt_options: {}),
+            ItemsSelectorQuestion.new(prompt, state, path: 'feed.selectors.items',
+                                                     question: 'Items selector:',
+                                                     prompt_options: { default: 'article' }),
+            SelectorQuestion.new(prompt, state, path: 'feed.selectors.title',
+                                                question: "Item's Title selector:",
+                                                prompt_options: { default: '[itemprop=headline]' }),
+            SelectorQuestion.new(prompt, state, path: 'feed.selectors.link',
+                                                question: "Item's URL selector:",
+                                                prompt_options: { default: 'a:first' }),
+            SelectorQuestion.new(prompt, state, path: 'feed.selectors.description',
+                                                question: "Item's description selector:",
+                                                prompt_options: { default: '[itemprop=description]' })
           ].each(&:ask)
         end
+        # rubocop:enable Metrics/MethodLength
 
         private
 

@@ -19,7 +19,7 @@ module Html2rss
         end
 
         def ask
-          @input = prompt.select('Which extractor would you like to use?', self.class.choices)
+          @input = prompt.select('Which extractor would you like to use?', self.class.choices, filter: true)
 
           print_extractor_result
 
@@ -65,7 +65,7 @@ module Html2rss
         def ask_for_missing_options(missing)
           missing.to_a.map do |miss|
             value = if miss == :attribute
-                      prompt.select('Select attribute with desired value', available_attributes)
+                      prompt.select('Select attribute with desired value', available_attributes, filter: true)
                     else
                       prompt.ask("Extractor option #{miss} value:", required: true)
                     end
@@ -80,7 +80,7 @@ module Html2rss
 
         def extractor_configuration
           extra_options = {}
-          extra_options[:post_process] = :sanitize_html if @extractor == :html
+          extra_options[:post_process] = :sanitize_html if @input == :html
 
           { extractor: @input }.merge(@extractor_options || {}).merge(extra_options)
         end

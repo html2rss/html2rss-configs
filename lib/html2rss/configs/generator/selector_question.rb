@@ -26,7 +26,8 @@ module Html2rss
           ItemExtractorQuestion.new(prompt, state, path: path, selector: input).ask
 
           # TODO: print the config and the result before asking
-          ask_yes_no_with_yes_default("Use this selector config for #{path}?")
+
+          prompt.yes?("Use this selector config for #{path}?")
         end
 
         def process(input)

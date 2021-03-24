@@ -49,10 +49,6 @@ module Html2rss
         def process(input)
           input
         end
-
-        def ask_yes_no_with_yes_default(question)
-          prompt.yes?(question)
-        end
       end
     end
   end

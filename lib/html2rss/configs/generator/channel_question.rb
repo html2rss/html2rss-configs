@@ -50,11 +50,23 @@ module Html2rss
 
           doc = Nokogiri.HTML(messy_html, &:noblanks)
 
+          # remove nodes which can't be parsed
+          doc.css('style, noscript, script, svg').each(&:remove)
+
           # remove nodes without innerText
           doc.xpath('//text()').each { |t| t.remove if t.to_s.strip == '' }
+
           # remove empty nodes
           doc.search(':empty').remove
-          @doc = doc
+
+          @doc = remove_empty_tags(doc)
+        end
+
+        def remove_empty_tags(tag)
+          tag.children.each do |child|
+            remove_empty_tags(child)
+            child.remove if child.text && child.text.gsub(/\s+/, '').empty?
+          end
         end
       end
     end
