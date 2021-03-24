@@ -23,8 +23,9 @@ module Html2rss
 
           print_tag(input, tag)
 
-          ItemExtractorQuestion.new(state, path: path, selector: input).ask
+          ItemExtractorQuestion.new(prompt, state, path: path, selector: input).ask
 
+          # TODO: print the config and the result before asking
           ask_yes_no_with_yes_default("Use this selector config for #{path}?")
         end
 
@@ -33,15 +34,16 @@ module Html2rss
         end
 
         def print_tag(input, tag)
-          lines = []
           if tag.count > 1
-            lines << '***'
-            lines << "`#{input}` selects multiple elements! Please write a selector as precise as possible."
-            lines << '***'
+            Helper.print_markdown <<~MARKDOWN
+              ***
+              `#{input}` selects multiple elements!
+              Please write a selector as precise as possible.
+              ***
+            MARKDOWN
           end
-          lines << "Match for selector: `#{input}`:"
 
-          Helper.print_markdown lines.join("\n")
+          Helper.print_markdown "The selector `#{input}` selects:"
           Helper.pretty_print :html, HtmlBeautifier.beautify(tag&.to_xhtml)
         end
       end

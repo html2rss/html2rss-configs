@@ -24,8 +24,8 @@ RSpec.describe Html2rss::Configs::Helper do
     end
   end
 
-  describe '.simple_yaml(hash)' do
-    subject(:returned_string) { described_class.simple_yaml(hash) }
+  describe '.to_simple_yaml(hash)' do
+    subject(:returned_string) { described_class.to_simple_yaml(hash) }
 
     let(:hash) do
       { foo: {

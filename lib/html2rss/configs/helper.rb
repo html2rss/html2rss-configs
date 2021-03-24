@@ -29,9 +29,9 @@ module Html2rss
       end
 
       ##
-      # Gets rid of YAML class annotations, e.g. HashWithIndifferentAccess and
-      # using most simple data structure types (Array, Hash, etc).
-      def self.simple_yaml(hash)
+      # Generates YAML without class annotations (e.g. HashWithIndifferentAccess)
+      # by using most simple data structure types (Array, Hash, etc).
+      def self.to_simple_yaml(hash)
         # watch this poor dump/parse/dump approach:
         YAML.dump JSON.parse(JSON.generate(hash))
       end

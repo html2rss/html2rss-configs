@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'readline'
+require 'html2rss'
 
 require_relative './question'
 require 'byebug'
@@ -18,7 +19,7 @@ module Html2rss
         end
 
         def ask
-          @input = prompt.select('Which extractor would you like to use?', extractor_choices)
+          @input = prompt.select('Which extractor would you like to use?', self.class.choices)
 
           print_extractor_result
 
@@ -29,19 +30,16 @@ module Html2rss
           end
         end
 
-        private
-
         ##
-        # Adds the extractor DEFAULT_NAME at index zero, as it's the default value.
-        #
-        # @return Array<Symbol>
-        def extractor_choices
+        # @return Array<Symbol> the available extractor names, with default extractor at index 0
+        def self.choices(default = Html2rss::ItemExtractors::DEFAULT_NAME)
           names = Html2rss::ItemExtractors::NAME_TO_CLASS.keys
-          default = Html2rss::ItemExtractors::DEFAULT_NAME
           names -= [default]
           names.prepend default
           names
         end
+
+        private
 
         def item
           state.fetch('item')

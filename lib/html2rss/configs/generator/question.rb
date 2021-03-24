@@ -13,11 +13,12 @@ module Html2rss
 
         def initialize(prompt, state, **options)
           @prompt = prompt
+          @state = state
           @options = options
+
           @path = options[:path]
           @question = options[:question]
           @prompt_options = options[:prompt_options] || { required: true }
-          @state = state
         end
 
         def ask
