@@ -57,7 +57,7 @@ module Html2rss
           return @files if defined?(@files)
 
           channel_url = feed_config.dig(:channel, :url)
-          gem_root = File.expand_path(File.join(__dir__, '../../..'))
+          gem_root = File.expand_path(File.join(__dir__, '../../../..'))
 
           dir = Helper.url_to_directory_name(channel_url)
           file = Helper.url_to_file_name(channel_url)

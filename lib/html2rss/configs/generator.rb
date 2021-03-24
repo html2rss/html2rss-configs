@@ -26,12 +26,13 @@ module Html2rss
           ```
         MARKDOWN
 
-        create = prompt.yes?('Would you like to create a file alongside a corresponding spec for this feed config?')
+        create = prompt.yes?('Would you like to create a file alongside a spec for this feed config?')
         FileCreator.new(prompt, feed_config).create if create
 
         # TODO: print a thanks & good bye note
         #    with urls where to ask for help etc or more instructions to submit
         #    to h2rc.
+        # https://github.com/piotrmurach/tty-link
       end
     end
   end

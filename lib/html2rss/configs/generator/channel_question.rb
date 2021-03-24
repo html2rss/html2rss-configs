@@ -18,6 +18,8 @@ module Html2rss
             This wizard will help you create a new *feed config*.
 
             You can quit at any time by pressing `Ctrl`+`C`.
+
+
           MARKDOWN
         end
 
