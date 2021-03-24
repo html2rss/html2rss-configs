@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'readline'
 require 'html2rss'
 
 require_relative './question'

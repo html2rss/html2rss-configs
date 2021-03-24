@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'htmlbeautifier'
-require 'io/console'
 
 require_relative './selector_question'
 

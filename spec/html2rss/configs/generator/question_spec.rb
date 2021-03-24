@@ -2,6 +2,7 @@
 
 require 'html2rss/configs/generator/question'
 require 'html2rss/configs/generator/state'
+require 'tty-prompt'
 
 RSpec.describe Html2rss::Configs::Generator::Question do
   describe '#ask' do

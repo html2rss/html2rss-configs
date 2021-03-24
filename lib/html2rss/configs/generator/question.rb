@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'readline'
-require 'tty-prompt'
-
 module Html2rss
   module Configs
     module Generator

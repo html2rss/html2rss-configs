@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'io/console'
 require 'tty-markdown'
 
 require_relative 'generator/collector'
