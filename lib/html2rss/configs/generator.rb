@@ -2,7 +2,6 @@
 
 require 'io/console'
 require 'tty-markdown'
-require 'byebug'
 
 require_relative 'generator/collector'
 require_relative 'generator/file_creator'

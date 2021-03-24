@@ -4,7 +4,6 @@ require 'readline'
 require 'html2rss'
 
 require_relative './question'
-require 'byebug'
 
 module Html2rss
   module Configs
