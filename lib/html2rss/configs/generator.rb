@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'tty-markdown'
+require 'tty-prompt'
 
 require_relative 'generator/collector'
 require_relative 'generator/file_creator'
