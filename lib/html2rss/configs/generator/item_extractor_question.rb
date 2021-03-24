@@ -78,7 +78,7 @@ module Html2rss
 
         def extractor_configuration
           extra_options = {}
-          extra_options[:post_process] = :sanitize_html if @input == :html
+          extra_options[:post_process] = [{ name: :sanitize_html }] if @input == :html
 
           { extractor: @input }.merge(@extractor_options || {}).merge(extra_options)
         end
