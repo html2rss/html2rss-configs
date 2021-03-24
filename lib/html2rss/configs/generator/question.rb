@@ -11,8 +11,8 @@ module Html2rss
       class Question
         attr_reader :state, :path, :question, :answer, :prompt_options, :prompt
 
-        def initialize(state, **options)
-          @prompt = TTY::Prompt.new
+        def initialize(prompt, state, **options)
+          @prompt = prompt
           @options = options
           @path = options[:path]
           @question = options[:question]
@@ -34,8 +34,6 @@ module Html2rss
 
         # rename to print banner or print instructions
         def before_ask; end
-
-        def validation_failed(input); end
 
         def item
           state.fetch('item')

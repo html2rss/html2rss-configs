@@ -4,22 +4,23 @@ require 'readline'
 
 require_relative './question'
 require 'byebug'
+
 module Html2rss
   module Configs
     module Generator
       class ItemExtractorQuestion
         attr_reader :prompt, :state, :options
 
-        def initialize(state, **options)
-          @prompt = TTY::Prompt.new
+        def initialize(prompt, state, **options)
+          @prompt = prompt
           @state = state
           @options = options
         end
 
         def ask
-          @input = prompt.select('Which extractor would you like to use?', Html2rss::ItemExtractors::NAME_TO_CLASS.keys)
+          @input = prompt.select('Which extractor would you like to use?', extractor_choices)
 
-          Generator.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
+          print_extractor_result
 
           if prompt.yes?("Use extractor '#{@input}'?")
             state.store(options[:path], extractor_configuration) if options[:path]
@@ -29,6 +30,18 @@ module Html2rss
         end
 
         private
+
+        ##
+        # Adds the extractor DEFAULT_NAME at index zero, as it's the default value.
+        #
+        # @return Array<Symbol>
+        def extractor_choices
+          names = Html2rss::ItemExtractors::NAME_TO_CLASS.keys
+          default = Html2rss::ItemExtractors::DEFAULT_NAME
+          names -= [default]
+          names.prepend default
+          names
+        end
 
         def item
           state.fetch('item')
@@ -58,6 +71,10 @@ module Html2rss
 
         def print_available_attributes
           puts "Available attributes: #{item.css(@selector)&.first&.attributes&.keys&.sort&.join(', ')}"
+        end
+
+        def print_extractor_result
+          Helper.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
         end
 
         def extractor_configuration

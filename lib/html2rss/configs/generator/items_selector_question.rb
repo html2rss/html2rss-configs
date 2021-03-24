@@ -12,7 +12,7 @@ module Html2rss
         private
 
         def before_ask
-          Generator.pretty_print :html, HtmlBeautifier.beautify(doc.to_xhtml)
+          Helper.pretty_print :html, HtmlBeautifier.beautify(doc.to_xhtml)
         end
 
         def validate(input)

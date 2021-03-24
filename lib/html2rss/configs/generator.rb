@@ -29,6 +29,7 @@ module Html2rss
         # TODO: use tty-prompt
         puts 'Would you like to create a file alongside a corresponding spec for this feed config? [y/N]'
 
+        # TODO: ask for filename ... suggest defaults determined by on url_to(directory|file)_name
         save_to_files(questionnaire) if $stdin.getch.casecmp('y').zero?
       end
 
@@ -87,14 +88,6 @@ module Html2rss
         }
       end
       # rubocop:enable Metrics/MethodLength
-
-      def self.print_markdown(markdown)
-        puts TTY::Markdown.parse markdown
-      end
-
-      def self.pretty_print(lang, code)
-        print_markdown ["```#{lang}", code, '```'].join("\n")
-      end
     end
   end
 end

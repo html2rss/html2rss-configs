@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'yaml'
-require 'json'
-
 require_relative './channel_question'
 require_relative './items_selector_question'
 require_relative './selector_question'
@@ -15,15 +12,16 @@ module Html2rss
       class Questionnaire
         def initialize
           @state = State.new(feed: {})
+          @prompt = TTY::Prompt.new
         end
 
         def questions
           @questions ||= [
-            ChannelQuestion.new(state, path: 'feed.channel', question: 'Please enter the URL to scrape'),
-            ItemsSelectorQuestion.new(state, path: 'feed.selectors.items', question: 'Items selector'),
-            SelectorQuestion.new(state, path: 'feed.selectors.title', question: "Item's Title selector"),
-            SelectorQuestion.new(state, path: 'feed.selectors.link', question: "Item's URL selector"),
-            SelectorQuestion.new(state, path: 'feed.selectors.description', question: "Item's description")
+            ChannelQuestion.new(prompt, state, path: 'feed.channel', question: 'Please enter the URL to scrape:'),
+            ItemsSelectorQuestion.new(prompt, state, path: 'feed.selectors.items', question: 'Items selector:'),
+            SelectorQuestion.new(prompt, state, path: 'feed.selectors.title', question: "Item's Title selector:"),
+            SelectorQuestion.new(prompt, state, path: 'feed.selectors.link', question: "Item's URL selector:"),
+            SelectorQuestion.new(prompt, state, path: 'feed.selectors.description', question: "Item's description selector:")
           ]
         end
 
@@ -32,9 +30,7 @@ module Html2rss
         end
 
         def to_yaml
-          # To get rid of yaml class annotations regarding HashWithIndifferentAccess,
-          # watch this poor dump/parse/dump approach:
-          YAML.dump JSON.parse(JSON.generate(state.fetch('feed')))
+          Helper.simple_yaml(state.fetch('feed'))
         end
 
         def channel_url
@@ -43,7 +39,7 @@ module Html2rss
 
         private
 
-        attr_reader :state
+        attr_reader :state, :prompt
       end
     end
   end

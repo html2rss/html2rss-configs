@@ -12,10 +12,10 @@ module Html2rss
         private
 
         def before_ask
-          Generator.print_markdown <<~MARKDOWN
+          Helper.print_markdown <<~MARKDOWN
             # html2rss config generator
 
-            This wizard will help you create a feed config.
+            This wizard will help you create a new *feed config*.
 
             You can quit at any time by pressing `Ctrl`+`C`.
           MARKDOWN

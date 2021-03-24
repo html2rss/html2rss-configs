@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/hash'
+
 RSpec.describe Html2rss::Configs::Helper do
   describe '.url_to_directory_name(url)' do
     { 'http://example.com' => 'example.com',
@@ -20,5 +22,23 @@ RSpec.describe Html2rss::Configs::Helper do
       'http://something.com/~/../../etc/passwd' => '________etc_passwd' }.each_pair do |url, filename|
       it { expect(described_class.url_to_file_name(url)).to eq filename }
     end
+  end
+
+  describe '.simple_yaml(hash)' do
+    subject(:returned_string) { described_class.simple_yaml(hash) }
+
+    let(:hash) do
+      { foo: {
+        bar: :baz
+      } }.with_indifferent_access
+    end
+
+    it {
+      expect(returned_string).to eq <<~YML
+        ---
+        foo:
+          bar: baz
+      YML
+    }
   end
 end
