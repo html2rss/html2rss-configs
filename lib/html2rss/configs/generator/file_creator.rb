@@ -28,13 +28,13 @@ module Html2rss
         def print_files
           Helper.print_markdown <<~MARKDOWN
             Created feed config at:
-                `#{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}`
+              `#{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}`
 
             Created spec at:
-                `#{files[:spec_file].gsub(files[:gem_root], '')[1..-1]}`
+              `#{files[:spec_file].gsub(files[:gem_root], '')[1..-1]}`
 
             Test with:
-                `bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}`
+              `bundle exec html2rss feed #{files[:yml_file].gsub(files[:gem_root], '')[1..-1]}`
           MARKDOWN
         end
 

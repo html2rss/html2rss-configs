@@ -54,21 +54,24 @@ module Html2rss
 
           return default_extractor_options if missing.none?
 
-          # TODO: use prompt.collect ... etc
-          missing = missing.map do |miss|
-            print_available_attributes if miss == :attribute
-
-            value = Readline.readline("Enter extractor option value for '#{miss}': ", true)
-
-            [miss, value.chomp]
-          end
-
-          @extractor_options = missing.to_h || {}
+          @extractor_options = ask_for_missing_options(missing)
           default_extractor_options.merge(@extractor_options)
         end
 
-        def print_available_attributes
-          puts "Available attributes: #{item.css(@selector)&.first&.attributes&.keys&.sort&.join(', ')}"
+        def available_attributes
+          item.css(options[:selector])&.first&.attributes&.keys&.sort&.to_a
+        end
+
+        def ask_for_missing_options(missing)
+          missing.to_a.map do |miss|
+            value = if miss == :attribute
+                      prompt.select('Select attribute with desired value', available_attributes)
+                    else
+                      prompt.ask("Extractor option #{miss} value:", required: true)
+                    end
+
+            [miss, value.chomp]
+          end.to_h
         end
 
         def print_extractor_result
