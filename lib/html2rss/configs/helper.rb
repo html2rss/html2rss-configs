@@ -9,10 +9,16 @@ require 'yaml'
 module Html2rss
   module Configs
     module Helper
+      ##
+      # @param url [String]
+      # @return [String]
       def self.url_to_directory_name(url)
         URI(url.split('/')[0..2].join('/')).host.gsub(/^(api|www)\./, '')
       end
 
+      ##
+      # @param url [String]
+      # @return [String]
       def self.url_to_file_name(url)
         path = begin
           URI(url).path
@@ -23,18 +29,39 @@ module Html2rss
         (['', '/'].include?(path) ? 'index' : replace_forbidden_characters_in_filename(path[1..-1]))
       end
 
+      FORBIDDEN_FILENAME_CHARACTERS = '.~/:<>|%*[]()!@#$ '
+
+      ##
+      # Replaces all characters in `FORBIDDEN_FILENAME_CHARACTERS` in `name`
+      # and replaces it with `replacement`.
+      # @param name [String]
+      # @param replacement [String] a single character
+      # @return [String]
       def self.replace_forbidden_characters_in_filename(name, replacement = '_')
-        forbidden_chars = '.~/:<>|%*[]()!@#$'
+        raise 'replacement must be a single character' if replacement.chr != replacement.to_s
+        raise ArgumentError if FORBIDDEN_FILENAME_CHARACTERS.include?(replacement)
 
-        raise ArgumentError if forbidden_chars.include?(replacement)
-
-        name.tr(forbidden_chars, 'replacement')
+        name.tr(FORBIDDEN_FILENAME_CHARACTERS, replacement.chr)
       end
 
+      ##
+      # Prints nicely formatted markdown to `output`.
+      #
+      # @param markdown [String]
+      # @return [nil]
       def self.print_markdown(markdown, output: $stdout)
         output.puts TTY::Markdown.parse markdown
       end
 
+      ##
+      # Prints nicely formatted code to `output` by wrapping it in a
+      # markdown code block and `.print_markdown`.
+      #
+      # If lang is :html, it beautifies the code
+      #
+      # @param lang [Symbol] e.g. :html, :yaml, :ruby, ...
+      # @param code [String]
+      # @return [nil]
       def self.pretty_print(lang, code, output: $stdout)
         return code if code&.to_s == ''
 
@@ -52,6 +79,10 @@ module Html2rss
       end
 
       ##
+      # Removes tags which match `selectors_to_remove`.
+      # Goal is to reduce cruft in the HTML which is irrelevant to building a
+      # RSS feed.
+      #
       # @param html [String]
       # @return [Nokogiri::HTML::Document]
       def self.strip_down_html(html, selectors_to_remove = %w[style noscript script svg])
@@ -67,7 +98,10 @@ module Html2rss
       end
 
       ##
+      # Removes empty html tags by recursively traversing all nodes in `doc`.
+      #
       # @param doc [Nokogiri::HTML::Document]
+      # @return [Nokogiri::HTML::Document]
       def self.remove_empty_html_tags(doc)
         doc.children.each do |child|
           remove_empty_html_tags(child)

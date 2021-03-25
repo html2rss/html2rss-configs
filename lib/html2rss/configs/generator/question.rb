@@ -30,21 +30,19 @@ module Html2rss
 
         private
 
-        # TODO: rename to print banner or print instructions
-        def before_ask; end
-
-        def item
-          state.fetch('item')
-        end
-
-        protected
-
         def validate(input)
           input.to_s != ''
         end
 
         def process(input)
           input
+        end
+
+        # TODO: rename to print banner or print instructions
+        def before_ask; end
+
+        def item
+          state.fetch('item')
         end
       end
     end

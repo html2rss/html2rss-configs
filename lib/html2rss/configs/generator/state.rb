@@ -10,6 +10,11 @@ module Html2rss
           @state = (initial_state || {}).with_indifferent_access
         end
 
+        ##
+        # Stores the value under path.
+        #
+        # @param path [String] Use dot as seperator, e.g. 'a.path.to.somewhere'
+        # @param value [Object]
         # rubocop:disable Metrics/MethodLength
         def store(path, value)
           splits = path.to_s.split('.')
@@ -36,6 +41,10 @@ module Html2rss
         end
         # rubocop:enable Metrics/MethodLength
 
+        ##
+        # Returns the previously stored value at path, or a new instance of an (empty) Hash.
+        # @param path [String]
+        # @return [Object, Hash]
         def fetch(path)
           case (splits = path.to_s.split('.')).size
           when 1

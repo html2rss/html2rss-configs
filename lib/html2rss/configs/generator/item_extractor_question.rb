@@ -27,7 +27,7 @@ module Html2rss
         end
 
         ##
-        # @return Array<Symbol> the available extractor names, with default extractor at index 0
+        # @return [Array<Symbol>] the available extractor names, with default extractor at index 0
         def self.choices(default = Html2rss::ItemExtractors::DEFAULT_NAME)
           names = Html2rss::ItemExtractors::NAME_TO_CLASS.keys
           names -= [default]
