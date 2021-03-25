@@ -55,10 +55,13 @@ module Html2rss
         end
 
         def extractor_configuration
+          options = {}
+          options[:extractor] = @input if @input != Html2rss::ItemExtractors::DEFAULT_NAME
+
           extra_options = {}
           extra_options[:post_process] = [{ name: :sanitize_html }] if @input == :html
 
-          { extractor: @input }.merge(@extractor_options || {}).merge(extra_options)
+          options.merge(@extractor_options || {}).merge(extra_options)
         end
 
         def available_attributes

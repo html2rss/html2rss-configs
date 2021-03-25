@@ -19,6 +19,7 @@ module Html2rss
 
           state.store('item', item)
 
+          # TODO: do not show warning about multiple items... but the opposite! show when only one tag is selected
           print_tag(input, item)
 
           prompt.yes?("Use selector `#{input}`?")

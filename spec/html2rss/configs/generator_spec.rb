@@ -57,7 +57,7 @@ RSpec.describe Html2rss::Configs::Generator do
         },
         'selectors' => {
           'items' => { 'selector' => 'article' },
-          'title' => { 'extractor' => :text, 'selector' => '[itemprop=headline]' },
+          'title' => { 'selector' => '[itemprop=headline]' },
           'link' => { 'extractor' => :href, 'selector' => 'a:first' },
           'description' => {
             'extractor' => :html,

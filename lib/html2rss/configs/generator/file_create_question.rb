@@ -25,7 +25,7 @@ module Html2rss
 
         def ask
           print_feed_config
-          return unless prompt.yes?('Would you like to create a file alongside a spec for this feed config?')
+          return unless prompt.yes?('Create YAML and spec files for this feed config?')
 
           config_name = ask_config_name
 
@@ -41,7 +41,7 @@ module Html2rss
 
         def print_feed_config
           Helper.print_markdown <<~MARKDOWN
-            ## This is your feed config
+            ## The feed config
 
             ```yaml
             #{Helper.to_simple_yaml(feed_config)}
@@ -50,7 +50,8 @@ module Html2rss
         end
 
         def ask_config_name
-          prompt.ask('Name of this config:', default: Helper.url_to_file_name(channel_url)) do |q|
+          # TODO: show target directory
+          prompt.ask('Name this config:', default: Helper.url_to_file_name(channel_url)) do |q|
             q.required true
             q.validate(/^[^.][A-z0-9\-_]+[^.]$/)
             q.modify :downcase
@@ -65,10 +66,10 @@ module Html2rss
 
         def print_files(fps)
           Helper.print_markdown <<~MARKDOWN
-            Created feed config at:
+            Created YAML file at:
               `#{fps.relative_yml_path}`
 
-            Created spec at:
+            Created spec file at:
               `#{fps.relative_spec_path}`
 
             Generate RSS with:
