@@ -20,11 +20,6 @@ module Html2rss
         Collector.new(prompt, state).collect
 
         FileCreateQuestion.new(prompt, state).ask
-
-        # TODO: print a thanks & good bye note
-        #    with urls where to ask for help etc or more instructions to submit
-        #    to h2rc.
-        # https://github.com/piotrmurach/tty-link
       end
     end
   end
