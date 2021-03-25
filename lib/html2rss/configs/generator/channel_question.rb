@@ -28,6 +28,9 @@ module Html2rss
           return false unless uri.absolute?
 
           @response = Faraday.new(url: uri, headers: {}).get
+
+          # TODO: print info if response is unsuccessful. in case of redirect, show Location
+
           @response.success?
         end
 
@@ -40,31 +43,7 @@ module Html2rss
         end
 
         def doc
-          return @doc if defined?(@doc)
-
-          # Make the beautification more beautiful:
-          # force line breaks after/before angle brackets.
-          messy_html = @response.body.gsub('<', "\n<").gsub!('>', ">\n")
-
-          doc = Nokogiri.HTML(messy_html, &:noblanks)
-
-          # remove nodes which can't be parsed
-          doc.css('style, noscript, script, svg').each(&:remove)
-
-          # remove nodes without innerText
-          doc.xpath('//text()').each { |t| t.remove if t.to_s.strip == '' }
-
-          # remove empty nodes
-          doc.search(':empty').remove
-
-          @doc = remove_empty_tags(doc)
-        end
-
-        def remove_empty_tags(tag)
-          tag.children.each do |child|
-            remove_empty_tags(child)
-            child.remove if child.text && child.text.gsub(/\s+/, '').empty?
-          end
+          @doc ||= Helper.strip_down_html(@response.body)
         end
       end
     end

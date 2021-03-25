@@ -30,7 +30,7 @@ module Html2rss
 
         private
 
-        # rename to print banner or print instructions
+        # TODO: rename to print banner or print instructions
         def before_ask; end
 
         def item

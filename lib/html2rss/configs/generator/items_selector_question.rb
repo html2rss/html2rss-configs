@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'htmlbeautifier'
-
 require_relative './selector_question'
 
 module Html2rss
@@ -11,7 +9,7 @@ module Html2rss
         private
 
         def before_ask
-          Helper.pretty_print :html, HtmlBeautifier.beautify(doc.to_xhtml)
+          Helper.pretty_print :html, doc.to_xhtml
         end
 
         def validate(input)

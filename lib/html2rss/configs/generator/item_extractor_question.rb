@@ -2,8 +2,6 @@
 
 require 'html2rss'
 
-require_relative './question'
-
 module Html2rss
   module Configs
     module Generator
@@ -56,6 +54,13 @@ module Html2rss
           default_extractor_options.merge(@extractor_options)
         end
 
+        def extractor_configuration
+          extra_options = {}
+          extra_options[:post_process] = [{ name: :sanitize_html }] if @input == :html
+
+          { extractor: @input }.merge(@extractor_options || {}).merge(extra_options)
+        end
+
         def available_attributes
           item.css(options[:selector])&.first&.attributes&.keys&.sort&.to_a
         end
@@ -74,13 +79,6 @@ module Html2rss
 
         def print_extractor_result
           Helper.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
-        end
-
-        def extractor_configuration
-          extra_options = {}
-          extra_options[:post_process] = [{ name: :sanitize_html }] if @input == :html
-
-          { extractor: @input }.merge(@extractor_options || {}).merge(extra_options)
         end
       end
     end

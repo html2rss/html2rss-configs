@@ -3,7 +3,6 @@
 require_relative './channel_question'
 require_relative './items_selector_question'
 require_relative './selector_question'
-require_relative './state'
 
 module Html2rss
   module Configs

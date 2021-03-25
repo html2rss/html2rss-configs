@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'htmlbeautifier'
-
 require_relative './question'
 require_relative './item_extractor_question'
 
@@ -12,7 +10,7 @@ module Html2rss
         private
 
         def before_ask
-          Helper.pretty_print :html, HtmlBeautifier.beautify(item.to_xhtml)
+          Helper.pretty_print :html, item.to_xhtml
         end
 
         def validate(input)
@@ -25,7 +23,6 @@ module Html2rss
           ItemExtractorQuestion.new(prompt, state, path: path, selector: input).ask
 
           # TODO: print the config and the result before asking
-
           prompt.yes?("Use this selector config for #{path}?")
         end
 
@@ -44,7 +41,7 @@ module Html2rss
           end
 
           Helper.print_markdown "The selector `#{input}` selects:"
-          Helper.pretty_print :html, HtmlBeautifier.beautify(tag&.to_xhtml)
+          Helper.pretty_print :html, tag&.to_xhtml
         end
       end
     end

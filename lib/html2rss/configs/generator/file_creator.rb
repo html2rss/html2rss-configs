@@ -19,7 +19,7 @@ module Html2rss
         end
 
         def create
-          # TODO: ask for filename ... suggest defaults determined by on Helper.url_to(directory|file)_name
+          # TODO: ask for config name ... suggest defaults determined by on Helper.url_to(directory|file)_name
           write_to_yml
           scaffold_spec
           print_files

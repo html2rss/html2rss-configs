@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require 'html2rss/configs/generator'
+require 'html2rss/configs/generator/state'
 require 'tty-prompt'
+require 'faraday'
 
 RSpec.describe Html2rss::Configs::Generator do
   it { expect(described_class).to be_a(Module) }
