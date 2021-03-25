@@ -45,7 +45,7 @@ RSpec.describe Html2rss::Configs::Generator do
         "\n",
         # final 'create files' question
         "no\n"
-      ].join(''))
+      ].join)
     end
 
     let(:generated_feed_config) do
