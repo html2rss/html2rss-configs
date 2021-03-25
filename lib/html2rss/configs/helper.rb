@@ -20,7 +20,15 @@ module Html2rss
           url.split('/')[3..-1].join('_')
         end
 
-        (['', '/'].include?(path) ? 'index' : path[1..-1]).tr('.~/:<>|%*[]()!@#$', '_')
+        (['', '/'].include?(path) ? 'index' : replace_forbidden_characters_in_filename(path[1..-1]))
+      end
+
+      def self.replace_forbidden_characters_in_filename(name, replacement = '_')
+        forbidden_chars = '.~/:<>|%*[]()!@#$'
+
+        raise ArgumentError if forbidden_chars.include?(replacement)
+
+        name.tr(forbidden_chars, 'replacement')
       end
 
       def self.print_markdown(markdown, output: $stdout)
