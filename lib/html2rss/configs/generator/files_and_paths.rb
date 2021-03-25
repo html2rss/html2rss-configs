@@ -3,6 +3,8 @@
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Contains the methods needed by the Generator when dealing with files.
       class FilesAndPaths
         attr_reader :config_name, :config_dir
 

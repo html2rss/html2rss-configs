@@ -5,6 +5,8 @@ require_relative './selector_question'
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Asks for the items selector.
       class ItemsSelectorQuestion < SelectorQuestion
         private
 
@@ -19,8 +21,7 @@ module Html2rss
 
           state.store('item', item)
 
-          # TODO: do not show warning about multiple items... but the opposite! show when only one tag is selected
-          print_tag(input, item)
+          print_tag(input, item, warn_on_multiple: false, warn_on_single: true)
 
           prompt.yes?("Use selector `#{input}`?")
         end

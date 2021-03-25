@@ -5,6 +5,9 @@ require 'html2rss'
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Asks which item extractor to use.
+      # When an extractor requires additional arguments, it asks for those, too.
       class ItemExtractorQuestion
         attr_reader :prompt, :state, :options
 
@@ -33,6 +36,10 @@ module Html2rss
           names -= [default]
           names.prepend default
           names
+        end
+
+        def print_extractor_result
+          Helper.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
         end
 
         private
@@ -78,10 +85,6 @@ module Html2rss
 
             [miss, value.chomp]
           end.to_h
-        end
-
-        def print_extractor_result
-          Helper.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
         end
       end
     end

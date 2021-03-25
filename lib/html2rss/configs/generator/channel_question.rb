@@ -8,6 +8,8 @@ require_relative './question'
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Asks the required RSS channel options.
       class ChannelQuestion < Question
         private
 
@@ -28,10 +30,28 @@ module Html2rss
           return false unless uri.absolute?
 
           @response = Faraday.new(url: uri, headers: {}).get
+          return true if @response.success?
 
-          # TODO: print info if response is unsuccessful. in case of redirect, show Location
+          handle_unsuccessful_response
+        end
 
-          @response.success?
+        def handle_unsuccessful_response
+          case @response.status
+          when 300..399
+            Helper.print_markdown "The url redirects. Try to use `#{@response.headers['location']}`"
+          when 400..599
+            # client/server error
+            Helper.print_markdown <<~MARKDOWN
+              Encountered error **`#{@response.status}`**.
+              Here are the response headers which could help debugging:
+
+              ```yaml
+              #{Helper.to_simple_yaml(@response.headers).gsub("---\n", '').chomp}
+              ```
+            MARKDOWN
+          end
+
+          false
         end
 
         def process(url)

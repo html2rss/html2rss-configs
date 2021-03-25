@@ -5,6 +5,8 @@ require 'active_support/core_ext/hash'
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Provides a flexible data store. It's roughly inspired by Vuex/Redux.
       class State
         def initialize(initial_state = {})
           @state = (initial_state || {}).with_indifferent_access
@@ -13,7 +15,7 @@ module Html2rss
         ##
         # Stores the value under path.
         #
-        # @param path [String] Use dot as seperator, e.g. 'a.path.to.somewhere'
+        # @param path [String] consists of multiple keys, joined with a dot, e.g. 'a.path.to.somewhere'
         # @param value [Object]
         # rubocop:disable Metrics/MethodLength
         def store(path, value)
@@ -36,15 +38,16 @@ module Html2rss
             end
           end
 
-          # Finally, merge the new hash into our state.
+          # Finally, deep merge the new hash into our state.
           state.deep_merge!(hash)
         end
         # rubocop:enable Metrics/MethodLength
 
         ##
-        # Returns the previously stored value at path, or a new instance of an (empty) Hash.
+        # Returns the previously stored value at path.
         # @param path [String]
         # @return [Object, Hash]
+        # @raise [KeyError] if no value is stored under path
         def fetch(path)
           case (splits = path.to_s.split('.')).size
           when 1

@@ -8,6 +8,8 @@ require 'yaml'
 
 module Html2rss
   module Configs
+    ##
+    # A collection of helper methods.
     module Helper
       ##
       # @param url [String]

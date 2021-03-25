@@ -7,6 +7,8 @@ require_relative './selector_question'
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Contains the questions to ask on `prompt`.
       class Collector
         def initialize(prompt, state)
           @state = state
@@ -22,13 +24,13 @@ module Html2rss
                                                      question: 'Items selector:',
                                                      prompt_options: { default: 'article' }),
             SelectorQuestion.new(prompt, state, path: 'feed.selectors.title',
-                                                question: "Item's Title selector:",
+                                                question: 'Title selector:',
                                                 prompt_options: { default: '[itemprop=headline]' }),
             SelectorQuestion.new(prompt, state, path: 'feed.selectors.link',
-                                                question: "Item's URL selector:",
+                                                question: 'URL selector:',
                                                 prompt_options: { default: 'a:first' }),
             SelectorQuestion.new(prompt, state, path: 'feed.selectors.description',
-                                                question: "Item's description selector:",
+                                                question: 'Description selector:',
                                                 prompt_options: { default: '[itemprop=description]' })
           ].each(&:ask)
         end

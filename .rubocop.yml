@@ -14,6 +14,10 @@ Metrics/BlockLength:
     - "spec/**/*_spec.rb"
     - html2rss-configs.gemspec
 
+Metrics/MethodLength:
+  CountAsOne:
+    - heredoc
+
 RSpec/DescribeClass:
   Exclude:
     - "spec/html2rss/configs/**/*.yml_spec.rb"
@@ -22,8 +26,6 @@ RSpec/DescribeClass:
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
-Style/Documentation:
-  Enabled: false
-
 Style/ClassStructure:
   Enabled: true
+

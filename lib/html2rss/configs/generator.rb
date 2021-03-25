@@ -10,7 +10,12 @@ require_relative 'generator/state'
 
 module Html2rss
   module Configs
+    ##
+    # Namespace for the Feed Config Generator.
     module Generator
+      ##
+      # Asks the caller questions, using prompt and stores the results in the state.
+      # @return [nil]
       def self.start(prompt = TTY::Prompt.new, state = State.new(feed: {}))
         Collector.new(prompt, state).collect
 

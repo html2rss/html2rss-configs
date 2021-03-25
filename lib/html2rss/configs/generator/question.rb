@@ -4,7 +4,7 @@ module Html2rss
   module Configs
     module Generator
       ##
-      # Asks a questions and stores the answer as a string in the state under the path.
+      # Asks a questions and stores the answer as a string under the path in the state.
       class Question
         attr_reader :state, :path, :question, :answer, :prompt_options, :prompt
 
@@ -38,7 +38,6 @@ module Html2rss
           input
         end
 
-        # TODO: rename to print banner or print instructions
         def before_ask; end
 
         def item

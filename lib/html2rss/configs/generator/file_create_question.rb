@@ -5,6 +5,9 @@ require_relative './files_and_paths'
 module Html2rss
   module Configs
     module Generator
+      ##
+      # Asks if the user would like to persist the state 'feed' as a YAML file
+      # and creating an rspec file using `RSPEC_TEMPLATE`.
       class FileCreateQuestion
         RSPEC_TEMPLATE = <<~RSPEC
           # frozen_string_literal: true
@@ -41,7 +44,7 @@ module Html2rss
 
         def print_feed_config
           Helper.print_markdown <<~MARKDOWN
-            ## The feed config
+            **The feed config:**
 
             ```yaml
             #{Helper.to_simple_yaml(feed_config)}
@@ -50,8 +53,9 @@ module Html2rss
         end
 
         def ask_config_name
-          # TODO: show target directory
-          prompt.ask('Name this config:', default: Helper.url_to_file_name(channel_url)) do |q|
+          directory_name = Helper.url_to_directory_name(channel_url)
+
+          prompt.ask("Name this config for #{directory_name}:", default: Helper.url_to_file_name(channel_url)) do |q|
             q.required true
             q.validate(/^[^.][A-z0-9\-_]+[^.]$/)
             q.modify :downcase
@@ -72,7 +76,7 @@ module Html2rss
             Created spec file at:
               `#{fps.relative_spec_path}`
 
-            Generate RSS with:
+            Use this config to generate RSS with:
               `bundle exec html2rss feed #{fps.relative_yml_path}`
           MARKDOWN
         end
