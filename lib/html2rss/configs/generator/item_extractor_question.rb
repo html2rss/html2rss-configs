@@ -21,10 +21,10 @@ module Html2rss
           self.extractor_name = prompt.select('Which extractor would you like to use?',
                                               self.class.choices, filter: true)
 
-          extractor_options = self.extractor_options
-          print_extractor_result(extractor_options)
+          full_extractor_options = extractor_options
+          print_extractor_result(full_extractor_options)
 
-          prompt.yes?("Use extractor '#{extractor_name}'?") ? state.store(path, extractor_options) : ask
+          prompt.yes?("Use extractor '#{extractor_name}'?") ? state.store(path, full_extractor_options) : ask
         end
 
         ##
