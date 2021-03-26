@@ -8,8 +8,9 @@ module Html2rss
       ##
       # Provides a flexible data store. It's roughly inspired by Vuex/Redux.
       class State
-        ITEM_PATH = 'item'
+        FEED_PATH = 'feed'
         HTML_DOC_PATH = 'doc'
+        ITEM_PATH = 'item'
 
         def initialize(initial_state = {})
           @state = (initial_state || {}).with_indifferent_access

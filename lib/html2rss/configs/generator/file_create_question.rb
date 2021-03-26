@@ -22,7 +22,7 @@ module Html2rss
         def initialize(prompt, state, **_options)
           @prompt = prompt
           @state = state
-          @feed_config = state.fetch('feed')
+          @feed_config = state.fetch(state.class::FEED_PATH)
           @channel_url = @feed_config.dig(:channel, :url)
         end
 

@@ -10,7 +10,8 @@ module Html2rss
       class ItemsSelectorQuestion < SelectorQuestion
         STATE_PATH_ITEM = 'item'
 
-        def self.validate(selector, state, prompt, **_options)
+        def self.validate(input:, state:, prompt:, **_)
+          selector = input
           item = state.fetch(state.class::HTML_DOC_PATH).css(selector)&.first or return false
 
           state.store(state.class::ITEM_PATH, item)
@@ -27,7 +28,7 @@ module Html2rss
         end
 
         def doc
-          state.fetch('doc')
+          state.fetch(state.class::HTML_DOC_PATH)
         end
       end
     end

@@ -19,7 +19,7 @@ module Html2rss
         def collect
           [
             ChannelQuestion.new(prompt, state, path: 'feed.channel',
-                                               question: 'Please enter the URL to scrape:', prompt_options: {}),
+                                               question: 'Please enter the URL to scrape:'),
             ItemsSelectorQuestion.new(prompt, state, path: 'feed.selectors.items',
                                                      question: 'Items selector:',
                                                      prompt_options: { default: 'article' }),

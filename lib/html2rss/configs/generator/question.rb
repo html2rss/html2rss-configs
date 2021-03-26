@@ -19,14 +19,17 @@ module Html2rss
         def ask
           before_ask
           validated_input = prompt.ask(question, prompt_options) do |answer|
-            answer.validate ->(input) { self.class.validate(input, state, prompt, @options) }
+            answer.validate lambda { |input|
+              args = { input: input, state: state, prompt: prompt, options: @options }
+              self.class.validate(args)
+            }
           end
 
           processed_input = process(validated_input)
           state.store(path, processed_input) if path
         end
 
-        def self.validate(input, _state, _prompt, **_options)
+        def self.validate(input:, **_opts)
           input.to_s != ''
         end
 

@@ -11,8 +11,8 @@ module Html2rss
       ##
       # Asks the required RSS channel options and tries to determine some.
       class ChannelQuestion < Question
-        def self.validate(url, state, _prompt, **_options)
-          uri = URI(url)
+        def self.validate(input:, state:, **_opts)
+          uri = URI(input)
           return false unless uri.absolute?
 
           response = Faraday.new(url: uri, headers: {}).get

@@ -10,12 +10,12 @@ module Html2rss
       # A generic base class for asking a selector and lastly invokes
       # `ItemExtractorQuestion` to build a full *selector hash*.
       class SelectorQuestion < Question
-        def self.validate(selector, state, prompt, **options)
-          tag = state.fetch(state.class::ITEM_PATH).css(selector) or return false
+        def self.validate(input:, state:, prompt:, options:)
+          tag = state.fetch(state.class::ITEM_PATH).css(input) or return false
 
-          Helper.print_tag(selector, tag)
+          Helper.print_tag(input, tag)
 
-          extractor_question = ItemExtractorQuestion.new(prompt, state, options.merge(selector: selector))
+          extractor_question = ItemExtractorQuestion.new(prompt, state, options.merge(selector: input))
           extractor_question.ask
 
           path = options[:path]
@@ -43,8 +43,8 @@ module Html2rss
           Helper.pretty_print :html, item.to_xhtml
         end
 
-        def process(selector)
-          { selector: selector }
+        def process(input)
+          { selector: input }
         end
       end
     end

@@ -17,28 +17,20 @@ module Html2rss
           @options = options
         end
 
-        # rubocop:disable Metrics/AbcSize
         def ask
           self.extractor_name = prompt.select('Which extractor would you like to use?',
                                               self.class.choices, filter: true)
 
-          options = {}
-          options = ask_for_missing_options if missing_extractor_option_names.any?
-          extractor_options = selector_config.merge(extractor_configuration, options)
-
+          extractor_options = self.extractor_options
           print_extractor_result(extractor_options)
 
           prompt.yes?("Use extractor '#{extractor_name}'?") ? state.store(path, extractor_options) : ask
         end
-        # rubocop:enable Metrics/AbcSize
 
         ##
         # @return [Array<Symbol>] the available extractor names, with default extractor at index 0
         def self.choices(default = Html2rss::ItemExtractors::DEFAULT_NAME)
-          names = Html2rss::ItemExtractors::NAME_TO_CLASS.keys
-          names -= [default]
-          names.prepend default
-          names
+          [default].concat(Html2rss::ItemExtractors::NAME_TO_CLASS.keys - [default])
         end
 
         def print_extractor_result(extractor_options)
@@ -73,6 +65,13 @@ module Html2rss
 
         def selector_config
           { selector: options[:selector] }
+        end
+
+        def extractor_options
+          options = {}
+          options = ask_for_missing_options if missing_extractor_option_names.any?
+
+          selector_config.merge(extractor_configuration, options)
         end
 
         def extractor_configuration
