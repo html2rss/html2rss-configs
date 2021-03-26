@@ -71,7 +71,7 @@ module Html2rss
           options = {}
           options = ask_for_missing_options if missing_extractor_option_names.any?
 
-          selector_config.merge(extractor_configuration, options)
+          selector_config.merge(extractor_configuration).merge(options)
         end
 
         def extractor_configuration
