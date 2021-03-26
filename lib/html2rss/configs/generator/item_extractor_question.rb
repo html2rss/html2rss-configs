@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'html2rss'
+require 'html2rss/item_extractors'
 
 module Html2rss
   module Configs
