@@ -26,6 +26,6 @@ RSpec/DescribeClass:
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
-Style/ClassStructure:
+Layout/ClassStructure:
   Enabled: true
 
