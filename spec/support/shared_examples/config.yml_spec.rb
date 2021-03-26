@@ -66,7 +66,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
       context 'with template post_processor' do
         it 'references available selectors only', aggregate_failures: true do
-          selectors_in_template(yaml['selectors']).each do |referenced_selector|
+          Html2rss::Configs::Helper.referenced_selectors_in_template(yaml['selectors']).each do |referenced_selector|
             next if referenced_selector == 'self'
 
             expect(yaml['selectors'][referenced_selector])

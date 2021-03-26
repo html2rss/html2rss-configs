@@ -6,33 +6,31 @@ module Html2rss
       ##
       # Asks a questions and stores the answer as a string under the path in the state.
       class Question
-        attr_reader :state, :path, :question, :answer, :prompt_options, :prompt
+        attr_reader :state, :prompt_options, :prompt
 
         def initialize(prompt, state, **options)
           @prompt = prompt
           @state = state
           @options = options
 
-          @path = options[:path]
-          @question = options[:question]
           @prompt_options = options[:prompt_options] || { required: true }
         end
 
         def ask
           before_ask
-          validated_input = prompt.ask(question, prompt_options) do |q|
-            q.validate ->(input) { validate(input) }
+          validated_input = prompt.ask(question, prompt_options) do |answer|
+            answer.validate ->(input) { self.class.validate(input, state, prompt, @options) }
           end
 
           processed_input = process(validated_input)
           state.store(path, processed_input) if path
         end
 
-        private
-
-        def validate(input)
+        def self.validate(input, _state, _prompt, **_options)
           input.to_s != ''
         end
+
+        private
 
         def process(input)
           input
@@ -41,7 +39,15 @@ module Html2rss
         def before_ask; end
 
         def item
-          state.fetch('item')
+          state.fetch(state.class::ITEM_PATH)
+        end
+
+        def path
+          @options[:path]
+        end
+
+        def question
+          @options[:question]
         end
       end
     end

@@ -8,6 +8,9 @@ module Html2rss
       ##
       # Provides a flexible data store. It's roughly inspired by Vuex/Redux.
       class State
+        ITEM_PATH = 'item'
+        HTML_DOC_PATH = 'doc'
+
         def initialize(initial_state = {})
           @state = (initial_state || {}).with_indifferent_access
         end
@@ -17,13 +20,8 @@ module Html2rss
         #
         # @param path [String] consists of multiple keys, joined with a dot, e.g. 'a.path.to.somewhere'
         # @param value [Object]
-        # rubocop:disable Metrics/MethodLength
         def store(path, value)
           splits = path.to_s.split('.')
-
-          # This is a Hash which automatically creates values (hashes) on access.
-          # It allows e.g. `new_hash[:a][:b][:c][:d] = 'something'`.
-          hash = Hash.new { |h, k| h[k] = h.dup.clear }
 
           # Now, traverse down the given path. `node` acts as our reference.
           node = hash
@@ -41,7 +39,6 @@ module Html2rss
           # Finally, deep merge the new hash into our state.
           state.deep_merge!(hash)
         end
-        # rubocop:enable Metrics/MethodLength
 
         ##
         # Returns the previously stored value at path.
@@ -58,6 +55,14 @@ module Html2rss
         end
 
         private
+
+        ##
+        # This is a Hash which automatically creates values (hashes) on access.
+        # It allows e.g. `hash[:a][:b][:c][:d] = 'something'`.
+        # @returns [Hash]
+        def hash
+          @hash ||= Hash.new { |hash, key| hash[key] = hash.dup.clear }
+        end
 
         attr_reader :state
       end

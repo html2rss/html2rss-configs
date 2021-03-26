@@ -10,28 +10,22 @@ module Html2rss
       # A generic base class for asking a selector and lastly invokes
       # `ItemExtractorQuestion` to build a full *selector hash*.
       class SelectorQuestion < Question
-        private
+        def self.validate(selector, state, prompt, **options)
+          tag = state.fetch(state.class::ITEM_PATH).css(selector) or return false
 
-        def before_ask
-          Helper.pretty_print :html, item.to_xhtml
-        end
+          Helper.print_tag(selector, tag)
 
-        def validate(input)
-          tag = item.css(input)
-
-          return false unless tag
-
-          print_tag(input, tag)
-
-          extractor_question = ItemExtractorQuestion.new(prompt, state, path: path, selector: input)
+          extractor_question = ItemExtractorQuestion.new(prompt, state, options.merge(selector: selector))
           extractor_question.ask
-          print_config(input, extractor_question)
 
+          path = options[:path]
+
+          print_config(state, path)
           prompt.yes?("Use this selector hash for #{path}?")
         end
 
-        def print_config(input, extractor_question)
-          config = state.fetch(path).dup.merge(selector: input)
+        def self.print_config(state, path)
+          config = state.fetch(path).dup
 
           Helper.print_markdown <<~MARKDOWN
 
@@ -40,36 +34,17 @@ module Html2rss
             ```yaml
             #{Helper.to_simple_yaml(config).gsub("---\n", '').chomp}
             ```
-
-            **The resulting value is:**
           MARKDOWN
-
-          extractor_question.print_extractor_result
         end
 
-        def process(input)
-          { selector: input }
+        private
+
+        def before_ask
+          Helper.pretty_print :html, item.to_xhtml
         end
 
-        def print_tag(input, tag, warn_on_multiple: true, warn_on_single: false)
-          if warn_on_multiple && tag.count > 1
-            Helper.print_markdown <<~MARKDOWN
-              ***
-              `#{input}` selects multiple elements!
-              Please write a selector as precise as possible to select just one element.
-              ***
-            MARKDOWN
-          elsif warn_on_single && tag.count == 1
-            Helper.print_markdown <<~MARKDOWN
-              ***
-              `#{input}` selects just one element!
-              Please broaden the selector to select multiple elements.
-              ***
-            MARKDOWN
-          end
-
-          Helper.print_markdown "**The selector `#{input}` selects:**"
-          Helper.pretty_print :html, tag&.to_xhtml
+        def process(selector)
+          { selector: selector }
         end
       end
     end

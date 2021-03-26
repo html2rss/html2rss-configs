@@ -17,17 +17,20 @@ module Html2rss
           @options = options
         end
 
+        # rubocop:disable Metrics/AbcSize
         def ask
-          @input = prompt.select('Which extractor would you like to use?', self.class.choices, filter: true)
+          self.extractor_name = prompt.select('Which extractor would you like to use?',
+                                              self.class.choices, filter: true)
 
-          print_extractor_result
+          options = {}
+          options = ask_for_missing_options if missing_extractor_option_names.any?
+          extractor_options = selector_config.merge(extractor_configuration, options)
 
-          if prompt.yes?("Use extractor '#{@input}'?")
-            state.store(options[:path], extractor_configuration) if options[:path]
-          else
-            ask
-          end
+          print_extractor_result(extractor_options)
+
+          prompt.yes?("Use extractor '#{extractor_name}'?") ? state.store(path, extractor_options) : ask
         end
+        # rubocop:enable Metrics/AbcSize
 
         ##
         # @return [Array<Symbol>] the available extractor names, with default extractor at index 0
@@ -38,53 +41,69 @@ module Html2rss
           names
         end
 
-        def print_extractor_result
-          Helper.print_markdown "`#{Html2rss::ItemExtractors.item_extractor_factory(extractor_options, item).get}`"
+        def print_extractor_result(extractor_options)
+          extractor_result = Html2rss::ItemExtractors.item_extractor_factory(
+            extractor_options.merge(channel: { url: state.fetch('feed.channel.url') }),
+            item
+          )
+                                                     .get
+
+          Helper.print_markdown "`#{extractor_result}`"
         end
 
         private
 
+        attr_accessor :extractor_name
+
         def item
-          state.fetch('item')
+          state.fetch(state.class::ITEM_PATH)
         end
 
-        def default_extractor_options
-          { extractor: @input, selector: options[:selector], channel: { url: state.fetch('feed.channel.url') } }
+        def path
+          @options[:path]
         end
 
-        def extractor_options
-          missing = Html2rss::ItemExtractors.options_class(@input).members - default_extractor_options.keys
+        def extractor_default?
+          extractor_name == Html2rss::ItemExtractors::DEFAULT_NAME
+        end
 
-          return default_extractor_options if missing.none?
+        def extractor_html?
+          extractor_name == :html
+        end
 
-          @extractor_options = ask_for_missing_options(missing)
-          default_extractor_options.merge(@extractor_options)
+        def selector_config
+          { selector: options[:selector] }
         end
 
         def extractor_configuration
           options = {}
-          options[:extractor] = @input if @input != Html2rss::ItemExtractors::DEFAULT_NAME
+          options[:extractor] = extractor_name unless extractor_default?
 
           extra_options = {}
-          extra_options[:post_process] = [{ name: :sanitize_html }] if @input == :html
+          extra_options[:post_process] = [{ name: :sanitize_html }] if extractor_html?
 
-          options.merge(@extractor_options || {}).merge(extra_options)
+          options.merge(extra_options)
         end
 
-        def available_attributes
-          item.css(options[:selector])&.first&.attributes&.keys&.sort&.to_a
+        def missing_extractor_option_names
+          # :channel is added to the options when fetching
+          Html2rss::ItemExtractors.options_class(extractor_name).members - selector_config.keys - [:channel]
         end
 
-        def ask_for_missing_options(missing)
-          missing.to_a.map do |miss|
+        def ask_for_missing_options
+          missing_extractor_option_names.to_a.map do |miss|
             value = if miss == :attribute
-                      prompt.select('Select attribute with desired value', available_attributes, filter: true)
+                      prompt.select('Select the attribute', available_attributes, filter: true)
                     else
                       prompt.ask("Extractor option #{miss} value:", required: true)
                     end
 
             [miss, value.chomp]
           end.to_h
+        end
+
+        def available_attributes
+          item.css(options[:selector])&.first&.attributes&.keys&.sort&.to_a
         end
       end
     end

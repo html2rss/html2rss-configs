@@ -112,4 +112,17 @@ RSpec.describe Html2rss::Configs::Helper do
       expect(described_class.remove_empty_html_tags(Nokogiri::HTML(messy_html)).to_s).to eq html
     end
   end
+
+  describe '.string_formatting_references(string)' do
+    # rubocop:disable Style/FormatStringToken
+    {
+      '/%<id>s/episodes/player' => ['id'],
+      '/%<id>s/episodes/%{id}s' => ['id'],
+      'https://github.com/%<username>s/%<repository>s/releases' => %w[username repository],
+      'https://github.com/%{username}s/%{repository}s/releases' => %w[username repository]
+    }.each_pair do |string, expected|
+      it { expect(described_class.string_formatting_references(string)).to eq expected }
+    end
+  end
+  # rubocop:enable Style/FormatStringToken
 end

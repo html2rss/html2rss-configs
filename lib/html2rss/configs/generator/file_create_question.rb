@@ -40,6 +40,26 @@ module Html2rss
           create(fps)
         end
 
+        def self.print_files(relative_yml_path, relative_spec_path)
+          Helper.print_markdown <<~MARKDOWN
+            Created YAML file at:
+              `#{relative_yml_path}`
+
+            Created spec file at:
+              `#{relative_spec_path}`
+
+            Use this config to generate RSS with:
+              `bundle exec html2rss feed #{relative_yml_path}`
+          MARKDOWN
+        end
+
+        def self.create_file(file_path, content)
+          raise 'file exists already' if File.exist? file_path
+
+          FileUtils.mkdir_p File.dirname(file_path)
+          File.open(file_path, 'w') { |file| file.write content }
+        end
+
         private
 
         def print_feed_config
@@ -55,45 +75,26 @@ module Html2rss
         def ask_config_name
           directory_name = Helper.url_to_directory_name(channel_url)
 
-          prompt.ask("Name this config for #{directory_name}:", default: Helper.url_to_file_name(channel_url)) do |q|
-            q.required true
-            q.validate(/^[^.][A-z0-9\-_]+[^.]$/)
-            q.modify :downcase
+          prompt.ask("Name this config for #{directory_name}:",
+                     default: Helper.url_to_file_name(channel_url)) do |answer|
+            answer.required true
+            answer.validate(/^[^.][A-z0-9\-_]+[^.]$/)
+            answer.modify :downcase
           end
         end
 
         def create(fps)
           write_to_yml(fps)
           scaffold_spec(fps)
-          print_files(fps)
-        end
-
-        def print_files(fps)
-          Helper.print_markdown <<~MARKDOWN
-            Created YAML file at:
-              `#{fps.relative_yml_path}`
-
-            Created spec file at:
-              `#{fps.relative_spec_path}`
-
-            Use this config to generate RSS with:
-              `bundle exec html2rss feed #{fps.relative_yml_path}`
-          MARKDOWN
+          self.class.print_files(fps.relative_yml_path, fps.relative_spec_path)
         end
 
         def write_to_yml(fps)
-          create_file fps.yml_file, Helper.to_simple_yaml(feed_config)
+          self.class.create_file fps.yml_file, Helper.to_simple_yaml(feed_config)
         end
 
         def scaffold_spec(fps)
-          create_file fps.spec_file, format(RSPEC_TEMPLATE, { rspec_yml_file_path: fps.rspec_yml_file_path })
-        end
-
-        def create_file(file_path, content)
-          raise 'file exists already' if File.exist? file_path
-
-          FileUtils.mkdir_p File.dirname(file_path)
-          File.open(file_path, 'w') { |file| file.write content }
+          self.class.create_file fps.spec_file, format(RSPEC_TEMPLATE, { rspec_yml_file_path: fps.rspec_yml_file_path })
         end
       end
     end

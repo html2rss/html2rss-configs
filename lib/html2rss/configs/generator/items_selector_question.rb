@@ -8,22 +8,22 @@ module Html2rss
       ##
       # Asks for the items selector.
       class ItemsSelectorQuestion < SelectorQuestion
+        STATE_PATH_ITEM = 'item'
+
+        def self.validate(selector, state, prompt, **_options)
+          item = state.fetch(state.class::HTML_DOC_PATH).css(selector)&.first or return false
+
+          state.store(state.class::ITEM_PATH, item)
+
+          Helper.print_tag(selector, item, warn_on_multiple: false, warn_on_single: true)
+
+          prompt.yes?("Use selector `#{selector}`?")
+        end
+
         private
 
         def before_ask
           Helper.pretty_print :html, doc.to_xhtml
-        end
-
-        def validate(input)
-          item = doc.css(input)&.first
-
-          return false unless item
-
-          state.store('item', item)
-
-          print_tag(input, item, warn_on_multiple: false, warn_on_single: true)
-
-          prompt.yes?("Use selector `#{input}`?")
         end
 
         def doc

@@ -9,8 +9,23 @@ module Html2rss
   module Configs
     module Generator
       ##
-      # Asks the required RSS channel options.
+      # Asks the required RSS channel options and tries to determine some.
       class ChannelQuestion < Question
+        def self.validate(url, state, _prompt, **_options)
+          uri = URI(url)
+          return false unless uri.absolute?
+
+          response = Faraday.new(url: uri, headers: {}).get
+
+          if response.success?
+            state.store(state.class::HTML_DOC_PATH, Helper.strip_down_html(response.body))
+            return true
+          end
+
+          Helper.handle_unsuccessful_http_response(response.status, response.headers)
+          false
+        end
+
         private
 
         def before_ask
@@ -25,45 +40,13 @@ module Html2rss
           MARKDOWN
         end
 
-        def validate(url)
-          uri = URI(url)
-          return false unless uri.absolute?
-
-          @response = Faraday.new(url: uri, headers: {}).get
-          return true if @response.success?
-
-          handle_unsuccessful_response
-        end
-
-        def handle_unsuccessful_response
-          case @response.status
-          when 300..399
-            Helper.print_markdown "The url redirects. Try to use `#{@response.headers['location']}`"
-          when 400..599
-            # client/server error
-            Helper.print_markdown <<~MARKDOWN
-              Encountered error **`#{@response.status}`**.
-              Here are the response headers which could help debugging:
-
-              ```yaml
-              #{Helper.to_simple_yaml(@response.headers).gsub("---\n", '').chomp}
-              ```
-            MARKDOWN
-          end
-
-          false
-        end
-
         def process(url)
-          state.store('doc', doc)
-
-          value = { url: url, language: doc.css('html').first['lang'], ttl: 360, time_zone: 'UTC' }
-
-          value.keep_if { |_k, v| v.to_s != '' }
+          { url: url, language: doc.css('html').first['lang'], ttl: 360, time_zone: 'UTC' }
+            .keep_if { |_key, value| value.to_s != '' }
         end
 
         def doc
-          @doc ||= Helper.strip_down_html(@response.body)
+          state.fetch(state.class::HTML_DOC_PATH)
         end
       end
     end

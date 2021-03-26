@@ -17,11 +17,11 @@ RSpec.describe Html2rss::Configs::Generator do
       StringIO.new([
         # channel url
         "https://example.com/blog\n",
-        # items selector
+        # ITEMS selector
         "\n",
         # confirm selector
         "\n",
-        # title selector
+        # TITLE selector
         "\n",
         # extractor
         "\n",
@@ -29,7 +29,7 @@ RSpec.describe Html2rss::Configs::Generator do
         "\n",
         # confirm selector
         "\n",
-        # url/link selector
+        # LINK selector
         "\n",
         # extractor
         "href\n",
@@ -37,7 +37,7 @@ RSpec.describe Html2rss::Configs::Generator do
         "\n",
         # confirm selector
         "\n",
-        # description selector
+        # DESCRIPTION selector
         "\n",
         # extractor
         "html\n",
@@ -79,7 +79,7 @@ RSpec.describe Html2rss::Configs::Generator do
           <article>
             <h1 itemprop="headline">Eine Überschrift</h1>
             <p itemprop="description">Mit <b>einem</b> Teaser.</p>
-            <a href="#">Und einem Link.</a>
+            <a href="#">Und einem relativen Link.</a>
           </article>
         </body>
         </html>
