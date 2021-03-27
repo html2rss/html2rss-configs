@@ -134,7 +134,7 @@ module Html2rss
       # Determines the referenced values of "more complex string formatting".
       # return [Hash<String, Class>] the keys with their type
       def self.string_formatting_references(string)
-        string.to_s.scan(/%[{<]([\w_\d]+)[>}](\w)?/).to_h.transform_values do |value|
+        string.to_s.scan(/%[{<](\w+)[>}](\w)?/).to_h.transform_values do |value|
           case value
           when 'i', 'd', 'u'
             Numeric

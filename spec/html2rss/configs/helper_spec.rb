@@ -108,7 +108,7 @@ RSpec.describe Html2rss::Configs::Helper do
       '/%<id>s/episodes/player' => { 'id' => String },
       '%<section>s/%<filter>s' => { 'section' => String, 'filter' => String },
       '/%<id>s/episodes/%{another_id}d' => { 'id' => String, 'another_id' => Numeric },
-      'https://github.com/%<username>s/%<repository>s/releases' => { 'username' => String, 'repository' => String },
+      'https://github.com/%<user_name>s/%<repository>s/releases' => { 'user_name' => String, 'repository' => String },
       'https://github.com/%{username}s/%{repository}s/releases' => { 'username' => String, 'repository' => String }
     }.each_pair do |string, expected|
       it { expect(described_class.string_formatting_references(string)).to eq expected }
