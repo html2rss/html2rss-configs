@@ -11,4 +11,4 @@ selectors:
   link:
     extractor: "href"
   description:
-    selector: '.teaser--card__text'
+    selector: ".teaser--card__text"
