@@ -40,7 +40,7 @@ module Html2rss
         private
 
         def before_ask
-          PrintHelper.pretty :html, item.to_xhtml
+          PrintHelper.code :html, item.to_xhtml
         end
 
         def process(input)

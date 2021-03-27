@@ -33,7 +33,7 @@ module Html2rss
       # @param lang [Symbol] e.g. :html, :yaml, :ruby, ...
       # @param code [String]
       # @return [nil]
-      def self.pretty(lang, code, output: $stdout)
+      def self.code(lang, code, output: $stdout)
         return code if code&.to_s == ''
 
         code = HtmlBeautifier.beautify(code) if Object.const_defined?('HtmlBeautifier') && lang == :html
@@ -69,7 +69,7 @@ module Html2rss
         end
 
         markdown "**The selector `#{selector}` selects:**"
-        pretty :html, tag&.to_xhtml
+        code :html, tag&.to_xhtml
         nil
       end
     end

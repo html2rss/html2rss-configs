@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'tty-markdown'
+require 'html2rss'
 require 'tty-prompt'
 
 require_relative './helper'

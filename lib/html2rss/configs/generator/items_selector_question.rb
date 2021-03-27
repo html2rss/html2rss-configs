@@ -24,7 +24,7 @@ module Html2rss
         private
 
         def before_ask
-          PrintHelper.pretty :html, doc.to_xhtml
+          PrintHelper.code :html, doc.to_xhtml
         end
 
         def doc

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Html2rss::Configs::PrintHelper do
-  describe '.pretty(lang, code)' do
+  describe '.code(lang, code)' do
     let(:messy_html) do
       <<~HTML
         <!DOCTYPE html>
@@ -16,7 +16,7 @@ RSpec.describe Html2rss::Configs::PrintHelper do
     let(:output) { StringIO.new }
 
     it do
-      expect { described_class.pretty(:html, messy_html, output: output) }
+      expect { described_class.code(:html, messy_html, output: output) }
         .to change(output, :string)
         .from('')
         .to(/Foo goes into a bar and... buz/)
