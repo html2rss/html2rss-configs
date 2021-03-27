@@ -4,6 +4,7 @@ require 'tty-markdown'
 require 'tty-prompt'
 
 require_relative './helper'
+require_relative './print_helper'
 require_relative 'generator/collector'
 require_relative 'generator/file_create_question'
 require_relative 'generator/state'

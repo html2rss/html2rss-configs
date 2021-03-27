@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require 'htmlbeautifier'
 require 'json'
 require 'nokogiri'
-require 'tty-markdown'
 require 'yaml'
 
 module Html2rss
@@ -48,32 +46,6 @@ module Html2rss
       end
 
       ##
-      # Prints nicely formatted markdown to `output`.
-      #
-      # @param markdown [String]
-      # @return [nil]
-      def self.print_markdown(markdown, output: $stdout)
-        output.puts TTY::Markdown.parse markdown
-      end
-
-      ##
-      # Prints nicely formatted code to `output` by wrapping it in a
-      # markdown code block and `.print_markdown`.
-      #
-      # If lang is :html, it beautifies the code
-      #
-      # @param lang [Symbol] e.g. :html, :yaml, :ruby, ...
-      # @param code [String]
-      # @return [nil]
-      def self.pretty_print(lang, code, output: $stdout)
-        return code if code&.to_s == ''
-
-        code = HtmlBeautifier.beautify(code) if lang == :html
-
-        print_markdown ["```#{lang}", code, '```'].join("\n"), output: output
-      end
-
-      ##
       # Generates YAML without class annotations (e.g. HashWithIndifferentAccess)
       # by using most simple data structure types (Array, Hash, etc).
       def self.to_simple_yaml(hash)
@@ -115,46 +87,14 @@ module Html2rss
       end
 
       ##
-      # Pretty prints a Nokogiri::Element and highlights the selector
-      #
-      # @param selector [String]
-      # @param tag [Nokogiri::Node]
-      # @param warn_on_multiple [true, false]
-      # @param warn_on_signel [true, false]
-      # @return [nil]
-      def self.print_tag(selector, tag, warn_on_multiple: true, warn_on_single: false)
-        tag_count = tag.count
-
-        if warn_on_multiple && tag_count > 1
-          Helper.print_markdown <<~MARKDOWN
-            ***
-            `#{selector}` selects multiple elements!
-            Please write a selector as precise as possible to select just one element.
-            ***
-          MARKDOWN
-        elsif warn_on_single && tag_count == 1
-          Helper.print_markdown <<~MARKDOWN
-            ***
-            `#{selector}` selects just one element!
-            Please broaden the selector to select multiple elements.
-            ***
-          MARKDOWN
-        end
-
-        Helper.print_markdown "**The selector `#{selector}` selects:**"
-        Helper.pretty_print :html, tag&.to_xhtml
-        nil
-      end
-
-      ##
       # Prints helpful debug information to the prompt.
       def self.handle_unsuccessful_http_response(status, headers)
         case status
         when 300..399
-          Helper.print_markdown "The url redirects. Try to use `#{headers['location']}`"
+          PrintHelper.markdown "The url redirects. Try to use `#{headers['location']}`"
         when 400..599
           # client/server error
-          Helper.print_markdown <<~MARKDOWN
+          PrintHelper.markdown <<~MARKDOWN
             Encountered error **`#{status}`**.
             Here are the response headers which could help debugging:
 
@@ -168,14 +108,14 @@ module Html2rss
       ##
       # Determines which selectors are referenced in the template of a Html2rss::PostProcessors::Template.
       #
-      # @params selectors [Hash<String,Hash>] the 'selectors hash'
+      # @param selectors [Hash<String,Hash>] the 'selectors hash'
       # @return [Array<String>]
       def self.referenced_selectors_in_template(selectors)
         selectors.each_value.flat_map do |selector_hash|
-          next unless selector_hash.is_a?(Hash)
-
-          post_processor_hashes(selector_hash['post_process'], 'template').flat_map do |template|
-            string_formatting_references template['string']
+          if selector_hash.is_a?(Hash)
+            post_processor_hashes(selector_hash['post_process'], 'template').flat_map do |template|
+              string_formatting_references(template['string']).keys
+            end
           end
         end
                  .compact
@@ -183,18 +123,25 @@ module Html2rss
 
       ##
       #
-      # @param post_process [Hash<Hash>, Array<Hash>]
-      # @params keep_name [String]
+      # @param post_processors [Hash<Hash>, Array<Hash>]
+      # @param keep_name [String]
       # @return [Array<Hash>] containing only the hashes stored under the 'keep_name'
       def self.post_processor_hashes(post_processors, keep_name)
         [post_processors].flatten.compact.keep_if { |processor| processor['name'] == keep_name }
       end
 
       ##
-      #
-      # return [Array<String>] the keys of the referenced values of "more complex string formatting"
+      # Determines the referenced values of "more complex string formatting".
+      # return [Hash<String, Class>] the keys with their type
       def self.string_formatting_references(string)
-        string.scan(/%[<|{](\w*)[>|}]/).flatten.uniq
+        string.to_s.scan(/%[{<]([\w_\d]+)[>}](\w)?/).to_h.transform_values do |value|
+          case value
+          when 'i', 'd', 'u'
+            Numeric
+          else
+            String
+          end
+        end
       end
     end
   end

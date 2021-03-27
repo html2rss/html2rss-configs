@@ -41,7 +41,7 @@ module Html2rss
         end
 
         def self.print_files(relative_yml_path, relative_spec_path)
-          Helper.print_markdown <<~MARKDOWN
+          PrintHelper.markdown <<~MARKDOWN
             Created YAML file at:
               `#{relative_yml_path}`
 
@@ -63,7 +63,7 @@ module Html2rss
         private
 
         def print_feed_config
-          Helper.print_markdown <<~MARKDOWN
+          PrintHelper.markdown <<~MARKDOWN
             **The feed config:**
 
             ```yaml

@@ -16,7 +16,7 @@ module Html2rss
 
           state.store(state.class::ITEM_PATH, item)
 
-          Helper.print_tag(selector, item, warn_on_multiple: false, warn_on_single: true)
+          PrintHelper.tag(selector, item, warn_on_multiple: false, warn_on_single: true)
 
           prompt.yes?("Use selector `#{selector}`?")
         end
@@ -24,7 +24,7 @@ module Html2rss
         private
 
         def before_ask
-          Helper.pretty_print :html, doc.to_xhtml
+          PrintHelper.pretty :html, doc.to_xhtml
         end
 
         def doc

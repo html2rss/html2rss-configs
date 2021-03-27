@@ -13,7 +13,7 @@ module Html2rss
         def self.validate(input:, state:, prompt:, options:)
           tag = state.fetch(state.class::ITEM_PATH).css(input) or return false
 
-          Helper.print_tag(input, tag)
+          PrintHelper.tag(input, tag)
 
           extractor_question = ItemExtractorQuestion.new(prompt, state, options.merge(selector: input))
           extractor_question.ask
@@ -27,7 +27,7 @@ module Html2rss
         def self.print_config(state, path)
           config = state.fetch(path).dup
 
-          Helper.print_markdown <<~MARKDOWN
+          PrintHelper.markdown <<~MARKDOWN
 
             **Selector hash:**
 
@@ -40,7 +40,7 @@ module Html2rss
         private
 
         def before_ask
-          Helper.pretty_print :html, item.to_xhtml
+          PrintHelper.pretty :html, item.to_xhtml
         end
 
         def process(input)

@@ -116,10 +116,10 @@ RSpec.describe Html2rss::Configs::Helper do
   describe '.string_formatting_references(string)' do
     # rubocop:disable Style/FormatStringToken
     {
-      '/%<id>s/episodes/player' => ['id'],
-      '/%<id>s/episodes/%{id}s' => ['id'],
-      'https://github.com/%<username>s/%<repository>s/releases' => %w[username repository],
-      'https://github.com/%{username}s/%{repository}s/releases' => %w[username repository]
+      '/%<id>s/episodes/player' => { 'id' => String },
+      '/%<id>s/episodes/%{another_id}d' => { 'id' => String, 'another_id' => Numeric },
+      'https://github.com/%<username>s/%<repository>s/releases' => { 'username' => String, 'repository' => String },
+      'https://github.com/%{username}s/%{repository}s/releases' => { 'username' => String, 'repository' => String }
     }.each_pair do |string, expected|
       it { expect(described_class.string_formatting_references(string)).to eq expected }
     end

@@ -28,7 +28,7 @@ module Html2rss
         private
 
         def before_ask
-          Helper.print_markdown <<~MARKDOWN
+          PrintHelper.markdown <<~MARKDOWN
             # html2rss config generator
 
             This wizard will help you create a new *feed config*.

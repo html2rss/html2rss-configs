@@ -40,7 +40,7 @@ module Html2rss
           )
                                                      .get
 
-          Helper.print_markdown "`#{extractor_result}`"
+          PrintHelper.markdown "`#{extractor_result}`"
         end
 
         private

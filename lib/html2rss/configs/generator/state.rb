@@ -60,7 +60,7 @@ module Html2rss
         ##
         # This is a Hash which automatically creates values (hashes) on access.
         # It allows e.g. `hash[:a][:b][:c][:d] = 'something'`.
-        # @returns [Hash]
+        # @return [Hash]
         def hash
           @hash ||= Hash.new { |hash, key| hash[key] = hash.dup.clear }
         end

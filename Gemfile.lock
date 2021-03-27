@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: bab2c263d7f173f95016c7094c182830608651c2
-  branch: feat/extractors-declare-needed-options
+  revision: f183dcaef0041168cc274c289691182c194aa67a
   specs:
     html2rss (0.9.0)
       activesupport (>= 5, < 7)
