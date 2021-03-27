@@ -4,16 +4,11 @@ channel:
   ttl: 720
 selectors:
   items:
-    selector: ".block-label-latest-news .teaser"
+    selector: ".nh-row-home .views-row"
   title:
-    selector: ".title"
-  type:
-    selector: ".type"
-  category:
-    selector: "span > strong"
+    selector: ".home-latest-title"
+  description:
+    selector: ".home-latest-teaser"
   link:
     selector: "a"
     extractor: "href"
-  categories:
-    - category
-    - type

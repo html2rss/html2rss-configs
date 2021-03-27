@@ -5,19 +5,19 @@ channel:
   language: de
 selectors:
   items:
-    selector: ".filmstart"
+    selector: ".list-movies-wide-item .wrapper-content"
   title:
-    selector: "h1 > a"
+    selector: "h2"
     post_process:
       name: "template"
       string: "%{self} (%{start_date})"
   link:
-    selector: "h1 > a"
+    selector: "a"
     extractor: "href"
   description:
-    selector: ".info"
+    selector: ".information"
     extractor: "html"
     post_process:
       name: "sanitize_html"
   start_date:
-    selector: "h1 > div"
+    selector: ".release-date .highlight"
