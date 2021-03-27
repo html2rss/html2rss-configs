@@ -4,6 +4,8 @@ require 'html2rss/configs/version'
 require 'yaml'
 
 module Html2rss
+  ##
+  # The namespace for this gem
   module Configs
     class Error < StandardError; end
 

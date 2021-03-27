@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'html2rss/configs/helper'
+
 RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load(file) }
 
@@ -17,7 +19,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     it "resides in a folder named after channel.url's host" do
       dirname = File.dirname(file.path).split(File::Separator).last
-      host_name = URI(yaml['channel']['url'].split('/')[0..2].join('/')).host.gsub(/(api|www)\./, '')
+      host_name = Html2rss::Configs::Helper.url_to_directory_name yaml['channel']['url']
 
       expect(dirname).to eq(host_name)
     end
@@ -64,7 +66,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
       context 'with template post_processor' do
         it 'references available selectors only', aggregate_failures: true do
-          selectors_in_template(yaml['selectors']).each do |referenced_selector|
+          Html2rss::Configs::Helper.referenced_selectors_in_template(yaml['selectors']).each do |referenced_selector|
             next if referenced_selector == 'self'
 
             expect(yaml['selectors'][referenced_selector])
@@ -94,11 +96,8 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         }
       }
     end
-    let(:feed_config) do
-      params ||= {}
-      Html2rss::Configs.find_by_name(feed_name, params)
-    end
-    let(:config) { Html2rss::Config.new(feed_config, global_config) }
+    let(:feed_config) { Html2rss::Configs.find_by_name(feed_name) }
+    let(:config) { Html2rss::Config.new(feed_config, global_config, (params || {})) }
 
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive
@@ -123,6 +122,10 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         content_attributes.each do |attribute_name|
           expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
         end
+      end
+
+      it 'has link content beginning with "http" when config has a link selector' do
+        expect(item.link).to start_with('http') if config.attribute_names.include?(:link)
       end
     end
   end

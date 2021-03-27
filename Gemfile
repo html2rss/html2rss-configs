@@ -4,5 +4,6 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-# Specify your gem's dependencies in html2rss-configs.gemspec
+gem 'html2rss', github: 'html2rss/html2rss'
+
 gemspec

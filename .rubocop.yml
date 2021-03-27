@@ -5,7 +5,7 @@ require:
 AllCops:
   DisplayCopNames: true
   NewCops: enable
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
   Exclude:
     - vendor/**/*
 
@@ -13,6 +13,10 @@ Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
     - html2rss-configs.gemspec
+
+Metrics/MethodLength:
+  CountAsOne:
+    - heredoc
 
 RSpec/DescribeClass:
   Exclude:
@@ -22,5 +26,6 @@ RSpec/DescribeClass:
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
-Style/Documentation:
-  Enabled: false
+Layout/ClassStructure:
+  Enabled: true
+
