@@ -125,7 +125,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       end
 
       it 'has link content beginning with "http" when config has a link selector' do
-        expect(item.link).to start_with('http') if config.attribute_names.include?(:link)
+        expect(item&.link&.to_s).to start_with('http') if config.attribute_names.include?(:link)
       end
     end
   end

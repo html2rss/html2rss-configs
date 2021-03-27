@@ -15,7 +15,7 @@ selectors:
     selector: ".listen > a"
     extractor: "href"
   enclosure:
-    selector: ".download > a"
+    selector: "a[href$=mp3]"
     extractor: "href"
   time:
     selector: ".date"

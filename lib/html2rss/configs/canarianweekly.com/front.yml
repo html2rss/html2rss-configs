@@ -15,7 +15,3 @@ selectors:
     selector: "p"
     post_process:
       - name: "sanitize_html"
-  updated:
-    selector: ".date"
-    post_process:
-      - name: "parse_time"
