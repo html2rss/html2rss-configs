@@ -40,7 +40,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'faraday'
-  spec.add_development_dependency 'html2rss'
   spec.add_development_dependency 'htmlbeautifier'
   spec.add_development_dependency 'nokogiri'
   spec.add_development_dependency 'rspec', '~> 3.0'

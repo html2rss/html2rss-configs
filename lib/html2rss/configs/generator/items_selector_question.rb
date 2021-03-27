@@ -8,8 +8,6 @@ module Html2rss
       ##
       # Asks for the items selector.
       class ItemsSelectorQuestion < SelectorQuestion
-        STATE_PATH_ITEM = 'item'
-
         def self.validate(input:, state:, prompt:, **_)
           selector = input
           item = state.fetch(state.class::HTML_DOC_PATH).css(selector)&.first or return false
