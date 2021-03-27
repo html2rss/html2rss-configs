@@ -57,17 +57,6 @@ RSpec.describe Html2rss::Configs::Helper do
     }
   end
 
-  describe '.pretty_print(lang, code)' do
-    let(:output) { StringIO.new }
-
-    it do
-      expect { described_class.pretty_print(:html, messy_html, output: output) }
-        .to change(output, :string)
-        .from('')
-        .to(/Foo goes into a bar and... buz/)
-    end
-  end
-
   describe '.strip_down_html(html, selectors_to_remove)' do
     let(:html) do
       <<~HTML
@@ -117,6 +106,7 @@ RSpec.describe Html2rss::Configs::Helper do
     # rubocop:disable Style/FormatStringToken
     {
       '/%<id>s/episodes/player' => { 'id' => String },
+      '%<section>s/%<filter>s' => { 'section' => String, 'filter' => String },
       '/%<id>s/episodes/%{another_id}d' => { 'id' => String, 'another_id' => Numeric },
       'https://github.com/%<username>s/%<repository>s/releases' => { 'username' => String, 'repository' => String },
       'https://github.com/%{username}s/%{repository}s/releases' => { 'username' => String, 'repository' => String }
