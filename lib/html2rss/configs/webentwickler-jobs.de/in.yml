@@ -1,0 +1,19 @@
+---
+channel:
+  url: https://www.webentwickler-jobs.de/in/%<region>s
+  language: de
+  ttl: 360
+  time_zone: Europe/Berlin
+selectors:
+  items:
+    selector: ".job-item"
+  title:
+    selector: ".job-title"
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: "> div"
+    extractor: html
+    post_process:
+      - name: sanitize_html
