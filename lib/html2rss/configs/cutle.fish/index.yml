@@ -1,0 +1,15 @@
+---
+channel:
+  url: https://cutle.fish/
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: main > div > div
+  title:
+    selector: a
+  link:
+    selector: a
+    extractor: href
+  description:
+    selector: a
