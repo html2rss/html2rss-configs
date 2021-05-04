@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.newyorker.com/magazine
+  language: en
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: main section ul > li
+  title:
+    selector: h4
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: h5
