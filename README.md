@@ -4,7 +4,7 @@
 
 ✌️This repository contains [`html2rss`](https://github.com/html2rss/html2rss) _feed configs_ for many websites.  
 👉Find all _feed configs_ in the [`configs/` directory](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs).  
-☝️A handy usage method is via [`html2rss-web`](https://github.com/gildesmarais/html2rss-web).  
+☝️A handy usage method is via [`html2rss-web`](https://github.com/html2rss/html2rss-web).  
 💪 Contributions are more than welcome!
 [Fork this repository](https://help.github.com/en/github/getting-started-with-github/fork-a-repo),
 add your _feed config_ and
@@ -55,7 +55,7 @@ This will return the _feed config_.
 
 ## Usage with `html2rss-web`
 
-If you're running [`html2rss-web`](https://github.com/gildesmarais/html2rss-web),
+If you're running [`html2rss-web`](https://github.com/html2rss/html2rss-web),
 you have nothing more to do! 🎉
 
 ## Building on the CI
