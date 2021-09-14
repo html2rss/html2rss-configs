@@ -1,0 +1,20 @@
+---
+channel:
+  url: https://www.nomanssky.com/news/
+  language: en-GB
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: article
+  title:
+    selector: ".post-title"
+  link:
+    selector: a.view-article
+    extractor: href
+  description:
+    selector: p:first
+    post_process:
+      name: substring
+      start: 0
+      end: -14
