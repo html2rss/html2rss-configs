@@ -18,10 +18,10 @@ module Html2rss
 
         def ask
           before_ask
-          validated_input = prompt.ask(question, prompt_options) do |answer|
+          validated_input = prompt.ask(question, **prompt_options) do |answer|
             answer.validate lambda { |input|
               args = { input: input, state: state, prompt: prompt, options: @options }
-              self.class.validate(args)
+              self.class.validate(**args)
             }
           end
 
