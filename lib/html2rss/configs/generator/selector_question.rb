@@ -15,7 +15,7 @@ module Html2rss
 
           PrintHelper.tag(input, tag)
 
-          extractor_question = ItemExtractorQuestion.new(prompt, state, options.merge(selector: input))
+          extractor_question = ItemExtractorQuestion.new(prompt, state, **options.merge(selector: input))
           extractor_question.ask
 
           path = options[:path]

@@ -16,7 +16,7 @@ RSpec.describe Html2rss::Configs::Generator::Question do
     end
 
     it 'asks and stores in the store under path', :aggregate_failures do
-      described_class.new(prompt, state, options).ask
+      described_class.new(prompt, state, **options).ask
       expect(prompt).to have_received :ask
       expect(state).to have_received(:store).with(options[:path], 'something')
     end
