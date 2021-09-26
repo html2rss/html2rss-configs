@@ -11,7 +11,7 @@ selectors:
   link:
     selector: "a"
     extractor: "href"
-  update:
+  updated:
     selector: ".vd small"
     post_process:
       - name: parse_time
