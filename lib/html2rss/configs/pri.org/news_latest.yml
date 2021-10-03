@@ -1,0 +1,26 @@
+---
+channel:
+  url: https://www.pri.org/news/latest
+  language: en
+  ttl: 360
+  time_zone: EST
+selectors:
+  items:
+    selector: ".view-news-stories-latest .view-content .views-row"
+  title:
+    selector: ".story-list__title-link"
+  link:
+    selector: ".story-list__title-link"
+    extractor: href
+  description:
+    selector: ".field-teaser"
+  category:
+    selector: ".field-categories-primary a"
+  categories:
+    - category
+  updated:
+    selector: ".date-display-single"
+    extractor: attribute
+    attribute: content
+    post_process:
+      - name: parse_time
