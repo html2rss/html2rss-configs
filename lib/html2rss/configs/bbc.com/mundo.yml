@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.bbc.com/mundo
+  language: es
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: '[data-e2e="story-promo"]'
+  title:
+    selector: a
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: p
