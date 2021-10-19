@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.ingenieur.de/karriere/arbeitsleben/heiko-mell/
+  language: de-DE
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: ".section > .ing-teaser"
+  title:
+    selector: ".ing-teaser__headline"
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: ".ing-teaser__excerpt"
