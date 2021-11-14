@@ -8,16 +8,20 @@ RSpec.describe Html2rss::Configs do
   describe '.file_names' do
     subject { described_class.file_names }
 
-    it { is_expected.to be_an Array }
-    it { is_expected.to be_frozen }
+    specify(:aggregate_failures) do
+      is_expected.to be_an Array
+      is_expected.to be_frozen
+    end
   end
 
   describe '.find_by_name' do
     context 'with valid name' do
       subject { described_class.find_by_name('tagesspiegel.de/mostread') }
 
-      it { is_expected.to be_a Hash }
-      it { is_expected.to be_frozen }
+      specify(:aggregate_failures) do
+        is_expected.to be_a Hash
+        is_expected.to be_frozen
+      end
     end
 
     context 'with name not being a String' do

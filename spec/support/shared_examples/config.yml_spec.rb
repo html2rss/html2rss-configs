@@ -26,8 +26,9 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   end
 
   context 'with file contents' do
-    it 'has channel' do
+    it 'has channel and selectors', :aggregate_failures do
       expect(yaml).to have_key 'channel'
+      expect(yaml).to have_key 'selectors'
     end
 
     context 'with channel present' do
@@ -40,10 +41,6 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       it 'has a known time_zone' do
         expect { Time.find_zone! yaml['channel']['time_zone'] }.not_to raise_error
       end
-    end
-
-    it 'has selectors' do
-      expect(yaml).to have_key 'selectors'
     end
 
     context 'with selectors present' do
@@ -112,13 +109,11 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         [].tap { |arr| arr << :pubDate if config.attribute_names.include?(:updated) }
       end
 
-      it 'has no empty text attributes', :aggregate_failures do
+      it 'has no empty text or content attributes', :aggregate_failures do
         (text_attributes + special_attributes).each do |attribute_name|
           expect(item.public_send(attribute_name).to_s).not_to be_empty, attribute_name.to_s
         end
-      end
 
-      it 'has no empty content attributes', :aggregate_failures do
         content_attributes.each do |attribute_name|
           expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
         end
