@@ -26,6 +26,12 @@ RSpec/DescribeClass:
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
+RSpec/ExampleLength:
+  Max: 6
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
 Layout/ClassStructure:
   Enabled: true
 
