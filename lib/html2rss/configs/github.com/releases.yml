@@ -5,34 +5,14 @@ channel:
   description: "Releases of %<username>s/%<repository>s on github.com."
 selectors:
   items:
-    selector: ".release"
+    selector: '[data-test-selector="release-card"]'
   title:
-    selector: ".release-header .text-normal a"
-    post_process:
-      name: "template"
-      string: "%{self} (%{author})"
-  author:
-    selector: ".avatar"
-    extractor: "attribute"
-    attribute: "alt"
-    post_process:
-      name: substring
-      start: 1
+    selector: "h1"
   link:
-    selector: ".release-header .text-normal a"
+    selector: "h1 a"
     extractor: "href"
-    post_process:
-      name: "parse_uri"
   description:
     selector: ".markdown-body"
     extractor: "html"
     post_process:
       name: "sanitize_html"
-  updated:
-    selector: "relative-time"
-    extractor: "attribute"
-    attribute: "datetime"
-    post_process:
-      name: "parse_time"
-  categories:
-    - author
