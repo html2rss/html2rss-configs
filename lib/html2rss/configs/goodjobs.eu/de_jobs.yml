@@ -1,13 +1,13 @@
 channel:
   url: https://goodjobs.eu/de/jobs
   time_zone: Europe/Berlin
-  ttl: 720
+  ttl: 180
   language: de
 selectors:
   items:
-    selector: ".jobCard"
+    selector: ".container div > .my-20"
   title:
-    selector: ".jobCard-title"
+    selector: "h3"
     post_process:
       name: "template"
       string: "%s (%s, %s)"
@@ -16,12 +16,9 @@ selectors:
         - city
         - employer
   city:
-    selector: ".jobCard-meta:not(.jobCard-meta--expires):not(.jobCard-meta--approved)"
+    selector: "p.text-riverbed"
   employer:
-    selector: ".jobCard-employer"
-  updated:
-    selector: "time"
-    extractor: attribute
-    attribute: datetime
+    selector: "h3 ~ p:first"
   link:
+    selector: "a"
     extractor: "href"
