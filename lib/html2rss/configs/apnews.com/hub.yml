@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://apnews.com/hub/%<section>s
+  language: en
+  ttl: 120
+  time_zone: UTC
+selectors:
+  items:
+    selector: ".FeedCard"
+  title:
+    selector: h3
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: p
