@@ -12,7 +12,7 @@ selectors:
     post_process:
       - name: template
         string: |
-          "%{self}": %{ergebnis} (%{punkte}/80 Punkte)
+          %{self}: %{ergebnis} (%{punkte}/80 Punkte)
   link:
     selector: a
     extractor: href
