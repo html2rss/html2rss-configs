@@ -1,0 +1,23 @@
+---
+channel:
+  url: https://www.philomag.de/
+  language: de
+  ttl: 360
+  time_zone: Europe/Berlin
+selectors:
+  items:
+    selector: ".content article"
+  title:
+    selector: h2
+  link:
+    selector: h2 a
+    extractor: href
+  description:
+    selector: p
+    extractor: html
+    post_process:
+      - name: sanitize_html
+  category:
+    selector: ".field"
+  categories:
+    - category
