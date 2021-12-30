@@ -57,7 +57,7 @@ module Html2rss
           raise 'file exists already' if File.exist? file_path
 
           FileUtils.mkdir_p File.dirname(file_path)
-          File.open(file_path, 'w') { |file| file.write content }
+          File.write(file_path, content)
         end
 
         private

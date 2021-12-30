@@ -10,7 +10,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     File.open(path)
   end
 
-  let(:feed_name) { file.path.split(File::Separator)[-2..-1].join(File::Separator) }
+  let(:feed_name) { file.path.split(File::Separator)[-2..].join(File::Separator) }
 
   context 'with the file' do
     it 'is parseable' do

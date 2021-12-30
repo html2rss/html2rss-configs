@@ -88,7 +88,7 @@ module Html2rss
         end
 
         def ask_for_missing_options
-          missing_extractor_option_names.to_a.map do |miss|
+          missing_extractor_option_names.to_a.to_h do |miss|
             value = if miss == :attribute
                       prompt.select('Select the attribute', available_attributes, filter: true)
                     else
@@ -96,7 +96,7 @@ module Html2rss
                     end
 
             [miss, value.chomp]
-          end.to_h
+          end
         end
 
         def available_attributes

@@ -25,10 +25,10 @@ module Html2rss
         path = begin
           URI(url).path
         rescue URI::InvalidURIError
-          url.split('/')[3..-1].join('_')
+          url.split('/')[3..].join('_')
         end
 
-        (['', '/'].include?(path) ? 'index' : replace_forbidden_characters_in_filename(path[1..-1]))
+        (['', '/'].include?(path) ? 'index' : replace_forbidden_characters_in_filename(path[1..]))
       end
 
       FORBIDDEN_FILENAME_CHARACTERS = '.~/:<>|%*[]()!@#$ '

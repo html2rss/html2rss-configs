@@ -55,13 +55,13 @@ module Html2rss
         ##
         # @return [String]
         def relative_yml_path
-          yml_file.gsub(self.class.gem_root, '')[1..-1]
+          yml_file.gsub(self.class.gem_root, '')[1..]
         end
 
         ##
         # @return [String]
         def relative_spec_path
-          spec_file.gsub(self.class.gem_root, '')[1..-1]
+          spec_file.gsub(self.class.gem_root, '')[1..]
         end
       end
     end
