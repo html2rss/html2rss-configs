@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: efb5e72eac4cc68adc40659a2a3822bc7fa21d88
+  revision: 5c423d45e47c4348cb990598088b0436fef4ebf6
   specs:
     html2rss (0.9.0)
       activesupport (>= 5, < 8)
@@ -22,15 +22,17 @@ PATH
   remote: .
   specs:
     html2rss-configs (0.2.0)
+      activesupport (< 7)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.0)
+    activesupport (6.1.4.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
@@ -155,6 +157,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   bundler
