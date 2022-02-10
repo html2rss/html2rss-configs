@@ -1,11 +1,9 @@
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: 5c423d45e47c4348cb990598088b0436fef4ebf6
+  revision: 788b0bb00af60cbb8d5ce2ec16ee26d18772d3ee
   specs:
     html2rss (0.9.0)
-      activesupport (>= 5, < 8)
       addressable (~> 2.7)
-      builder
       faraday (~> 1.0)
       faraday_middleware
       kramdown
@@ -16,27 +14,20 @@ GIT
       sanitize (~> 6.0)
       thor
       to_regexp
+      tzinfo
       zeitwerk
 
 PATH
   remote: .
   specs:
     html2rss-configs (0.2.0)
-      activesupport (< 7)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4.4)
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 1.6, < 2)
-      minitest (>= 5.1)
-      tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
-    builder (3.2.4)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     diff-lcs (1.5.0)
@@ -61,16 +52,14 @@ GEM
     faraday-rack (1.0.0)
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
+    hashie (5.0.0)
     htmlbeautifier (1.4.1)
-    i18n (1.8.11)
-      concurrent-ruby (~> 1.0)
     kramdown (2.3.1)
       rexml
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.1115)
+    mime-types-data (3.2022.0105)
     mini_portile2 (2.6.1)
-    minitest (5.15.0)
     multipart-post (2.1.1)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
@@ -129,7 +118,7 @@ GEM
       unicode-display_width (>= 1.5, < 3.0)
       unicode_utils (~> 1.4)
     strings-ansi (0.2.0)
-    thor (1.1.0)
+    thor (1.2.1)
     to_regexp (0.2.1)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
@@ -153,7 +142,7 @@ GEM
     unicode-display_width (2.1.0)
     unicode_utils (1.4.0)
     wisper (2.0.1)
-    zeitwerk (2.5.2)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   x86_64-darwin-20
@@ -162,6 +151,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   faraday
+  hashie
   html2rss!
   html2rss-configs!
   htmlbeautifier

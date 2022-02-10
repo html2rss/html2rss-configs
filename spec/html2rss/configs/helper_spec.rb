@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/hash'
-
 RSpec.describe Html2rss::Configs::Helper do
   let(:messy_html) do
     <<~HTML
@@ -41,7 +39,7 @@ RSpec.describe Html2rss::Configs::Helper do
     let(:hash) do
       { foo: {
         bar: :baz
-      } }.with_indifferent_access
+      } }
     end
 
     let(:yml) do

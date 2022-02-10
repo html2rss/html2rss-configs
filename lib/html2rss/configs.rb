@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/hash'
 require 'html2rss/configs/version'
 require 'yaml'
 

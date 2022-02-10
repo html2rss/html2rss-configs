@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'html2rss/configs/helper'
+require 'tzinfo'
 
 RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load(file) }
@@ -39,7 +40,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       end
 
       it 'has a known time_zone' do
-        expect { Time.find_zone! yaml['channel']['time_zone'] }.not_to raise_error
+        expect { TZInfo::Timezone.get yaml['channel']['time_zone'] }.not_to raise_error
       end
     end
 
