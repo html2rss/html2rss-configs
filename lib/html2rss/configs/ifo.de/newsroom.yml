@@ -6,7 +6,7 @@ channel:
   json: true
 selectors:
   items:
-    selector: "field"
+    selector: "fields > array > object"
   title:
     selector: "title"
   link:
@@ -20,10 +20,10 @@ selectors:
   type:
     selector: ".type"
   description:
-    selector: "field-kurztext"
+    selector: "field_kurztext"
     post_process:
       - name: sanitize_html
   updated:
-    selector: "field-date default"
+    selector: "field_date default"
     post_process:
       name: parse_time

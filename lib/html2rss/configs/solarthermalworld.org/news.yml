@@ -4,7 +4,7 @@ channel:
   ttl: 180
 selectors:
   items:
-    selector: ".item-list ul > li > article"
+    selector: "article.post-wrapper"
   title:
     selector: "h2 a"
   link:
@@ -15,9 +15,3 @@ selectors:
     extractor: html
     post_process:
       name: "sanitize_html"
-  updated:
-    selector: '[property="dc:date dc:created"]'
-    extractor: attribute
-    attribute: content
-    post_process:
-      name: "parse_time"

@@ -5,7 +5,7 @@ channel:
   time_zone: America/Los_Angeles
 selectors:
   items:
-    selector: "new > new, recent > recent"
+    selector: "new > array > object, recent > array > object"
   title:
     selector: "title"
     post_process:
@@ -19,13 +19,13 @@ selectors:
   grade:
     selector: "grade"
   movie_title:
-    selector: "movie-title"
+    selector: "movie_title"
   link:
     post_process:
       - name: "template"
         string: "https://www.metacritic.com/search/movie/%{movie_title}/results"
   mpaa_rating:
-    selector: "mpaa-rating"
+    selector: "mpaa_rating"
   distributor:
     selector: "distributor"
   year:
