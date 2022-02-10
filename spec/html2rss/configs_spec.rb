@@ -16,7 +16,7 @@ RSpec.describe Html2rss::Configs do
 
   describe '.find_by_name' do
     context 'with valid name' do
-      subject { described_class.find_by_name('tagesspiegel.de/mostread') }
+      subject { described_class.find_by_name('truthdig.com/most_popular') }
 
       specify(:aggregate_failures) do
         is_expected.to be_a Hash

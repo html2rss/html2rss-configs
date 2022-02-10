@@ -7,13 +7,13 @@ channel:
   json: true
 selectors:
   items:
-    selector: "objects > object"
+    selector: "array > object"
   title:
     selector: "title"
   imdb_id:
-    selector: "imdb-id"
+    selector: "imdb_id"
   poster_url:
-    selector: "poster-url"
+    selector: "poster_url"
   link:
     post_process:
       - name: template
