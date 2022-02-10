@@ -3,8 +3,6 @@
 require 'bundler/setup'
 require 'html2rss'
 require 'html2rss/configs'
-require 'active_support'
-require 'active_support/core_ext/time'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 

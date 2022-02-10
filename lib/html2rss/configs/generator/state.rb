@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/hash'
+require 'hashie'
 
 module Html2rss
   module Configs
@@ -12,8 +12,14 @@ module Html2rss
         HTML_DOC_PATH = 'doc'
         ITEM_PATH = 'item'
 
+        class Storage < Hash
+          include Hashie::Extensions::MergeInitializer
+          include Hashie::Extensions::IndifferentAccess
+          include Hashie::Extensions::DeepMerge
+        end
+
         def initialize(initial_state = {})
-          @state = (initial_state || {}).with_indifferent_access
+          @state = Storage.new(initial_state || {})
         end
 
         ##
