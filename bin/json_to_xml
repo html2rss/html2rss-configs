@@ -7,8 +7,4 @@ require 'html2rss/utils'
 
 raise ArgumentError unless ARGV[0].is_a?(String)
 
-# rubocop:disable Style/OpenStructUse
-config = OpenStruct.new(json?: true)
-# rubocop:enable Style/OpenStructUse
-
-puts Html2rss::Item.get_body_from_url(ARGV[0], config)
+puts Html2rss::Utils.request_body_from_url(ARGV[0], convert_json_to_xml: true)
