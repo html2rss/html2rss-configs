@@ -32,8 +32,9 @@ module Html2rss
         end
 
         def print_extractor_result(extractor_options)
+          channel_config = Html2rss::Config::Channel.new({ url: state.fetch('feed.channel.url') })
           extractor_result = Html2rss::ItemExtractors.item_extractor_factory(
-            extractor_options.merge(channel: { url: state.fetch('feed.channel.url') }),
+            extractor_options.merge(channel: channel_config),
             item
           )
                                                      .get
