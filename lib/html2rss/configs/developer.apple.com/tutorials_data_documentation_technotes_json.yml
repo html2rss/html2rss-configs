@@ -1,0 +1,17 @@
+---
+channel:
+  json: true
+  url: https://developer.apple.com/tutorials/data/documentation/Technotes.json
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: " references > object > * > object"
+  title:
+    selector: title
+  link:
+    selector: url
+    post_process:
+      - name: parse_uri
+  description:
+    selector: abstract text
