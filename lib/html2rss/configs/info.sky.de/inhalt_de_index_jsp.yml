@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://info.sky.de/inhalt/de/index.jsp
+  language: de
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: ".news ul > li"
+  title:
+    selector: font
+  link:
+    selector: a
+    extractor: href
+  description:
+    selector: a
