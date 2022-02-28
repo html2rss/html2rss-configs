@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.stripes.com/
+  language: en
+  ttl: 360
+  time_zone: America/New_York
+selectors:
+  items:
+    selector: article[itemscope]
+  title:
+    selector: a
+  link:
+    selector: a
+    extractor: href
+  description:
+    selector: div ~ div
