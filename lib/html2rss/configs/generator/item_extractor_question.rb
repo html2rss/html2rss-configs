@@ -85,7 +85,7 @@ module Html2rss
 
         def missing_extractor_option_names
           # :channel is added to the options when fetching
-          Html2rss::ItemExtractors.options_class(extractor_name).members - selector_config.keys - [:channel]
+          Html2rss::ItemExtractors::NAME_TO_CLASS[extractor_name]::Options.members - selector_config.keys - [:channel]
         end
 
         def ask_for_missing_options
