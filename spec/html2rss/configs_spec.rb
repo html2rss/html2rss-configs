@@ -2,7 +2,7 @@
 
 RSpec.describe Html2rss::Configs do
   it 'has a version number' do
-    expect(Html2rss::Configs::VERSION).not_to be nil
+    expect(Html2rss::Configs::VERSION).not_to be_nil
   end
 
   describe '.file_names' do
