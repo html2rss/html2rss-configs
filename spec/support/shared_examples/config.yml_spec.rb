@@ -103,8 +103,8 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     context 'with an item' do
       let(:item) { feed.items.first }
-      let(:specified_attributes) { %w[title description author category] & config.attribute_names }
-      let(:text_attributes) { %w[title description author] & specified_attributes }
+      let(:specified_attributes) { config.attribute_names & %w[title description author category] }
+      let(:text_attributes) {  specified_attributes & %w[title description author] }
       let(:content_attributes) { specified_attributes - text_attributes }
       let(:special_attributes) do
         [].tap { |arr| arr << :pubDate if config.attribute_names.include?(:updated) }
