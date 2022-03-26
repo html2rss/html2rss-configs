@@ -5,24 +5,13 @@ channel:
   language: de
 selectors:
   items:
-    selector: ".c-qck article"
+    selector: "div[class^='DoubleChainstyled']:first-child a[class*='ContentTeaser']"
   title:
-    selector: "h3"
+    selector: "h2"
   link:
-    selector: "a"
     extractor: "href"
   description:
-    selector: ".js-quickcheck-accordion-element-content"
+    selector: "p"
     extractor: html
     post_process:
       name: sanitize_html
-  tag1:
-    selector: ".tags > li:nth-child(1)"
-  tag2:
-    selector: ".tags > li:nth-child(2)"
-  tag3:
-    selector: ".tags > li:nth-child(3)"
-  categories:
-    - tag1
-    - tag2
-    - tag3
