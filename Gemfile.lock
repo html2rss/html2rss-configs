@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: b6eec1f6307af02f53d44347b140c35fd6b8406b
+  revision: a898923f92b231d6826cdc90db395403b6b59eb8
   specs:
     html2rss (0.9.0)
       addressable (~> 2.7)
@@ -9,11 +9,11 @@ GIT
       kramdown
       mime-types (> 3.0)
       nokogiri (>= 1.10, < 2.0)
+      regexp_parser
       reverse_markdown (~> 2.0)
       rss
       sanitize (~> 6.0)
       thor
-      to_regexp
       tzinfo
       zeitwerk
 
@@ -28,7 +28,7 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     crass (1.0.6)
     diff-lcs (1.5.0)
     faraday (1.9.3)
@@ -58,7 +58,7 @@ GEM
       faraday (~> 1.0)
     hashie (5.0.0)
     htmlbeautifier (1.4.1)
-    kramdown (2.3.1)
+    kramdown (2.3.2)
       rexml
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
@@ -123,7 +123,6 @@ GEM
       unicode_utils (~> 1.4)
     strings-ansi (0.2.0)
     thor (1.2.1)
-    to_regexp (0.2.1)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
     tty-markdown (0.7.0)
