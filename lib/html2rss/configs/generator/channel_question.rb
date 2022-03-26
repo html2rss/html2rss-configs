@@ -14,6 +14,8 @@ module Html2rss
           uri = URI(input)
           return false unless uri.absolute?
 
+          # TODO: In the validation, there should be no data storing.
+          # TODO: This should use the same request method as h2r gem
           response = Faraday.new(url: uri, headers: {}).get
 
           if response.success?
