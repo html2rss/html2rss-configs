@@ -17,12 +17,24 @@ module Html2rss
           response = Faraday.new(url: uri, headers: {}).get
 
           if response.success?
-            state.store(state.class::HTML_DOC_PATH, Helper.strip_down_html(response.body))
-            return true
+            handle_success_response(state, body: response.body, headers: response.headers)
+          else
+            Helper.handle_unsuccessful_http_response(response.status, response.headers)
+            false
+          end
+        end
+
+        def self.handle_success_response(state, body:, headers:)
+          json = headers['content-type'].include?('application/json')
+
+          if json
+            state.store('feed.channel.json', json)
+            body = Html2rss::Utils.object_to_xml(JSON.parse(body))
           end
 
-          Helper.handle_unsuccessful_http_response(response.status, response.headers)
-          false
+          state.store(state.class::HTML_DOC_PATH, Helper.strip_down_html(body))
+
+          true
         end
 
         private
@@ -40,7 +52,8 @@ module Html2rss
         end
 
         def process(url)
-          { url: url, language: doc.css('html').first['lang'], ttl: 360, time_zone: 'UTC' }
+          language = doc.css('html').first['lang']
+          { url: url, language: language, ttl: 360, time_zone: 'UTC' }
             .keep_if { |_key, value| value.to_s != '' }
         end
 

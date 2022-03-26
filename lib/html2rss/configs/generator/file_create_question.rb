@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './files_and_paths'
+require 'fileutils'
 
 module Html2rss
   module Configs

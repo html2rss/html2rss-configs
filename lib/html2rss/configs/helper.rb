@@ -28,7 +28,7 @@ module Html2rss
           url.split('/')[3..].join('_')
         end
 
-        (['', '/'].include?(path) ? 'index' : replace_forbidden_characters_in_filename(path[1..]))
+        (['', '/'].include?(path) ? 'index' : replace_forbidden_characters_in_filename(path[1..])).downcase
       end
 
       FORBIDDEN_FILENAME_CHARACTERS = '.~/:<>|%*[]()!@#$ '
