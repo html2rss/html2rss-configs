@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://sebastianvettel.de/news/
+  language: de-DE
+  ttl: 8640
+  time_zone: Europe/Berlin
+selectors:
+  items:
+    selector: ".card.title_in_content"
+  title:
+    selector: h2
+  description:
+    selector: ".row-text-bild-modul"
+    extractor: html
+    post_process:
+      - name: sanitize_html

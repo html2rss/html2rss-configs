@@ -103,11 +103,11 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     context 'with an item' do
       let(:item) { feed.items.first }
-      let(:specified_attributes) { config.attribute_names & %w[title description author category] }
+      let(:specified_attributes) { config.item_selector_names & %w[title description author category] }
       let(:text_attributes) {  specified_attributes & %w[title description author] }
       let(:content_attributes) { specified_attributes - text_attributes }
       let(:special_attributes) do
-        [].tap { |arr| arr << :pubDate if config.attribute_names.include?(:updated) }
+        [].tap { |arr| arr << :pubDate if config.item_selector_names.include?(:updated) }
       end
 
       it 'has no empty text or content attributes', :aggregate_failures do
@@ -121,7 +121,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       end
 
       it 'has link content beginning with "http" when config has a link selector' do
-        expect(item&.link&.to_s).to start_with('http') if config.attribute_names.include?(:link)
+        expect(item&.link&.to_s).to start_with('http') if config.item_selector_names.include?(:link)
       end
     end
   end
