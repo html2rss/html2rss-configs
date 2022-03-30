@@ -8,7 +8,7 @@ selectors:
   items:
     selector: ".FeedCard"
   title:
-    selector: h3
+    selector: h2
   link:
     selector: a:first
     extractor: href
