@@ -57,7 +57,7 @@ GEM
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
     hashie (5.0.0)
-    htmlbeautifier (1.4.1)
+    htmlbeautifier (1.4.2)
     kramdown (2.3.2)
       rexml
     mime-types (3.4.1)
