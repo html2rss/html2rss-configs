@@ -1,0 +1,13 @@
+---
+channel:
+  url: https://avherald.com/
+  language: en
+  ttl: 120
+  time_zone: UTC
+selectors:
+  items:
+    selector: "table table a"
+  title:
+    selector: span
+  link:
+    extractor: href
