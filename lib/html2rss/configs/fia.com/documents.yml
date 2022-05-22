@@ -1,0 +1,18 @@
+---
+channel:
+  url: https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2022-2005
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: ".decision-document-list .document-row"
+  title:
+    selector: ".title"
+  link:
+    selector: a
+    extractor: href
+  description:
+    selector: a
+    extractor: html
+    post_process:
+      - name: sanitize_html
