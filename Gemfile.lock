@@ -76,7 +76,7 @@ GEM
     public_suffix (4.0.7)
     racc (1.6.0)
     rainbow (3.1.1)
-    regexp_parser (2.4.0)
+    regexp_parser (2.5.0)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -107,7 +107,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.18.0)
       parser (>= 3.1.1.0)
-    rubocop-performance (1.14.0)
+    rubocop-performance (1.14.1)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     rubocop-rspec (2.11.1)
