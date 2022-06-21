@@ -7,5 +7,7 @@ version: 2
 updates:
   - package-ecosystem: "bundler"
     directory: "/"
+    allow:
+      - dependency-type: production
     schedule:
       interval: "daily"
