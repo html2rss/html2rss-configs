@@ -4,7 +4,7 @@ require 'bundler/setup'
 require 'html2rss'
 require 'html2rss/configs'
 
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
