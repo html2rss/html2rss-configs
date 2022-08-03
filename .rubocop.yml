@@ -29,7 +29,8 @@ RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
 RSpec/ExampleLength:
-  Max: 6
+  Exclude:
+    - spec/support/shared_examples/config.yml_spec.rb
 
 RSpec/ImplicitSubject:
   Enabled: false

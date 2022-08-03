@@ -40,15 +40,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'faraday'
-  spec.add_development_dependency 'hashie'
-  spec.add_development_dependency 'htmlbeautifier'
   spec.add_development_dependency 'nokogiri'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'tty-markdown'
-  spec.add_development_dependency 'tty-prompt'
 end

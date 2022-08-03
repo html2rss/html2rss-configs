@@ -1,6 +1,18 @@
 GIT
+  remote: https://github.com/html2rss/generator
+  revision: 0a26a395964cfa82a3db2205009a0ecc6a478c1b
+  branch: main
+  specs:
+    html2rss-generator (0.1.0)
+      faraday
+      hashie
+      htmlbeautifier
+      tty-markdown
+      tty-prompt
+
+GIT
   remote: https://github.com/html2rss/html2rss
-  revision: b512753d88c62f23025d57e2235ac43c365157f1
+  revision: e8973af55283bd03f49b4e34b2b88fb5a8be175c
   specs:
     html2rss (0.9.0)
       addressable (~> 2.7)
@@ -31,12 +43,12 @@ GEM
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     diff-lcs (1.5.0)
-    faraday (2.3.0)
+    faraday (2.4.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-net_http (2.0.3)
+    faraday-net_http (2.1.0)
     hashie (5.0.0)
     htmlbeautifier (1.4.2)
     json (2.6.2)
@@ -61,7 +73,7 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
-    rouge (3.29.0)
+    rouge (3.30.0)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -122,7 +134,7 @@ GEM
       tty-screen (~> 0.8)
       wisper (~> 2.0)
     tty-screen (0.8.1)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.2.0)
     unicode_utils (1.4.0)
@@ -134,19 +146,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bundler
-  faraday
-  hashie
   html2rss!
   html2rss-configs!
-  htmlbeautifier
+  html2rss-generator!
   nokogiri
   rspec (~> 3.0)
   rubocop
   rubocop-performance
   rubocop-rspec
-  tty-markdown
-  tty-prompt
 
 BUNDLED WITH
    2.3.4
