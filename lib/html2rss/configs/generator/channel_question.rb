@@ -40,7 +40,7 @@ module Html2rss
         end
 
         def process(url)
-          { url: url, language: doc.css('html').first['lang'], ttl: 360, time_zone: 'UTC' }
+          { url:, language: doc.css('html').first['lang'], ttl: 360, time_zone: 'UTC' }
             .keep_if { |_key, value| value.to_s != '' }
         end
 

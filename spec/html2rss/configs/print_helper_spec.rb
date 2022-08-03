@@ -16,7 +16,7 @@ RSpec.describe Html2rss::Configs::PrintHelper do
     let(:output) { StringIO.new }
 
     it do
-      expect { described_class.code(:html, messy_html, output: output) }
+      expect { described_class.code(:html, messy_html, output:) }
         .to change(output, :string)
         .from('')
         .to(/Foo goes into a bar and... buz/)

@@ -38,7 +38,7 @@ module Html2rss
 
         code = HtmlBeautifier.beautify(code) if Object.const_defined?('HtmlBeautifier') && lang == :html
 
-        markdown ["```#{lang}", code, '```'].join("\n"), output: output
+        markdown ["```#{lang}", code, '```'].join("\n"), output:
       end
 
       ##
