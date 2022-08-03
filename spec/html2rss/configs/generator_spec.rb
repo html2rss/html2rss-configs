@@ -9,7 +9,7 @@ RSpec.describe Html2rss::Configs::Generator do
   it { expect(described_class).to be_a(Module) }
 
   describe '.start' do
-    let(:prompt) { TTY::Prompt.new(input: input) }
+    let(:prompt) { TTY::Prompt.new(input:) }
     let(:state) { Html2rss::Configs::Generator::State.new(feed: {}) }
     let(:options) { { path: 'spec.path', question: 'Path?' } }
 
@@ -88,7 +88,7 @@ RSpec.describe Html2rss::Configs::Generator do
 
     let(:faraday) do
       instance_double(Faraday::Connection,
-                      get: instance_double(Faraday::Response, success?: true, body: body))
+                      get: instance_double(Faraday::Response, success?: true, body:))
     end
 
     before do
