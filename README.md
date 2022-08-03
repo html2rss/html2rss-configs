@@ -2,9 +2,9 @@
 
 # html2rss-configs
 
-✌️This repository contains [`html2rss`](https://github.com/html2rss/html2rss) _feed configs_ for many websites.  
-👉Find all _feed configs_ in the [`configs/` directory](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs).  
-☝️A handy usage method is via [`html2rss-web`](https://github.com/html2rss/html2rss-web).  
+✌️This repository contains [`html2rss`](https://github.com/html2rss/html2rss) _feed configs_ for many websites.
+👉Find all _feed configs_ in the [`configs/` directory](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs).
+☝️A handy usage method is via [`html2rss-web`](https://github.com/html2rss/html2rss-web).
 💪 Contributions are more than welcome!
 [Fork this repository](https://help.github.com/en/github/getting-started-with-github/fork-a-repo),
 add your _feed config_ and
@@ -14,12 +14,12 @@ add your _feed config_ and
 
 There's a generator for that! 🆒
 
-1. Fork this repo and run `bundle install`.
-2. Start the generator by typing: `bin/generator`  
+1. Fork this repo and run `bundle install` (you need to have Ruby >= 3.1 installed).
+2. Start the generator by typing: `bin/generator`
 3. Build your feed config and answer 'y' in the last step to create the files.
 4. Optionally, edit the created files. Read [`html2rss`'s README](https://github.com/html2rss/html2rss/blob/master/README.md) what is possible or browse [existing configs](https://github.com/html2rss/html2rss-configs/tree/master/lib/html2rss/configs) for inspiration.
 4. To test, run:
-   `bundle exec html2rss feed lib/html2rss/configs/domainname.tld/whatever`  
+   `bundle exec html2rss feed lib/html2rss/configs/domainname.tld/whatever`
 
 ## Using dynamic parameters in `channel` attributes
 

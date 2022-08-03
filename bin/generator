@@ -2,6 +2,6 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'html2rss/configs/generator'
+require 'html2rss/generator'
 
-Html2rss::Configs::Generator.start
+Html2rss::Generator.start
