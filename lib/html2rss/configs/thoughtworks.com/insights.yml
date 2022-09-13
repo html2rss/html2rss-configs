@@ -1,0 +1,15 @@
+channel:
+  url: https://www.thoughtworks.com/insights
+  language: en
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: ".collectionOfMedia .aem-GridColumn"
+  title:
+    selector: ".cmp-collection-of-media__card__text__title"
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: p
