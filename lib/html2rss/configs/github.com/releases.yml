@@ -7,12 +7,12 @@ selectors:
   items:
     selector: '[data-test-selector="release-card"]'
   title:
-    selector: "h1"
+    selector: "span > a"
   link:
-    selector: "h1 a"
+    selector: "span > a"
     extractor: "href"
   description:
-    selector: ".markdown-body"
+    selector: '[data-test-selector="body-content"]'
     extractor: "html"
     post_process:
       name: "sanitize_html"
