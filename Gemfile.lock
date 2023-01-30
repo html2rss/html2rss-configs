@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: cfbffe84c199533a601f74bd259fff0fce84676f
+  revision: 1ebb38a8863f9f7a7425db46e2430da009b9512b
   specs:
     html2rss (0.9.0)
       addressable (~> 2.7)
@@ -40,10 +40,10 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
-    concurrent-ruby (1.1.10)
+    concurrent-ruby (1.2.0)
     crass (1.0.6)
     diff-lcs (1.5.0)
-    faraday (2.7.1)
+    faraday (2.7.4)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-follow_redirects (0.3.0)
@@ -69,7 +69,7 @@ GEM
     public_suffix (5.0.1)
     racc (1.6.2)
     rainbow (3.1.1)
-    regexp_parser (2.6.1)
+    regexp_parser (2.6.2)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -134,7 +134,7 @@ GEM
       tty-screen (~> 0.8)
       wisper (~> 2.0)
     tty-screen (0.8.1)
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.2.0)
     unicode_utils (1.4.0)
