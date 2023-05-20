@@ -1,5 +1,5 @@
 channel:
-  url: https://api.cinemascore.com/guest/surveys
+  url: https://webapp.cinemascore.com/guest/surveys
   ttl: 720
   json: true
   time_zone: America/Los_Angeles
