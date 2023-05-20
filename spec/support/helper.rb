@@ -11,7 +11,7 @@ module Helper
   # @param url [String]
   # @return [String]
   def self.url_to_directory_name(url)
-    URI(url.split('/')[0..2].join('/')).host.gsub(/^(api|www)\./, '')
+    URI(url.split('/')[0..2].join('/')).host.gsub(/^(api|www|webapp)\./, '')
   end
 
   ##
