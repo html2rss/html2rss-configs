@@ -1,0 +1,20 @@
+---
+channel:
+  url: https://support.apple.com/en-gb/HT201222
+  language: en
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: "#tableWraper table tbody > tr:not(:first-child)"
+  title:
+    selector: a
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: td:nth-child(2)
+  updated:
+    selector: td:nth-child(3)
+    post_process:
+      - name: parse_time
