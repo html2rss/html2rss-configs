@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.reuters.com/technology/
+  language: en
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: '[class^="story-collection"] > li'
+  title:
+    selector: h3
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: p
