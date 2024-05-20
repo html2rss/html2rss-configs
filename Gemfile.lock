@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: c41778d36e910dc5d97b5cdae3d8b453a5f68438
+  revision: d8f0e66108d6c63718628ad35004744c512c9b04
   specs:
     html2rss (0.9.0)
       addressable (~> 2.7)
@@ -71,7 +71,7 @@ GEM
     public_suffix (5.0.5)
     racc (1.7.3)
     rainbow (3.1.1)
-    regexp_parser (2.9.1)
+    regexp_parser (2.9.2)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.8)
