@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: aa99bd68c7add7abd4f65d2e4b558ebe20227ee8
+  revision: 2c458a7606c2519a5fc75b58b1acca0cb4f1ace3
   specs:
     html2rss (0.9.0)
       addressable (~> 2.7)
@@ -48,7 +48,7 @@ GEM
       logger
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-net_http (3.1.0)
+    faraday-net_http (3.1.1)
       net-http
     hashie (5.0.0)
     htmlbeautifier (1.4.2)
@@ -70,7 +70,7 @@ GEM
       ast (~> 2.4.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
-    public_suffix (6.0.0)
+    public_suffix (6.0.1)
     racc (1.8.0)
     rainbow (3.1.1)
     regexp_parser (2.9.2)
@@ -112,7 +112,7 @@ GEM
     rubocop-rspec (2.12.1)
       rubocop (~> 1.31)
     ruby-progressbar (1.11.0)
-    sanitize (6.1.1)
+    sanitize (6.1.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     strings (0.2.1)
