@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/html2rss/generator
-  revision: 0a26a395964cfa82a3db2205009a0ecc6a478c1b
+  revision: 3a00f3c618ba6e548334180e53f3a3506da090a3
   branch: main
   specs:
     html2rss-generator (0.1.0)
@@ -10,11 +10,30 @@ GIT
       tty-markdown
       tty-prompt
 
-GIT
-  remote: https://github.com/html2rss/html2rss
-  revision: 2c458a7606c2519a5fc75b58b1acca0cb4f1ace3
+PATH
+  remote: .
   specs:
-    html2rss (0.9.0)
+    html2rss-configs (0.2.0)
+      html2rss
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
+    ast (2.4.2)
+    concurrent-ruby (1.3.3)
+    crass (1.0.6)
+    diff-lcs (1.5.1)
+    faraday (2.10.0)
+      faraday-net_http (>= 2.0, < 3.2)
+      logger
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
+    faraday-net_http (3.1.1)
+      net-http
+    hashie (5.0.0)
+    html2rss (0.10.0)
       addressable (~> 2.7)
       faraday (> 2.0.1, < 3.0)
       faraday-follow_redirects
@@ -28,90 +47,72 @@ GIT
       thor
       tzinfo
       zeitwerk
-
-PATH
-  remote: .
-  specs:
-    html2rss-configs (0.2.0)
-
-GEM
-  remote: https://rubygems.org/
-  specs:
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
-    ast (2.4.2)
-    concurrent-ruby (1.3.3)
-    crass (1.0.6)
-    diff-lcs (1.5.0)
-    faraday (2.10.0)
-      faraday-net_http (>= 2.0, < 3.2)
-      logger
-    faraday-follow_redirects (0.3.0)
-      faraday (>= 1, < 3)
-    faraday-net_http (3.1.1)
-      net-http
-    hashie (5.0.0)
-    htmlbeautifier (1.4.2)
-    json (2.6.2)
+    htmlbeautifier (1.4.3)
+    json (2.7.2)
     kramdown (2.4.0)
       rexml
+    language_server-protocol (3.17.0.3)
     logger (1.6.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0702)
     net-http (0.4.1)
       uri
-    nokogiri (1.13.6-x86_64-darwin)
+    nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.6-x86_64-linux)
+    nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
-    parallel (1.22.1)
-    parser (3.1.2.0)
+    nokogiri (1.16.7-x86_64-linux)
+      racc (~> 1.4)
+    parallel (1.25.1)
+    parser (3.3.4.0)
       ast (~> 2.4.1)
+      racc
     pastel (0.8.0)
       tty-color (~> 0.5)
     public_suffix (6.0.1)
-    racc (1.8.0)
+    racc (1.8.1)
     rainbow (3.1.1)
     regexp_parser (2.9.2)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.3.2)
       strscan
-    rouge (3.30.0)
-    rspec (3.11.0)
-      rspec-core (~> 3.11.0)
-      rspec-expectations (~> 3.11.0)
-      rspec-mocks (~> 3.11.0)
-    rspec-core (3.11.0)
-      rspec-support (~> 3.11.0)
-    rspec-expectations (3.11.0)
+    rouge (4.3.0)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.1)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
-    rspec-support (3.11.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
     rss (0.3.0)
       rexml
-    rubocop (1.31.2)
+    rubocop (1.65.0)
       json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
-      parser (>= 3.1.0.0)
+      parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8, < 3.0)
+      regexp_parser (>= 2.4, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.18.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.18.0)
-      parser (>= 3.1.1.0)
-    rubocop-performance (1.14.2)
-      rubocop (>= 1.7.0, < 2.0)
-      rubocop-ast (>= 0.4.0)
-    rubocop-rspec (2.12.1)
-      rubocop (~> 1.31)
-    ruby-progressbar (1.11.0)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.31.3)
+      parser (>= 3.3.1.0)
+    rubocop-performance (1.21.1)
+      rubocop (>= 1.48.1, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rspec (3.0.3)
+      rubocop (~> 1.61)
+    ruby-progressbar (1.13.0)
     sanitize (6.1.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -124,10 +125,10 @@ GEM
     thor (1.3.1)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
-    tty-markdown (0.7.0)
+    tty-markdown (0.7.2)
       kramdown (>= 1.16.2, < 3.0)
       pastel (~> 0.8)
-      rouge (~> 3.14)
+      rouge (>= 3.14, < 5.0)
       strings (~> 0.2.0)
       tty-color (~> 0.5)
       tty-screen (~> 0.8)
@@ -138,21 +139,21 @@ GEM
       tty-cursor (~> 0.7)
       tty-screen (~> 0.8)
       wisper (~> 2.0)
-    tty-screen (0.8.1)
+    tty-screen (0.8.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.5.0)
     unicode_utils (1.4.0)
     uri (0.13.0)
     wisper (2.0.1)
-    zeitwerk (2.6.16)
+    zeitwerk (2.6.17)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
-  html2rss!
   html2rss-configs!
   html2rss-generator!
   nokogiri
@@ -162,4 +163,4 @@ DEPENDENCIES
   rubocop-rspec
 
 BUNDLED WITH
-   2.3.4
+   2.5.16

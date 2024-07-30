@@ -63,7 +63,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       end
 
       context 'with template post_processor' do
-        it 'references available selectors only', aggregate_failures: true do
+        it 'references available selectors only', :aggregate_failures do
           Helper.referenced_selectors_in_template(yaml['selectors']).each do |referenced_selector|
             next if referenced_selector == 'self'
 
@@ -74,7 +74,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       end
 
       context 'with categories' do
-        it 'references available selectors only', aggregate_failures: true do
+        it 'references available selectors only', :aggregate_failures do
           yaml['selectors'].fetch('categories', []).each do |selector_name|
             expect(yaml['selectors'][selector_name])
               .not_to be_nil, "categories references `#{selector_name}`, but is missing"
