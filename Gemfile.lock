@@ -14,6 +14,7 @@ PATH
   remote: .
   specs:
     html2rss-configs (0.2.0)
+      html2rss
 
 GEM
   remote: https://rubygems.org/
@@ -153,7 +154,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  html2rss
   html2rss-configs!
   html2rss-generator!
   nokogiri
