@@ -8,32 +8,12 @@ AllCops:
   Exclude:
     - vendor/**/*
 
-Performance/StringIdentifierArgument:
-  Enabled: false
-
-Metrics/BlockLength:
-  Exclude:
-    - "spec/**/*_spec.rb"
-    - html2rss-configs.gemspec
-
-Metrics/MethodLength:
-  CountAsOne:
-    - heredoc
+Layout/ClassStructure:
+  Enabled: true
 
 RSpec/DescribeClass:
   Exclude:
     - "spec/html2rss/configs/**/*.yml_spec.rb"
-    - "spec/bin/*_spec.rb"
 
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
-
-RSpec/ExampleLength:
-  Exclude:
-    - spec/support/shared_examples/config.yml_spec.rb
-
-RSpec/ImplicitSubject:
-  Enabled: false
-
-Layout/ClassStructure:
-  Enabled: true
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
