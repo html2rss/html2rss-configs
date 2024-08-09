@@ -7,8 +7,7 @@ module Html2rss
   ##
   # The namespace for this gem
   module Configs
-    class Error < StandardError; end
-
+    class Error < Html2rss::Error; end
     class ConfigNotFound < Html2rss::Configs::Error; end
 
     ##
