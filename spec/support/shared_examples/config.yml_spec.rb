@@ -1,27 +1,37 @@
 # frozen_string_literal: true
 
-require_relative '../helper'
-require 'tzinfo'
+require 'yaml'
 
 RSpec.shared_examples 'config.yml' do |file_name, params|
-  subject(:yaml) { YAML.safe_load(file) }
+  subject(:yaml) { YAML.safe_load_file(file_path) }
 
-  let!(:file) do
-    path = File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
-    File.open(path)
+  let!(:file_path) do
+    File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
   end
 
-  let(:feed_name) { file.path.split(File::Separator)[-2..].join(File::Separator) }
+  let(:global_config) do
+    {
+      'headers' => {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
+      }
+    }
+  end
+  let(:config) do
+    feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
+    feed_config = Html2rss::Configs.find_by_name(feed_name)
+
+    Html2rss::Config.new(feed_config, global_config, (params || {}))
+  end
 
   context 'with the file' do
+    let(:host_name) { Helper.url_to_directory_name yaml['channel']['url'] }
+    let(:dirname) { File.dirname(file_path).split(File::Separator).last }
+
     it 'is parseable' do
       expect { yaml }.not_to raise_error
     end
 
     it "resides in a folder named after channel.url's host" do
-      dirname = File.dirname(file.path).split(File::Separator).last
-      host_name = Helper.url_to_directory_name yaml['channel']['url']
-
       expect(dirname).to eq(host_name)
     end
   end
@@ -84,45 +94,34 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
   end
 
-  context "with fetching #{params}", :fetch do
+  context "when fetching #{params}", :fetch do
     subject(:feed) { Html2rss.feed(config) }
-
-    let(:global_config) do
-      {
-        'headers' => {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
-        }
-      }
-    end
-    let(:feed_config) { Html2rss::Configs.find_by_name(feed_name) }
-    let(:config) { Html2rss::Config.new(feed_config, global_config, (params || {})) }
 
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive
     end
+  end
 
-    context 'with an item' do
-      let(:item) { feed.items.first }
-      let(:specified_attributes) { config.item_selector_names & %w[title description author category] }
-      let(:text_attributes) {  specified_attributes & %w[title description author] }
-      let(:content_attributes) { specified_attributes - text_attributes }
-      let(:special_attributes) do
-        [].tap { |arr| arr << :pubDate if config.item_selector_names.include?(:updated) }
+  context "when fetching #{params} / item", :fetch do
+    subject(:item) { Html2rss.feed(config).items.first }
+
+    let(:specified_attributes) { config.item_selector_names & %w[title description author category] }
+    let(:text_attributes) { specified_attributes & %w[title description author] }
+
+    it 'has no empty text attributes', :aggregate_failures do
+      text_attributes.each do |attribute_name|
+        expect(item.public_send(attribute_name).to_s).not_to be_empty, attribute_name.to_s
       end
+    end
 
-      it 'has no empty text or content attributes', :aggregate_failures do
-        (text_attributes + special_attributes).each do |attribute_name|
-          expect(item.public_send(attribute_name).to_s).not_to be_empty, attribute_name.to_s
-        end
-
-        content_attributes.each do |attribute_name|
-          expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
-        end
+    it 'has no empty content attributes', :aggregate_failures do
+      (specified_attributes - text_attributes).each do |attribute_name|
+        expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
       end
+    end
 
-      it 'has link content beginning with "http" when config has a link selector' do
-        expect(item&.link&.to_s).to start_with('http') if config.item_selector_names.include?(:link)
-      end
+    it 'has link content beginning with "http" when config has a link selector' do
+      expect(item&.link&.to_s).to start_with('http') if config.item_selector_names.include?(:link)
     end
   end
 end

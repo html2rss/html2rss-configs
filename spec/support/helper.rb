@@ -3,6 +3,7 @@
 require 'json'
 require 'nokogiri'
 require 'yaml'
+require 'uri'
 
 ##
 # A collection of helper methods.

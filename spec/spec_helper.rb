@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'tzinfo'
 require 'html2rss'
 require 'html2rss/configs'
 
