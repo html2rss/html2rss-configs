@@ -6,21 +6,19 @@ RSpec.describe Html2rss::Configs do
   end
 
   describe '.file_names' do
-    subject { described_class.file_names }
+    subject(:file_names) { described_class.file_names }
 
     specify(:aggregate_failures) do
-      is_expected.to be_an Array
-      is_expected.to be_frozen
+      expect(file_names).to be_an(Array) & be_frozen
     end
   end
 
   describe '.find_by_name' do
     context 'with valid name' do
-      subject { described_class.find_by_name('truthdig.com/most_popular') }
+      subject(:find_by_name) { described_class.find_by_name('truthdig.com/most_popular') }
 
       specify(:aggregate_failures) do
-        is_expected.to be_a Hash
-        is_expected.to be_frozen
+        expect(find_by_name).to be_a(Hash) & be_frozen
       end
     end
 
