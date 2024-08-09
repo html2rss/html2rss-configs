@@ -23,7 +23,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1
+          ruby-version: 3.3
           bundler-cache: true
 
       - name: Run linters
@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["3.1"]
+        ruby: ["3.3"]
 
     runs-on: ubuntu-latest
 
@@ -58,7 +58,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1
+          ruby-version: 3.3
           bundler-cache: true
 
       - name: setup remote origin
