@@ -6,11 +6,11 @@ channel:
   time_zone: UTC
 selectors:
   items:
-    selector: main section ul > li
+    selector: .summary-item
   title:
-    selector: h4
+    selector: h3
   link:
     selector: a:first
     extractor: href
   description:
-    selector: h5
+    selector: .summary-item__dek

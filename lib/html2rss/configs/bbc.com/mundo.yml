@@ -6,7 +6,7 @@ channel:
   time_zone: UTC
 selectors:
   items:
-    selector: '[data-e2e="story-promo"]'
+    selector: '[data-testid="topic-promos"] > li'
   title:
     selector: a
   link:

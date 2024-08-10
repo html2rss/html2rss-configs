@@ -5,13 +5,9 @@ channel:
   language: en
 selectors:
   items:
-    selector: ".grid-post"
+    selector: ".article__entry"
   title:
-    selector: "h4 > a"
+    selector: "h5 > a"
   link:
-    selector: "h4 > a"
+    selector: "h5 > a"
     extractor: "href"
-  description:
-    selector: "p"
-    post_process:
-      - name: "sanitize_html"

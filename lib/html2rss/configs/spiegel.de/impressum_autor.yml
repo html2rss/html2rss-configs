@@ -5,16 +5,16 @@ channel:
   language: de
 selectors:
   items:
-    selector: "[data-area='article-teaser-list'] [data-area]"
+    selector: '[data-block-el="articleTeaser"] > article'
   title:
-    selector: "h2 .mb-12"
+    selector: "h2"
   prefixed_title:
-    selector: ".h2 .mb-4"
+    selector: "h2"
   link:
-    selector: "h2 > a"
+    selector: "section > a"
     extractor: "href"
   descripton:
-    selector: ".mb-12 > .leading-loose "
+    selector: ".leading-loose"
   updated:
     selector: "footer"
     extractor: text

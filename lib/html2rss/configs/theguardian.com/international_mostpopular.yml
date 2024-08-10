@@ -5,9 +5,9 @@ channel:
   ttl: 60
 selectors:
   items:
-    selector: ".most-popular > li"
+    selector: '[data-link-name="most-viewed"] > ol > li'
   title:
-    selector: ".fc-item__link .js-headline-text"
+    selector: "h4 span"
   link:
-    selector: ".fc-item__link"
+    selector: "a"
     extractor: "href"
