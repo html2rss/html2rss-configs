@@ -6,11 +6,13 @@ channel:
   time_zone: America/New_York
 selectors:
   items:
-    selector: article[itemscope]
+    selector: '[class$="teaser"]'
   title:
     selector: a
   link:
     selector: a
     extractor: href
   description:
-    selector: div ~ div
+    selector: img
+    extractor: attribute
+    attribute: alt

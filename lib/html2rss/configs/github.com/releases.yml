@@ -5,11 +5,11 @@ channel:
   description: "Releases of %<username>s/%<repository>s on github.com."
 selectors:
   items:
-    selector: '[data-test-selector="release-card"]'
+    selector: ".repository-content section"
   title:
-    selector: "span > a"
+    selector: "h2"
   link:
-    selector: "span > a"
+    selector: "a"
     extractor: "href"
   description:
     selector: '[data-test-selector="body-content"]'

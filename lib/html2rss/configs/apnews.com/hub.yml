@@ -1,22 +1,16 @@
 ---
 channel:
-  url: https://apnews.com/hub/%<section>s
+  url: https://apnews.com/%<section>s
   language: en
   ttl: 120
   time_zone: UTC
 selectors:
   items:
-    selector: ".FeedCard"
+    selector: ".PagePromo"
   title:
-    selector: h2
+    selector: h3
   link:
     selector: a:first
     extractor: href
   description:
-    selector: p
-  updated:
-    selector: ".Timestamp"
-    extractor: attribute
-    attribute: data-source
-    post_process:
-      name: "parse_time"
+    selector: .PagePromoContentIcons-text

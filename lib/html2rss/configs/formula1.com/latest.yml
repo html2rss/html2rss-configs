@@ -4,15 +4,16 @@ channel:
   ttl: 120
 selectors:
   items:
-    selector: ".f1-latest-listing .f1-latest-listing--grid-item"
+    selector: "#article-list > li"
   title:
-    selector: ".f1--s"
+    selector: "p"
   link:
-    selector: "a.f1-cc"
+    selector: "a"
     extractor: "href"
-    post_process:
-      name: "parse_uri"
   categories:
-    - category
-  category:
-    selector: ".misc--tag"
+    - category_a
+    - category_b
+  category_a:
+    selector: "figcaption>span:first"
+  category_b:
+    selector: "figcaption>span:last"
