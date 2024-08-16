@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.cnet.com/%<section>s/%<sub>s/
+  language: en
+  ttl: 360
+  time_zone: UTC
+selectors:
+  items:
+    selector: ".c-storiesNeonHighlightsCard"
+  title:
+    selector: ".g-text-bold"
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: span
