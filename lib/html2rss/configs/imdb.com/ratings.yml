@@ -8,8 +8,11 @@ selectors:
   title:
     selector: ".ipc-title__text"
     post_process:
-      name: template
-      string: 'Rated: "%{self}" %{user_rating}/10 [IMDb: %{global_rating}]'
+      - name: gsub
+        pattern: "/^(\\d+.)\\s/"
+        replacement: ""
+      - name: template
+        string: 'Rated: "%{self}" %{user_rating} [IMDb: %{global_rating}]'
   link:
     selector: "a.ipc-title-link-wrapper"
     extractor: "href"
@@ -18,4 +21,8 @@ selectors:
   global_rating:
     selector: ".ipc-rating-star--imdb .ipc-rating-star--rating"
   user_rating:
-    selector: ".ipc-rating-star .ipc-rating-star--rating"
+    selector: ".dli-ratings-container .ipc-rating-star--otherUser span"
+  enclosure:
+    selector: ".ipc-image"
+    extractor: "attribute"
+    attribute: "src"
