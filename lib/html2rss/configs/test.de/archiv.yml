@@ -1,0 +1,16 @@
+---
+channel:
+  url: https://www.test.de/archiv/
+  language: de
+  ttl: 360
+  time_zone: Europe/Berlin
+selectors:
+  items:
+    selector: ".archive__list > li"
+  title:
+    selector: a
+  link:
+    selector: a:first
+    extractor: href
+  description:
+    selector: p
