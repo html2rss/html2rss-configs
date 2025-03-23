@@ -18,9 +18,11 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   end
   let(:config) do
     feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
-    feed_config = Html2rss::Configs.find_by_name(feed_name)
+    config = Html2rss::Configs.find_by_name(feed_name)
 
-    Html2rss::Config.new(feed_config, global_config, (params || {}))
+    config.merge!(global_config)
+    config[:params] = params if params
+    config
   end
 
   context 'with the file' do
