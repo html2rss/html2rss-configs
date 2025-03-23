@@ -15,5 +15,3 @@ selectors:
   description:
     selector: "> div"
     extractor: html
-    post_process:
-      - name: sanitize_html

@@ -14,5 +14,3 @@ selectors:
   url:
     selector: ".news-link"
     extractor: "href"
-    post_process:
-      name: "parse_uri"

@@ -10,8 +10,8 @@ selectors:
   title:
     selector: ".charts__title"
     post_process:
-      name: "template"
-      string: "%{context}: %{self}"
+      - name: "template"
+        string: "%{context}: %{self}"
   context:
     selector: ".charts__context"
   url:

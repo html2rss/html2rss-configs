@@ -16,4 +16,4 @@ selectors:
   published_at:
     selector: ".bdst_presslist__block__date"
     post_process:
-      name: "parse_time"
+      - name: "parse_time"

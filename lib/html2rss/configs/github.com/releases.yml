@@ -14,5 +14,3 @@ selectors:
   description:
     selector: '[data-test-selector="body-content"]'
     extractor: "html"
-    post_process:
-      name: "sanitize_html"

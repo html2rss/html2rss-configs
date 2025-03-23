@@ -6,7 +6,7 @@ channel:
   time_zone: UTC
 selectors:
   items:
-    selector: " references > object > * > object"
+    selector: "references > object > * > object:has(url)"
   title:
     selector: title
   url:

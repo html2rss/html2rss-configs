@@ -14,5 +14,3 @@ selectors:
   description:
     selector: ".articleteaser-header-container p"
     extractor: "html"
-    post_process:
-      - name: sanitize_html

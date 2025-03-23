@@ -13,4 +13,4 @@ selectors:
   published_at:
     selector: ".date-display-single"
     post_process:
-      name: parse_time
+      - name: parse_time

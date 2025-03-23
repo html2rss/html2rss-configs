@@ -12,5 +12,3 @@ selectors:
     extractor: "href"
   description:
     selector: ".programme__synopsis"
-    post_process:
-      name: sanitize_html

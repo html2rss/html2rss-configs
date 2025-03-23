@@ -15,6 +15,6 @@ selectors:
   description:
     selector: p:first
     post_process:
-      name: substring
-      start: 0
-      end: -14
+      - name: substring
+        start: 0
+        end: -14

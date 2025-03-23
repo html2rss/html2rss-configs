@@ -13,5 +13,3 @@ selectors:
   description:
     selector: '[property="content:encoded"]'
     extractor: html
-    post_process:
-      name: "sanitize_html"
