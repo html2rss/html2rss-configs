@@ -7,7 +7,7 @@ selectors:
     selector: ".main .as-columns--2up-extended"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   img:

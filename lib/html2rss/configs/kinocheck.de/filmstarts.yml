@@ -11,7 +11,7 @@ selectors:
     post_process:
       name: "template"
       string: "%{self} (%{start_date})"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   description:

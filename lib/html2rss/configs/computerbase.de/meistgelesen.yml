@@ -14,6 +14,6 @@ selectors:
       string: "%{context}: %{self}"
   context:
     selector: ".charts__context"
-  link:
+  url:
     selector: ".charts__link"
     extractor: "href"

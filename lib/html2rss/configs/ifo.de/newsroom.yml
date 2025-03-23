@@ -9,7 +9,7 @@ selectors:
     selector: "fields > array > object"
   title:
     selector: "title"
-  link:
+  url:
     selector: "url"
     post_process:
       - name: template

@@ -7,7 +7,7 @@ selectors:
     selector: "#article-list > li"
   title:
     selector: "p"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   categories:

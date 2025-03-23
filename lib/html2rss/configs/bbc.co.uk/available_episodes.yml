@@ -7,7 +7,7 @@ selectors:
     selector: ".highlight-box-wrapper > div"
   title:
     selector: ".programme__title"
-  link:
+  url:
     selector: ".programme__titles > a"
     extractor: "href"
   description:

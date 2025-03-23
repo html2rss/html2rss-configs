@@ -138,7 +138,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     it 'has link content beginning with "http" when config has a link selector' do
-      expect(item&.link&.to_s).to start_with('http') if config.item_selector_names.include?(:link)
+      expect(item&.link&.to_s).to start_with('http') if Html2rss::Selectors::ITEM_TAGS.include?(:url)
     end
   end
 end

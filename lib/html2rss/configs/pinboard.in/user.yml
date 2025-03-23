@@ -8,6 +8,6 @@ selectors:
     selector: "#bookmarks .bookmark"
   title:
     selector: ".bookmark_title"
-  link:
+  url:
     selector: ".bookmark_title"
     extractor: "href"

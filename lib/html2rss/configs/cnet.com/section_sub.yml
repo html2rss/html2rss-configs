@@ -9,7 +9,7 @@ selectors:
     selector: ".c-storiesNeonHighlightsCard"
   title:
     selector: ".g-text-bold"
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

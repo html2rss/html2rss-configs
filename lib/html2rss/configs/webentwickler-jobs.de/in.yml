@@ -9,7 +9,7 @@ selectors:
     selector: ".job-item"
   title:
     selector: ".job-title"
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

@@ -7,7 +7,7 @@ selectors:
     selector: ".view-content article"
   title:
     selector: "h3 a"
-  link:
+  url:
     selector: "h3 a"
     extractor: "href"
   published_at:

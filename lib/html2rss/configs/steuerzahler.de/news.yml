@@ -8,7 +8,7 @@ selectors:
     selector: ".bdst_presslist .bdst_presslist__block"
   title:
     selector: "h4"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   description:

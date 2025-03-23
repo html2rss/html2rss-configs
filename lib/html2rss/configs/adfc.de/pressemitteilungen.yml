@@ -8,7 +8,7 @@ selectors:
     selector: ".articleteasercontainer .articleteaser"
   title:
     selector: ".articleteaser-header-container h4"
-  link:
+  url:
     selector: "a:first"
     extractor: "href"
   description:

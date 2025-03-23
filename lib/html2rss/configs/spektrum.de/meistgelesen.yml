@@ -9,6 +9,6 @@ selectors:
     selector: ".teaser.teaser__list_box ol > li"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"

@@ -8,7 +8,7 @@ selectors:
     selector: "div[class^='DoubleChainstyled']:first-child a[class*='ContentTeaser']"
   title:
     selector: "h2"
-  link:
+  url:
     extractor: "href"
   description:
     selector: "p"

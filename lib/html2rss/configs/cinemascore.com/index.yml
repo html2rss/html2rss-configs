@@ -20,7 +20,7 @@ selectors:
     selector: "grade"
   movie_title:
     selector: "movie_title"
-  link:
+  url:
     post_process:
       - name: "template"
         string: "https://www.metacritic.com/search/movie/%{movie_title}/results"

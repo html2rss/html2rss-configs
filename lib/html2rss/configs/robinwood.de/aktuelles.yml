@@ -8,7 +8,7 @@ selectors:
     selector: "article[data-history-node-id]"
   title:
     selector: "h2"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   description:

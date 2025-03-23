@@ -8,7 +8,7 @@ selectors:
     selector: ".main-content article"
   title:
     selector: "h2"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   img_url:

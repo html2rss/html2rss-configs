@@ -9,7 +9,7 @@ selectors:
     selector: ".PagePromo"
   title:
     selector: h3
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

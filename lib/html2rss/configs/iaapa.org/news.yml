@@ -9,6 +9,6 @@ selectors:
     selector: ".home-latest-title"
   description:
     selector: ".home-latest-teaser"
-  link:
+  url:
     selector: "a"
     extractor: "href"

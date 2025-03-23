@@ -9,7 +9,7 @@ selectors:
     selector: " references > object > * > object"
   title:
     selector: title
-  link:
+  url:
     selector: url
     post_process:
       - name: parse_uri

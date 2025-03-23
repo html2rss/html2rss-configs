@@ -8,6 +8,6 @@ selectors:
     selector: ".article__entry"
   title:
     selector: "h5 > a"
-  link:
+  url:
     selector: "h5 > a"
     extractor: "href"

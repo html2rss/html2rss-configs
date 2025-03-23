@@ -11,7 +11,7 @@ selectors:
     selector: ".text-info"
   categories:
     - category
-  link:
+  url:
     selector: ".news-link"
     extractor: "href"
     post_process:

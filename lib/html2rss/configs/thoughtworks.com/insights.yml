@@ -8,7 +8,7 @@ selectors:
     selector: ".collectionOfMedia .aem-GridColumn"
   title:
     selector: ".cmp-collection-of-media__card__text__title"
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

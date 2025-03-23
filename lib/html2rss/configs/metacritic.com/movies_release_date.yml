@@ -14,7 +14,7 @@ selectors:
   score:
     selector: ".clamp-score-wrap > .metascore_anchor > .metascore_w"
     extractor: "text"
-  link:
+  url:
     selector: ".metascore_anchor"
     extractor: "href"
   description:

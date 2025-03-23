@@ -9,7 +9,7 @@ selectors:
     selector: "#tableWraper table tbody > tr:not(:first-child)"
   title:
     selector: a
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

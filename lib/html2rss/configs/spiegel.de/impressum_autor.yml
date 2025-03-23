@@ -10,7 +10,7 @@ selectors:
     selector: "h2"
   prefixed_title:
     selector: "h2"
-  link:
+  url:
     selector: "section > a"
     extractor: "href"
   descripton:

@@ -8,7 +8,7 @@ selectors:
     selector: ".article-teaser-list article"
   title:
     selector: ".headline"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   published_at:

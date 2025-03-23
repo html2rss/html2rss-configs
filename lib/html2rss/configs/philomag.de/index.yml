@@ -9,7 +9,7 @@ selectors:
     selector: ".content article"
   title:
     selector: h2
-  link:
+  url:
     selector: h2 a
     extractor: href
   description:

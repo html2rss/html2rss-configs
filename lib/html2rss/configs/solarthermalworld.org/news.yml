@@ -7,7 +7,7 @@ selectors:
     selector: "article.post-wrapper"
   title:
     selector: "h2 a"
-  link:
+  url:
     selector: "h2 a"
     extractor: "href"
   description:

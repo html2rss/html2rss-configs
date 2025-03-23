@@ -8,7 +8,7 @@ selectors:
     selector: ".cesprop-0 .container.zw-01 .frame:nth-child(2) ul > li"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   published_at:

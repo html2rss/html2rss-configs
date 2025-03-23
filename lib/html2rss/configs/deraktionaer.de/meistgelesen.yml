@@ -9,7 +9,7 @@ selectors:
     selector: "#most-viewed ol > li"
   title:
     selector: "> a"
-  link:
+  url:
     selector: "> a"
     extractor: "href"
   isin:

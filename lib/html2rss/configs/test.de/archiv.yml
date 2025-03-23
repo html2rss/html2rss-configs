@@ -9,7 +9,7 @@ selectors:
     selector: ".archive__list > li"
   title:
     selector: a
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

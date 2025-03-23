@@ -7,6 +7,6 @@ selectors:
     selector: ".table-issue"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"
