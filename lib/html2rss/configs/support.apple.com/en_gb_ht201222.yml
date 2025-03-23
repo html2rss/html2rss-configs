@@ -14,7 +14,7 @@ selectors:
     extractor: href
   description:
     selector: td:nth-child(2)
-  updated:
+  published_at:
     selector: td:nth-child(3)
     post_process:
       - name: parse_time

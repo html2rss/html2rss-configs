@@ -23,7 +23,7 @@ selectors:
     selector: "field_kurztext"
     post_process:
       - name: sanitize_html
-  updated:
+  published_at:
     selector: "field_date default"
     post_process:
       name: parse_time

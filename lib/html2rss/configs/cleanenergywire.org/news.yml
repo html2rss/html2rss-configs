@@ -10,7 +10,7 @@ selectors:
   link:
     selector: "h3 a"
     extractor: "href"
-  updated:
+  published_at:
     selector: ".date-display-single"
     post_process:
       name: parse_time

@@ -32,7 +32,7 @@ selectors:
     post_process:
       - name: substring
         start: 10
-  update:
+  published_at:
     selector: ".bewertung-panel .row:nth-child(1)"
     post_process:
       - name: substring

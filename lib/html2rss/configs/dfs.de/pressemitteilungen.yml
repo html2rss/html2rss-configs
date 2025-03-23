@@ -11,7 +11,7 @@ selectors:
   link:
     selector: "a"
     extractor: "href"
-  updated:
+  published_at:
     selector: "time"
     extractor: "attribute"
     attribute: "datetime"
