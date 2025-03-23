@@ -100,14 +100,29 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     subject(:feed) { Html2rss.feed(config) }
 
     it 'has positive amount of items' do
-      expect(feed.items.count).to be_positive
+      expect(feed.items.count).to be_positive, <<~MSG
+        No items fetched.
+        Check the feed URL and selectors in `#{file_name}`.
+
+        # #{file_name}
+        #{config}
+
+        # resulted in RSS:
+        #{feed}
+      MSG
     end
   end
 
   context "when fetching #{params} / item", :fetch do
-    subject(:item) { Html2rss.feed(config).items.first }
+    subject(:item) do
+      items = Html2rss.feed(config).items
 
-    let(:specified_attributes) { config.item_selector_names & %w[title description author category] }
+      expect(items.count).not_to be_zero, "Zero items fetched for `#{file_name}`"
+
+      items.shift
+    end
+
+    let(:specified_attributes) { Html2rss::Selectors::ITEM_TAGS & %w[title description author category] }
     let(:text_attributes) { specified_attributes & %w[title description author] }
 
     it 'has no empty text attributes', :aggregate_failures do
