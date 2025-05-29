@@ -7,11 +7,9 @@ selectors:
     selector: "article.post-wrapper"
   title:
     selector: "h2 a"
-  link:
+  url:
     selector: "h2 a"
     extractor: "href"
   description:
     selector: '[property="content:encoded"]'
     extractor: html
-    post_process:
-      name: "sanitize_html"

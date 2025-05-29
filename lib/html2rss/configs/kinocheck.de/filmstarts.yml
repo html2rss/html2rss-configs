@@ -9,15 +9,13 @@ selectors:
   title:
     selector: "h2"
     post_process:
-      name: "template"
-      string: "%{self} (%{start_date})"
-  link:
+      - name: "template"
+        string: "%{self} (%{start_date})"
+  url:
     selector: "a"
     extractor: "href"
   description:
     selector: ".information"
     extractor: "html"
-    post_process:
-      name: "sanitize_html"
   start_date:
     selector: ".release-date .highlight"

@@ -7,10 +7,10 @@ selectors:
     selector: ".view-content article"
   title:
     selector: "h3 a"
-  link:
+  url:
     selector: "h3 a"
     extractor: "href"
-  updated:
+  published_at:
     selector: ".date-display-single"
     post_process:
-      name: parse_time
+      - name: parse_time

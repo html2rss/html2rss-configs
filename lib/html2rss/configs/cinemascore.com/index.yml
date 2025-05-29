@@ -9,18 +9,18 @@ selectors:
   title:
     selector: "title"
     post_process:
-      name: "template"
-      string: "%s (%s) [Rated %s] (%s)"
-      methods:
-        - self
-        - grade
-        - mpaa_rating
-        - year
+      - name: "template"
+        string: "%s (%s) [Rated %s] (%s)"
+        methods:
+          - self
+          - grade
+          - mpaa_rating
+          - year
   grade:
     selector: "grade"
   movie_title:
     selector: "movie_title"
-  link:
+  url:
     post_process:
       - name: "template"
         string: "https://www.metacritic.com/search/movie/%{movie_title}/results"

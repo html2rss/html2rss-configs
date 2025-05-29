@@ -9,7 +9,7 @@ selectors:
     selector: '[data-testid="topic-promos"] > li'
   title:
     selector: a
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

@@ -8,6 +8,6 @@ selectors:
     selector: '[data-link-name="most-viewed"] > ol > li'
   title:
     selector: "h4 span"
-  link:
+  url:
     selector: "a"
     extractor: "href"

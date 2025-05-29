@@ -13,7 +13,7 @@ selectors:
         replacement: ""
       - name: template
         string: 'Rated: "%{self}" %{user_rating} [IMDb: %{global_rating}]'
-  link:
+  url:
     selector: "a.ipc-title-link-wrapper"
     extractor: "href"
   description:

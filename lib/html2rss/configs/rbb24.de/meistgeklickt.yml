@@ -9,6 +9,6 @@ selectors:
     selector: ".tabmodul_container > li:last-child > ul > li"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"

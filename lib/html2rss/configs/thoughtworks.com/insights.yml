@@ -5,10 +5,10 @@ channel:
   time_zone: UTC
 selectors:
   items:
-    selector: ".collectionOfMedia .aem-GridColumn"
+    selector: ".cmp-content-card"
   title:
-    selector: ".cmp-collection-of-media__card__text__title"
-  link:
+    selector: ".cmp-content-card__text__para-text"
+  url:
     selector: a:first
     extractor: href
   description:

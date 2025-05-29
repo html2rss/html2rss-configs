@@ -4,11 +4,11 @@ channel:
   ttl: 720
 selectors:
   items:
-    selector: ".nh-row-home .views-row"
+    selector: ".views-row > article"
   title:
-    selector: ".home-latest-title"
+    selector: h3
   description:
-    selector: ".home-latest-teaser"
-  link:
+    selector: ".event-card__summary"
+  url:
     selector: "a"
     extractor: "href"

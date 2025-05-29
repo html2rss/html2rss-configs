@@ -5,14 +5,11 @@ channel:
   language: de
 selectors:
   items:
-    selector: ".articleteasercontainer .articleteaser"
+    selector: "#articleteasercontainer-columns .articleteaser"
   title:
-    selector: ".articleteaser-header-container h4"
-  link:
+    selector: ".articleteaser-header-container a"
+  url:
     selector: "a:first"
     extractor: "href"
   description:
     selector: ".articleteaser-header-container p"
-    extractor: "html"
-    post_process:
-      - name: sanitize_html

@@ -14,7 +14,7 @@ selectors:
     selector: "imdb_id"
   poster_url:
     selector: "poster_url"
-  link:
+  url:
     post_process:
       - name: template
         string: "https://imdb.com/title/%{imdb_id}"

@@ -9,12 +9,12 @@ selectors:
     selector: article
   title:
     selector: ".post-title"
-  link:
+  url:
     selector: a.view-article
     extractor: href
   description:
     selector: p:first
     post_process:
-      name: substring
-      start: 0
-      end: -14
+      - name: substring
+        start: 0
+        end: -14

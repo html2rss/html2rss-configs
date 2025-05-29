@@ -9,7 +9,7 @@ selectors:
     selector: ".section > .ing-teaser"
   title:
     selector: ".ing-teaser__headline"
-  link:
+  url:
     selector: a:first
     extractor: href
   description:

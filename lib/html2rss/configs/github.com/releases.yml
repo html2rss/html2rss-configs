@@ -8,11 +8,9 @@ selectors:
     selector: ".repository-content section"
   title:
     selector: "h2"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   description:
     selector: '[data-test-selector="body-content"]'
     extractor: "html"
-    post_process:
-      name: "sanitize_html"

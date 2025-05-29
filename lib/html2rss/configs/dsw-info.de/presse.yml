@@ -8,14 +8,12 @@ selectors:
     selector: ".cesprop-0 .container.zw-01 .frame:nth-child(2) ul > li"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"
-  updated:
+  published_at:
     selector: ".vd small"
     post_process:
       - name: parse_time
   description:
     selector: ".bt small"
-    post_process:
-      - name: "sanitize_html"

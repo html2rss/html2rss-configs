@@ -9,5 +9,5 @@ selectors:
     selector: "table table a"
   title:
     selector: span
-  link:
+  url:
     extractor: href

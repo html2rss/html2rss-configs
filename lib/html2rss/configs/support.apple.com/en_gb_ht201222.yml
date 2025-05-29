@@ -6,15 +6,15 @@ channel:
   time_zone: UTC
 selectors:
   items:
-    selector: "#tableWraper table tbody > tr:not(:first-child)"
+    selector: ".table-wrapper table tbody > tr:not(:first-child)"
   title:
     selector: a
-  link:
+  url:
     selector: a:first
     extractor: href
   description:
     selector: td:nth-child(2)
-  updated:
+  published_at:
     selector: td:nth-child(3)
     post_process:
       - name: parse_time

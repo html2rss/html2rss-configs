@@ -10,12 +10,12 @@ selectors:
     selector: "h2"
   prefixed_title:
     selector: "h2"
-  link:
+  url:
     selector: "section > a"
     extractor: "href"
   descripton:
     selector: ".leading-loose"
-  updated:
+  published_at:
     selector: "footer"
     extractor: text
     post_process:

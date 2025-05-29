@@ -8,11 +8,9 @@ selectors:
     selector: ".decision-document-list .document-row"
   title:
     selector: ".title"
-  link:
+  url:
     selector: a
     extractor: href
   description:
     selector: a
     extractor: html
-    post_process:
-      - name: sanitize_html

@@ -13,7 +13,7 @@ selectors:
       - name: template
         string: |
           %{self}: %{ergebnis} (%{punkte}/80 Punkte)
-  link:
+  url:
     selector: a
     extractor: href
   description:
@@ -32,7 +32,7 @@ selectors:
     post_process:
       - name: substring
         start: 10
-  update:
+  published_at:
     selector: ".bewertung-panel .row:nth-child(1)"
     post_process:
       - name: substring

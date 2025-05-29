@@ -9,7 +9,7 @@ selectors:
     selector: '[class$="teaser"]'
   title:
     selector: a
-  link:
+  url:
     selector: a
     extractor: href
   description:

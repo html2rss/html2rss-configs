@@ -7,14 +7,14 @@ selectors:
     selector: ".main .as-columns--2up-extended"
   title:
     selector: "a"
-  link:
+  url:
     selector: "a"
     extractor: "href"
   img:
     selector: "img"
     extractor: "attribute"
     attribute: "src"
-  updated:
+  published_at:
     selector: ".note"
     post_process:
       - name: parse_time

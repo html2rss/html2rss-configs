@@ -9,11 +9,9 @@ selectors:
     selector: ".job-item"
   title:
     selector: ".job-title"
-  link:
+  url:
     selector: a:first
     extractor: href
   description:
     selector: "> div"
     extractor: html
-    post_process:
-      - name: sanitize_html

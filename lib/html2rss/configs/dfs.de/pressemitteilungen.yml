@@ -8,10 +8,10 @@ selectors:
     selector: ".article-teaser-list article"
   title:
     selector: ".headline"
-  link:
+  url:
     selector: "a"
     extractor: "href"
-  updated:
+  published_at:
     selector: "time"
     extractor: "attribute"
     attribute: "datetime"

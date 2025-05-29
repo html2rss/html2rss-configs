@@ -12,15 +12,22 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   let(:global_config) do
     {
       'headers' => {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
+        'User-Agent': <<~UA.delete("\n")
+          Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
+          AppleWebKit/537.36 (KHTML, like Gecko)
+          Chrome/134.0.0.0
+          Safari/537.36'
+        UA
       }
     }
   end
   let(:config) do
     feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
-    feed_config = Html2rss::Configs.find_by_name(feed_name)
+    config = {}.merge Html2rss::Configs.find_by_name(feed_name)
 
-    Html2rss::Config.new(feed_config, global_config, (params || {}))
+    config.merge!(global_config.dup)
+    config[:params] = params if params
+    config
   end
 
   context 'with the file' do
@@ -61,17 +68,6 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         end
       end
 
-      context 'with sanitize_html post_processor' do
-        it 'is used for description selector' do
-          if (description_selector = yaml['selectors']['description'])
-            post_processors = [description_selector['post_process']].flatten.compact
-            sanitize_html = post_processors.select { |p| p['name'] == 'sanitize_html' }
-
-            expect(sanitize_html).not_to be_nil
-          end
-        end
-      end
-
       context 'with template post_processor' do
         it 'references available selectors only', :aggregate_failures do
           Helper.referenced_selectors_in_template(yaml['selectors']).each do |referenced_selector|
@@ -95,17 +91,32 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   end
 
   context "when fetching #{params}", :fetch do
-    subject(:feed) { Html2rss.feed(config) }
+    subject(:feed) { Html2rss.feed(config.dup) }
 
     it 'has positive amount of items' do
-      expect(feed.items.count).to be_positive
+      expect(feed.items.count).to be_positive, <<~MSG
+        No items fetched.
+        Check the feed URL and selectors in `#{file_name}`.
+
+        # #{file_name}
+        #{config}
+
+        # resulted in RSS:
+        #{feed}
+      MSG
     end
   end
 
   context "when fetching #{params} / item", :fetch do
-    subject(:item) { Html2rss.feed(config).items.first }
+    subject(:item) do
+      items = Html2rss.feed(config.dup).items
 
-    let(:specified_attributes) { config.item_selector_names & %w[title description author category] }
+      expect(items.count).not_to be_zero, "Zero items fetched for `#{file_name}`"
+
+      items.shift
+    end
+
+    let(:specified_attributes) { Html2rss::Selectors::ITEM_TAGS & %w[title description author category] }
     let(:text_attributes) { specified_attributes & %w[title description author] }
 
     it 'has no empty text attributes', :aggregate_failures do
@@ -121,7 +132,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     it 'has link content beginning with "http" when config has a link selector' do
-      expect(item&.link&.to_s).to start_with('http') if config.item_selector_names.include?(:link)
+      expect(item&.link&.to_s).to start_with('http') if Html2rss::Selectors::ITEM_TAGS.include?(:url)
     end
   end
 end
