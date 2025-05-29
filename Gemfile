@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
+gem 'html2rss', github: 'html2rss/html2rss', branch: :master
+
 group :development do
   # gem 'html2rss-generator', path: '../generator'
   gem 'html2rss-generator', github: 'html2rss/generator', branch: :main
