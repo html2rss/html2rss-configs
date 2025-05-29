@@ -12,7 +12,12 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   let(:global_config) do
     {
       'headers' => {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0'
+        'User-Agent': <<~UA.delete("\n")
+          Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
+          AppleWebKit/537.36 (KHTML, like Gecko)
+          Chrome/134.0.0.0
+          Safari/537.36'
+        UA
       }
     }
   end
@@ -20,7 +25,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
     config = {}.merge Html2rss::Configs.find_by_name(feed_name)
 
-    config.merge!(global_config)
+    config.merge!(global_config.dup)
     config[:params] = params if params
     config
   end
@@ -63,17 +68,6 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         end
       end
 
-      context 'with sanitize_html post_processor' do
-        it 'is used for description selector' do
-          if (description_selector = yaml['selectors']['description'])
-            post_processors = [description_selector['post_process']].flatten.compact
-            sanitize_html = post_processors.select { |p| p['name'] == 'sanitize_html' }
-
-            expect(sanitize_html).not_to be_nil
-          end
-        end
-      end
-
       context 'with template post_processor' do
         it 'references available selectors only', :aggregate_failures do
           Helper.referenced_selectors_in_template(yaml['selectors']).each do |referenced_selector|
@@ -97,7 +91,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   end
 
   context "when fetching #{params}", :fetch do
-    subject(:feed) { Html2rss.feed(config) }
+    subject(:feed) { Html2rss.feed(config.dup) }
 
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive, <<~MSG
@@ -115,7 +109,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
   context "when fetching #{params} / item", :fetch do
     subject(:item) do
-      items = Html2rss.feed(config).items
+      items = Html2rss.feed(config.dup).items
 
       expect(items.count).not_to be_zero, "Zero items fetched for `#{file_name}`"
 
