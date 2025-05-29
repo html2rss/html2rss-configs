@@ -12,5 +12,3 @@ selectors:
   description:
     selector: ".row-text-bild-modul"
     extractor: html
-    post_process:
-      - name: sanitize_html

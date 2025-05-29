@@ -17,5 +17,3 @@ selectors:
       - name: parse_time
   description:
     selector: ".bt small"
-    post_process:
-      - name: "sanitize_html"
