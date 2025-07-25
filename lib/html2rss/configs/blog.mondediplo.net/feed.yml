@@ -1,7 +1,7 @@
 channel:
-  url: https://blog.mondediplo.net/-La-pompe-a-phynance-
+  url: https://blog.mondediplo.net/%<blog>s
   time_zone: Europe/Paris
-  title: "La pompe à phynance"
+  title: title: "%<blog>s"
   ttl: 120
 selectors:
   items:
