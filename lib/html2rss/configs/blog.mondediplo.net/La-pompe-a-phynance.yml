@@ -1,0 +1,16 @@
+channel:
+  url: https://blog.mondediplo.net/-La-pompe-a-phynance-
+  time_zone: Europe/Paris
+  title: "La pompe à phynance"
+  ttl: 120
+selectors:
+  items:
+    selector: ".large > ul > li"
+  title:
+    selector: "h3"
+  description:
+    selector: ".intro"
+  url:
+    selector: "a"
+    extractor: "href"
+
