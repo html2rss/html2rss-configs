@@ -1,7 +1,7 @@
 channel:
   url: https://blog.mondediplo.net/%<blog>s
   time_zone: Europe/Paris
-  title: title: "%<blog>s"
+  title: "blog.mondediplo.net: %<blog>s"
   ttl: 120
 selectors:
   items:
@@ -13,4 +13,3 @@ selectors:
   url:
     selector: "a"
     extractor: "href"
-
