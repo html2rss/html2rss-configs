@@ -7,5 +7,5 @@ This repository contains `html2rss` feed configurations for many websites.
 ## Documentation
 
 - [Main Documentation](https://html2rss.github.io/html2rss-configs/)
-- [Contributing Guide](https://html2rss.github.io/get-involved/contributing.md)
-- [Sponsorship Page](https://html2rss.github.io/get-involved/sponsoring.md)
+- [Contributing Guide](https://html2rss.github.io/get-involved/contributing)
+- [Sponsorship Page](https://html2rss.github.io/get-involved/sponsoring)
