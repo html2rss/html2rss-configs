@@ -1,4 +1,9 @@
 ---
+parameters:
+  region:
+    type: string
+    default: "berlin"
+
 channel:
   url: https://www.webentwickler-jobs.de/in/%<region>s
   language: de

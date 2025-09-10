@@ -1,4 +1,12 @@
 ---
+parameters:
+  section:
+    type: string
+    default: "news"
+  sub:
+    type: string
+    default: "tech"
+
 channel:
   url: https://www.cnet.com/%<section>s/%<sub>s/
   language: en

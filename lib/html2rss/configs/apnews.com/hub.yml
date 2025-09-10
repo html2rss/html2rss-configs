@@ -1,4 +1,9 @@
 ---
+parameters:
+  section:
+    type: string
+    default: "news"
+
 channel:
   url: https://apnews.com/%<section>s
   language: en
