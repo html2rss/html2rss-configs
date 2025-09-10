@@ -4,6 +4,26 @@
 
 This repository contains `html2rss` feed configurations for many websites.
 
+## Dynamic Parameters
+
+Configs must include a `parameters` section to define default values for dynamic parameters:
+
+```yaml
+parameters:
+  query:
+    type: string
+    default: "technology"
+  category:
+    type: string
+    default: "news"
+
+channel:
+  url: https://example.com/search?q=%<query>s&cat=%<category>s
+  # ... rest of config
+```
+
+The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value when no parameter is explicitly provided.
+
 ## Documentation
 
 - [Main Documentation](https://html2rss.github.io/html2rss-configs/)

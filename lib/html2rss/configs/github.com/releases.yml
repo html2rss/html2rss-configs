@@ -1,3 +1,11 @@
+parameters:
+  username:
+    type: string
+    default: "nuxt"
+  repository:
+    type: string
+    default: "nuxt.js"
+
 channel:
   url: https://github.com/%<username>s/%<repository>s/releases
   time_zone: UTC

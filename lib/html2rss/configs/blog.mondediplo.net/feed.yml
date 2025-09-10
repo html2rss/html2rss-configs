@@ -1,3 +1,8 @@
+parameters:
+  blog:
+    type: string
+    default: "-Defense-en-ligne-"
+
 channel:
   url: https://blog.mondediplo.net/%<blog>s
   time_zone: Europe/Paris

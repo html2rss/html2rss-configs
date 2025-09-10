@@ -1,3 +1,8 @@
+parameters:
+  user_id:
+    type: string
+    default: "ur7019649"
+
 channel:
   url: https://www.imdb.com/user/%<user_id>s/ratings
   time_zone: UTC

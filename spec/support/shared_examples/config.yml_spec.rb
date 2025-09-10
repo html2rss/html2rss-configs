@@ -26,7 +26,18 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     config = {}.merge Html2rss::Configs.find_by_name(feed_name)
 
     config.merge!(global_config.dup)
-    config[:params] = params if params
+
+    # Use provided params or extract defaults from parameters section
+    if params
+      config[:params] = params
+    elsif config[:parameters]
+      default_params = {}
+      config[:parameters].each do |param_name, param_config|
+        default_params[param_name] = param_config[:default] if param_config[:default]
+      end
+      config[:params] = default_params unless default_params.empty?
+    end
+
     config
   end
 
@@ -58,6 +69,16 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
       it 'has a known time_zone' do
         expect { TZInfo::Timezone.get yaml['channel']['time_zone'] }.not_to raise_error
+      end
+    end
+
+    context 'with parameters present' do
+      it 'has valid parameter definitions', :aggregate_failures do
+        yaml['parameters']&.each do |param_name, param_config|
+          expect(param_config).to be_a(Hash), "parameter `#{param_name}` should be a hash"
+          expect(param_config['type']).to eq('string'), "parameter `#{param_name}` should have type 'string'"
+          expect(param_config['default']).not_to be_nil, "parameter `#{param_name}` should have a default value"
+        end
       end
     end
 
