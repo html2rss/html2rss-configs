@@ -3,14 +3,16 @@
 
 changed_files = `git diff --name-only origin/master | grep 'lib/html2rss/configs/.*/.*.yml'`.split("\n")
 
-specs_to_run = changed_files.filter_map do |file|
-  filepath = File.expand_path File.join(__dir__, '..', file)
+if changed_files.count.positive?
+  # Use dynamic test file with environment variable to filter changed configs
+  config_names = changed_files.map { |file| file.sub('lib/html2rss/configs/', '') }
 
-  "#{file.gsub('lib/', 'spec/')}_spec.rb" if File.exist?(filepath)
-end
-
-if specs_to_run.count.positive?
-  exec "bundle exec rspec --tag fetch #{specs_to_run.join(' ')}"
+  # Test each changed config individually
+  config_names.each do |config_name|
+    puts "Testing changed config: #{config_name}"
+    system("bundle exec rspec --example '#{config_name}' --tag fetch spec/html2rss/configs_dynamic_spec.rb")
+  end
 else
+  puts 'No changed config files found'
   exit 0
 end

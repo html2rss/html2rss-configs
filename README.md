@@ -24,6 +24,23 @@ channel:
 
 The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value when no parameter is explicitly provided.
 
+## Testing
+
+Uses **dynamic test generation** - no individual spec files needed!
+
+```bash
+# Test all configs
+bundle exec rspec spec/html2rss/configs_dynamic_spec.rb
+
+# Test specific config
+make test-config CONFIG=github.com/releases.yml
+
+# Test domain
+make test-domain DOMAIN=github.com
+```
+
+**Adding new configs**: Just create the YAML file and run tests. No spec file needed.
+
 ## Documentation
 
 - [Main Documentation](https://html2rss.github.io/html2rss-configs/)
