@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: 252289759287d5f0d7251a958d12a72ceebc27d6
+  revision: 29660a74c2ac9330f60a99a1670241dde32a7222
   branch: master
   specs:
     html2rss (0.17.0)
@@ -95,7 +95,7 @@ GEM
       net-http (>= 0.5.0)
     hashie (5.0.0)
     htmlbeautifier (1.4.3)
-    json (2.13.2)
+    json (2.14.1)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
     language_server-protocol (3.17.0.5)
