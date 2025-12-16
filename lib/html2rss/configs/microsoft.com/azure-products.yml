@@ -1,0 +1,13 @@
+channel:
+  url: https://azure.microsoft.com/en-us/products
+  language: en
+selectors:
+  items:
+    selector: ".card-body"
+  title:
+    selector: ".h5"
+  link: # <-- html2rss v0.17.0 does not seem to work with url here
+    selector: ".link-group a:first-of-type"
+    extractor: "href"
+  description:
+    selector: "p"
