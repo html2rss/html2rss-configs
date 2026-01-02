@@ -41,16 +41,17 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     config
   end
 
-  context 'with the file' do
-    let(:host_name) { Helper.url_to_directory_name yaml['channel']['url'] }
+  context 'with the file' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+    let(:host_name) { Helper.url_to_host_name yaml['channel']['url'] }
+    let(:domain_name) { Helper.url_to_registrable_domain yaml['channel']['url'] }
     let(:dirname) { File.dirname(file_path).split(File::Separator).last }
 
     it 'is parseable' do
       expect { yaml }.not_to raise_error
     end
 
-    it "resides in a folder named after channel.url's host" do
-      expect(dirname).to eq(host_name)
+    it "resides in a folder named after channel.url's host or domain" do
+      expect([domain_name, host_name]).to include(dirname)
     end
   end
 
