@@ -10,7 +10,7 @@ require 'public_suffix'
 module Helper
   ##
   # @param url [String]
-  # @return [String]
+  # @return [String, nil]
   def self.url_to_registrable_domain(url)
     host = url_to_host_name(url)
     return host unless host
