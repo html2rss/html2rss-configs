@@ -111,8 +111,12 @@ GEM
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
     mime-types-data (3.2025.0924)
+    mini_portile2 (2.8.9)
     net-http (0.9.1)
       uri (>= 0.11.1)
+    nokogiri (1.18.8)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.18.8-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-darwin)
@@ -225,6 +229,7 @@ DEPENDENCIES
   html2rss-configs!
   html2rss-generator!
   nokogiri
+  public_suffix
   rspec (~> 3.0)
   rubocop
   rubocop-performance

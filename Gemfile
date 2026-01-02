@@ -11,6 +11,7 @@ group :development do
   gem 'html2rss-generator', github: 'html2rss/generator', branch: :main
 
   gem 'nokogiri'
+  gem 'public_suffix'
   gem 'rspec', '~> 3.0'
   gem 'rubocop'
   gem 'rubocop-performance'
