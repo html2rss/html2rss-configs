@@ -3,16 +3,37 @@
 require 'json'
 require 'nokogiri'
 require 'yaml'
-require 'uri'
+require 'public_suffix'
 
 ##
 # A collection of helper methods.
 module Helper
   ##
   # @param url [String]
+  # @return [String, nil]
+  def self.url_to_registrable_domain(url)
+    host = url_to_host_name(url)
+    return host unless host
+
+    registrable_domain(host)
+  end
+
+  ##
+  # @param url [String]
+  # @return [String, nil]
+  def self.url_to_host_name(url)
+    Html2rss::Url.for_channel(url)&.host
+  rescue ArgumentError
+    nil
+  end
+
+  ##
+  # @param host [String]
   # @return [String]
-  def self.url_to_directory_name(url)
-    URI(url.split('/')[0..2].join('/')).host.gsub(/^(api|www|webapp)\./, '')
+  def self.registrable_domain(host)
+    PublicSuffix.domain(host) || host
+  rescue PublicSuffix::DomainInvalid
+    host
   end
 
   ##

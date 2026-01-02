@@ -57,6 +57,8 @@ make test-domain DOMAIN=github.com
 
 **Adding new configs**: Just create the YAML file and run tests. No spec file needed.
 
+**Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
+
 ## Documentation
 
 - [Main Documentation](https://html2rss.github.io/html2rss-configs/)
