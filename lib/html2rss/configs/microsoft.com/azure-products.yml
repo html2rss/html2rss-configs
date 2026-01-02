@@ -1,6 +1,8 @@
 channel:
   url: https://azure.microsoft.com/en-us/products
   language: en
+  time_zone: US/Pacific
+  ttl: 3600
 selectors:
   items:
     selector: ".card-body"
