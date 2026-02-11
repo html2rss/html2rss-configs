@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: 400e796540e82a69e1f1e014b6f89c626acf32fd
+  revision: 6b43db180b37e811d2a3be06dafef3ed700e4a86
   branch: master
   specs:
     html2rss (0.17.0)
@@ -94,7 +94,7 @@ GEM
       logger
     faraday-follow_redirects (0.5.0)
       faraday (>= 1, < 3)
-    faraday-gzip (3.0.4)
+    faraday-gzip (3.1.0)
       faraday (>= 2.0, < 3)
       zlib (~> 3.0)
     faraday-net_http (3.4.2)
@@ -102,15 +102,15 @@ GEM
     hashie (5.0.0)
     htmlbeautifier (1.4.3)
     json (2.18.1)
-    kramdown (2.5.1)
-      rexml (>= 3.3.9)
+    kramdown (2.5.2)
+      rexml (>= 3.4.4)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2025.0924)
+    mime-types-data (3.2026.0203)
     net-http (0.9.1)
       uri (>= 0.11.1)
     nokogiri (1.18.8-arm64-darwin)
@@ -134,7 +134,7 @@ GEM
     racc (1.8.1)
     rainbow (3.1.1)
     regexp_parser (2.11.3)
-    reverse_markdown (3.0.1)
+    reverse_markdown (3.0.2)
       nokogiri
     rexml (3.4.4)
     rouge (4.5.2)
@@ -183,7 +183,7 @@ GEM
       unicode-display_width (>= 1.5, < 3.0)
       unicode_utils (~> 1.4)
     strings-ansi (0.2.0)
-    thor (1.4.0)
+    thor (1.5.0)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
     tty-markdown (0.7.2)
