@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/html2rss/html2rss
-  revision: 6b43db180b37e811d2a3be06dafef3ed700e4a86
+  revision: 20731ec7324e9ece01e9ad02dd19778137848a71
   branch: master
   specs:
     html2rss (0.17.0)
