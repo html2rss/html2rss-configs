@@ -3,7 +3,7 @@ default: lint validate test
 lint:
 	yamllint lib/html2rss/configs/ .github/
 	bundle exec rubocop -P -f quiet
-	npx prettier --check lib/**/*.yml .github/**/*.yml README.md
+	./node_modules/.bin/prettier --check lib/**/*.yml .github/**/*.yml README.md
 
 validate:
 	bundle exec ruby bin/validate_configs
@@ -53,4 +53,4 @@ restore-tests:
 
 lintfix:
 	bundle exec rubocop -a
-	npx prettier --write lib/**/*.yml .github/**/*.yml README.md
+	./node_modules/.bin/prettier --write lib/**/*.yml .github/**/*.yml README.md
