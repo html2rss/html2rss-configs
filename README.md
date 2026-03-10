@@ -22,7 +22,7 @@ This repository contains `html2rss` feed configurations for many websites.
 
 ## Dynamic Parameters
 
-Configs must include a `parameters` section to define default values for dynamic parameters:
+Parameterized configs should include a `parameters` section with default values:
 
 ```yaml
 parameters:
@@ -38,19 +38,30 @@ channel:
   # ... rest of config
 ```
 
-The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value when no parameter is explicitly provided.
+The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value used by this repository's validation and fetch tests.
+
+Notes:
+
+- Only configs that use `%<param>s` placeholders need a `parameters` section.
+- Callers can still override those defaults at runtime with `html2rss feed ... --params ...`.
+- Dynamic substitution applies to `channel` and `headers`; selectors are not parameterized by this feature.
 
 ## Validation
 
-Validate configs against the html2rss schema before committing:
+Use both schema-aware editing and runtime validation before committing:
 
 ```bash
-# Validate all configs
+# Validate all configs with the runtime validator
 make validate
 
 # Validate a single config directly
 bundle exec html2rss validate lib/html2rss/configs/github.com/releases.yml
+
+# Export the current JSON Schema locally for editor use
+make schema
 ```
+
+The JSON Schema is useful for editor autocompletion and basic structural checks. Runtime validation remains authoritative for merged defaults and cross-field rules.
 
 ## Testing
 
@@ -67,7 +78,7 @@ make test-config CONFIG=github.com/releases.yml
 make test-domain DOMAIN=github.com
 ```
 
-**Adding new configs**: Just create the YAML file and run `make validate` then tests. No spec file needed.
+**Adding new configs**: Create the YAML file, run `make validate`, then run the generated tests. No dedicated spec file is needed.
 
 **Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
 
@@ -92,6 +103,8 @@ configs via a glob pattern, so new files get validation before the modeline is a
 
 ## Documentation
 
-- [Main Documentation](https://html2rss.github.io/html2rss-configs/)
+- [Selectors Reference](https://html2rss.github.io/ruby-gem/reference/selectors/)
+- [Dynamic Parameters](https://html2rss.github.io/ruby-gem/how-to/dynamic-parameters/)
+- [CLI Reference](https://html2rss.github.io/ruby-gem/reference/cli-reference/)
 - [Contributing Guide](https://html2rss.github.io/get-involved/contributing)
 - [Sponsorship Page](https://html2rss.github.io/get-involved/sponsoring)
