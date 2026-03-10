@@ -3,7 +3,7 @@
 
 changed_files = `git diff --name-only origin/master | grep 'lib/html2rss/configs/.*/.*.yml'`.split("\n")
 
-if changed_files.count.positive?
+if changed_files.any?
   # Use dynamic test file with environment variable to filter changed configs
   config_names = changed_files.map { |file| file.sub('lib/html2rss/configs/', '') }
 
