@@ -28,13 +28,13 @@ files.each do |file|
       end
       failed << file
     end
-  rescue Psych::Exception => e
+  rescue Psych::Exception => error
     puts "FAIL #{file}"
-    warn "       parse: #{e.message}"
+    warn "       parse: #{error.message}"
     failed << file
-  rescue StandardError => e
+  rescue StandardError => error
     puts "FAIL #{file}"
-    warn "       validation: #{e.class}: #{e.message}"
+    warn "       validation: #{error.class}: #{error.message}"
     failed << file
   end
 end
