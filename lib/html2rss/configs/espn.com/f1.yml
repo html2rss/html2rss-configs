@@ -1,9 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+strategy: default
 channel:
   url: https://www.espn.com/f1/
   time_zone: UTC
   ttl: 60
 selectors:
   items:
+    s: 'dfd'
     selector: ".headlineStack__list > li"
   title:
     selector: "a"

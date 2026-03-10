@@ -71,6 +71,25 @@ make test-domain DOMAIN=github.com
 
 **Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
 
+## Editor Setup (JSON Schema)
+
+Get inline validation and autocompletion when editing configs in your IDE.
+All config files already carry the schema modeline at the top:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+```
+
+Any editor with [yaml-language-server](https://github.com/redhat-developer/yaml-language-server)
+support (VS Code + [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml),
+Neovim, Helix, …) will automatically pick up the schema when opening a config file.
+
+The included `.vscode/settings.json` additionally associates the schema with all
+configs via a glob pattern, so new files get validation before the modeline is added.
+
+> `make schema` writes `schema/html2rss-config.schema.json` locally — useful for
+> offline editing or when you want to pin against the currently installed gem version.
+
 ## Documentation
 
 - [Main Documentation](https://html2rss.github.io/html2rss-configs/)
