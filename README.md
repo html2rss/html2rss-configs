@@ -40,6 +40,18 @@ channel:
 
 The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value when no parameter is explicitly provided.
 
+## Validation
+
+Validate configs against the html2rss schema before committing:
+
+```bash
+# Validate all configs
+make validate
+
+# Validate a single config directly
+bundle exec html2rss validate lib/html2rss/configs/github.com/releases.yml
+```
+
 ## Testing
 
 Uses **dynamic test generation** - no individual spec files needed!
@@ -55,7 +67,7 @@ make test-config CONFIG=github.com/releases.yml
 make test-domain DOMAIN=github.com
 ```
 
-**Adding new configs**: Just create the YAML file and run tests. No spec file needed.
+**Adding new configs**: Just create the YAML file and run `make validate` then tests. No spec file needed.
 
 **Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
 

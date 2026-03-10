@@ -1,9 +1,16 @@
-default: lint test
+default: lint validate test
 
 lint:
 	yamllint lib/html2rss/configs/ .github/
 	bundle exec rubocop -P -f quiet
-	npx prettier --check lib/**/*.yml .github/**/*.yml  README.md
+	npx prettier --check lib/**/*.yml .github/**/*.yml README.md
+
+validate:
+	bundle exec ruby bin/validate_configs
+
+schema:
+	mkdir -p schema
+	bundle exec html2rss schema --write schema/html2rss-config.schema.json
 
 test:
 	bundle exec rspec
