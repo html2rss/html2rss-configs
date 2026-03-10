@@ -22,7 +22,7 @@ This repository contains `html2rss` feed configurations for many websites.
 
 ## Dynamic Parameters
 
-Configs must include a `parameters` section to define default values for dynamic parameters:
+Parameterized configs should include a `parameters` section with default values:
 
 ```yaml
 parameters:
@@ -38,7 +38,30 @@ channel:
   # ... rest of config
 ```
 
-The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value when no parameter is explicitly provided.
+The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value used by this repository's validation and fetch tests.
+
+Notes:
+
+- Only configs that use `%<param>s` placeholders need a `parameters` section.
+- Callers can still override those defaults at runtime with `html2rss feed ... --params ...`.
+- Dynamic substitution applies to `channel` and `headers`; selectors are not parameterized by this feature.
+
+## Validation
+
+Use both schema-aware editing and runtime validation before committing:
+
+```bash
+# Validate all configs with the runtime validator
+make validate
+
+# Validate a single config directly
+bundle exec html2rss validate lib/html2rss/configs/github.com/releases.yml
+
+# Export the current JSON Schema locally for editor use
+make schema
+```
+
+The JSON Schema is useful for editor autocompletion and basic structural checks. Runtime validation remains authoritative for merged defaults and cross-field rules.
 
 ## Testing
 
@@ -55,12 +78,33 @@ make test-config CONFIG=github.com/releases.yml
 make test-domain DOMAIN=github.com
 ```
 
-**Adding new configs**: Just create the YAML file and run tests. No spec file needed.
+**Adding new configs**: Create the YAML file, run `make validate`, then run the generated tests. No dedicated spec file is needed.
 
 **Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
 
+## Editor Setup (JSON Schema)
+
+Get inline validation and autocompletion when editing configs in your IDE.
+All config files already carry the schema modeline at the top:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+```
+
+Any editor with [yaml-language-server](https://github.com/redhat-developer/yaml-language-server)
+support (VS Code + [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml),
+Neovim, Helix, …) will automatically pick up the schema when opening a config file.
+
+The included `.vscode/settings.json` additionally associates the schema with all
+configs via a glob pattern, so new files get validation before the modeline is added.
+
+> `make schema` writes `schema/html2rss-config.schema.json` locally — useful for
+> offline editing or when you want to pin against the currently installed gem version.
+
 ## Documentation
 
-- [Main Documentation](https://html2rss.github.io/html2rss-configs/)
+- [Selectors Reference](https://html2rss.github.io/ruby-gem/reference/selectors/)
+- [Dynamic Parameters](https://html2rss.github.io/ruby-gem/how-to/dynamic-parameters/)
+- [CLI Reference](https://html2rss.github.io/ruby-gem/reference/cli-reference/)
 - [Contributing Guide](https://html2rss.github.io/get-involved/contributing)
 - [Sponsorship Page](https://html2rss.github.io/get-involved/sponsoring)

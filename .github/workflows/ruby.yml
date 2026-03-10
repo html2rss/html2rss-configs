@@ -11,14 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Install dependencies
-        run: |
-          sudo apt-get install -yqq yamllint
+        run: sudo apt-get install -yqq yamllint
+
+      - name: Install Node dependencies
+        run: npm ci --ignore-scripts --no-fund --no-audit
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -29,6 +31,9 @@ jobs:
       - name: Run linters
         run: make lint
 
+      - name: Validate configs
+        run: make validate
+
   test:
     strategy:
       fail-fast: false
@@ -38,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -53,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1

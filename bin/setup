@@ -1,8 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
-set -vx
 
+echo "==> Installing Ruby dependencies..."
 bundle install
 
-# Do any other automated setup that you need to do here
+echo
+echo "==> Installing Node dependencies (required for make lint)..."
+npm install --ignore-scripts --no-fund --no-audit
+
+echo
+echo "==> Checking system tools..."
+if command -v yamllint &>/dev/null; then
+  echo "    yamllint: ok ($(yamllint --version))"
+else
+  echo "    yamllint: not found"
+  echo "    Install with one of:"
+  echo "      brew install yamllint"
+  echo "      pip install yamllint"
+fi
+
+echo
+echo "==> Setup complete. Common commands:"
+echo
+echo "    make              # lint + validate + test"
+echo "    make lint         # yamllint, rubocop, prettier"
+echo "    make validate     # validate all configs against the html2rss schema"
+echo "    make test         # run rspec"
+echo
+echo "    make test-config CONFIG=github.com/releases.yml   # test a single config"
+echo "    make test-domain DOMAIN=github.com                # test all configs for a domain"
+echo "    make schema                                        # write schema locally (optional)"

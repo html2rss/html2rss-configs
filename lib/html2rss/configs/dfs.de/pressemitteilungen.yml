@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
   url: https://www.dfs.de/homepage/de/medien/presse/
   time_zone: Europe/Berlin
