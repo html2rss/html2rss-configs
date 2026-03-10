@@ -13,8 +13,8 @@ def comment_only_change?(file)
 end
 
 changed_files = `git diff --name-only origin/master`
-  .split("\n")
-  .grep(CONFIG_PATH)
+                .split("\n")
+                .grep(CONFIG_PATH)
 
 test_files = changed_files.reject { |file| comment_only_change?(file) }
 
