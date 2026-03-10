@@ -26,7 +26,7 @@ rescue Psych::Exception => error
   warn "       parse: #{error.message}"
   failed << file
 rescue StandardError => error
-    puts "FAIL #{file}"
+  puts "FAIL #{file}"
   warn "       validation: #{error.class}: #{error.message}"
   failed << file
 end
