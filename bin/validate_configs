@@ -3,10 +3,9 @@
 
 require 'bundler/setup'
 require 'html2rss'
-require 'yaml'
 
-unless Html2rss::Config.respond_to?(:validate)
-  warn 'Error: installed html2rss gem does not support Config.validate.'
+unless Html2rss::Config.respond_to?(:validate_yaml)
+  warn 'Error: installed html2rss gem does not support Config.validate_yaml.'
   warn 'Run: bundle update html2rss'
   exit 1
 end
@@ -16,8 +15,7 @@ failed = []
 
 files.each do |file|
   begin
-    config = YAML.safe_load_file(file, symbolize_names: true)
-    result = Html2rss::Config.validate(config)
+    result = Html2rss::Config.validate_yaml(file)
 
     if result.success?
       puts "ok   #{file}"
