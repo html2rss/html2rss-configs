@@ -7,7 +7,7 @@ bundle install
 
 echo
 echo "==> Installing Node dependencies (required for make lint)..."
-npm install --ignore-scripts --no-fund --no-audit
+npm ci --ignore-scripts --no-fund --no-audit
 
 echo
 echo "==> Checking system tools..."
