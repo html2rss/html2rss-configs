@@ -15,26 +15,28 @@ files = Dir['lib/html2rss/configs/**/*.yml']
 failed = []
 
 files.each do |file|
-  config = YAML.safe_load_file(file, symbolize_names: true)
-  result = Html2rss::Config.validate(config)
+  begin
+    config = YAML.safe_load_file(file, symbolize_names: true)
+    result = Html2rss::Config.validate(config)
 
-  if result.success?
-    puts "ok   #{file}"
-  else
-    puts "FAIL #{file}"
-    result.errors.to_h.each do |key, messages|
-      Array(messages).each { |msg| warn "       #{key}: #{msg}" }
+    if result.success?
+      puts "ok   #{file}"
+    else
+      puts "FAIL #{file}"
+      result.errors.to_h.each do |key, messages|
+        Array(messages).each { |msg| warn "       #{key}: #{msg}" }
+      end
+      failed << file
     end
+  rescue Psych::Exception => e
+    puts "FAIL #{file}"
+    warn "       parse: #{e.message}"
+    failed << file
+  rescue StandardError => e
+    puts "FAIL #{file}"
+    warn "       validation: #{e.class}: #{e.message}"
     failed << file
   end
-rescue Psych::Exception => error
-  puts "FAIL #{file}"
-  warn "       parse: #{error.message}"
-  failed << file
-rescue StandardError => error
-  puts "FAIL #{file}"
-  warn "       validation: #{error.class}: #{error.message}"
-  failed << file
 end
 
 puts
