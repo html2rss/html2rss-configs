@@ -32,13 +32,6 @@ test-domain:
 	fi
 	bundle exec rspec --example "$(DOMAIN)" spec/html2rss/configs_dynamic_spec.rb
 
-test-debug:
-	@if [ -z "$(CONFIG)" ]; then \
-		echo "Usage: make test-debug CONFIG=github.com/releases.yml"; \
-		exit 1; \
-	fi
-	DEBUG_CONFIG=$(CONFIG) bundle exec rspec spec/html2rss/configs_dynamic_spec.rb
-
 # Migration commands
 migrate-tests:
 	bin/migrate_to_dynamic_tests

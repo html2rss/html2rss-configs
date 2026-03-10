@@ -14,23 +14,14 @@ RSpec.describe Html2rss::Configs do
   end
 
   config_files.each do |config_file|
-    relative_path = config_file.sub('lib/html2rss/configs/', '')
-    config_name = relative_path.tr('/', '_').gsub('.yml', '')
-    domain = relative_path.split('/').first
+    config_name = config_file.sub('lib/html2rss/configs/', '').tr('/', '_').gsub('.yml', '')
+    domain = config_file.sub('lib/html2rss/configs/', '').split('/').first
 
-    describe "#{relative_path} (#{config_name})", config: config_name, domain: domain do
-      it_behaves_like 'config.yml', relative_path
-
-      # Add debugging hook for specific configs
-      if ENV['DEBUG_CONFIG'] == relative_path
-        it 'debugs the config' do
-          puts "Debugging config: #{relative_path}"
-          puts "File path: #{config_file}"
-          puts "Config name: #{config_name}"
-          puts "Domain: #{domain}"
-          expect(relative_path).to be_a(String) # Add meaningful expectation
-        end
-      end
+    describe "#{config_file.sub('lib/html2rss/configs/', '')} (#{config_name})",
+             config: config_name,
+             domain: domain,
+             relative_path: config_file.sub('lib/html2rss/configs/', '') do
+      it_behaves_like 'config.yml', config_file.sub('lib/html2rss/configs/', '')
     end
   end
 end
