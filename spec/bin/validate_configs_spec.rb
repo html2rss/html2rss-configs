@@ -1,14 +1,43 @@
 # frozen_string_literal: true
 
 require 'fileutils'
-require 'stringio'
 require 'tmpdir'
 
-RSpec.describe 'bin/validate_configs' do
+RSpec.describe 'bin/validate_configs' do # rubocop:disable RSpec/DescribeClass
   let(:script_path) { File.expand_path('../../bin/validate_configs', __dir__) }
+  let(:config_path) { File.join('lib', 'html2rss', 'configs', 'example.com', 'search.yml') }
+  let(:success_output) do
+    a_string_including(
+      "ok   #{config_path}",
+      '1 configs validated successfully.'
+    )
+  end
 
   it 'passes validation for parameterized configs when defaults are present' do
-    config = <<~YAML
+    with_temp_config do |dir|
+      expect { run_script(dir) }.to output(success_output).to_stdout
+                                                          .and output('').to_stderr
+    end
+  end
+
+  def with_temp_config
+    Dir.mktmpdir do |dir|
+      write_config(dir)
+      yield dir
+    end
+  end
+
+  def write_config(dir)
+    FileUtils.mkdir_p(File.join(dir, File.dirname(config_path)))
+    File.write(File.join(dir, config_path), valid_config)
+  end
+
+  def run_script(dir)
+    Dir.chdir(dir) { load script_path }
+  end
+
+  def valid_config
+    <<~YAML
       parameters:
         query:
           type: string
@@ -23,26 +52,5 @@ RSpec.describe 'bin/validate_configs' do
         title:
           selector: "h2"
     YAML
-
-    Dir.mktmpdir do |dir|
-      FileUtils.mkdir_p(File.join(dir, 'lib', 'html2rss', 'configs', 'example.com'))
-      File.write(File.join(dir, 'lib', 'html2rss', 'configs', 'example.com', 'search.yml'), config)
-
-      stdout = StringIO.new
-      stderr = StringIO.new
-      original_stdout = $stdout
-      original_stderr = $stderr
-      $stdout = stdout
-      $stderr = stderr
-
-      Dir.chdir(dir) { load script_path }
-
-      expect(stdout.string).to include('ok   lib/html2rss/configs/example.com/search.yml')
-      expect(stdout.string).to include('1 configs validated successfully.')
-      expect(stderr.string).to be_empty
-    ensure
-      $stdout = original_stdout
-      $stderr = original_stderr
-    end
   end
 end

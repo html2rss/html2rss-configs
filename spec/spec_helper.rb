@@ -3,9 +3,6 @@
 require 'bundler/setup'
 require 'tzinfo'
 
-local_html2rss_lib = File.expand_path('../../html2rss/lib', __dir__)
-$LOAD_PATH.unshift(local_html2rss_lib) if File.directory?(local_html2rss_lib)
-
 require 'html2rss'
 require 'html2rss/configs'
 
