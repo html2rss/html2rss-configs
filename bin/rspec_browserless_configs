@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../spec/support/browserless_fetch_configs'
+
+unless BrowserlessFetchConfigs.browserless_env_configured?
+  warn 'BROWSERLESS_IO_WEBSOCKET_URL is required for browserless fetch tests.'
+  warn 'Set BROWSERLESS_IO_API_TOKEN as well when using a custom websocket endpoint.'
+  exit 1
+end
+
+args = ['bundle', 'exec', 'rspec', '--tag', 'fetch']
+BrowserlessFetchConfigs::CONFIGS.each do |config|
+  args << '--example'
+  args << config
+end
+args << 'spec/html2rss/configs_dynamic_spec.rb'
+
+exec(*args)

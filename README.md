@@ -76,9 +76,21 @@ make test-config CONFIG=github.com/releases.yml
 
 # Test domain
 make test-domain DOMAIN=github.com
+
+# Run live fetch tests for the full corpus
+make test-fetch-all-configs
+
+# Run the Browserless-backed fetch subset
+BROWSERLESS_IO_WEBSOCKET_URL=ws://127.0.0.1:4002 \
+make test-fetch-browserless-configs
 ```
 
 **Adding new configs**: Create the YAML file, run `make validate`, then run the generated tests. No dedicated spec file is needed.
+
+The fetch suite has two lanes:
+
+- `make test-fetch-all-configs` runs all `:fetch` examples. Configs marked as Browserless-backed are skipped unless Browserless env vars are configured.
+- `make test-fetch-browserless-configs` runs only the Browserless-backed config subset and requires `BROWSERLESS_IO_WEBSOCKET_URL`. Custom endpoints also require `BROWSERLESS_IO_API_TOKEN`.
 
 **Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
 

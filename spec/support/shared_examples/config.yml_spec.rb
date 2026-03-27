@@ -9,23 +9,11 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
   end
 
-  let(:global_config) do
-    {
-      'headers' => {
-        'User-Agent': <<~UA.delete("\n")
-          Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
-          AppleWebKit/537.36 (KHTML, like Gecko)
-          Chrome/134.0.0.0
-          Safari/537.36'
-        UA
-      }
-    }
-  end
   let(:config) do
     feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
     config = {}.merge Html2rss::Configs.find_by_name(feed_name)
-
-    config.merge!(global_config.dup)
+    # Reuse runtime browser defaults so fetch specs exercise the same header shape as production.
+    config[:headers] = Html2rss::Config::RequestHeaders.browser_defaults.merge(config.fetch(:headers, {}))
 
     # Use provided params or extract defaults from parameters section
     if params
@@ -41,7 +29,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     config
   end
 
-  context 'with the file' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+  context 'with the file' do
     let(:host_name) { Helper.url_to_host_name yaml['channel']['url'] }
     let(:domain_name) { Helper.url_to_registrable_domain yaml['channel']['url'] }
     let(:dirname) { File.dirname(file_path).split(File::Separator).last }
@@ -115,6 +103,16 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   context "when fetching #{params}", :fetch do
     subject(:feed) { Html2rss.feed(config.dup) }
 
+    before do
+      next unless config[:strategy].to_s == 'browserless'
+      next if BrowserlessFetchConfigs.browserless_env_configured?
+
+      skip(
+        "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, " \
+        'for custom endpoints, BROWSERLESS_IO_API_TOKEN'
+      )
+    end
+
     it 'has positive amount of items' do
       expect(feed.items.count).to be_positive, <<~MSG
         No items fetched.
@@ -140,6 +138,16 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     let(:specified_attributes) { Html2rss::Selectors::ITEM_TAGS & %w[title description author category] }
     let(:text_attributes) { specified_attributes & %w[title description author] }
+
+    before do
+      next unless config[:strategy].to_s == 'browserless'
+      next if BrowserlessFetchConfigs.browserless_env_configured?
+
+      skip(
+        "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, " \
+        'for custom endpoints, BROWSERLESS_IO_API_TOKEN'
+      )
+    end
 
     it 'has no empty text attributes', :aggregate_failures do
       text_attributes.each do |attribute_name|

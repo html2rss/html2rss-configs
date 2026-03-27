@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+strategy: browserless
+
+channel:
+  url: https://www.apple.com/newsroom/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "li.tile-item a.tile-hero, li.tile-item a.tile-2up, li.tile-item a.tile-3up, li.tile-item a.tile-list"
+    enhance: false
+  title:
+    selector: .tile__headline
+  url:
+    extractor: href
+  published_at:
+    selector: .tile__timestamp
