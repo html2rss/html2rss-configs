@@ -82,7 +82,6 @@ make test-fetch-all-configs
 
 # Run the Browserless-backed fetch subset
 BROWSERLESS_IO_WEBSOCKET_URL=ws://127.0.0.1:4002 \
-BROWSERLESS_IO_API_TOKEN=... \
 make test-fetch-browserless-configs
 ```
 

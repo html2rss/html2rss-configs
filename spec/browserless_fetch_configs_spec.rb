@@ -32,5 +32,12 @@ RSpec.describe BrowserlessFetchConfigs do
 
       expect(described_class.browserless_env_configured?).to be(false)
     end
+
+    it 'accepts non-local websocket URLs when a token is present' do
+      ENV['BROWSERLESS_IO_WEBSOCKET_URL'] = 'wss://production.browserless.example/ws'
+      ENV['BROWSERLESS_IO_API_TOKEN'] = 'secret-token'
+
+      expect(described_class.browserless_env_configured?).to be(true)
+    end
   end
 end

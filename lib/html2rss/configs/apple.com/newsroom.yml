@@ -8,7 +8,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'li.tile-item a.tile-hero, li.tile-item a.tile-2up, li.tile-item a.tile-3up, li.tile-item a.tile-list'
+    selector: "li.tile-item a.tile-hero, li.tile-item a.tile-2up, li.tile-item a.tile-3up, li.tile-item a.tile-list"
     enhance: false
   title:
     selector: .tile__headline

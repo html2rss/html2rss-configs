@@ -8,7 +8,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: '.post-box.v2'
+    selector: ".post-box.v2"
     enhance: false
   title:
     selector: 'h3 a[href*="/20"]'

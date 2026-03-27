@@ -14,7 +14,6 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     config = {}.merge Html2rss::Configs.find_by_name(feed_name)
     # Reuse runtime browser defaults so fetch specs exercise the same header shape as production.
     config[:headers] = Html2rss::Config::RequestHeaders.browser_defaults.merge(config.fetch(:headers, {}))
-    config[:strategy] = :browserless if BrowserlessFetchConfigs.include?(file_name)
 
     # Use provided params or extract defaults from parameters section
     if params
@@ -105,7 +104,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     subject(:feed) { Html2rss.feed(config.dup) }
 
     before do
-      next unless BrowserlessFetchConfigs.include?(file_name)
+      next unless config[:strategy].to_s == 'browserless'
       next if BrowserlessFetchConfigs.browserless_env_configured?
 
       skip(
@@ -141,7 +140,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     let(:text_attributes) { specified_attributes & %w[title description author] }
 
     before do
-      next unless BrowserlessFetchConfigs.include?(file_name)
+      next unless config[:strategy].to_s == 'browserless'
       next if BrowserlessFetchConfigs.browserless_env_configured?
 
       skip(
