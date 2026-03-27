@@ -30,7 +30,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     config
   end
 
-  context 'with the file' do # rubocop:disable RSpec/MultipleMemoizedHelpers
+  context 'with the file' do
     let(:host_name) { Helper.url_to_host_name yaml['channel']['url'] }
     let(:domain_name) { Helper.url_to_registrable_domain yaml['channel']['url'] }
     let(:dirname) { File.dirname(file_path).split(File::Separator).last }
@@ -108,7 +108,10 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       next unless BrowserlessFetchConfigs.include?(file_name)
       next if BrowserlessFetchConfigs.browserless_env_configured?
 
-      skip "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, for custom endpoints, BROWSERLESS_IO_API_TOKEN"
+      skip(
+        "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, " \
+        'for custom endpoints, BROWSERLESS_IO_API_TOKEN'
+      )
     end
 
     it 'has positive amount of items' do
@@ -141,7 +144,10 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       next unless BrowserlessFetchConfigs.include?(file_name)
       next if BrowserlessFetchConfigs.browserless_env_configured?
 
-      skip "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, for custom endpoints, BROWSERLESS_IO_API_TOKEN"
+      skip(
+        "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, " \
+        'for custom endpoints, BROWSERLESS_IO_API_TOKEN'
+      )
     end
 
     it 'has no empty text attributes', :aggregate_failures do

@@ -3,8 +3,8 @@
 RSpec.describe BrowserlessFetchConfigs do
   describe '.browserless_env_configured?' do
     around do |example|
-      original_ws_url = ENV['BROWSERLESS_IO_WEBSOCKET_URL']
-      original_api_token = ENV['BROWSERLESS_IO_API_TOKEN']
+      original_ws_url = ENV.fetch('BROWSERLESS_IO_WEBSOCKET_URL', nil)
+      original_api_token = ENV.fetch('BROWSERLESS_IO_API_TOKEN', nil)
 
       example.run
     ensure
