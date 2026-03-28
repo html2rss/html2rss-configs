@@ -1,8 +1,9 @@
 default: lint validate test
+ready: lint validate test
 
 lint:
 	yamllint lib/html2rss/configs/ .github/
-	bundle exec rubocop -P -f quiet
+	bundle exec rubocop -P --cache false -f quiet
 	./node_modules/.bin/prettier --check lib/**/*.yml .github/**/*.yml README.md
 
 validate:
