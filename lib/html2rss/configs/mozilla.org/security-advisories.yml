@@ -6,7 +6,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'main li'
+    selector: "main li"
     enhance: false
   title:
     selector: 'a[href*="/security/advisories/mfsa"]'
