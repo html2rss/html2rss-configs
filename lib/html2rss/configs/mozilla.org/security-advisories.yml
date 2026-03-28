@@ -4,6 +4,7 @@ channel:
   language: en
   time_zone: UTC
   ttl: 360
+strategy: browserless
 selectors:
   items:
     selector: "main li"

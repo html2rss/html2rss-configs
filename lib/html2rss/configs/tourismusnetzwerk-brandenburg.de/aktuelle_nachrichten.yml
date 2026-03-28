@@ -5,6 +5,7 @@ channel:
   ttl: 720
   language: de
 enhance: false
+strategy: browserless
 selectors:
   items:
     selector: "article.node.article.wall-floating"

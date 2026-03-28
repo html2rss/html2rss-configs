@@ -6,11 +6,11 @@ channel:
   ttl: 360
   language: de
 enhance: false
+strategy: browserless
 selectors:
   items:
-    selector: "#most-viewed ol > li"
+    selector: "section#top-articles article.top-article a.top-article-content[href^='/artikel/']"
   title:
-    selector: "h3 > a"
+    extractor: "text"
   url:
-    selector: "h3 > a"
     extractor: "href"

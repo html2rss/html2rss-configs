@@ -4,6 +4,7 @@ channel:
   time_zone: UTC
   ttl: 720
 enhance: false
+strategy: browserless
 selectors:
   items:
     selector: ".views-row > article"
