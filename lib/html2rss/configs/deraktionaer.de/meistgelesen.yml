@@ -1,21 +1,16 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
   title: "deraktionaer.de: meistgelesen"
-  url: https://deraktionaer.de/
+  url: https://www.deraktionaer.de/
   time_zone: Europe/Berlin
   ttl: 360
   language: de
+enhance: false
+strategy: browserless
 selectors:
   items:
-    selector: "#most-viewed ol > li"
+    selector: "section#top-articles article.top-article a.top-article-content[href^='/artikel/']"
   title:
-    selector: "> a"
+    extractor: "text"
   url:
-    selector: "> a"
     extractor: "href"
-  isin:
-    selector: ".stock-info"
-    extractor: attribute
-    attribute: "data-quote"
-  categories:
-    - isin

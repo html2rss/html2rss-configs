@@ -68,6 +68,13 @@ Recommended sequence:
 4. Confirm the title and URL live inside that boundary.
 5. Record the final URL if the page redirects by locale or renders a different surface than expected.
 
+If Chrome MCP is unavailable (`Transport closed` or page-lock errors), do this recovery sequence:
+
+1. Kill stale Chrome MCP processes (`pkill -9 -f 'chrome-devtools-mcp|Chrome for Testing'`).
+2. Retry Chrome MCP once before continuing.
+3. If still unavailable, continue with `curl -I -L`, runtime `feed`, and HTML inspection in a temporary file.
+4. Explicitly report Chrome MCP outage in the final handoff.
+
 ## Browserless
 
 Use Browserless when:
@@ -158,6 +165,20 @@ bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/con
 - the chosen surface is too noisy or too dynamic
 - the candidate should be downgraded or dropped
 
+7. Cross-runtime mismatch check (required when core feed works but fetch specs fail):
+
+- confirm canonical URL with redirect tracing:
+
+```bash
+curl -I -L -s https://example.com | sed -n '1,20p'
+```
+
+- compare behavior in both runtimes:
+  - core repo (`../html2rss`) via `html2rss feed`
+  - configs repo fetch lane (`bundle exec rspec --tag fetch --example ...`)
+- if selectors are valid in core but fetch lane still returns zero items, treat this as request-strategy/runtime mismatch, not selector success.
+- in that case: prefer Browserless-backed verification if available; otherwise mark as downgraded/deferred with evidence.
+
 ## Runtime Debugging
 
 Use the core CLI as the authority for single-config debugging. The quickest loop is:
@@ -169,6 +190,13 @@ Use the core CLI as the authority for single-config debugging. The quickest loop
 5. rerun
 
 If Browserless works but Faraday does not, keep the config narrow and classify it as Browserless-backed instead of trying to rescue it with brittle tweaks.
+
+Additional high-value checks:
+
+- Always normalize `channel.url` to the final canonical host/path (`www` vs non-`www`, retired legacy paths).
+- Prefer selectors anchored to content links (`h3 a`, `a[href*='/article/']`) over container-only selectors.
+- Remove optional fields first when quality drops (`categories`, synthetic IDs, weak descriptions) before adding selector complexity.
+- Set `enhance: false` early if enhancement starts pulling nav/hero/market widgets.
 
 ## Auto-Source
 
@@ -211,3 +239,5 @@ When finishing config work, report:
 - dropped or deferred candidates and why
 - commands actually run
 - residual risks, especially selector drift, localization dependence, or Browserless dependence
+- whether Chrome MCP was available during validation
+- whether focused fetch specs matched core runtime behavior

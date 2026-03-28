@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+channel:
+  url: https://grafana.com/docs/grafana/latest/whatsnew/
+  language: en
+  time_zone: UTC
+  ttl: 360
+strategy: browserless
+selectors:
+  items:
+    selector: 'a.docs__menu-a[href^="/docs/grafana/latest/whatsnew/whats-new-in-v"]'
+    enhance: false
+  title:
+    extractor: text
+  url:
+    extractor: href

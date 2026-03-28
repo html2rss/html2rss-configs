@@ -1,15 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://iaapa.org/news-funworld
+  url: https://go.dev/doc/devel/release
+  language: en
   time_zone: UTC
-  ttl: 720
-enhance: false
+  ttl: 360
 strategy: browserless
 selectors:
   items:
-    selector: ".views-row > article"
+    selector: 'a[href^="/doc/go1."]'
+    enhance: false
   title:
-    selector: h3
+    extractor: text
   url:
-    selector: "a"
-    extractor: "href"
+    extractor: href

@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+channel:
+  url: https://www.mozilla.org/en-US/security/advisories/
+  language: en
+  time_zone: UTC
+  ttl: 360
+strategy: browserless
+selectors:
+  items:
+    selector: "main li"
+    enhance: false
+  title:
+    selector: 'a[href*="/security/advisories/mfsa"]'
+  url:
+    selector: 'a[href*="/security/advisories/mfsa"]'
+    extractor: href

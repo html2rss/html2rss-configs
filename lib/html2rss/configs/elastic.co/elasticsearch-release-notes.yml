@@ -1,14 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
----
 channel:
-  url: https://avherald.com/
+  url: https://www.elastic.co/docs/release-notes/elasticsearch
   language: en
-  ttl: 120
   time_zone: UTC
+  ttl: 360
+strategy: browserless
 selectors:
   items:
-    selector: "table table a"
+    selector: 'a[href^="#elasticsearch-"][href$="-release-notes"]'
+    enhance: false
   title:
-    selector: span
+    extractor: text
   url:
     extractor: href
