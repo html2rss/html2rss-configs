@@ -5,10 +5,11 @@ channel:
   language: en
   ttl: 120
   time_zone: UTC
+enhance: false
 selectors:
   items:
-    selector: "table table a"
+    selector: "a[href*='h?article=']"
   title:
-    selector: span
+    extractor: text
   url:
     extractor: href

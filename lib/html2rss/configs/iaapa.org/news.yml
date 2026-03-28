@@ -1,15 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.iaapa.org/news
+  url: https://iaapa.org/news-funworld
   time_zone: UTC
   ttl: 720
+enhance: false
 selectors:
   items:
     selector: ".views-row > article"
   title:
     selector: h3
-  description:
-    selector: ".event-card__summary"
   url:
     selector: "a"
     extractor: "href"

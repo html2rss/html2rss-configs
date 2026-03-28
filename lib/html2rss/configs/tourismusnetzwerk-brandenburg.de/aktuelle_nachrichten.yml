@@ -1,20 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.tourismusnetzwerk-brandenburg.de/nc/aktuelle-nachrichten/
+  url: https://tourismusnetzwerk-brandenburg.de/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
+enhance: false
 selectors:
   items:
-    selector: "article.article"
+    selector: "article.node.article.wall-floating"
   title:
-    selector: "h3"
+    selector: "h3.title a[rel='bookmark']"
   url:
-    selector: "a"
+    selector: "h3.title a[rel='bookmark']"
     extractor: "href"
-  topic:
-    selector: ".field--item"
-  categories:
-    - topic
-  description:
-    selector: "p"
