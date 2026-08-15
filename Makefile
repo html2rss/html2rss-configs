@@ -22,8 +22,8 @@ test-fetch-changed-configs:
 test-fetch-all-configs:
 	bundle exec rspec --tag fetch spec/html2rss/configs_dynamic_spec.rb
 
-test-fetch-browserless-configs:
-	bin/rspec_browserless_configs
+test-fetch-botasaurus-configs:
+	bin/rspec_botasaurus_configs
 
 test-all: test test-fetch-all-configs
 
