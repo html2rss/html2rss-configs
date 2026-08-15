@@ -18,10 +18,6 @@ module BotasaurusFetchConfigs
 
   module_function
 
-  def include?(file_name)
-    CONFIGS.include?(file_name)
-  end
-
   def botasaurus_env_configured?
     !ENV['BOTASAURUS_SCRAPER_URL'].to_s.empty?
   end

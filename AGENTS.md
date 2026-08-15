@@ -31,7 +31,7 @@ Avoid these unless they are the only workable option:
 
 - homepages with hero content mixed with promos
 - pages that combine multiple unrelated card systems
-- infinite-scroll surfaces unless Browserless is already clearly required
+- infinite-scroll surfaces unless Botasaurus is already clearly required
 - localized or geo-redirecting entry pages when a stable non-localized path exists
 
 ## Selector Strategy
