@@ -6,7 +6,7 @@ channel:
   ttl: 360
   language: de
 enhance: false
-strategy: browserless
+strategy: botasaurus
 selectors:
   items:
     selector: "section#top-articles article.top-article a.top-article-content[href^='/artikel/']"

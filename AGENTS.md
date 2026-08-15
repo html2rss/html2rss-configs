@@ -31,7 +31,7 @@ Avoid these unless they are the only workable option:
 
 - homepages with hero content mixed with promos
 - pages that combine multiple unrelated card systems
-- infinite-scroll surfaces unless Browserless is already clearly required
+- infinite-scroll surfaces unless Botasaurus is already clearly required
 - localized or geo-redirecting entry pages when a stable non-localized path exists
 
 ## Selector Strategy
@@ -75,21 +75,19 @@ If Chrome MCP is unavailable (`Transport closed` or page-lock errors), do this r
 3. If still unavailable, continue with `curl -I -L`, runtime `feed`, and HTML inspection in a temporary file.
 4. Explicitly report Chrome MCP outage in the final handoff.
 
-## Browserless
+## Botasaurus
 
-Use Browserless when:
+Use Botasaurus when:
 
 - the page is JS-rendered
 - Faraday fetch returns zero items but Chrome shows a valid repeated list
 - the site is bot-sensitive enough that static fetch is unreliable
 
-Local Browserless notes:
+Local Botasaurus notes:
 
-- `html2rss-web` exposes a local endpoint at `ws://127.0.0.1:4002`
-- Browserless fetch tests require `BROWSERLESS_IO_WEBSOCKET_URL`
-- custom websocket endpoints also require `BROWSERLESS_IO_API_TOKEN`
+- Botasaurus fetch tests require `BOTASAURUS_SCRAPER_URL` (typically `http://localhost:4010`)
 
-Do not default the whole repo to Browserless. Use it only for configs that need it.
+Do not default the whole repo to Botasaurus. Use it only for configs that need it.
 
 ## Command Assumptions
 
@@ -110,7 +108,7 @@ Assume the `html2rss` CLI is available on `PATH` when working against the siblin
 7. Run repo validation and non-fetch tests.
 8. Run the appropriate fetch lane:
    - plain fetch for static or Faraday-backed configs
-   - Browserless fetch for JS-heavy or Browserless-backed configs
+   - Botasaurus fetch for JS-heavy or Botasaurus-backed configs
 
 ## Quality Gate
 
@@ -150,18 +148,17 @@ make test
 bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
 ```
 
-- Browserless-backed candidate:
+- Botasaurus-backed candidate:
 
 ```bash
-BROWSERLESS_IO_WEBSOCKET_URL=ws://127.0.0.1:4002 \
-BROWSERLESS_IO_API_TOKEN=... \
+BOTASAURUS_SCRAPER_URL=http://localhost:4010 \
 bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
 ```
 
 6. If fetch still fails, decide explicitly whether:
 
 - selectors are wrong
-- the page needs Browserless
+- the page needs Botasaurus
 - the chosen surface is too noisy or too dynamic
 - the candidate should be downgraded or dropped
 
@@ -177,7 +174,7 @@ curl -I -L -s https://example.com | sed -n '1,20p'
   - core repo (`../html2rss`) via `html2rss feed`
   - configs repo fetch lane (`bundle exec rspec --tag fetch --example ...`)
 - if selectors are valid in core but fetch lane still returns zero items, treat this as request-strategy/runtime mismatch, not selector success.
-- in that case: prefer Browserless-backed verification if available; otherwise mark as downgraded/deferred with evidence.
+- in that case: prefer Botasaurus-backed verification if available; otherwise mark as downgraded/deferred with evidence.
 
 ## Runtime Debugging
 
@@ -189,7 +186,7 @@ Use the core CLI as the authority for single-config debugging. The quickest loop
 4. adjust selectors
 5. rerun
 
-If Browserless works but Faraday does not, keep the config narrow and classify it as Browserless-backed instead of trying to rescue it with brittle tweaks.
+If Botasaurus works but Faraday does not, keep the config narrow and classify it as Botasaurus-backed instead of trying to rescue it with brittle tweaks.
 
 Additional high-value checks:
 
@@ -210,7 +207,7 @@ html2rss auto 'https://example.com'
 Use it to:
 
 - discover likely repeated item selectors
-- compare Faraday and Browserless behavior quickly
+- compare Faraday and Botasaurus behavior quickly
 - decide whether a site belongs in the curated set at all
 
 Do not ship raw auto-sourced output without manual tightening.
@@ -238,6 +235,6 @@ When finishing config work, report:
 - downgraded configs and why
 - dropped or deferred candidates and why
 - commands actually run
-- residual risks, especially selector drift, localization dependence, or Browserless dependence
+- residual risks, especially selector drift, localization dependence, or Botasaurus dependence
 - whether Chrome MCP was available during validation
 - whether focused fetch specs matched core runtime behavior

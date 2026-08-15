@@ -5,7 +5,7 @@ channel:
   ttl: 720
   language: de
 enhance: false
-strategy: browserless
+strategy: botasaurus
 selectors:
   items:
     selector: "article.node.article.wall-floating"

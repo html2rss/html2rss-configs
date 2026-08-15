@@ -104,13 +104,10 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     subject(:feed) { Html2rss.feed(config.dup) }
 
     before do
-      next unless config[:strategy].to_s == 'browserless'
-      next if BrowserlessFetchConfigs.browserless_env_configured?
+      next unless config[:strategy].to_s == 'botasaurus'
+      next if BotasaurusFetchConfigs.botasaurus_env_configured?
 
-      skip(
-        "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, " \
-        'for custom endpoints, BROWSERLESS_IO_API_TOKEN'
-      )
+      skip("Botasaurus fetch for #{file_name} requires BOTASAURUS_SCRAPER_URL")
     end
 
     it 'has positive amount of items' do
@@ -140,13 +137,10 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     let(:text_attributes) { specified_attributes & %w[title description author] }
 
     before do
-      next unless config[:strategy].to_s == 'browserless'
-      next if BrowserlessFetchConfigs.browserless_env_configured?
+      next unless config[:strategy].to_s == 'botasaurus'
+      next if BotasaurusFetchConfigs.botasaurus_env_configured?
 
-      skip(
-        "Browserless fetch for #{file_name} requires BROWSERLESS_IO_WEBSOCKET_URL and, " \
-        'for custom endpoints, BROWSERLESS_IO_API_TOKEN'
-      )
+      skip("Botasaurus fetch for #{file_name} requires BOTASAURUS_SCRAPER_URL")
     end
 
     it 'has no empty text attributes', :aggregate_failures do
