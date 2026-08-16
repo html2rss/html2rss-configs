@@ -18,6 +18,11 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
 - If the site only becomes reliable on a narrower path, use that narrower path.
 - Omit brittle fields. If dates or descriptions are low quality, leave them out.
 - Set `enhance: false` when enhancement pulls in page chrome, duplicate cards, or unrelated links.
+- Require top-level `directory.topics` (non-empty) using the controlled vocabulary from
+  `Html2rss::Config::Validator::DIRECTORY_TOPICS` (`sports`, `energy`, `tech`, `science`,
+  `news`, `entertainment`, `jobs`, `finance`, `security`, `travel`, `environment`,
+  `consumer`, `civic`, `product`, `research`). Prefer 1–2 primary topics.
+- Prefer setting `channel.language` (`en`/`de`/`es`/`en-GB`/`de-DE`) when the surface language is clear.
 
 ## Surface Selection
 

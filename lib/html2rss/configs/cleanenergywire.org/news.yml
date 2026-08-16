@@ -1,5 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - energy
+    - environment
 channel:
+  language: en
   url: https://www.cleanenergywire.org/news
   time_zone: "Europe/Berlin"
   ttl: 360

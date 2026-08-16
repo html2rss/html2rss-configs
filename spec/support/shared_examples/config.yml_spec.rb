@@ -49,6 +49,20 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       expect(yaml).to have_key 'selectors'
     end
 
+    context 'with directory present' do
+      it 'has non-empty topics from the controlled vocabulary', :aggregate_failures do # rubocop:disable RSpec/ExampleLength
+        expect(yaml).to have_key('directory')
+        topics = yaml.dig('directory', 'topics')
+        expect(topics).to be_an(Array)
+        expect(topics).not_to be_empty
+
+        vocabulary = Html2rss::Config::Validator::DIRECTORY_TOPICS
+        topics.each do |topic|
+          expect(vocabulary).to include(topic), "unknown topic `#{topic}` (allowed: #{vocabulary.join(', ')})"
+        end
+      end
+    end
+
     context 'with channel present' do
       it 'has channel required attributes', :aggregate_failures do
         %w[url ttl time_zone].each do |required_attribute|

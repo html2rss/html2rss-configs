@@ -1,10 +1,14 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
 parameters:
   blog:
     type: string
     default: "-Defense-en-ligne-"
 
 channel:
+  language: en
   url: https://blog.mondediplo.net/%<blog>s
   time_zone: Europe/Paris
   title: "blog.mondediplo.net: %<blog>s"

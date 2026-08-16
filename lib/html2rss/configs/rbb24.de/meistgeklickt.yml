@@ -1,4 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
 channel:
   title: "rbb24.de: Das Beste"
   url: https://www.rbb24.de/das-beste/

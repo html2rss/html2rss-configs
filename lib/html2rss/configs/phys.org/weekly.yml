@@ -1,5 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - science
 channel:
+  language: en
   url: https://phys.org/weekly-news/
   time_zone: Europe/London
   ttl: 1440

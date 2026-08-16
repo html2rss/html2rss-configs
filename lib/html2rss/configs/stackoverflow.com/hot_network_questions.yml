@@ -1,7 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
 strategy: botasaurus
 
 channel:
+  language: en
   title: "stackoverflow.com: Hot Network Questions"
   url: https://stackoverflow.com/questions
   time_zone: America/New_York
