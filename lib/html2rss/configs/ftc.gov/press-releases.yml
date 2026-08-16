@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - security
+    - civic
+channel:
+  url: https://www.ftc.gov/news-events/news/press-releases
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href*="/news-events/news/press-releases/20"]'
+    enhance: false
+  title:
+    extractor: text
+  url:
+    extractor: href

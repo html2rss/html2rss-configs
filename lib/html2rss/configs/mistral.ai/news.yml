@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+channel:
+  url: https://mistral.ai/news/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: article.js-post
+    enhance: false
+  title:
+    selector: h2.js-post-title
+  url:
+    selector: a[href^="/news/"]
+    extractor: href

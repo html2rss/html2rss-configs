@@ -1,0 +1,182 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Probe first-party RSS/Atom for a page or origin URL.
+# 1) Fetch the page and parse <link rel="alternate" …> feed hints.
+# 2) Fall back to common feed path guesses (+ optional extra paths).
+#
+# Exit 0 = no feed found (curated config may add value).
+# Exit 3 = feed found (print URL; consider dropping per AGENTS.md).
+# Exit 1 = usage / request error.
+#
+# Notes for agents: exit 3 is intentional success-for-"has feed". Under `set -e`,
+# check explicitly (`probe_rss …; status=$?`) — do not treat 3 as a shell failure.
+#
+# Usage:
+#   .agents/skills/html2rss-config/scripts/probe_rss 'https://example.com/news/'
+#   .agents/skills/html2rss-config/scripts/probe_rss 'https://example.com' /feed /rss.xml
+
+require 'net/http'
+require 'uri'
+
+UA = 'html2rss-config-probe_rss/1.0'
+DEFAULT_PATHS = %w[
+  /feed
+  /feed.xml
+  /rss
+  /rss.xml
+  /atom.xml
+  /index.xml
+  /news/rss
+  /news/feed
+  /blog/feed
+  /blog/rss.xml
+].freeze
+FEED_CT_MARKERS = %w[xml rss atom].freeze
+FEED_BODY_MARKERS = %w[<rss <feed xmlns:atom].freeze
+LINK_TAG_RE = /<link\b[^>]*>/i
+HREF_RE = /\bhref\s*=\s*["']([^"']+)["']/i
+TYPE_RE = /\btype\s*=\s*["']([^"']+)["']/i
+REL_RE = /\brel\s*=\s*["']([^"']+)["']/i
+
+def usage!
+  warn <<~USAGE
+    Usage: probe_rss <page-or-origin-url> [extra/path ...]
+  USAGE
+  exit 1
+end
+
+def http_client(uri)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme == 'https'
+  http.open_timeout = 8
+  http.read_timeout = 12
+  http
+end
+
+def get_request(uri)
+  req = Net::HTTP::Get.new(uri)
+  req['User-Agent'] = UA
+  req['Accept'] = 'application/rss+xml, application/atom+xml, application/xml, text/xml, text/html, */*'
+  req
+end
+
+def follow_redirect(url, res)
+  loc = URI.join(url, res['location'])
+  [http_client(loc).request(get_request(loc)), loc.to_s]
+end
+
+def fetch(url)
+  uri = URI(url)
+  res = http_client(uri).request(get_request(uri))
+  4.times do
+    break unless res.is_a?(Net::HTTPRedirection)
+
+    res, url = follow_redirect(url, res)
+  end
+  [res, url]
+rescue StandardError => error
+  [error, url]
+end
+
+def ok_response?(res)
+  res.respond_to?(:code) && res.code.to_i.between?(200, 299)
+end
+
+def feedish?(res)
+  return false unless ok_response?(res)
+
+  ct = (res['content-type'] || '').downcase
+  return true if FEED_CT_MARKERS.any? { |marker| ct.include?(marker) }
+
+  body = res.body.to_s[0, 800].downcase
+  FEED_BODY_MARKERS.any? { |marker| body.include?(marker) }
+end
+
+def page_dir_paths(page)
+  path = URI(page).path
+  return [] if path.nil? || path.empty? || path == '/'
+
+  dir = path.sub(%r{/[^/]*$}, '/')
+  ["#{dir}feed", "#{dir}rss.xml", "#{dir}atom.xml"]
+end
+
+def absolute_url(base, path)
+  return path if path.start_with?('http')
+
+  origin = URI.join(base, '/').to_s.chomp('/')
+  return "#{origin}#{path}" if path.start_with?('/')
+
+  URI.join("#{origin}/", path).to_s
+rescue StandardError
+  origin = base.to_s.sub(%r{/[^/]*$}, '')
+  origin = base.to_s if origin.empty?
+  "#{origin.chomp('/')}#{path.start_with?('/') ? path : "/#{path}"}"
+end
+
+def syndication_type?(type)
+  return false if type.nil? || type.empty?
+
+  t = type.downcase
+  t.include?('rss+xml') || t.include?('atom+xml') || t.include?('rss') || t.include?('atom')
+end
+
+def feed_like_href?(href)
+  href.match?(/rss|atom|feed|\.xml/i)
+end
+
+def alternate_rel?(tag)
+  tag[REL_RE, 1].to_s.downcase.split(/\s+/).include?('alternate')
+end
+
+def href_from_alternate_link(tag, page_url)
+  return unless alternate_rel?(tag)
+
+  href = tag[HREF_RE, 1]
+  return if href.nil? || href.empty?
+  return unless syndication_type?(tag[TYPE_RE, 1]) || feed_like_href?(href)
+
+  absolute_url(page_url, href.strip)
+end
+
+def alternate_feed_hrefs(html, page_url)
+  return [] if html.nil? || html.empty?
+
+  html.scan(LINK_TAG_RE).filter_map { |tag| href_from_alternate_link(tag, page_url) }.uniq
+end
+
+def first_feedish_url(urls)
+  urls.lazy.filter_map do |url|
+    res, final = fetch(url)
+    final if feedish?(res)
+  end.first
+end
+
+def page_fetch_context(page)
+  page_res, final_page = fetch(page)
+  page_url = ok_response?(page_res) ? final_page : page
+  html = ok_response?(page_res) ? page_res.body.to_s : ''
+  [page_url, html]
+end
+
+def find_feed(page, extra)
+  page_url, html = page_fetch_context(page)
+  hit = first_feedish_url(alternate_feed_hrefs(html, page_url))
+  return hit if hit
+
+  paths = (page_dir_paths(page_url) + DEFAULT_PATHS + extra).uniq
+  first_feedish_url(paths.map { |path| absolute_url(page_url, path) })
+end
+
+usage! if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
+
+page = ARGV.fetch(0)
+hit = find_feed(page, ARGV.drop(1))
+
+if hit
+  puts "HAS_RSS\t#{hit}"
+  exit 3
+end
+
+puts "NO_RSS\t#{page}"
+exit 0

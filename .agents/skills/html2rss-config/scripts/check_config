@@ -1,0 +1,109 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Validate + feed (+ optional focused fetch) for one curated config.
+# Usage (from repo root):
+#   .agents/skills/html2rss-config/scripts/check_config lib/html2rss/configs/domain/file.yml
+#   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch
+#   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
+
+require 'open3'
+require 'pathname'
+
+def usage!
+  warn <<~USAGE
+    Usage: check_config <config.yml|domain/file.yml> [--fetch] [--botasaurus]
+  USAGE
+  exit 1
+end
+
+def repo_root
+  Pathname.new(__dir__).ascend.find { |p| (p / 'lib/html2rss/configs').directory? } ||
+    abort('Could not find html2rss-configs repo root')
+end
+
+def resolve_config(arg, root)
+  path = Pathname.new(arg)
+  candidates = []
+  candidates << path if path.absolute?
+  candidates << (root / path)
+  candidates << (root / 'lib/html2rss/configs' / path)
+  found = candidates.find(&:file?)
+  abort("Config not found: #{arg}") unless found
+  found.expand_path
+end
+
+def feed_example_name(config_path, root)
+  config_path.relative_path_from(root / 'lib/html2rss/configs').to_s
+end
+
+def invoke_entry(entry, sibling)
+  return nil unless entry.file?
+  return ['bundle', 'exec', entry.to_s] if (sibling / 'Gemfile').file?
+
+  [entry.to_s]
+end
+
+def sibling_html2rss_invocation(root)
+  sibling = root.parent / 'html2rss'
+  invoke_entry(sibling / 'exe' / 'html2rss', sibling) ||
+    invoke_entry(sibling / 'bin' / 'html2rss', sibling) ||
+    abort(<<~MSG)
+      html2rss CLI not found on PATH and no sibling checkout at #{sibling}.
+      Install the CLI or clone html2rss next to html2rss-configs (AGENTS.md).
+    MSG
+end
+
+# Prefer PATH `html2rss`, then sibling ../html2rss (exe via bundle, then bin).
+def resolve_html2rss_invocation(root)
+  return ['html2rss'] unless `command -v html2rss 2>/dev/null`.strip.empty?
+
+  sibling_html2rss_invocation(root)
+end
+
+def run!(*cmd, env: {}, quiet: false, chdir: nil)
+  puts "+ #{cmd.join(' ')}"
+  opts = {}
+  opts[:chdir] = chdir if chdir
+  out, status = Open3.capture2e(env, *cmd, **opts)
+  puts out unless quiet
+  abort("Command failed (#{status.exitstatus}): #{cmd.join(' ')}\n#{out}") unless status.success?
+  out
+end
+
+def count_items(rss)
+  rss.scan(/<item[\s>]/i).size
+end
+
+usage! if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
+
+fetch = ARGV.delete('--fetch')
+botasaurus = ARGV.delete('--botasaurus')
+usage! unless ARGV.size == 1
+
+root = repo_root
+config = resolve_config(ARGV.fetch(0), root)
+example = feed_example_name(config, root)
+cli = resolve_html2rss_invocation(root)
+cli_chdir = cli.first == 'bundle' ? (root.parent / 'html2rss').to_s : nil
+env = {}
+env['BOTASAURUS_SCRAPER_URL'] = ENV.fetch('BOTASAURUS_SCRAPER_URL', 'http://localhost:4010') if botasaurus
+
+Dir.chdir(root) do
+  run!(*cli, 'validate', config.to_s, env: env, chdir: cli_chdir)
+  rss = run!(*cli, 'feed', config.to_s, env: env, quiet: true, chdir: cli_chdir)
+  items = count_items(rss)
+  puts "items #{items}"
+  abort('Feed produced zero <item> elements') if items.zero?
+
+  titles = rss.scan(%r{<title>(.*?)</title>}m).flatten.drop(1).first(5)
+  titles.each { |t| puts "  - #{t.gsub(/<!\[CDATA\[|\]\]>/, '').strip}" }
+
+  if fetch
+    cmd = ['bundle', 'exec', 'rspec', '--tag', 'fetch', '--example', example,
+           'spec/html2rss/configs_dynamic_spec.rb']
+    run!(*cmd, env: env)
+  end
+end
+
+puts "ok #{example}"

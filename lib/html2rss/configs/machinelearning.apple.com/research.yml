@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+channel:
+  url: https://machinelearning.apple.com/research/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "ul.article-list > li.post-row > div > a.post-link"
+    enhance: false
+  title:
+    selector: h3.post-title
+  url:
+    extractor: href
