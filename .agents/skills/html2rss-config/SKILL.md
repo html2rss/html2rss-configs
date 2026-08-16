@@ -50,6 +50,8 @@ Run from repo root. Prefer these over ad‑hoc CLI glue:
 
 | Script                                                       | Purpose                                                                                                                                                                 |
 | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`scripts/batch_recon`](scripts/batch_recon)                 | Parallel redirect + RSS + HTML cache → `BUILD`/`DEFER`/`DROP` ledger (`--file` TSV or URL args).                                                                        |
+| [`scripts/analyze_html`](scripts/analyze_html)               | Selector hints from cached HTML / ledger (`--from-ledger`). No network.                                                                                                 |
 | [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe (HTML `rel=alternate` then path guesses). Exit `0` = none; `3` = found (consider drop). Under `set -e`, check `$?` — do not treat `3` as failure. |
 | [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. Resolves CLI via PATH or sibling `../html2rss`.                                             |
 | [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.                                                                                                    |
@@ -57,6 +59,8 @@ Run from repo root. Prefer these over ad‑hoc CLI glue:
 Examples:
 
 ```bash
+.agents/skills/html2rss-config/scripts/batch_recon --cache-dir tmp/html2rss-recon --file candidates.tsv
+.agents/skills/html2rss-config/scripts/analyze_html --from-ledger tmp/html2rss-recon/ledger.tsv
 .agents/skills/html2rss-config/scripts/probe_rss 'https://example.com/news/'
 .agents/skills/html2rss-config/scripts/check_config domain/file.yml
 .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
