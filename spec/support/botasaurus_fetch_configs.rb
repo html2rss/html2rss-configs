@@ -3,10 +3,16 @@
 module BotasaurusFetchConfigs
   CONFIGS = %w[
     apple.com/newsroom.yml
+    aspi.org.au/strategist.yml
     bundesregierung.de/pressemitteilungen.yml
     carnegieendowment.org/research.yml
+    chathamhouse.org/research-publications.yml
+    ethz.ch/eth-news.yml
+    iiss.org/online-analysis.yml
     imdb.com/ratings.yml
+    ntu.edu.sg/news.yml
     oecd.org/newsroom.yml
+    opec.org/press-releases.yml
     stackoverflow.com/hot_network_questions.yml
     support.apple.com/en_gb_ht201222.yml
     thoughtworks.com/insights.yml
