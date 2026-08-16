@@ -2,15 +2,16 @@
 name: html2rss-config
 description: >-
   Create or repair curated html2rss YAML feed configs in this repo (lib/html2rss/configs/),
-  including directory.topics, selectors, Faraday vs Botasaurus triage, and the AGENTS.md
-  quality gate. Use when adding a new feed config, fixing a broken/zero-item config,
-  tightening selectors, or diagnosing fetch failures for a curated config. Do not use for
-  html2rss gem core, html2rss-web, docs-only work, or bulk coverage-expansion campaigns.
+  including directory.topics, selectors, Faraday vs Botasaurus triage, RSS probe-before-write,
+  and the AGENTS.md quality gate. Use when adding a new feed config, fixing a broken/zero-item
+  config, tightening selectors, diagnosing fetch failures, or shipping a user-requested batch
+  of configs (still one quality loop each). Do not use for html2rss gem core, html2rss-web,
+  or docs-only work.
 ---
 
 # html2rss-config
 
-Thin workflow skill for **one config at a time**. Quality-gate SSOT: repo root [`AGENTS.md`](../../../AGENTS.md). Do not duplicate that gate here.
+Thin workflow skill for **one config quality loop at a time** (a multi-config PR is OK only when the user asks). Quality-gate SSOT: repo root [`AGENTS.md`](../../../AGENTS.md). Do not duplicate that gate here. Campaign traps: [reference/pitfalls.md](reference/pitfalls.md).
 
 ## Modes
 
@@ -24,15 +25,15 @@ Pick mode from the user ask. Grow later with more modes/references; keep this fi
 ## Before any write
 
 1. Read [`AGENTS.md`](../../../AGENTS.md) (surface selection, selectors, drop rules).
-2. Confirm canonical URL (`curl -I -L`); prefer **registrable-domain** folder.
+2. Confirm canonical URL (`curl -I -L`); prefer **registrable-domain** folder. Watch for HTTPS→HTTP downgrades (Faraday will refuse).
 3. Assign `directory.topics` (1–2) — see [reference/topics.md](reference/topics.md).
-4. If a solid first-party RSS already covers the surface and curated value is low → **drop/defer** with evidence (AGENTS.md). Use `scripts/probe_rss` for a quick check.
+4. Probe **that exact surface** with `scripts/probe_rss`. Exit `3` = first-party feed → drop/defer unless curated value is clearly higher. See [pitfalls.md](reference/pitfalls.md).
 
 ## Tool order
 
 1. **user-html2rss MCP** — `capture_config` / `scrape_url` / `inspect_url` / `validate_config` when discovery works.
 2. Else **core CLI** from PATH or sibling `../html2rss` — `scripts/check_config` resolves this (or raw `html2rss` / `bundle exec exe/html2rss`).
-3. **Botasaurus** when Faraday returns zero items: `BOTASAURUS_SCRAPER_URL=http://localhost:4010`.
+3. **Botasaurus** when Faraday returns zero items or scheme/redirect blocks Faraday: `BOTASAURUS_SCRAPER_URL=http://localhost:4010` (health: `/health`). `wait_timeout_seconds` **≤ 20**.
 4. **Chrome MCP** only if Faraday + Botasaurus fail or the item boundary is unclear. Report Chrome outage in handoff if unavailable.
 
 If MCP discovery fails or the MCP process lacks `BOTASAURUS_SCRAPER_URL`, **skip MCP** and go straight to the CLI — do not burn the timebox retrying discovery.
@@ -41,7 +42,7 @@ If MCP discovery fails or the MCP process lacks `BOTASAURUS_SCRAPER_URL`, **skip
 
 Soft budget: one tight loop per site (~3–4 minutes of wall effort). Faraday → Botasaurus → Chrome. If still zero/noisy → **stop**, report drop/defer with evidence, unless the user says keep going.
 
-Minimal selectors first: `items`, `title`, `url`. Omit brittle optional fields. Set `enhance: false` when chrome leaks in.
+Minimal selectors first: `items`, `title`, `url`. Omit brittle optional fields. Set `enhance: false` when chrome leaks in. Prefer nested title / `aria-label` over whole-card text.
 
 ## Scripts
 

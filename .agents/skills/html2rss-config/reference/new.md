@@ -4,11 +4,11 @@ Add one curated config. SSOT details: [AGENTS.md](../../../../AGENTS.md).
 
 ## Steps
 
-1. Confirm no useful first-party RSS for this surface (else drop/defer). Use `scripts/probe_rss` (HTML `rel=alternate` first, then path guesses). Exit `3` = feed found.
-2. Pick the cleanest list URL (newsroom / archive / category — not marketing homepage).
-3. Capture items via skill tool order (MCP → CLI → Botasaurus → Chrome).
+1. Pick the cleanest list URL (newsroom / archive / category — not marketing homepage). Confirm with `curl -I -L` (canonical host; no HTTPS→HTTP downgrade unless you plan Botasaurus).
+2. Confirm no useful first-party RSS **for that exact URL** (else drop/defer). Use `scripts/probe_rss`. Exit `3` = feed found.
+3. Capture items via skill tool order (MCP → CLI → Botasaurus → Chrome). If `auto` is empty, still inspect HTML before assuming JS-only — see [pitfalls.md](pitfalls.md).
 4. Write YAML under `lib/html2rss/configs/<registrable-domain>/<name>.yml`.
-5. Run `scripts/check_config …` (and `--fetch` / `--botasaurus` as needed); `scripts/register_botasaurus` if Botasaurus-backed.
+5. Run `scripts/check_config …` (and `--fetch` / `--botasaurus` as needed); verify real `<item>` rows, not only the summary. `scripts/register_botasaurus` if Botasaurus-backed.
 6. Handoff per skill.
 
 ## YAML skeleton
@@ -37,8 +37,8 @@ selectors:
 Notes:
 
 - Always include `directory.topics` (1–2) — see [topics.md](topics.md).
-- Set `channel.language` when clear (`en` / `de` / `es` / …).
-- Add `strategy: botasaurus` + request wait selectors only when Faraday cannot produce items.
+- Set `channel.language` when clear (`en` / `de` / `es` / …). Prefer a real region `time_zone` when obvious (`Africa/Johannesburg`, `Africa/Cairo`, …).
+- Add `strategy: botasaurus` only when Faraday cannot produce items (or Faraday is blocked by scheme/redirect). Keep `wait_timeout_seconds` **≤ 20**.
 - Parameterized URLs need a `parameters:` block with `type: string` and `default`.
 - Prefer item-local selectors; anchor on article URL path fragments when possible.
 
@@ -46,9 +46,12 @@ Notes:
 
 Live `feed` shows repeated real articles, no nav/footer leakage, absolute URLs. Then repo `make validate` + `make test` + focused fetch.
 
-Footnotes from campaign experience:
+## Footnotes
+
+See [pitfalls.md](pitfalls.md) for full campaign traps. Short list:
 
 - **Folder name:** registrable domain only — avoid `www.` folders unless the host is uniquely `www`.
-- **Archive size:** if the list HTML embeds a full multi-year archive (hundreds–thousands of items), prefer a `/latest` or paginated surface; otherwise note the blast radius in handoff.
-- **Paywall:** titles that work while bodies are gated are shippable; mention premium/paywall risk in handoff.
-- **MCP:** if `user-html2rss` discovery is errored or missing `BOTASAURUS_SCRAPER_URL`, skip MCP and use the CLI path immediately.
+- **Archive size:** if the list HTML embeds a full multi-year archive, prefer `/latest` or paginated; note blast radius in handoff.
+- **Paywall:** titles OK while bodies gated are shippable; mention risk in handoff.
+- **MCP:** errored discovery or missing Botasaurus env → skip MCP, use CLI immediately.
+- **Batch PR:** allowed when the user asks; still one probe→feed→fetch loop per config.
