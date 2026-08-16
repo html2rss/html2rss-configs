@@ -19,6 +19,7 @@ module BotasaurusFetchConfigs
     panapress.com/latest.yml
     stackoverflow.com/hot_network_questions.yml
     support.apple.com/en_gb_ht201222.yml
+    tap.info.tn/politics.yml
     theeastafrican.co.ke/news.yml
     thoughtworks.com/insights.yml
     who.int/news.yml
