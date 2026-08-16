@@ -26,7 +26,7 @@ Pick mode from the user ask. Grow later with more modes/references; keep this fi
 1. Read [`AGENTS.md`](../../../AGENTS.md) (surface selection, selectors, drop rules).
 2. Confirm canonical URL (`curl -I -L`); prefer **registrable-domain** folder.
 3. Assign `directory.topics` (1–2) — see [reference/topics.md](reference/topics.md).
-4. If a solid first-party RSS already covers the surface and curated value is low → **drop/defer** with evidence (AGENTS.md).
+4. If a solid first-party RSS already covers the surface and curated value is low → **drop/defer** with evidence (AGENTS.md). Use `scripts/probe_rss` for a quick check.
 
 ## Tool order
 
@@ -41,18 +41,36 @@ Soft budget: one tight loop per site (~3–4 minutes of wall effort). Faraday �
 
 Minimal selectors first: `items`, `title`, `url`. Omit brittle optional fields. Set `enhance: false` when chrome leaks in.
 
+## Scripts
+
+Run from repo root. Prefer these over ad‑hoc CLI glue:
+
+| Script                                                       | Purpose                                                                     |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe. Exit `0` = none; `3` = found (consider drop).        |
+| [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. |
+| [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.        |
+
+Examples:
+
+```bash
+.agents/skills/html2rss-config/scripts/probe_rss 'https://example.com/news/'
+.agents/skills/html2rss-config/scripts/check_config domain/file.yml
+.agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
+.agents/skills/html2rss-config/scripts/register_botasaurus domain/file.yml
+```
+
 ## Done checklist
 
 From AGENTS.md Quality Gate, in order:
 
-1. `html2rss validate /abs/path/to/config.yml`
-2. `html2rss feed /abs/path/to/config.yml` — clean items, no nav junk
-3. `make validate` (this repo)
-4. `make test` (non-fetch)
-5. Focused fetch:
+1. Prefer `scripts/check_config <path>` (or raw `html2rss validate` + `feed`)
+2. `make validate` (this repo) when touching shared support files or multiple configs
+3. `make test` (non-fetch)
+4. Focused fetch via `scripts/check_config … --fetch` or:
    - Faraday: `bundle exec rspec --tag fetch --example 'domain/file.yml' spec/html2rss/configs_dynamic_spec.rb`
    - Botasaurus: same with `BOTASAURUS_SCRAPER_URL=http://localhost:4010`
-6. If `strategy: botasaurus` (or fetch only works via Botasaurus): add path to [`spec/support/botasaurus_fetch_configs.rb`](../../../spec/support/botasaurus_fetch_configs.rb) — **required**.
+5. If `strategy: botasaurus` (or fetch only works via Botasaurus): `scripts/register_botasaurus domain/file.yml` — **required**.
 
 ## Handoff
 

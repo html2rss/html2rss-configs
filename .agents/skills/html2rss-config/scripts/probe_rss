@@ -1,0 +1,120 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Probe common first-party RSS/Atom paths for a page or origin URL.
+# Exit 0 = no feed found (curated config may add value).
+# Exit 3 = feed found (print URL; consider dropping per AGENTS.md).
+# Exit 1 = usage / request error.
+#
+# Usage:
+#   .agents/skills/html2rss-config/scripts/probe_rss 'https://example.com/news/'
+#   .agents/skills/html2rss-config/scripts/probe_rss 'https://example.com' /feed /rss.xml
+
+require 'net/http'
+require 'uri'
+
+UA = 'html2rss-config-probe_rss/1.0'
+DEFAULT_PATHS = %w[
+  /feed
+  /feed.xml
+  /rss
+  /rss.xml
+  /atom.xml
+  /index.xml
+  /news/rss
+  /news/feed
+  /blog/feed
+  /blog/rss.xml
+].freeze
+FEED_CT_MARKERS = %w[xml rss atom].freeze
+FEED_BODY_MARKERS = %w[<rss <feed xmlns:atom].freeze
+
+def usage!
+  warn <<~USAGE
+    Usage: probe_rss <page-or-origin-url> [extra/path ...]
+  USAGE
+  exit 1
+end
+
+def http_client(uri)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme == 'https'
+  http.open_timeout = 8
+  http.read_timeout = 12
+  http
+end
+
+def get_request(uri)
+  req = Net::HTTP::Get.new(uri)
+  req['User-Agent'] = UA
+  req['Accept'] = 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*'
+  req
+end
+
+def follow_redirect(url, res)
+  loc = URI.join(url, res['location'])
+  [http_client(loc).request(get_request(loc)), loc.to_s]
+end
+
+def fetch(url)
+  uri = URI(url)
+  res = http_client(uri).request(get_request(uri))
+  4.times do
+    break unless res.is_a?(Net::HTTPRedirection)
+
+    res, url = follow_redirect(url, res)
+  end
+  [res, url]
+rescue StandardError => error
+  [error, url]
+end
+
+def ok_response?(res)
+  res.respond_to?(:code) && res.code.to_i.between?(200, 299)
+end
+
+def feedish?(res)
+  return false unless ok_response?(res)
+
+  ct = (res['content-type'] || '').downcase
+  return true if FEED_CT_MARKERS.any? { |marker| ct.include?(marker) }
+
+  body = res.body.to_s[0, 800].downcase
+  FEED_BODY_MARKERS.any? { |marker| body.include?(marker) }
+end
+
+def page_dir_paths(page)
+  path = URI(page).path
+  return [] if path.nil? || path.empty? || path == '/'
+
+  dir = path.sub(%r{/[^/]*$}, '/')
+  ["#{dir}feed", "#{dir}rss.xml", "#{dir}atom.xml"]
+end
+
+def absolute_url(base, path)
+  return path if path.start_with?('http')
+
+  "#{base}#{path.start_with?('/') ? path : "/#{path}"}"
+end
+
+def find_feed(page, extra)
+  base = URI.join(page, '/').to_s.chomp('/')
+  paths = (page_dir_paths(page) + DEFAULT_PATHS + extra).uniq
+  paths.lazy.filter_map do |path|
+    res, final = fetch(absolute_url(base, path))
+    final if feedish?(res)
+  end.first
+end
+
+usage! if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
+
+page = ARGV.fetch(0)
+hit = find_feed(page, ARGV.drop(1))
+
+if hit
+  puts "HAS_RSS\t#{hit}"
+  exit 3
+end
+
+puts "NO_RSS\t#{page}"
+exit 0

@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Idempotently add a config path to spec/support/botasaurus_fetch_configs.rb (sorted).
+# Usage (from repo root):
+#   .agents/skills/html2rss-config/scripts/register_botasaurus domain/file.yml
+#   .agents/skills/html2rss-config/scripts/register_botasaurus lib/html2rss/configs/domain/file.yml
+
+require 'pathname'
+
+def usage!
+  warn <<~USAGE
+    Usage: register_botasaurus <domain/file.yml>
+  USAGE
+  exit 1
+end
+
+def repo_root
+  Pathname.new(__dir__).ascend.find { |p| (p / 'spec/support/botasaurus_fetch_configs.rb').file? } ||
+    abort('Could not find html2rss-configs repo root')
+end
+
+def normalize_name(arg, root)
+  rel = arg.to_s.split('lib/html2rss/configs/', 2).last.delete_prefix('/').delete_prefix('./')
+  abort('Expected something like domain/file.yml') unless rel.match?(%r{\A[^/]+/.+\.yml\z})
+
+  warn "Warning: missing #{root / 'lib/html2rss/configs' / rel}" unless (root / 'lib/html2rss/configs' / rel).file?
+  rel
+end
+
+usage! if ARGV.size != 1 || ARGV.include?('-h') || ARGV.include?('--help')
+
+root = repo_root
+name = normalize_name(ARGV.fetch(0), root)
+registry = root / 'spec/support/botasaurus_fetch_configs.rb'
+text = registry.read
+
+unless text =~ /CONFIGS = %w\[(.*?)\].freeze/m
+  abort('Could not find CONFIGS = %w[ ... ].freeze in botasaurus_fetch_configs.rb')
+end
+
+body = Regexp.last_match(1)
+entries = body.scan(%r{^\s*([a-z0-9._-]+/[a-z0-9._/-]+\.yml)\s*$}i).flatten
+if entries.include?(name)
+  puts "already_registered #{name}"
+  exit 0
+end
+
+entries << name
+entries.sort!
+new_body = entries.map { |e| "    #{e}" }.join("\n")
+new_text = text.sub(/CONFIGS = %w\[.*?\].freeze/m, "CONFIGS = %w[\n#{new_body}\n  ].freeze")
+
+registry.write(new_text)
+puts "registered #{name}"

@@ -4,11 +4,11 @@ Add one curated config. SSOT details: [AGENTS.md](../../../../AGENTS.md).
 
 ## Steps
 
-1. Confirm no useful first-party RSS for this surface (else drop/defer).
+1. Confirm no useful first-party RSS for this surface (else drop/defer). Use `scripts/probe_rss`.
 2. Pick the cleanest list URL (newsroom / archive / category — not marketing homepage).
 3. Capture items via skill tool order (MCP → CLI → Botasaurus → Chrome).
 4. Write YAML under `lib/html2rss/configs/<registrable-domain>/<name>.yml`.
-5. Run AGENTS.md Quality Gate; register Botasaurus path if needed.
+5. Run `scripts/check_config …` (and `--fetch` / `--botasaurus` as needed); `scripts/register_botasaurus` if Botasaurus-backed.
 6. Handoff per skill.
 
 ## YAML skeleton

@@ -5,10 +5,10 @@ Fix one existing config. SSOT: [AGENTS.md](../../../../AGENTS.md). Runtime Debug
 ## Diagnose (cheapest first)
 
 1. Read the YAML; note `channel.url`, selectors, `strategy`.
-2. `html2rss validate` then `html2rss feed` on the absolute path (core CLI).
+2. `scripts/check_config <path>` (or `html2rss validate` then `html2rss feed`).
 3. If zero items with Faraday:
-   - Retry with Botasaurus (`BOTASAURUS_SCRAPER_URL=http://localhost:4010`).
-   - If Botasaurus works → keep config narrow; set `strategy: botasaurus`; register in `spec/support/botasaurus_fetch_configs.rb`.
+   - Retry with Botasaurus (`BOTASAURUS_SCRAPER_URL=http://localhost:4010` or `check_config … --botasaurus`).
+   - If Botasaurus works → keep config narrow; set `strategy: botasaurus`; run `scripts/register_botasaurus`.
 4. If both request strategies fail or items are wrong → Chrome MCP snapshot; confirm item boundary / final URL after redirects.
 5. Compare core `feed` vs configs-repo focused fetch when they disagree (request-strategy mismatch, not “selectors OK”).
 

@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Validate + feed (+ optional focused fetch) for one curated config.
+# Usage (from repo root):
+#   .agents/skills/html2rss-config/scripts/check_config lib/html2rss/configs/domain/file.yml
+#   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch
+#   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
+
+require 'open3'
+require 'pathname'
+
+def usage!
+  warn <<~USAGE
+    Usage: check_config <config.yml|domain/file.yml> [--fetch] [--botasaurus]
+  USAGE
+  exit 1
+end
+
+def repo_root
+  Pathname.new(__dir__).ascend.find { |p| (p / 'lib/html2rss/configs').directory? } ||
+    abort('Could not find html2rss-configs repo root')
+end
+
+def resolve_config(arg, root)
+  path = Pathname.new(arg)
+  candidates = []
+  candidates << path if path.absolute?
+  candidates << (root / path)
+  candidates << (root / 'lib/html2rss/configs' / path)
+  found = candidates.find(&:file?)
+  abort("Config not found: #{arg}") unless found
+  found.expand_path
+end
+
+def feed_example_name(config_path, root)
+  config_path.relative_path_from(root / 'lib/html2rss/configs').to_s
+end
+
+def run!(*cmd, env: {}, quiet: false)
+  puts "+ #{cmd.join(' ')}"
+  out, status = Open3.capture2e(env, *cmd)
+  puts out unless quiet
+  abort("Command failed (#{status.exitstatus}): #{cmd.join(' ')}\n#{out}") unless status.success?
+  out
+end
+
+def count_items(rss)
+  rss.scan(/<item[\s>]/i).size
+end
+
+usage! if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
+
+fetch = ARGV.delete('--fetch')
+botasaurus = ARGV.delete('--botasaurus')
+usage! unless ARGV.size == 1
+
+root = repo_root
+config = resolve_config(ARGV.fetch(0), root)
+example = feed_example_name(config, root)
+env = {}
+env['BOTASAURUS_SCRAPER_URL'] = ENV.fetch('BOTASAURUS_SCRAPER_URL', 'http://localhost:4010') if botasaurus
+
+Dir.chdir(root) do
+  run!('html2rss', 'validate', config.to_s, env: env)
+  rss = run!('html2rss', 'feed', config.to_s, env: env, quiet: true)
+  items = count_items(rss)
+  puts "items #{items}"
+  abort('Feed produced zero <item> elements') if items.zero?
+
+  titles = rss.scan(%r{<title>(.*?)</title>}m).flatten.drop(1).first(5)
+  titles.each { |t| puts "  - #{t.gsub(/<!\[CDATA\[|\]\]>/, '').strip}" }
+
+  if fetch
+    cmd = ['bundle', 'exec', 'rspec', '--tag', 'fetch', '--example', example,
+           'spec/html2rss/configs_dynamic_spec.rb']
+    run!(*cmd, env: env)
+  end
+end
+
+puts "ok #{example}"
