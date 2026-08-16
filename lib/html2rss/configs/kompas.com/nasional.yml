@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
+    - civic
+channel:
+  url: https://nasional.kompas.com/
+  language: id
+  time_zone: Asia/Jakarta
+  ttl: 360
+selectors:
+  items:
+    selector: '.articleList a[href*="/read/"]'
+    enhance: false
+  title:
+    extractor: text
+  url:
+    extractor: href
