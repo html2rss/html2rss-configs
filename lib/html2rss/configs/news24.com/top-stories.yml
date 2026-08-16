@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
+channel:
+  url: https://www.news24.com/
+  language: en
+  time_zone: Africa/Johannesburg
+  ttl: 180
+selectors:
+  items:
+    selector: "a.article-item__title"
+    enhance: false
+  title:
+    extractor: text
+  url:
+    extractor: href
