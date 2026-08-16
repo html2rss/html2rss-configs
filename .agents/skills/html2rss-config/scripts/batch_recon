@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/ParameterLists,Metrics/PerceivedComplexity
+
 # Parallel recon for one or many candidate URLs.
 # For each candidate: follow redirects, probe first-party RSS on the exact surface,
 # cache HTML once, emit a BUILD/DEFER/DROP ledger (TSV).
@@ -14,12 +16,6 @@
 #   https://example.com/news/
 #   example.com	https://example.com/news/
 #   example.com	LATAM	https://example.com/news/
-#
-# Options:
-#   --cache-dir DIR   HTML + ledger directory (default: tmp/html2rss-recon)
-#   --ledger PATH     Ledger TSV path (default: CACHE_DIR/ledger.tsv)
-#   --file PATH       Read candidates from file
-#   --dry-run         Parse candidates and print plan; no network
 #
 # Exit 0 always after a completed run (including all-DROP). Exit 1 on usage/parse errors.
 
@@ -42,45 +38,65 @@ FEED_PATHS = %w[
   /blog/rss.xml
 ].freeze
 FEED_CT = %w[rss+xml atom+xml application/rss application/atom].freeze
+USAGE = <<~USAGE
+  Usage: batch_recon [options] URL [URL ...]
+         batch_recon [options] --file candidates.tsv
+
+  Options:
+    --cache-dir DIR   Cache + default ledger dir (default: tmp/html2rss-recon)
+    --ledger PATH     Ledger TSV (default: CACHE_DIR/ledger.tsv)
+    --file PATH       Candidate list (URL lines or slug[\\tregion]\\turl)
+    --dry-run         Print candidates only; no network
+    -h, --help        Show this help
+USAGE
+ASSET_EXT = /\.(svg|png|jpg|jpeg|gif|ico|css|js)(\?|$)/i
+FEED_ACCEPT = 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*'
 
 def usage!(msg = nil)
   warn(msg) if msg
-  warn(<<~USAGE)
-    Usage: batch_recon [options] URL [URL ...]
-           batch_recon [options] --file candidates.tsv
-
-    Options:
-      --cache-dir DIR   Cache + default ledger dir (default: tmp/html2rss-recon)
-      --ledger PATH     Ledger TSV (default: CACHE_DIR/ledger.tsv)
-      --file PATH       Candidate list (URL lines or slug[\\tregion]\\turl)
-      --dry-run         Print candidates only; no network
-      -h, --help        Show this help
-  USAGE
+  warn(USAGE)
   exit 1
 end
 
+def take_arg!(argv, index, flag)
+  usage!("Missing value for #{flag}") unless argv[index + 1]
+
+  argv[index + 1]
+end
+
+def default_opts
+  { cache_dir: 'tmp/html2rss-recon', ledger: nil, file: nil, dry_run: false, urls: [] }
+end
+
+def apply_flag(opts, argv, index)
+  case argv[index]
+  when '-h', '--help' then usage!
+  when '--dry-run'
+    opts[:dry_run] = true
+    index
+  when '--cache-dir'
+    opts[:cache_dir] = take_arg!(argv, index, '--cache-dir')
+    index + 1
+  when '--ledger'
+    opts[:ledger] = take_arg!(argv, index, '--ledger')
+    index + 1
+  when '--file'
+    opts[:file] = take_arg!(argv, index, '--file')
+    index + 1
+  when /^--/
+    usage!("Unknown option: #{argv[index]}")
+  else
+    opts[:urls] << argv[index]
+    index
+  end
+end
+
 def parse_args(argv)
-  opts = { cache_dir: 'tmp/html2rss-recon', ledger: nil, file: nil, dry_run: false, urls: [] }
-  i = 0
-  while i < argv.size
-    case argv[i]
-    when '-h', '--help' then usage!
-    when '--dry-run' then opts[:dry_run] = true
-    when '--cache-dir'
-      usage!('Missing value for --cache-dir') unless argv[i + 1]
-      opts[:cache_dir] = argv[i += 1]
-    when '--ledger'
-      usage!('Missing value for --ledger') unless argv[i + 1]
-      opts[:ledger] = argv[i += 1]
-    when '--file'
-      usage!('Missing value for --file') unless argv[i + 1]
-      opts[:file] = argv[i += 1]
-    when /^--/
-      usage!("Unknown option: #{argv[i]}")
-    else
-      opts[:urls] << argv[i]
-    end
-    i += 1
+  opts = default_opts
+  index = 0
+  while index < argv.size
+    index = apply_flag(opts, argv, index)
+    index += 1
   end
   opts[:ledger] ||= File.join(opts[:cache_dir], 'ledger.tsv')
   opts
@@ -96,36 +112,31 @@ end
 def unique_slug(base, seen)
   return base unless seen[base]
 
-  n = 2
-  n += 1 while seen["#{base}-#{n}"]
-  "#{base}-#{n}"
+  counter = 2
+  counter += 1 while seen["#{base}-#{counter}"]
+  "#{base}-#{counter}"
+end
+
+def candidate_parts(cols)
+  case cols.size
+  when 1 then [slug_from_url(cols[0]), '-', cols[0]]
+  when 2 then [cols[0], '-', cols[1]]
+  when 3 then [cols[0], cols[1], cols[2]]
+  else
+    raise "Bad candidate line (want URL or slug[\\tregion]\\turl): #{cols.join("\t").inspect}"
+  end
 end
 
 def parse_candidate_line(line, seen)
-  cols = line.split("\t").map(&:strip)
-  case cols.size
-  when 1
-    url = cols[0]
-    slug = unique_slug(slug_from_url(url), seen)
-    region = '-'
-  when 2
-    slug = unique_slug(cols[0], seen)
-    url = cols[1]
-    region = '-'
-  when 3
-    slug = unique_slug(cols[0], seen)
-    region = cols[1]
-    url = cols[2]
-  else
-    raise "Bad candidate line (want URL or slug[\\tregion]\\turl): #{line.inspect}"
-  end
+  slug_base, region, url = candidate_parts(line.split("\t").map(&:strip))
   raise "Not a URL: #{url.inspect}" unless url.match?(%r{\Ahttps?://}i)
 
+  slug = unique_slug(slug_base, seen)
   seen[slug] = true
   { slug: slug, region: region, url: url }
 end
 
-def load_candidates(opts)
+def candidate_lines(opts)
   lines = []
   if opts[:file]
     usage!("Candidate file not found: #{opts[:file]}") unless File.file?(opts[:file])
@@ -134,8 +145,12 @@ def load_candidates(opts)
   lines.concat(opts[:urls])
   usage!('Pass at least one URL or --file') if lines.empty?
 
+  lines
+end
+
+def load_candidates(opts)
   seen = {}
-  lines.filter_map do |raw|
+  candidate_lines(opts).filter_map do |raw|
     line = raw.strip
     next if line.empty? || line.start_with?('#')
 
@@ -161,6 +176,34 @@ def request(uri, accept: nil, insecure: false)
   http_client(uri, insecure: insecure).request(req)
 end
 
+def empty_follow(attrs)
+  {
+    chain: attrs.fetch(:chain),
+    final_url: attrs.fetch(:current),
+    status: attrs[:status],
+    body: attrs[:body],
+    error: attrs[:error],
+    ssl_note: attrs[:ssl_note],
+    insecure: attrs.fetch(:insecure, false)
+  }
+end
+
+def follow_ssl_retry(url, max, error)
+  retried = follow(url, insecure: true, max: max)
+  retried[:ssl_note] = "ssl_insecure_retry: #{error.message[0, 80]}"
+  retried
+end
+
+def handle_follow_response(res, chain, current)
+  status = res.code.to_i
+  chain << "#{status}:#{current}"
+  if res.is_a?(Net::HTTPRedirection) && res['location']
+    return [:redirect, URI.join(current, res['location']).to_s, status, nil]
+  end
+
+  [:done, current, status, res.body.to_s]
+end
+
 def follow(url, insecure: false, max: 8)
   chain = []
   current = url
@@ -169,115 +212,139 @@ def follow(url, insecure: false, max: 8)
   ssl_note = nil
 
   max.times do
-    uri = URI(current)
     begin
-      res = request(uri, insecure: insecure)
+      res = request(URI(current), insecure: insecure)
     rescue OpenSSL::SSL::SSLError => error
-      unless insecure
-        retried = follow(url, insecure: true, max: max)
-        retried[:ssl_note] = "ssl_insecure_retry: #{error.message[0, 80]}"
-        return retried
-      end
-      return { chain: chain, final_url: current, status: nil, body: nil, error: "SSL: #{error.message}",
-               ssl_note: 'ssl_fail' }
+      return follow_ssl_retry(url, max, error) unless insecure
+
+      return empty_follow(chain: chain, current: current, error: "SSL: #{error.message}", ssl_note: 'ssl_fail')
     rescue Net::HTTPExceptions => error
       code = error.response&.code&.to_i
       chain << "#{code}:#{current}" if code
-      return { chain: chain, final_url: current, status: code, body: error.response&.body.to_s,
-               error: nil }
+      return empty_follow(chain: chain, current: current, status: code, body: error.response&.body.to_s)
     end
 
-    status = res.code.to_i
-    chain << "#{status}:#{current}"
-    if res.is_a?(Net::HTTPRedirection) && res['location']
-      current = URI.join(current, res['location']).to_s
-      next
-    end
-    body = res.body.to_s
-    break
+    state, current, status, body = handle_follow_response(res, chain, current)
+    break if state == :done
   end
 
-  { chain: chain, final_url: current, status: status, body: body, ssl_note: ssl_note, insecure: insecure }
+  empty_follow(
+    chain: chain,
+    current: current,
+    status: status,
+    body: body,
+    ssl_note: ssl_note,
+    insecure: insecure
+  )
 rescue StandardError => error
-  { chain: chain, final_url: current || url, status: nil, body: nil, error: "#{error.class}: #{error.message}" }
+  empty_follow(chain: chain, current: current || url, error: "#{error.class}: #{error.message}")
+end
+
+def feed_content_type?(content_type)
+  FEED_CT.any? { |marker| content_type.include?(marker) }
+end
+
+def feed_body?(sample)
+  sample.include?('<rss') || sample.match?(/<feed[\s>]/i)
 end
 
 def real_feed?(res, body, url)
   return false unless res.is_a?(Net::HTTPSuccess)
-  return false if url.match?(/\.(svg|png|jpg|jpeg|gif|ico|css|js)(\?|$)/i)
+  return false if url.match?(ASSET_EXT)
 
-  ct = res['content-type'].to_s.downcase
-  return false if ct.include?('image') || ct.include?('svg') || ct.include?('javascript') || ct.include?('text/css')
+  content_type = res['content-type'].to_s.downcase
+  blocked = %w[image svg javascript text/css]
+  return false if blocked.any? { |part| content_type.include?(part) }
 
   sample = body.to_s[0, 4000]
-  return true if FEED_CT.any? { |m| ct.include?(m) }
-  return true if sample.include?('<rss') || sample.match?(/<feed[\s>]/i)
+  feed_content_type?(content_type) || feed_body?(sample)
+end
 
-  false
+def fetch_once(url)
+  request(URI(url), accept: FEED_ACCEPT)
 end
 
 def fetch_feed_candidate(url)
-  res = request(URI(url), accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*')
+  res = fetch_once(url)
   body = res.body.to_s
   if res.is_a?(Net::HTTPRedirection) && res['location']
-    loc = URI.join(url, res['location']).to_s
-    res = request(URI(loc), accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*')
+    url = URI.join(url, res['location']).to_s
+    res = fetch_once(url)
     body = res.body.to_s
-    url = loc
   end
   [res, body, url]
 rescue StandardError
   [nil, '', url]
 end
 
+def link_attr(tag, name)
+  tag[/\b#{name}\s*=\s*["']([^"']+)["']/i, 1].to_s
+end
+
+def alternate_feed_url?(rel, type, href)
+  return false if href.empty?
+  return false unless rel.split(/\s+/).include?('alternate') || type.match?(/rss|atom/)
+  return false unless type.match?(/rss|atom|xml/) || href.match?(/rss|atom|feed/i)
+
+  true
+end
+
+def absolute_href(page_url, href)
+  URI.join(page_url, href).to_s
+rescue StandardError
+  nil
+end
+
 def alternate_feed_hrefs(html, page_url)
   html.to_s.scan(/<link\b[^>]*>/i).filter_map do |tag|
-    rel = tag[/\brel\s*=\s*["']([^"']+)["']/i, 1].to_s.downcase
-    type = tag[/\btype\s*=\s*["']([^"']+)["']/i, 1].to_s.downcase
-    href = tag[/\bhref\s*=\s*["']([^"']+)["']/i, 1]
-    next if href.to_s.empty?
-    next unless rel.split(/\s+/).include?('alternate') || type.match?(/rss|atom/)
-    next unless type.match?(/rss|atom|xml/) || href.match?(/rss|atom|feed/i)
+    rel = link_attr(tag, 'rel').downcase
+    type = link_attr(tag, 'type').downcase
+    href = link_attr(tag, 'href')
+    next unless alternate_feed_url?(rel, type, href)
 
-    abs = begin
-      URI.join(page_url, href).to_s
-    rescue StandardError
-      next
-    end
-    next if abs.match?(/\.(svg|png|jpg|jpeg|gif|ico|css|js)(\?|$)/i)
+    abs = absolute_href(page_url, href)
+    next if abs.nil? || abs.match?(ASSET_EXT)
 
     abs
   end.uniq
 end
 
-def probe_feeds(page_url, html)
-  found = []
-  alternate_feed_hrefs(html, page_url).each do |abs|
+def origin_of(page_url)
+  uri = URI(page_url)
+  "#{uri.scheme}://#{uri.host}"
+rescue StandardError
+  nil
+end
+
+def collect_alternate_feeds(html, page_url)
+  alternate_feed_hrefs(html, page_url).filter_map do |abs|
     res, body, final = fetch_feed_candidate(abs)
-    next unless res
+    next unless res && real_feed?(res, body, final)
 
-    found << final if real_feed?(res, body, final)
+    final
   end
-  return found.uniq if found.any?
+end
 
-  origin = begin
-    u = URI(page_url)
-    "#{u.scheme}://#{u.host}"
-  rescue StandardError
-    nil
-  end
-  return [] unless origin
-
+def collect_path_feeds(origin)
+  found = []
   FEED_PATHS.each do |path|
     res, body, final = fetch_feed_candidate("#{origin}#{path}")
-    next unless res
+    next unless res && real_feed?(res, body, final)
 
-    if real_feed?(res, body, final)
-      found << final
-      break
-    end
+    found << final
+    break
   end
-  found.uniq
+  found
+end
+
+def probe_feeds(page_url, html)
+  found = collect_alternate_feeds(html, page_url)
+  return found.uniq if found.any?
+
+  origin = origin_of(page_url)
+  return [] unless origin
+
+  collect_path_feeds(origin).uniq
 end
 
 def https_to_http?(start_url, final_url)
@@ -286,20 +353,23 @@ rescue StandardError
   false
 end
 
-def verdict_for(start_url, result)
+def verdict_notes(result)
   note = []
   note << result[:ssl_note] if result[:ssl_note]
   note << 'insecure_ssl_fetch' if result[:insecure]
+  note
+end
 
-  return ['DROP', note + ["unreachable: #{result[:error]}"], result[:body].to_s] if result[:error]
-  if result[:status].nil? || result[:status] >= 400
-    return ['DROP', note + ["http_#{result[:status] || 'nil'}"], result[:body].to_s]
-  end
-  if https_to_http?(start_url, result[:final_url])
-    return ['DROP', note + ['https_to_http_downgrade'], result[:body].to_s]
-  end
-
+def early_verdict(start_url, result, note)
   body = result[:body].to_s
+  return ['DROP', note + ["unreachable: #{result[:error]}"], body] if result[:error]
+  return ['DROP', note + ["http_#{result[:status] || 'nil'}"], body] if result[:status].nil? || result[:status] >= 400
+  return ['DROP', note + ['https_to_http_downgrade'], body] if https_to_http?(start_url, result[:final_url])
+
+  nil
+end
+
+def html_verdict(result, note, body)
   feeds = probe_feeds(result[:final_url], body)
   return ['DEFER', note + ["native_rss=#{feeds.first}"], body] if feeds.any?
   return ['DROP', note + ['error_page'], body] if body.include?('ErrorPage') || result[:final_url].include?('ErrorPage')
@@ -311,53 +381,88 @@ def verdict_for(start_url, result)
   ['BUILD', note + ["html_bytes=#{body.bytesize}"], body]
 end
 
+def verdict_for(start_url, result)
+  note = verdict_notes(result)
+  early = early_verdict(start_url, result, note)
+  return early if early
+
+  html_verdict(result, note, result[:body].to_s)
+end
+
+def print_dry_run(opts, candidates)
+  puts %w[slug region url].join("\t")
+  candidates.each { |cand| puts [cand[:slug], cand[:region], cand[:url]].join("\t") }
+  puts "cache_dir=#{opts[:cache_dir]}"
+  puts "ledger=#{opts[:ledger]}"
+  puts "count=#{candidates.size}"
+end
+
+def recon_row(cand, result, verdict, notes, body, cache_dir)
+  html_path = File.join(cache_dir, "#{cand[:slug]}.html")
+  File.write(html_path, body.to_s)
+  [
+    cand[:slug],
+    cand[:region],
+    verdict,
+    cand[:url],
+    result[:final_url],
+    html_path,
+    notes.join('; '),
+    (result[:chain] || []).join(' > ')
+  ]
+end
+
+def process_candidate(cand, cache_dir)
+  result = follow(cand[:url])
+  verdict, notes, body = verdict_for(cand[:url], result)
+  row = recon_row(cand, result, verdict, notes, body, cache_dir)
+  warn([verdict, cand[:slug], result[:final_url], notes.join('; ')].join("\t"))
+  row
+end
+
+def run_recon(opts, candidates)
+  FileUtils.mkdir_p(opts[:cache_dir])
+  mutex = Mutex.new
+  rows = []
+
+  threads = candidates.map do |cand|
+    Thread.new do
+      row = process_candidate(cand, opts[:cache_dir])
+      mutex.synchronize { rows << row }
+    end
+  end
+  threads.each(&:join)
+  rows
+end
+
+def write_ledger(path, rows)
+  rows.sort_by! { |row| [row[1], row[0]] }
+  File.open(path, 'w') do |file|
+    file.puts %w[slug region verdict start_url canonical_url html_path notes redirect_chain].join("\t")
+    rows.each { |row| file.puts row.join("\t") }
+  end
+end
+
+def summarize(opts, rows)
+  build = rows.count { |row| row[2] == 'BUILD' }
+  defer = rows.count { |row| row[2] == 'DEFER' }
+  drop = rows.count { |row| row[2] == 'DROP' }
+  puts
+  puts "LEDGER=#{opts[:ledger]}"
+  puts "CACHE_DIR=#{opts[:cache_dir]}"
+  puts "BUILD=#{build} DEFER=#{defer} DROP=#{drop}"
+end
+
 opts = parse_args(ARGV)
 candidates = load_candidates(opts)
 
 if opts[:dry_run]
-  puts %w[slug region url].join("\t")
-  candidates.each { |c| puts [c[:slug], c[:region], c[:url]].join("\t") }
-  puts "cache_dir=#{opts[:cache_dir]}"
-  puts "ledger=#{opts[:ledger]}"
-  puts "count=#{candidates.size}"
+  print_dry_run(opts, candidates)
   exit 0
 end
 
-FileUtils.mkdir_p(opts[:cache_dir])
-mutex = Mutex.new
-rows = []
+rows = run_recon(opts, candidates)
+write_ledger(opts[:ledger], rows)
+summarize(opts, rows)
 
-threads = candidates.map do |cand|
-  Thread.new do
-    result = follow(cand[:url])
-    verdict, notes, body = verdict_for(cand[:url], result)
-    html_path = File.join(opts[:cache_dir], "#{cand[:slug]}.html")
-    File.write(html_path, body.to_s)
-    row = [
-      cand[:slug],
-      cand[:region],
-      verdict,
-      cand[:url],
-      result[:final_url],
-      html_path,
-      notes.join('; '),
-      (result[:chain] || []).join(' > ')
-    ]
-    mutex.synchronize { rows << row }
-    warn([verdict, cand[:slug], result[:final_url], notes.join('; ')].join("\t"))
-  end
-end
-threads.each(&:join)
-
-rows.sort_by! { |r| [r[1], r[0]] }
-File.open(opts[:ledger], 'w') do |f|
-  f.puts %w[slug region verdict start_url canonical_url html_path notes redirect_chain].join("\t")
-  rows.each { |r| f.puts r.join("\t") }
-end
-
-puts
-puts "LEDGER=#{opts[:ledger]}"
-puts "CACHE_DIR=#{opts[:cache_dir]}"
-puts "BUILD=#{rows.count { |r| r[2] == 'BUILD' }} DEFER=#{rows.count { |r| r[2] == 'DEFER' }} DROP=#{rows.count do |r|
-  r[2] == 'DROP'
-end}"
+# rubocop:enable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/ParameterLists,Metrics/PerceivedComplexity
