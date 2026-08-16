@@ -5,6 +5,7 @@ module BotasaurusFetchConfigs
     apple.com/newsroom.yml
     imdb.com/ratings.yml
     stackoverflow.com/hot_network_questions.yml
+    support.apple.com/en_gb_ht201222.yml
     thoughtworks.com/insights.yml
   ].freeze
 
