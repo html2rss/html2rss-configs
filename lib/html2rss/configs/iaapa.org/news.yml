@@ -1,5 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - entertainment
 channel:
+  language: en
   url: https://iaapa.org/news-funworld
   time_zone: UTC
   ttl: 720

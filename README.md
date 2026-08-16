@@ -85,7 +85,7 @@ BOTASAURUS_SCRAPER_URL=http://localhost:4010 \
 make test-fetch-botasaurus-configs
 ```
 
-**Adding new configs**: Create the YAML file, run `make validate`, then run the generated tests. No dedicated spec file is needed.
+**Adding new configs**: Create the YAML file with top-level `directory.topics` (controlled vocabulary), run `make validate`, then run the generated tests. No dedicated spec file is needed.
 
 The fetch suite has two lanes:
 

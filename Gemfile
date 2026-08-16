@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem 'html2rss', '>= 0.25.0'
+# Path gem until html2rss ships directory.topics validation (feat/directory-topics).
+gem 'html2rss', path: '../html2rss'
 
 group :development do
   gem 'nokogiri'

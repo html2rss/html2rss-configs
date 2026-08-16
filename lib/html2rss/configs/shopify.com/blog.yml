@@ -1,6 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - product
 
 channel:
+  language: en
   url: https://www.shopify.com/blog/latest
   time_zone: UTC
   ttl: 360

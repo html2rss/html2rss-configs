@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 ---
+directory:
+  topics:
+    - entertainment
 channel:
   url: https://www.nomanssky.com/news/
   language: en-GB
