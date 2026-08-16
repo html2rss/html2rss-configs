@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - science
+    - research
+channel:
+  url: https://www.anu.edu.au/news/all-news
+  language: en
+  time_zone: Australia/Sydney
+  ttl: 360
+selectors:
+  items:
+    selector: 'h3 a[href*="/news/all-news/"]'
+    enhance: false
+  title:
+    extractor: text
+  url:
+    extractor: href
