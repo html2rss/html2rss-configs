@@ -1,17 +1,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.cleanenergywire.org/news-archive
+  url: https://www.cleanenergywire.org/news
   time_zone: "Europe/Berlin"
   ttl: 360
 selectors:
   items:
-    selector: ".view-content article"
+    selector: ".views-row"
+    enhance: false
   title:
-    selector: "h3 a"
+    selector: "h2 a"
   url:
-    selector: "h3 a"
+    selector: "h2 a"
     extractor: "href"
   published_at:
-    selector: ".date-display-single"
+    selector: "time"
     post_process:
       - name: parse_time

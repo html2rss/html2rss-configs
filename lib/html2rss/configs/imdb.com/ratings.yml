@@ -1,4 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+strategy: botasaurus
+
 parameters:
   user_id:
     type: string
@@ -8,9 +10,14 @@ channel:
   url: https://www.imdb.com/user/%<user_id>s/ratings
   time_zone: UTC
   ttl: 1440
+request:
+  botasaurus:
+    wait_timeout_seconds: 20
+    wait_for_selector: "li.ipc-metadata-list-summary-item"
 selectors:
   items:
     selector: "li.ipc-metadata-list-summary-item"
+    enhance: false
   title:
     selector: ".ipc-title__text"
     post_process:

@@ -1,15 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
   title: "rbb24.de: meistgeklickt"
-  url: https://rbb24.de/
+  url: https://www.rbb24.de/das-beste/
   time_zone: Europe/Berlin
   ttl: 30
   language: de
 selectors:
   items:
-    selector: ".tabmodul_container > li:last-child > ul > li"
+    selector: "article.top-teaser a.top-teaser__text-container"
+    enhance: false
   title:
-    selector: "a"
+    extractor: "text"
   url:
-    selector: "a"
     extractor: "href"

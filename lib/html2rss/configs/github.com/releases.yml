@@ -5,7 +5,7 @@ parameters:
     default: "nuxt"
   repository:
     type: string
-    default: "nuxt.js"
+    default: "nuxt"
 
 channel:
   url: https://github.com/%<username>s/%<repository>s/releases
@@ -15,11 +15,9 @@ channel:
 selectors:
   items:
     selector: ".repository-content section"
+    enhance: false
   title:
-    selector: "h2"
+    selector: 'a[href*="/releases/tag/"]'
   url:
-    selector: "a"
+    selector: 'a[href*="/releases/tag/"]'
     extractor: "href"
-  description:
-    selector: '[data-test-selector="body-content"]'
-    extractor: "html"

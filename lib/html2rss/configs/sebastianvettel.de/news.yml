@@ -1,15 +1,16 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 ---
 channel:
-  url: https://sebastianvettel.de/news/
+  url: https://sebastianvettel.de/
   language: de-DE
   ttl: 8640
   time_zone: Europe/Berlin
 selectors:
   items:
-    selector: ".card.title_in_content"
+    selector: ".gb-loop-item:has(a[href*='/news/'])"
+    enhance: false
   title:
-    selector: h2
-  description:
-    selector: ".row-text-bild-modul"
-    extractor: html
+    selector: ".gb-text:first-child"
+  url:
+    selector: "a[href*='/news/']"
+    extractor: href

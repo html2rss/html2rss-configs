@@ -1,20 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.formula1.com/en/latest/all.html
+  url: https://www.formula1.com/en/latest
   time_zone: UTC
   ttl: 120
 selectors:
   items:
-    selector: "#article-list > li"
+    selector: 'a[class*="ArticleListCard-module_title"]'
+    enhance: false
   title:
-    selector: "p"
+    extractor: text
   url:
-    selector: "a"
     extractor: "href"
-  categories:
-    - category_a
-    - category_b
-  category_a:
-    selector: "figcaption>span:first"
-  category_b:
-    selector: "figcaption>span:last"

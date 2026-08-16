@@ -4,7 +4,6 @@ channel:
   time_zone: UTC
   ttl: 720
 enhance: false
-strategy: botasaurus
 selectors:
   items:
     selector: ".views-row > article"
