@@ -10,7 +10,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'div.pgafu-post-grid-content h2 a'
+    selector: "div.pgafu-post-grid-content h2 a"
     enhance: false
   title:
     extractor: text

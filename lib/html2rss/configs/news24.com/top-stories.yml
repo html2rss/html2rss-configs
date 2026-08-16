@@ -9,7 +9,7 @@ channel:
   ttl: 180
 selectors:
   items:
-    selector: 'a.article-item__title'
+    selector: "a.article-item__title"
     enhance: false
   title:
     extractor: text

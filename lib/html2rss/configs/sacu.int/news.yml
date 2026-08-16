@@ -10,7 +10,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: '.card'
+    selector: ".card"
     enhance: false
   title:
     selector: h3
