@@ -16,8 +16,10 @@ module BotasaurusFetchConfigs
     occrp.org/news.yml
     oecd.org/newsroom.yml
     opec.org/press-releases.yml
+    panapress.com/latest.yml
     stackoverflow.com/hot_network_questions.yml
     support.apple.com/en_gb_ht201222.yml
+    theeastafrican.co.ke/news.yml
     thoughtworks.com/insights.yml
     who.int/news.yml
     worldbank.org/news.yml
