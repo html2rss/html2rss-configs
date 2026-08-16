@@ -1,0 +1,210 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Batch Nokogiri selector hints over cached HTML files (no network).
+# Prefer repeated article-like anchors, heading links, and common card selectors.
+#
+# Usage (from repo root):
+#   .agents/skills/html2rss-config/scripts/analyze_html tmp/html2rss-recon/example.com.html
+#   .agents/skills/html2rss-config/scripts/analyze_html --base https://example.com/news/ file.html
+#   .agents/skills/html2rss-config/scripts/analyze_html --from-ledger tmp/html2rss-recon/ledger.tsv
+#   .agents/skills/html2rss-config/scripts/analyze_html --from-ledger ledger.tsv --verdict BUILD
+#
+# Options:
+#   --base URL           Base URL for relative hrefs (single-file / override)
+#   --from-ledger PATH   Read html_path (+ canonical_url) from batch_recon ledger
+#   --verdict NAME       Filter ledger rows (default with --from-ledger: BUILD)
+#   --min-repeat N       Minimum repeated path count to print (default: 3)
+#   -h, --help
+
+require 'nokogiri'
+require 'uri'
+
+NEWSISH = %r{(news|press|noticia|actualit|release|communiqu|artikel|article|berita|post|media|event|speech|relcontent|AllRel|/pr/)}i
+CARD_SELECTORS = %w[article .card .views-row .post .news-item .press-release li.media].freeze
+
+def usage!(msg = nil)
+  warn(msg) if msg
+  warn(<<~USAGE)
+    Usage: analyze_html [options] HTML_FILE [HTML_FILE ...]
+           analyze_html [options] --from-ledger ledger.tsv
+
+    Options:
+      --base URL           Base URL for resolving relative hrefs
+      --from-ledger PATH   Use batch_recon ledger (html_path + canonical_url)
+      --verdict NAME       Ledger verdict filter (default: BUILD)
+      --min-repeat N       Min path repeats to show (default: 3)
+      -h, --help
+  USAGE
+  exit 1
+end
+
+def parse_args(argv)
+  opts = {
+    base: nil,
+    ledger: nil,
+    verdict: 'BUILD',
+    min_repeat: 3,
+    files: [],
+    verdict_explicit: false
+  }
+  i = 0
+  while i < argv.size
+    case argv[i]
+    when '-h', '--help' then usage!
+    when '--base'
+      usage!('Missing value for --base') unless argv[i + 1]
+      opts[:base] = argv[i += 1]
+    when '--from-ledger'
+      usage!('Missing value for --from-ledger') unless argv[i + 1]
+      opts[:ledger] = argv[i += 1]
+    when '--verdict'
+      usage!('Missing value for --verdict') unless argv[i + 1]
+      opts[:verdict] = argv[i += 1]
+      opts[:verdict_explicit] = true
+    when '--min-repeat'
+      usage!('Missing value for --min-repeat') unless argv[i + 1]
+      opts[:min_repeat] = Integer(argv[i += 1])
+    when /^--/
+      usage!("Unknown option: #{argv[i]}")
+    else
+      opts[:files] << argv[i]
+    end
+    i += 1
+  end
+  opts
+end
+
+def parent_sig(node)
+  parts = []
+  cur = node
+  4.times do
+    break unless cur&.element?
+
+    cls = cur['class'].to_s.split.grep_v(/^(js-|is-|active|hidden)/).first(2).join('.')
+    parts << [cur.name, cls].reject(&:empty?).join('.')
+    cur = cur.parent
+  end
+  parts.join(' < ')
+end
+
+def normalize_path_key(path)
+  path.to_s
+      .gsub(%r{/\d{4}/\d{2}/}, '/YYYY/MM/')
+      .gsub(%r{/\d+}, '/N')
+      .gsub(/-[0-9a-f]{8,}/, '-HASH')
+end
+
+def load_targets(opts)
+  if opts[:ledger]
+    usage!("Ledger not found: #{opts[:ledger]}") unless File.file?(opts[:ledger])
+    lines = File.readlines(opts[:ledger], chomp: true)
+    usage!('Empty ledger') if lines.empty?
+
+    header = lines.shift.split("\t")
+    idx = header.each_with_index.to_h
+    %w[slug verdict canonical_url html_path].each do |col|
+      usage!("Ledger missing column: #{col}") unless idx[col]
+    end
+
+    filter = opts[:verdict]
+    filter = nil if filter.to_s.casecmp('ALL').zero?
+
+    return lines.filter_map do |line|
+      cols = line.split("\t")
+      next if filter && cols[idx['verdict']] != filter
+
+      {
+        slug: cols[idx['slug']],
+        path: cols[idx['html_path']],
+        base: opts[:base] || cols[idx['canonical_url']]
+      }
+    end
+  end
+
+  usage!('Pass HTML files and/or --from-ledger') if opts[:files].empty?
+  opts[:files].map do |path|
+    {
+      slug: File.basename(path, '.*'),
+      path: path,
+      base: opts[:base] || "https://#{File.basename(path, '.*')}/"
+    }
+  end
+end
+
+def analyze(slug:, path:, base:, min_repeat:)
+  unless File.file?(path)
+    puts '=' * 72
+    puts "#{slug} MISSING #{path}"
+    return
+  end
+
+  raw = File.read(path)
+  puts '=' * 72
+  puts "#{slug} bytes=#{raw.bytesize} base=#{base} path=#{path}"
+  if raw.bytesize < 800
+    puts '  THIN/EMPTY — Botasaurus candidate (or DROP if still empty after one scrape)'
+    return
+  end
+
+  doc = Nokogiri::HTML(raw)
+  anchors = doc.css('a[href]').reject { |a| a['href'].to_s.start_with?('#', 'javascript:', 'mailto:') }
+  puts "  anchors=#{anchors.size}"
+
+  buckets = Hash.new { |h, k| h[k] = [] }
+  anchors.each do |a|
+    href = a['href'].to_s
+    text = a.text.gsub(/\s+/, ' ').strip
+    title = text.empty? ? a['aria-label'].to_s.strip : text
+    next if title.length < 12
+
+    path_key = begin
+      normalize_path_key(URI.join(base, href).path)
+    rescue StandardError
+      normalize_path_key(href)
+    end
+    buckets[path_key] << {
+      href: href,
+      title: title[0, 90],
+      parent: parent_sig(a),
+      classes: a['class'].to_s
+    }
+  end
+
+  ranked = buckets.sort_by { |k, v| [-v.size, NEWSISH.match?(k) ? 0 : 1, k] }
+  ranked.first(8).each do |path_key, items|
+    next if items.size < min_repeat
+
+    sample = items.first(3)
+    puts "  PATH x#{items.size}: #{path_key}"
+    puts "    parent: #{sample.first[:parent]}"
+    puts "    classes: #{sample.map { |i| i[:classes] }.uniq.first(3).inspect}"
+    sample.each { |i| puts "    - #{i[:title].inspect} => #{i[:href][0, 100]}" }
+  end
+
+  %w[h1 h2 h3 h4 h5 h6].each do |h|
+    links = doc.css("#{h} a[href]")
+    next if links.size < min_repeat
+
+    sample = links.first(2).map { |a| a.text.gsub(/\s+/, ' ').strip[0, 60] }
+    puts "  #{h} a x#{links.size}: sample=#{sample}"
+  end
+
+  CARD_SELECTORS.each do |sel|
+    nodes = doc.css(sel)
+    next if nodes.size < min_repeat
+
+    puts "  SEL #{sel} x#{nodes.size}"
+  end
+end
+
+opts = parse_args(ARGV)
+targets = load_targets(opts)
+if targets.empty?
+  warn('No targets matched (check --verdict / files)')
+  exit 0
+end
+
+targets.each do |t|
+  analyze(slug: t[:slug], path: t[:path], base: t[:base], min_repeat: opts[:min_repeat])
+end
