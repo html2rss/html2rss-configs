@@ -37,30 +37,28 @@ def feed_example_name(config_path, root)
   config_path.relative_path_from(root / 'lib/html2rss/configs').to_s
 end
 
+def invoke_entry(entry, sibling)
+  return nil unless entry.file?
+  return ['bundle', 'exec', entry.to_s] if (sibling / 'Gemfile').file?
+
+  [entry.to_s]
+end
+
+def sibling_html2rss_invocation(root)
+  sibling = root.parent / 'html2rss'
+  invoke_entry(sibling / 'exe' / 'html2rss', sibling) ||
+    invoke_entry(sibling / 'bin' / 'html2rss', sibling) ||
+    abort(<<~MSG)
+      html2rss CLI not found on PATH and no sibling checkout at #{sibling}.
+      Install the CLI or clone html2rss next to html2rss-configs (AGENTS.md).
+    MSG
+end
+
 # Prefer PATH `html2rss`, then sibling ../html2rss (exe via bundle, then bin).
 def resolve_html2rss_invocation(root)
-  path_bin = `command -v html2rss 2>/dev/null`.strip
-  return ['html2rss'] unless path_bin.empty?
+  return ['html2rss'] unless `command -v html2rss 2>/dev/null`.strip.empty?
 
-  sibling = root.parent / 'html2rss'
-  exe = sibling / 'exe' / 'html2rss'
-  if exe.file?
-    return ['bundle', 'exec', exe.to_s] if (sibling / 'Gemfile').file?
-
-    return [exe.to_s]
-  end
-
-  bin = sibling / 'bin' / 'html2rss'
-  if bin.file?
-    return ['bundle', 'exec', bin.to_s] if (sibling / 'Gemfile').file?
-
-    return [bin.to_s]
-  end
-
-  abort(<<~MSG)
-    html2rss CLI not found on PATH and no sibling checkout at #{sibling}.
-    Install the CLI or clone html2rss next to html2rss-configs (AGENTS.md).
-  MSG
+  sibling_html2rss_invocation(root)
 end
 
 def run!(*cmd, env: {}, quiet: false, chdir: nil)

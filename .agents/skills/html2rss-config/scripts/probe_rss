@@ -122,41 +122,50 @@ def syndication_type?(type)
 end
 
 def feed_like_href?(href)
-  href.match?(%r{rss|atom|feed|\.xml}i)
+  href.match?(/rss|atom|feed|\.xml/i)
+end
+
+def alternate_rel?(tag)
+  tag[REL_RE, 1].to_s.downcase.split(/\s+/).include?('alternate')
+end
+
+def href_from_alternate_link(tag, page_url)
+  return unless alternate_rel?(tag)
+
+  href = tag[HREF_RE, 1]
+  return if href.nil? || href.empty?
+  return unless syndication_type?(tag[TYPE_RE, 1]) || feed_like_href?(href)
+
+  absolute_url(page_url, href.strip)
 end
 
 def alternate_feed_hrefs(html, page_url)
   return [] if html.nil? || html.empty?
 
-  html.scan(LINK_TAG_RE).filter_map do |tag|
-    rel = tag[REL_RE, 1].to_s.downcase
-    next unless rel.split(/\s+/).include?('alternate')
+  html.scan(LINK_TAG_RE).filter_map { |tag| href_from_alternate_link(tag, page_url) }.uniq
+end
 
-    href = tag[HREF_RE, 1]
-    next if href.nil? || href.empty?
+def first_feedish_url(urls)
+  urls.lazy.filter_map do |url|
+    res, final = fetch(url)
+    final if feedish?(res)
+  end.first
+end
 
-    type = tag[TYPE_RE, 1]
-    next unless syndication_type?(type) || feed_like_href?(href)
-
-    absolute_url(page_url, href.strip)
-  end.uniq
+def page_fetch_context(page)
+  page_res, final_page = fetch(page)
+  page_url = ok_response?(page_res) ? final_page : page
+  html = ok_response?(page_res) ? page_res.body.to_s : ''
+  [page_url, html]
 end
 
 def find_feed(page, extra)
-  page_res, final_page = fetch(page)
-  page_url = ok_response?(page_res) ? final_page : page
-  page_html = ok_response?(page_res) ? page_res.body.to_s : ''
-
-  alternate_feed_hrefs(page_html, page_url).each do |candidate|
-    res, final = fetch(candidate)
-    return final if feedish?(res)
-  end
+  page_url, html = page_fetch_context(page)
+  hit = first_feedish_url(alternate_feed_hrefs(html, page_url))
+  return hit if hit
 
   paths = (page_dir_paths(page_url) + DEFAULT_PATHS + extra).uniq
-  paths.lazy.filter_map do |path|
-    res, final = fetch(absolute_url(page_url, path))
-    final if feedish?(res)
-  end.first
+  first_feedish_url(paths.map { |path| absolute_url(page_url, path) })
 end
 
 usage! if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
