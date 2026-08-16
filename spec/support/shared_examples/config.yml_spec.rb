@@ -50,7 +50,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     context 'with directory present' do
-      it 'has non-empty topics from the controlled vocabulary', :aggregate_failures do
+      it 'has non-empty topics from the controlled vocabulary', :aggregate_failures do # rubocop:disable RSpec/ExampleLength
         expect(yaml).to have_key('directory')
         topics = yaml.dig('directory', 'topics')
         expect(topics).to be_an(Array)
