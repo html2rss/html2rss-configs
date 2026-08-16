@@ -14,5 +14,5 @@ selectors:
   title:
     selector: .views-field-field-document-long-title
   url:
-    selector: '.views-field-field-press-release-number a'
+    selector: ".views-field-field-press-release-number a"
     extractor: href

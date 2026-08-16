@@ -13,6 +13,6 @@ selectors:
     selector: 'a[href^="/blog/"][class*="flex-1"]'
     enhance: false
   title:
-    selector: '> p:first-of-type'
+    selector: "> p:first-of-type"
   url:
     extractor: href

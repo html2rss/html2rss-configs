@@ -9,7 +9,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: '#list .item .tit a'
+    selector: "#list .item .tit a"
     enhance: false
   title:
     extractor: text

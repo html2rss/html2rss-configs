@@ -10,7 +10,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'ul.article-list > li.post-row > div > a.post-link'
+    selector: "ul.article-list > li.post-row > div > a.post-link"
     enhance: false
   title:
     selector: h3.post-title
