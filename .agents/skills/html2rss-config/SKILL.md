@@ -31,9 +31,11 @@ Pick mode from the user ask. Grow later with more modes/references; keep this fi
 ## Tool order
 
 1. **user-html2rss MCP** — `capture_config` / `scrape_url` / `inspect_url` / `validate_config` when discovery works.
-2. Else **core CLI** from sibling `../html2rss` — `html2rss validate|feed` (or `bundle exec exe/html2rss …`).
+2. Else **core CLI** from PATH or sibling `../html2rss` — `scripts/check_config` resolves this (or raw `html2rss` / `bundle exec exe/html2rss`).
 3. **Botasaurus** when Faraday returns zero items: `BOTASAURUS_SCRAPER_URL=http://localhost:4010`.
 4. **Chrome MCP** only if Faraday + Botasaurus fail or the item boundary is unclear. Report Chrome outage in handoff if unavailable.
+
+If MCP discovery fails or the MCP process lacks `BOTASAURUS_SCRAPER_URL`, **skip MCP** and go straight to the CLI — do not burn the timebox retrying discovery.
 
 ## Fast path (quick)
 
@@ -47,8 +49,8 @@ Run from repo root. Prefer these over ad‑hoc CLI glue:
 
 | Script                                                       | Purpose                                                                     |
 | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe. Exit `0` = none; `3` = found (consider drop).        |
-| [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. |
+| [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe (HTML `rel=alternate` then path guesses). Exit `0` = none; `3` = found (consider drop). Under `set -e`, check `$?` — do not treat `3` as failure. |
+| [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. Resolves CLI via PATH or sibling `../html2rss`. |
 | [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.        |
 
 Examples:

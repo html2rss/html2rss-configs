@@ -18,9 +18,17 @@ Prefer **1–2** primary topics. Do not invent strings.
 | Gov / IGO / regulator press        | `civic`                                   |
 | Think tank analysis                | `civic` + `research`                      |
 | Science institute / lab            | `science` + `research`                    |
+| Space agency                       | `science` + `research`                    |
 | General newsroom                   | `news`                                    |
+| Investigative / OSINT newsroom     | `news` + `civic`                          |
 | Energy / climate agency            | `energy` + `environment`                  |
 | Markets / central bank / IMF-class | `finance` + `civic`                       |
+| Patents / IP office                | `civic` + `tech`                          |
+| Courts / legal press               | `civic`                                   |
+| Aviation / shipping regulator      | `civic`                                   |
+| Telecom / spectrum regulator       | `civic` + `tech`                          |
+| Semiconductors / hardware vendor   | `tech` + `product`                        |
+| Food / agriculture agency          | `environment` + `civic`                   |
 | Jobs board                         | `jobs`                                    |
 | Consumer tests / recalls           | `consumer` (+ `civic`)                    |
 | Travel / local visitor news        | `travel` (+ `news`)                       |
