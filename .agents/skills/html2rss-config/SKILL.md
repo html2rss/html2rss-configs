@@ -11,7 +11,7 @@ description: >-
 
 # html2rss-config
 
-Thin workflow skill for **one config quality loop at a time** (a multi-config PR is OK only when the user asks). Quality-gate SSOT: repo root [`AGENTS.md`](../../../AGENTS.md). Do not duplicate that gate here. Campaign traps: [reference/pitfalls.md](reference/pitfalls.md).
+Thin workflow skill for **one config quality loop at a time** (a multi-config PR is OK only when the user asks). Quality-gate SSOT: repo root [`AGENTS.md`](../../../AGENTS.md). Do not duplicate that gate here. Campaign traps: [reference/pitfalls.md](reference/pitfalls.md). Batch pipeline (N=1 and N>1): [reference/batch.md](reference/batch.md).
 
 ## Modes
 
@@ -48,11 +48,11 @@ Minimal selectors first: `items`, `title`, `url`. Omit brittle optional fields. 
 
 Run from repo root. Prefer these over ad‑hoc CLI glue:
 
-| Script                                                       | Purpose                                                                     |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| Script                                                       | Purpose                                                                                                                                                                 |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe (HTML `rel=alternate` then path guesses). Exit `0` = none; `3` = found (consider drop). Under `set -e`, check `$?` — do not treat `3` as failure. |
-| [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. Resolves CLI via PATH or sibling `../html2rss`. |
-| [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.        |
+| [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. Resolves CLI via PATH or sibling `../html2rss`.                                             |
+| [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.                                                                                                    |
 
 Examples:
 

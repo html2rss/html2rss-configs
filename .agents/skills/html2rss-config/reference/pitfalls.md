@@ -1,13 +1,58 @@
+# Batch wall-time constraints
+
+Present constraints for config campaigns (N≥1). Quality-gate commands stay in [AGENTS.md](../../../../AGENTS.md).
+
+## Recon
+
+- Probe the **exact** intended `channel.url` (not a homepage stand-in).
+- Prefer `scripts/batch_recon` over sequential `scripts/probe_rss` loops.
+- Cache HTML once per candidate; author selectors from that cache.
+- Treat first-party RSS on the surface as **DEFER** (no curated config unless curated value is explicit).
+- Use `html2rss auto` only as optional discovery; never as proof a config is ready (AGENTS.md Auto-Source).
+
+## Request strategy
+
+- Faraday first.
+- Botasaurus only when Faraday returns zero/blocked items and the browser shows a real list.
+- Cap Botasaurus `wait_timeout_seconds` at **≤ 20**.
+- One scrape retry on transient Botasaurus errors, then **DROP** with ledger evidence — no retry spirals.
+
+## Authoring
+
+- Soft budget ~3–4 minutes wall effort per BUILD site after recon.
+- Minimal selectors first: `items`, `title`, `url`. Drop brittle optionals early.
+- Set `enhance: false` when enhancement pulls chrome/nav/hero.
+
+## Verification batching
+
+- Offline: validate all new/changed YAML files in one pass.
+- Feed checks: run several `scripts/check_config` jobs in parallel (grouped by strategy).
+- Focused fetch: **one rspec boot per lane**, multiple `--example` flags:
+
+```bash
+bundle exec rspec --tag fetch \
+  --example 'domain/a.yml' \
+  --example 'domain/b.yml' \
+  spec/html2rss/configs_dynamic_spec.rb
+```
+
+Botasaurus lane: same command with `BOTASAURUS_SCRAPER_URL=http://localhost:4010`.
+
+- For campaigns: `make validate` and `make test` **once at the end**, not per config.
+- Register every shipped Botasaurus config with `scripts/register_botasaurus`.
+
+---
+
 # Runtime pitfalls (campaign harvest)
 
 Hard-won notes for `new` / `repair`. Prefer these over rediscovering the same traps.
-SSOT for quality gate remains [AGENTS.md](../../../../AGENTS.md).
+SSOT for quality gate remains [AGENTS.md](../../../../AGENTS.md). Pipeline: [batch.md](batch.md).
 
 ## Probe the exact surface
 
-- Run `scripts/probe_rss` on the **same URL** you will put in `channel.url`, not only the domain homepage.
+- Run `scripts/probe_rss` / `scripts/batch_recon` on the **same URL** you will put in `channel.url`, not only the domain homepage.
 - Example: AllAfrica homepage looked RSS-free; `https://allafrica.com/latest/` advertises a working RDF/RSS → **defer**.
-- Exit `3` = feed found → drop/defer unless curated value is clearly higher than the native feed.
+- Exit `3` / ledger `DEFER` = feed found → drop/defer unless curated value is clearly higher than the native feed.
 
 ## Coverage / gap campaigns (when the user asks)
 
