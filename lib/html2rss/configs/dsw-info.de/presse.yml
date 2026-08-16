@@ -1,12 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.dsw-info.de/presse
+  url: https://www.dsw-info.de/presse/pressemitteilungen-2026/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: ".cesprop-0 .container.zw-01 .frame:nth-child(2) ul > li"
+    selector: "main .frame.cet-menu ul > li"
+    enhance: false
   title:
     selector: "a"
   url:

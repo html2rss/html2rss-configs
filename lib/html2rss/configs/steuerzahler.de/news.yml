@@ -1,14 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.steuerzahler.de/news
+  url: https://www.steuerzahler.de/news/
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
     selector: ".bdst_presslist .bdst_presslist__block"
+    enhance: false
   title:
-    selector: "h4"
+    selector: "a"
   url:
     selector: "a"
     extractor: "href"

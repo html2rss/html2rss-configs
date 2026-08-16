@@ -1,21 +1,22 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 ---
 channel:
-  url: https://support.apple.com/en-gb/HT201222
+  url: https://support.apple.com/en-gb/100100
   language: en
   ttl: 360
   time_zone: UTC
 selectors:
   items:
     selector: ".table-wrapper table tbody > tr:not(:first-child)"
+    enhance: false
   title:
     selector: a
   url:
-    selector: a:first
+    selector: a
     extractor: href
   description:
-    selector: td:nth-child(2)
+    selector: "td:nth-child(2)"
   published_at:
-    selector: td:nth-child(3)
+    selector: "td:nth-child(3)"
     post_process:
       - name: parse_time

@@ -3,17 +3,9 @@
 module BotasaurusFetchConfigs
   CONFIGS = %w[
     apple.com/newsroom.yml
-    deepmind.google/blog.yml
-    deraktionaer.de/meistgelesen.yml
-    elastic.co/elasticsearch-release-notes.yml
-    go.dev/release-history.yml
-    grafana.com/whatsnew.yml
-    iaapa.org/news.yml
-    mozilla.org/security-advisories.yml
-    notion.com/blog.yml
-    shopify.com/blog.yml
-    spotify.com/newsroom.yml
-    tourismusnetzwerk-brandenburg.de/aktuelle_nachrichten.yml
+    imdb.com/ratings.yml
+    stackoverflow.com/hot_network_questions.yml
+    thoughtworks.com/insights.yml
   ].freeze
 
   module_function

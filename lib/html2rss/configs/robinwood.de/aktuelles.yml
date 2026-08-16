@@ -1,16 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://www.robinwood.de/was-gibt-es-neues/aktuelles
+  url: https://www.robinwood.de/was-gibt-es-neues
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: "article[data-history-node-id]"
+    selector: "article.node--view-mode-teaser"
+    enhance: false
   title:
     selector: "h2"
   url:
     selector: "a"
     extractor: "href"
-  description:
-    selector: ".teaser-text"

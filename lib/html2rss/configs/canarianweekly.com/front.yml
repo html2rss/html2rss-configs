@@ -6,9 +6,9 @@ channel:
   language: en
 selectors:
   items:
-    selector: ".article__entry"
+    selector: "h5.post-title a"
+    enhance: false
   title:
-    selector: "h5 > a"
+    extractor: text
   url:
-    selector: "h5 > a"
     extractor: "href"

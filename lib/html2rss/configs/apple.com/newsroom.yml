@@ -9,9 +9,10 @@ channel:
 request:
   botasaurus:
     wait_for_selector: "li.tile-item"
+    wait_timeout_seconds: 20
 selectors:
   items:
-    selector: "li.tile-item a.tile-hero, li.tile-item a.tile-2up, li.tile-item a.tile-3up, li.tile-item a.tile-list"
+    selector: "li.tile-item a.tile"
     enhance: false
   title:
     selector: .tile__headline

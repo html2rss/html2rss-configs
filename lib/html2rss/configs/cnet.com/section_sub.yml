@@ -3,23 +3,19 @@
 parameters:
   section:
     type: string
-    default: "news"
-  sub:
-    type: string
     default: "tech"
 
 channel:
-  url: https://www.cnet.com/%<section>s/%<sub>s/
+  url: https://www.cnet.com/%<section>s/
   language: en
   ttl: 360
   time_zone: UTC
 selectors:
   items:
-    selector: ".c-storiesNeonHighlightsCard"
+    selector: "article.list-entry"
+    enhance: false
   title:
-    selector: ".g-text-bold"
+    selector: "h3.list-entry__title a"
   url:
-    selector: a:first
+    selector: "h3.list-entry__title a"
     extractor: href
-  description:
-    selector: span

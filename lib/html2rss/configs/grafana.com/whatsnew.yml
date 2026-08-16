@@ -4,7 +4,6 @@ channel:
   language: en
   time_zone: UTC
   ttl: 360
-strategy: botasaurus
 selectors:
   items:
     selector: 'a.docs__menu-a[href^="/docs/grafana/latest/whatsnew/whats-new-in-v"]'

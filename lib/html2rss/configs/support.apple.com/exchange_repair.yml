@@ -1,11 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 channel:
-  url: https://support.apple.com/exchange_repair
+  url: https://support.apple.com/service-programs
   time_zone: America/Los_Angeles
   ttl: 720
 selectors:
   items:
-    selector: ".main .as-columns--2up-extended"
+    selector: ".as-columns--2up-extended"
+    enhance: false
   title:
     selector: "a"
   url:
@@ -15,10 +16,6 @@ selectors:
     selector: "img"
     extractor: "attribute"
     attribute: "src"
-  published_at:
-    selector: ".note"
-    post_process:
-      - name: parse_time
   description:
     post_process:
       - name: template
