@@ -4,15 +4,15 @@ directory:
     - tech
     - product
 channel:
-  url: https://www.asml.com/en/news/press-releases
+  url: https://www.nokia.com/newsroom/
   language: en
-  time_zone: Europe/Amsterdam
+  time_zone: Europe/Helsinki
   ttl: 360
 selectors:
   items:
-    selector: 'a.related-content-card[href*="/en/news/press-releases/20"]'
+    selector: 'a.pp-block-item-container[href*="/newsroom/"]'
     enhance: false
   title:
-    selector: span.related-content-card-title
+    selector: h3.pp-block-item-heading
   url:
     extractor: href
