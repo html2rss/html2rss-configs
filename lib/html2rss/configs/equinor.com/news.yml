@@ -1,18 +1,17 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - tech
-    - product
+    - energy
 channel:
-  url: https://www.asml.com/en/news/press-releases
+  url: https://www.equinor.com/news
   language: en
-  time_zone: Europe/Amsterdam
+  time_zone: Europe/Oslo
   ttl: 360
 selectors:
   items:
-    selector: 'a.related-content-card[href*="/en/news/press-releases/20"]'
+    selector: 'a[href^="/news/"]'
     enhance: false
   title:
-    selector: span.related-content-card-title
+    selector: h2
   url:
     extractor: href

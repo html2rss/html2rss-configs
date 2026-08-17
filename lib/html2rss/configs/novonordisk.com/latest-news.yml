@@ -1,18 +1,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - tech
+    - science
     - product
 channel:
-  url: https://www.asml.com/en/news/press-releases
+  url: https://www.novonordisk.com/news-and-media/latest-news.html
   language: en
-  time_zone: Europe/Amsterdam
+  time_zone: Europe/Copenhagen
   ttl: 360
 selectors:
   items:
-    selector: 'a.related-content-card[href*="/en/news/press-releases/20"]'
+    selector: 'a.ln-link-item[href*="news-details.html"]'
     enhance: false
   title:
-    selector: span.related-content-card-title
+    selector: .location-info p.paragraph-s
   url:
     extractor: href

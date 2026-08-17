@@ -2,10 +2,13 @@
 
 module BotasaurusFetchConfigs
   CONFIGS = %w[
+    aalto.fi/news.yml
+    academictransfer.com/jobs.yml
     apple.com/newsroom.yml
     aspi.org.au/strategist.yml
     bundesregierung.de/pressemitteilungen.yml
     carnegieendowment.org/research.yml
+    chalmers.se/news.yml
     chathamhouse.org/research-publications.yml
     curia.europa.eu/press-releases.yml
     ethz.ch/eth-news.yml
@@ -22,6 +25,7 @@ module BotasaurusFetchConfigs
     tap.info.tn/politics.yml
     theeastafrican.co.ke/news.yml
     thoughtworks.com/insights.yml
+    visitfinland.com/press-releases.yml
     who.int/news.yml
     worldbank.org/news.yml
     www.consilium.europa.eu/press-releases.yml

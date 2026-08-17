@@ -1,18 +1,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - tech
+    - entertainment
     - product
 channel:
-  url: https://www.asml.com/en/news/press-releases
-  language: en
-  time_zone: Europe/Amsterdam
+  url: https://www.lego.com/en-gb/aboutus/newsroom/press-releases
+  language: en-GB
+  time_zone: Europe/Copenhagen
   ttl: 360
 selectors:
   items:
-    selector: 'a.related-content-card[href*="/en/news/press-releases/20"]'
+    selector: 'a.c-card--article[href*="/aboutus/news/20"]'
     enhance: false
   title:
-    selector: span.related-content-card-title
+    selector: h2.c-card__title
   url:
     extractor: href
