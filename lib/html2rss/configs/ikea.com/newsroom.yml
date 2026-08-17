@@ -11,7 +11,7 @@ channel:
 selectors:
   items:
     selector: 'a.card[href*="/global/en/newsroom/"]'
-    enhance: false
+    enhance: true
   title:
     selector: span.skapa-typography-heading-m
   url:

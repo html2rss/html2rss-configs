@@ -16,7 +16,7 @@ request:
 selectors:
   items:
     selector: 'a[data-component="NewsListItem"]'
-    enhance: false
+    enhance: true
   title:
     selector: p.line-clamp-2
   url:

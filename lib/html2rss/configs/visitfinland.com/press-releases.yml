@@ -15,7 +15,7 @@ request:
 selectors:
   items:
     selector: 'a.PageCard[href*="/en/media-press-releases/"]'
-    enhance: false
+    enhance: true
   title:
     selector: div.h5
   url:

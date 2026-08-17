@@ -11,7 +11,7 @@ channel:
 selectors:
   items:
     selector: 'a.c-card--article[href*="/aboutus/news/20"]'
-    enhance: false
+    enhance: true
   title:
     selector: h2.c-card__title
   url:

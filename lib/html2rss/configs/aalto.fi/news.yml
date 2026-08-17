@@ -16,7 +16,7 @@ request:
 selectors:
   items:
     selector: 'a.hub-listing__results__item__link[href^="/en/news/"]'
-    enhance: false
+    enhance: true
   title:
     selector: .hub-listing__results__item__heading
   url:

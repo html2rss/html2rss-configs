@@ -15,7 +15,7 @@ request:
 selectors:
   items:
     selector: article
-    enhance: false
+    enhance: true
   title:
     selector: h3
   url:

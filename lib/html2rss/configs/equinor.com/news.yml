@@ -10,7 +10,7 @@ channel:
 selectors:
   items:
     selector: 'a[href^="/news/"]'
-    enhance: false
+    enhance: true
   title:
     selector: h2
   url:
