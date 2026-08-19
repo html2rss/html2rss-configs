@@ -12,15 +12,22 @@ RSpec.describe Html2rss::Configs::Catalog do
       expect(entries).to all(be_a(Html2rss::Configs::CatalogEntry))
     end
 
-    it 'includes required wire fields on every entry', :aggregate_failures do
-      entry = entries.find { |candidate| candidate.id == 'anthropic.com/news' }
+    context 'with anthropic.com/news' do
+      subject(:entry) { entries.find { |candidate| candidate.id == 'anthropic.com/news' } }
 
-      expect(entry).not_to be_nil
-      expect(entry.path).to eq('/anthropic.com/news.rss')
-      expect(entry.source).to eq('embedded')
-      expect(entry.directory[:title]).to eq('Anthropic — News')
-      expect(entry.channel[:title]).to eq('Anthropic — News')
-      expect(entry.parameters).to eq(schema: {}, defaults: {})
+      it 'maps anthropic identifiers' do
+        expect(entry).to have_attributes(
+          id: 'anthropic.com/news',
+          path: '/anthropic.com/news.rss',
+          source: 'embedded'
+        )
+      end
+
+      it 'maps anthropic titles and parameters', :aggregate_failures do
+        expect(entry.directory[:title]).to eq('Anthropic — News')
+        expect(entry.channel[:title]).to eq('Anthropic — News')
+        expect(entry.parameters).to eq(schema: {}, defaults: {})
+      end
     end
   end
 
