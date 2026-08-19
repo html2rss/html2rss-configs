@@ -26,6 +26,12 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
 - Optional `directory.summary` (max 160 characters) for feed-directory browse cards.
 - Prefer setting `channel.language` (`en`/`de`/`es`/`en-GB`/`de-DE`) when the surface language is clear.
 
+## Feed Directory catalog
+
+- **Serialization owner:** `Html2rss::Configs::Catalog` in `lib/html2rss/configs/catalog.rb` builds wire-ready entries from packaged YAML. Do not duplicate YAML walking in `html2rss-web` or the docs site.
+- **Entry type:** `Html2rss::Configs::CatalogEntry` (`Data.define`) — use `#to_h` for the v1 wire shape (`id`, `path`, `source`, `directory`, `channel`, `parameters`).
+- **Agent reference:** [.agents/skills/html2rss-config/reference/catalog.md](.agents/skills/html2rss-config/reference/catalog.md).
+
 ## Surface Selection
 
 Prefer these surfaces first:
@@ -135,19 +141,25 @@ cd ../html2rss
 html2rss feed /abs/path/to/config.yml
 ```
 
-3. Repo-wide validation in this repo:
+3. Catalog serialization for changed configs:
+
+```bash
+bundle exec rspec spec/lib/html2rss/configs/catalog_spec.rb
+```
+
+4. Repo-wide validation in this repo:
 
 ```bash
 make validate
 ```
 
-4. Repo non-fetch tests in this repo:
+5. Repo non-fetch tests in this repo:
 
 ```bash
 make test
 ```
 
-5. Focused fetch verification:
+6. Focused fetch verification:
 
 - Faraday-backed candidate:
 
@@ -162,14 +174,14 @@ BOTASAURUS_SCRAPER_URL=http://localhost:4010 \
 bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
 ```
 
-6. If fetch still fails, decide explicitly whether:
+7. If fetch still fails, decide explicitly whether:
 
 - selectors are wrong
 - the page needs Botasaurus
 - the chosen surface is too noisy or too dynamic
 - the candidate should be downgraded or dropped
 
-7. Cross-runtime mismatch check (required when core feed works but fetch specs fail):
+8. Cross-runtime mismatch check (required when core feed works but fetch specs fail):
 
 - confirm canonical URL with redirect tracing:
 

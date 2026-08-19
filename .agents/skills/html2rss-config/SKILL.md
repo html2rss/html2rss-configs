@@ -2,7 +2,7 @@
 name: html2rss-config
 description: >-
   Create or repair curated html2rss YAML feed configs in this repo (lib/html2rss/configs/),
-  including directory.topics, selectors, Faraday vs Botasaurus triage, RSS probe-before-write,
+  including directory.topics, directory.title, selectors, Faraday vs Botasaurus triage, RSS probe-before-write,
   and the AGENTS.md quality gate. Use when adding a new feed config, fixing a broken/zero-item
   config, tightening selectors, diagnosing fetch failures, or shipping a user-requested batch
   of configs (still one quality loop each). Do not use for html2rss gem core, html2rss-web,
@@ -27,7 +27,8 @@ Pick mode from the user ask. Grow later with more modes/references; keep this fi
 1. Read [`AGENTS.md`](../../../AGENTS.md) (surface selection, selectors, drop rules).
 2. Confirm canonical URL (`curl -I -L`); prefer **registrable-domain** folder. Watch for HTTPS→HTTP downgrades (Faraday will refuse).
 3. Assign `directory.topics` (1–2) — see [reference/topics.md](reference/topics.md).
-4. Probe **that exact surface** with `scripts/probe_rss`. Exit `3` = first-party feed → drop/defer unless curated value is clearly higher. See [pitfalls.md](reference/pitfalls.md).
+4. Write `directory.title`, optional `directory.summary`, and mirror `channel.title` — see [reference/catalog.md](reference/catalog.md).
+5. Probe **that exact surface** with `scripts/probe_rss`. Exit `3` = first-party feed → drop/defer unless curated value is clearly higher. See [pitfalls.md](reference/pitfalls.md).
 
 ## Tool order
 

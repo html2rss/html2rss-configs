@@ -1,5 +1,7 @@
-PATH
-  remote: ../html2rss
+GIT
+  remote: https://github.com/html2rss/html2rss
+  revision: 7f1485b36ed6f298377dbf83daff618ac4cd1824
+  branch: feat/feed-directory-catalog-schema
   specs:
     html2rss (0.27.0)
       addressable (~> 2.7)
