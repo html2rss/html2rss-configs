@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - news
-  title: 'Sacu — News'
-  summary: 'RSS feed for Sacu — News.'
+  title: "Sacu — News"
+  summary: "RSS feed for Sacu — News."
 channel:
-  title: 'Sacu — News'
+  title: "Sacu — News"
   url: https://www.sacu.int/news/
   language: en
   time_zone: Africa/Windhoek

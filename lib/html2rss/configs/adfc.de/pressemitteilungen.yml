@@ -2,10 +2,10 @@
 directory:
   topics:
     - civic
-  title: 'Adfc — Pressemitteilungen'
-  summary: 'RSS feed for Adfc — Pressemitteilungen.'
+  title: "Adfc — Pressemitteilungen"
+  summary: "RSS feed for Adfc — Pressemitteilungen."
 channel:
-  title: 'Adfc — Pressemitteilungen'
+  title: "Adfc — Pressemitteilungen"
   url: https://www.adfc.de/presse/pressemitteilungen/
   time_zone: Europe/Berlin
   ttl: 720

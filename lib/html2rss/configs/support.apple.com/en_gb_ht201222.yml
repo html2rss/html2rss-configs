@@ -4,12 +4,12 @@ directory:
   topics:
     - tech
     - security
-  title: 'Apple Support — En Gb Ht201222'
-  summary: 'RSS feed for Apple Support — En Gb Ht201222.'
+  title: "Apple Support — En Gb Ht201222"
+  summary: "RSS feed for Apple Support — En Gb Ht201222."
 strategy: botasaurus
 
 channel:
-  title: 'Apple Support — En Gb Ht201222'
+  title: "Apple Support — En Gb Ht201222"
   url: https://support.apple.com/en-gb/100100
   language: en
   ttl: 360

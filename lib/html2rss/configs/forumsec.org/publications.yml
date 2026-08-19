@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - news
-  title: 'Forumsec — Publications'
-  summary: 'RSS feed for Forumsec — Publications.'
+  title: "Forumsec — Publications"
+  summary: "RSS feed for Forumsec — Publications."
 channel:
-  title: 'Forumsec — Publications'
+  title: "Forumsec — Publications"
   url: https://forumsec.org/publications
   language: en
   time_zone: Pacific/Fiji

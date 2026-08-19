@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - consumer
-  title: 'Dsw Info — Presse'
-  summary: 'RSS feed for Dsw Info — Presse.'
+  title: "Dsw Info — Presse"
+  summary: "RSS feed for Dsw Info — Presse."
 channel:
-  title: 'Dsw Info — Presse'
+  title: "Dsw Info — Presse"
   url: https://www.dsw-info.de/presse/pressemitteilungen-2026/
   time_zone: Europe/Berlin
   ttl: 720

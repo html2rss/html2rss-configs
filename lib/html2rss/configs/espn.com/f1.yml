@@ -2,11 +2,11 @@
 directory:
   topics:
     - sports
-  title: 'Espn — F1'
-  summary: 'RSS feed for Espn — F1.'
+  title: "Espn — F1"
+  summary: "RSS feed for Espn — F1."
 channel:
   language: en
-  title: 'Espn — F1'
+  title: "Espn — F1"
   url: https://www.espn.com/f1/
   time_zone: UTC
   ttl: 60

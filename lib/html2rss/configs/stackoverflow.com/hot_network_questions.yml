@@ -2,13 +2,13 @@
 directory:
   topics:
     - tech
-  title: 'Stack Overflow — Hot Network Questions'
-  summary: 'Trending developer questions from the Stack Overflow network.'
+  title: "Stack Overflow — Hot Network Questions"
+  summary: "Trending developer questions from the Stack Overflow network."
 strategy: botasaurus
 
 channel:
   language: en
-  title: 'Stack Overflow — Hot Network Questions'
+  title: "Stack Overflow — Hot Network Questions"
   url: https://stackoverflow.com/questions
   time_zone: America/New_York
   ttl: 30

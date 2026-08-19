@@ -2,11 +2,11 @@
 directory:
   topics:
     - entertainment
-  title: 'Spotify — Newsroom'
-  summary: 'RSS feed for Spotify — Newsroom.'
+  title: "Spotify — Newsroom"
+  summary: "RSS feed for Spotify — Newsroom."
 
 channel:
-  title: 'Spotify — Newsroom'
+  title: "Spotify — Newsroom"
   url: https://newsroom.spotify.com/
   language: en
   time_zone: UTC

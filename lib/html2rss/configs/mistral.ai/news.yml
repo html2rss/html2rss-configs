@@ -3,10 +3,10 @@ directory:
   topics:
     - tech
     - research
-  title: 'Mistral — News'
-  summary: 'RSS feed for Mistral — News.'
+  title: "Mistral — News"
+  summary: "RSS feed for Mistral — News."
 channel:
-  title: 'Mistral — News'
+  title: "Mistral — News"
   url: https://mistral.ai/news/
   language: en
   time_zone: UTC

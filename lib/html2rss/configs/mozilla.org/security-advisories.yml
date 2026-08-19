@@ -3,10 +3,10 @@ directory:
   topics:
     - security
     - tech
-  title: 'Mozilla — Security Advisories'
-  summary: 'RSS feed for Mozilla — Security Advisories.'
+  title: "Mozilla — Security Advisories"
+  summary: "RSS feed for Mozilla — Security Advisories."
 channel:
-  title: 'Mozilla — Security Advisories'
+  title: "Mozilla — Security Advisories"
   url: https://www.mozilla.org/en-US/security/advisories/
   language: en
   time_zone: UTC

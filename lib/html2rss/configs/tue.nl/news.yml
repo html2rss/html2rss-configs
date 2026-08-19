@@ -3,10 +3,10 @@ directory:
   topics:
     - science
     - research
-  title: 'Tue — News'
-  summary: 'RSS feed for Tue — News.'
+  title: "Tue — News"
+  summary: "RSS feed for Tue — News."
 channel:
-  title: 'Tue — News'
+  title: "Tue — News"
   url: https://www.tue.nl/en/news-and-events/news-overview
   language: en
   time_zone: Europe/Amsterdam

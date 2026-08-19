@@ -3,10 +3,10 @@
 directory:
   topics:
     - entertainment
-  title: 'Nomanssky — News'
-  summary: 'RSS feed for Nomanssky — News.'
+  title: "Nomanssky — News"
+  summary: "RSS feed for Nomanssky — News."
 channel:
-  title: 'Nomanssky — News'
+  title: "Nomanssky — News"
   url: https://www.nomanssky.com/news/
   language: en-GB
   ttl: 360

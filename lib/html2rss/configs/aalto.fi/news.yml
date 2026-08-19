@@ -3,11 +3,11 @@ directory:
   topics:
     - science
     - research
-  title: 'Aalto — News'
-  summary: 'RSS feed for Aalto — News.'
+  title: "Aalto — News"
+  summary: "RSS feed for Aalto — News."
 strategy: botasaurus
 channel:
-  title: 'Aalto — News'
+  title: "Aalto — News"
   url: https://www.aalto.fi/en/news
   language: en
   time_zone: Europe/Helsinki

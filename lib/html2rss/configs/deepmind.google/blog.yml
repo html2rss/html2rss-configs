@@ -3,11 +3,11 @@ directory:
   topics:
     - science
     - research
-  title: 'DeepMind — Blog'
-  summary: 'RSS feed for DeepMind — Blog.'
+  title: "DeepMind — Blog"
+  summary: "RSS feed for DeepMind — Blog."
 
 channel:
-  title: 'DeepMind — Blog'
+  title: "DeepMind — Blog"
   url: https://deepmind.google/blog/
   language: en
   time_zone: UTC

@@ -2,11 +2,11 @@
 directory:
   topics:
     - jobs
-  title: 'Academictransfer — Jobs'
-  summary: 'RSS feed for Academictransfer — Jobs.'
+  title: "Academictransfer — Jobs"
+  summary: "RSS feed for Academictransfer — Jobs."
 strategy: botasaurus
 channel:
-  title: 'Academictransfer — Jobs'
+  title: "Academictransfer — Jobs"
   url: https://www.academictransfer.com/en/jobs/
   language: en
   time_zone: Europe/Amsterdam

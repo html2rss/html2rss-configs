@@ -3,11 +3,11 @@ directory:
   topics:
     - tech
     - security
-  title: 'Apple Support — Exchange Repair'
-  summary: 'RSS feed for Apple Support — Exchange Repair.'
+  title: "Apple Support — Exchange Repair"
+  summary: "RSS feed for Apple Support — Exchange Repair."
 channel:
   language: en
-  title: 'Apple Support — Exchange Repair'
+  title: "Apple Support — Exchange Repair"
   url: https://support.apple.com/service-programs
   time_zone: America/Los_Angeles
   ttl: 720

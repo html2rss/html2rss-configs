@@ -3,10 +3,10 @@ directory:
   topics:
     - security
     - civic
-  title: 'ENISA — News'
-  summary: 'RSS feed for ENISA — News.'
+  title: "ENISA — News"
+  summary: "RSS feed for ENISA — News."
 channel:
-  title: 'ENISA — News'
+  title: "ENISA — News"
   url: https://www.enisa.europa.eu/news
   language: en
   time_zone: UTC

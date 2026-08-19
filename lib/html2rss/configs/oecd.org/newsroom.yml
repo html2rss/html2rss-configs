@@ -3,12 +3,12 @@ directory:
   topics:
     - finance
     - civic
-  title: 'Oecd — Newsroom'
-  summary: 'RSS feed for Oecd — Newsroom.'
+  title: "Oecd — Newsroom"
+  summary: "RSS feed for Oecd — Newsroom."
 strategy: botasaurus
 
 channel:
-  title: 'Oecd — Newsroom'
+  title: "Oecd — Newsroom"
   url: https://www.oecd.org/en/about/newsroom.html
   language: en
   time_zone: UTC

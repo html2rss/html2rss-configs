@@ -2,10 +2,10 @@
 directory:
   topics:
     - civic
-  title: 'Icj Cij — Press Releases'
-  summary: 'RSS feed for Icj Cij — Press Releases.'
+  title: "Icj Cij — Press Releases"
+  summary: "RSS feed for Icj Cij — Press Releases."
 channel:
-  title: 'Icj Cij — Press Releases'
+  title: "Icj Cij — Press Releases"
   url: https://www.icj-cij.org/press-releases
   language: en
   time_zone: UTC

@@ -3,10 +3,10 @@ directory:
   topics:
     - tech
     - product
-  title: 'Microsoft — Azure Products'
-  summary: 'Product updates and announcements from Microsoft Azure.'
+  title: "Microsoft — Azure Products"
+  summary: "Product updates and announcements from Microsoft Azure."
 channel:
-  title: 'Microsoft — Azure Products'
+  title: "Microsoft — Azure Products"
   url: https://azure.microsoft.com/en-us/products
   language: en
   time_zone: US/Pacific

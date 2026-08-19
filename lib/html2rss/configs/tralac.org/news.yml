@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - research
-  title: 'Tralac — News'
-  summary: 'RSS feed for Tralac — News.'
+  title: "Tralac — News"
+  summary: "RSS feed for Tralac — News."
 channel:
-  title: 'Tralac — News'
+  title: "Tralac — News"
   url: https://www.tralac.org/news.html
   language: en
   time_zone: Africa/Johannesburg

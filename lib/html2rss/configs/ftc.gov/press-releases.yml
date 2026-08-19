@@ -3,10 +3,10 @@ directory:
   topics:
     - security
     - civic
-  title: 'Ftc — Press Releases'
-  summary: 'RSS feed for Ftc — Press Releases.'
+  title: "Ftc — Press Releases"
+  summary: "RSS feed for Ftc — Press Releases."
 channel:
-  title: 'Ftc — Press Releases'
+  title: "Ftc — Press Releases"
   url: https://www.ftc.gov/news-events/news/press-releases
   language: en
   time_zone: UTC

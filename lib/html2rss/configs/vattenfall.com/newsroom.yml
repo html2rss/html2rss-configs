@@ -3,10 +3,10 @@ directory:
   topics:
     - energy
     - environment
-  title: 'Vattenfall — Newsroom'
-  summary: 'RSS feed for Vattenfall — Newsroom.'
+  title: "Vattenfall — Newsroom"
+  summary: "RSS feed for Vattenfall — Newsroom."
 channel:
-  title: 'Vattenfall — Newsroom'
+  title: "Vattenfall — Newsroom"
   url: https://group.vattenfall.com/press-and-media/newsroom
   language: en
   time_zone: Europe/Stockholm

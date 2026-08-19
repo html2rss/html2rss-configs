@@ -3,12 +3,12 @@ directory:
   topics:
     - tech
     - research
-  title: 'Thoughtworks — Insights'
-  summary: 'RSS feed for Thoughtworks — Insights.'
+  title: "Thoughtworks — Insights"
+  summary: "RSS feed for Thoughtworks — Insights."
 strategy: botasaurus
 
 channel:
-  title: 'Thoughtworks — Insights'
+  title: "Thoughtworks — Insights"
   url: https://www.thoughtworks.com/insights/blog
   language: en
   ttl: 360

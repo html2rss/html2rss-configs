@@ -3,10 +3,10 @@
 directory:
   topics:
     - news
-  title: 'Stripes — Index'
-  summary: 'RSS feed for Stripes — Index.'
+  title: "Stripes — Index"
+  summary: "RSS feed for Stripes — Index."
 channel:
-  title: 'Stripes — Index'
+  title: "Stripes — Index"
   url: https://www.stripes.com/
   language: en
   ttl: 360

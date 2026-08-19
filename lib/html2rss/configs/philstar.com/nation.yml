@@ -2,10 +2,10 @@
 directory:
   topics:
     - news
-  title: 'Philstar — Nation'
-  summary: 'RSS feed for Philstar — Nation.'
+  title: "Philstar — Nation"
+  summary: "RSS feed for Philstar — Nation."
 channel:
-  title: 'Philstar — Nation'
+  title: "Philstar — Nation"
   url: https://www.philstar.com/nation
   language: en
   time_zone: Asia/Manila

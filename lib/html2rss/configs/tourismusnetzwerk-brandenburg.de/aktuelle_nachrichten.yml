@@ -2,10 +2,10 @@
 directory:
   topics:
     - travel
-  title: 'Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten'
-  summary: 'RSS feed for Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten.'
+  title: "Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten"
+  summary: "RSS feed for Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten."
 channel:
-  title: 'Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten'
+  title: "Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten"
   url: https://tourismusnetzwerk-brandenburg.de/
   time_zone: Europe/Berlin
   ttl: 720

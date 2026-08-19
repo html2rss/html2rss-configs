@@ -3,10 +3,10 @@ directory:
   topics:
     - science
     - research
-  title: 'Hai — News'
-  summary: 'RSS feed for Hai — News.'
+  title: "Hai — News"
+  summary: "RSS feed for Hai — News."
 channel:
-  title: 'Hai — News'
+  title: "Hai — News"
   url: https://hai.stanford.edu/news
   language: en
   time_zone: UTC

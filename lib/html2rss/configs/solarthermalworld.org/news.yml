@@ -2,11 +2,11 @@
 directory:
   topics:
     - energy
-  title: 'Solarthermalworld — News'
-  summary: 'RSS feed for Solarthermalworld — News.'
+  title: "Solarthermalworld — News"
+  summary: "RSS feed for Solarthermalworld — News."
 channel:
   language: en
-  title: 'Solarthermalworld — News'
+  title: "Solarthermalworld — News"
   url: https://solarthermalworld.org/news
   time_zone: UTC
   ttl: 180

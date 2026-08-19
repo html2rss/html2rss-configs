@@ -3,10 +3,10 @@
 directory:
   topics:
     - consumer
-  title: 'Test — Archiv'
-  summary: 'RSS feed for Test — Archiv.'
+  title: "Test — Archiv"
+  summary: "RSS feed for Test — Archiv."
 channel:
-  title: 'Test — Archiv'
+  title: "Test — Archiv"
   url: https://www.test.de/archiv/
   language: de
   ttl: 360

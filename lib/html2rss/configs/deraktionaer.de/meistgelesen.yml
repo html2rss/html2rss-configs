@@ -2,10 +2,10 @@
 directory:
   topics:
     - finance
-  title: 'Der Aktionär — Meistgelesen'
-  summary: 'Most-read stock market news from Der Aktionär.'
+  title: "Der Aktionär — Meistgelesen"
+  summary: "Most-read stock market news from Der Aktionär."
 channel:
-  title: 'Der Aktionär — Meistgelesen'
+  title: "Der Aktionär — Meistgelesen"
   url: https://www.deraktionaer.de/
   time_zone: Europe/Berlin
   ttl: 360

@@ -3,10 +3,10 @@
 directory:
   topics:
     - sports
-  title: 'Sebastianvettel — News'
-  summary: 'RSS feed for Sebastianvettel — News.'
+  title: "Sebastianvettel — News"
+  summary: "RSS feed for Sebastianvettel — News."
 channel:
-  title: 'Sebastianvettel — News'
+  title: "Sebastianvettel — News"
   url: https://sebastianvettel.de/
   language: de-DE
   ttl: 8640

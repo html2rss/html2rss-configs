@@ -3,10 +3,10 @@ directory:
   topics:
     - tech
     - product
-  title: 'Go — Release History'
-  summary: 'RSS feed for Go — Release History.'
+  title: "Go — Release History"
+  summary: "RSS feed for Go — Release History."
 channel:
-  title: 'Go — Release History'
+  title: "Go — Release History"
   url: https://go.dev/doc/devel/release
   language: en
   time_zone: UTC

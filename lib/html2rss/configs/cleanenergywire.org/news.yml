@@ -3,11 +3,11 @@ directory:
   topics:
     - energy
     - environment
-  title: 'Cleanenergywire — News'
-  summary: 'RSS feed for Cleanenergywire — News.'
+  title: "Cleanenergywire — News"
+  summary: "RSS feed for Cleanenergywire — News."
 channel:
   language: en
-  title: 'Cleanenergywire — News'
+  title: "Cleanenergywire — News"
   url: https://www.cleanenergywire.org/news
   time_zone: "Europe/Berlin"
   ttl: 360

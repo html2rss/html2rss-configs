@@ -4,12 +4,12 @@ directory:
   topics:
     - tech
     - product
-  title: 'Apple Developer — Tutorials Data Documentation Technotes Json'
-  summary: 'RSS feed for Apple Developer — Tutorials Data Documentation Technotes Json.'
+  title: "Apple Developer — Tutorials Data Documentation Technotes Json"
+  summary: "RSS feed for Apple Developer — Tutorials Data Documentation Technotes Json."
 channel:
   language: en
   json: true
-  title: 'Apple Developer — Tutorials Data Documentation Technotes Json'
+  title: "Apple Developer — Tutorials Data Documentation Technotes Json"
   url: https://developer.apple.com/tutorials/data/documentation/Technotes.json
   ttl: 360
   time_zone: UTC

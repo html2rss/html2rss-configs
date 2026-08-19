@@ -2,10 +2,10 @@
 directory:
   topics:
     - jobs
-  title: 'Eures — News'
-  summary: 'RSS feed for Eures — News.'
+  title: "Eures — News"
+  summary: "RSS feed for Eures — News."
 channel:
-  title: 'Eures — News'
+  title: "Eures — News"
   url: https://eures.europa.eu/news_en
   language: en
   time_zone: Europe/Brussels

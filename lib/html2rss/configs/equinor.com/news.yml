@@ -2,10 +2,10 @@
 directory:
   topics:
     - energy
-  title: 'Equinor — News'
-  summary: 'RSS feed for Equinor — News.'
+  title: "Equinor — News"
+  summary: "RSS feed for Equinor — News."
 channel:
-  title: 'Equinor — News'
+  title: "Equinor — News"
   url: https://www.equinor.com/news
   language: en
   time_zone: Europe/Oslo

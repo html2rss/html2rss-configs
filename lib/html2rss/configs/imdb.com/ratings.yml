@@ -2,8 +2,8 @@
 directory:
   topics:
     - entertainment
-  title: 'Imdb — Ratings'
-  summary: 'RSS feed for Imdb — Ratings.'
+  title: "Imdb — Ratings"
+  summary: "RSS feed for Imdb — Ratings."
 strategy: botasaurus
 
 parameters:
@@ -13,7 +13,7 @@ parameters:
 
 channel:
   language: en
-  title: 'Imdb — Ratings'
+  title: "Imdb — Ratings"
   url: https://www.imdb.com/user/%<user_id>s/ratings
   time_zone: UTC
   ttl: 1440

@@ -2,12 +2,12 @@
 directory:
   topics:
     - news
-  title: 'Panapress — Latest'
-  summary: 'RSS feed for Panapress — Latest.'
+  title: "Panapress — Latest"
+  summary: "RSS feed for Panapress — Latest."
 strategy: botasaurus
 
 channel:
-  title: 'Panapress — Latest'
+  title: "Panapress — Latest"
   url: https://www.panapress.com/
   language: en
   time_zone: UTC

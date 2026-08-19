@@ -2,10 +2,10 @@
 directory:
   topics:
     - news
-  title: 'News24 — Top Stories'
-  summary: 'RSS feed for News24 — Top Stories.'
+  title: "News24 — Top Stories"
+  summary: "RSS feed for News24 — Top Stories."
 channel:
-  title: 'News24 — Top Stories'
+  title: "News24 — Top Stories"
   url: https://www.news24.com/
   language: en
   time_zone: Africa/Johannesburg
