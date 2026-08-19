@@ -3,6 +3,8 @@ directory:
   topics:
     - tech
     - product
+  title: 'Github — Releases'
+  summary: 'RSS feed for Github — Releases.'
 parameters:
   username:
     type: string
@@ -13,6 +15,7 @@ parameters:
 
 channel:
   language: en
+  title: 'Github — Releases'
   url: https://github.com/%<username>s/%<repository>s/releases
   time_zone: UTC
   ttl: 720

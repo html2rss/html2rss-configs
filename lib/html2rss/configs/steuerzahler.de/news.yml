@@ -2,7 +2,10 @@
 directory:
   topics:
     - civic
+  title: 'Steuerzahler — News'
+  summary: 'RSS feed for Steuerzahler — News.'
 channel:
+  title: 'Steuerzahler — News'
   url: https://www.steuerzahler.de/news/
   time_zone: Europe/Berlin
   ttl: 720

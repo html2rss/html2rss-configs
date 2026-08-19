@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - news
+  title: 'Akorda — Events'
+  summary: 'RSS feed for Akorda — Events.'
 channel:
+  title: 'Akorda — Events'
   url: https://www.akorda.kz/en/events
   language: en
   time_zone: Asia/Almaty

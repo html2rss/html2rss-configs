@@ -3,12 +3,15 @@
 directory:
   topics:
     - news
+  title: 'Apnews — Hub'
+  summary: 'RSS feed for Apnews — Hub.'
 parameters:
   section:
     type: string
     default: "news"
 
 channel:
+  title: 'Apnews — Hub'
   url: https://apnews.com/%<section>s
   language: en
   ttl: 120

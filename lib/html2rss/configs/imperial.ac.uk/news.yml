@@ -3,7 +3,10 @@ directory:
   topics:
     - science
     - research
+  title: 'Imperial — News'
+  summary: 'RSS feed for Imperial — News.'
 channel:
+  title: 'Imperial — News'
   url: https://www.imperial.ac.uk/news/articles/
   language: en
   time_zone: Europe/London

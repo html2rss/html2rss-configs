@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Issafrica — Iss Today'
+  summary: 'RSS feed for Issafrica — Iss Today.'
 channel:
+  title: 'Issafrica — Iss Today'
   url: https://issafrica.org/iss-today
   language: en
   time_zone: Africa/Johannesburg

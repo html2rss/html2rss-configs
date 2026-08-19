@@ -3,9 +3,12 @@ directory:
   topics:
     - news
     - civic
+  title: 'Tap — Politics'
+  summary: 'RSS feed for Tap — Politics.'
 strategy: botasaurus
 
 channel:
+  title: 'Tap — Politics'
   url: https://www.tap.info.tn/en
   language: en
   time_zone: Africa/Tunis

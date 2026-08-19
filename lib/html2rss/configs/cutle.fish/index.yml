@@ -3,8 +3,11 @@
 directory:
   topics:
     - tech
+  title: 'Cutle — Index'
+  summary: 'RSS feed for Cutle — Index.'
 channel:
   language: en
+  title: 'Cutle — Index'
   url: https://cutle.fish/
   ttl: 360
   time_zone: UTC

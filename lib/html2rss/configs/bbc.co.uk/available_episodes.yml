@@ -2,6 +2,8 @@
 directory:
   topics:
     - entertainment
+  title: 'BBC — Available Episodes'
+  summary: 'RSS feed for BBC — Available Episodes.'
 parameters:
   id:
     type: string
@@ -9,6 +11,7 @@ parameters:
 
 channel:
   language: en
+  title: 'BBC — Available Episodes'
   url: https://www.bbc.co.uk/programmes/%<id>s/episodes/player
   time_zone: UTC
   ttl: 720

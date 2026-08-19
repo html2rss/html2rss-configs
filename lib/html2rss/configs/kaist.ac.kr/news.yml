@@ -3,7 +3,10 @@ directory:
   topics:
     - science
     - research
+  title: 'Kaist — News'
+  summary: 'RSS feed for Kaist — News.'
 channel:
+  title: 'Kaist — News'
   url: https://news.kaist.ac.kr/newsen/html/news/
   language: en
   time_zone: Asia/Seoul

@@ -2,6 +2,8 @@
 directory:
   topics:
     - news
+  title: 'Le Monde diplomatique — Blog feed'
+  summary: 'Blog posts from Le Monde diplomatique with customizable blog path.'
 parameters:
   blog:
     type: string
@@ -11,7 +13,7 @@ channel:
   language: en
   url: https://blog.mondediplo.net/%<blog>s
   time_zone: Europe/Paris
-  title: "blog.mondediplo.net: %<blog>s"
+  title: 'Le Monde diplomatique — Blog feed'
   ttl: 120
 selectors:
   items:

@@ -2,9 +2,12 @@
 directory:
   topics:
     - civic
+  title: 'Imo — Press Briefings'
+  summary: 'RSS feed for Imo — Press Briefings.'
 strategy: botasaurus
 
 channel:
+  title: 'Imo — Press Briefings'
   url: https://www.imo.org/en/MediaCentre/PressBriefings/Pages/default.aspx
   language: en
   time_zone: UTC

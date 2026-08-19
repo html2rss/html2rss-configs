@@ -3,9 +3,12 @@ directory:
   topics:
     - science
     - civic
+  title: 'Who — News'
+  summary: 'RSS feed for Who — News.'
 strategy: botasaurus
 
 channel:
+  title: 'Who — News'
   url: https://www.who.int/news
   language: en
   time_zone: UTC

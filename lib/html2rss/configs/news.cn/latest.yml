@@ -2,7 +2,10 @@
 directory:
   topics:
     - news
+  title: 'News — Latest'
+  summary: 'RSS feed for News — Latest.'
 channel:
+  title: 'News — Latest'
   url: https://english.news.cn/list/latestnews.htm
   language: en
   time_zone: Asia/Shanghai

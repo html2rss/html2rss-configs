@@ -4,12 +4,15 @@ directory:
   topics:
     - tech
     - news
+  title: 'Cnet — Section Sub'
+  summary: 'RSS feed for Cnet — Section Sub.'
 parameters:
   section:
     type: string
     default: "tech"
 
 channel:
+  title: 'Cnet — Section Sub'
   url: https://www.cnet.com/%<section>s/
   language: en
   ttl: 360

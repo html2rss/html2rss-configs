@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - research
+  title: 'Meta AI — Blog'
+  summary: 'RSS feed for Meta AI — Blog.'
 channel:
+  title: 'Meta AI — Blog'
   url: https://ai.meta.com/blog/
   language: en
   time_zone: UTC

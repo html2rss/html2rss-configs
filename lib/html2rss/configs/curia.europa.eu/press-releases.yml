@@ -2,9 +2,12 @@
 directory:
   topics:
     - civic
+  title: 'Curia — Press Releases'
+  summary: 'RSS feed for Curia — Press Releases.'
 strategy: botasaurus
 
 channel:
+  title: 'Curia — Press Releases'
   url: https://curia.europa.eu/jcms/jcms/Jo2_7052/
   language: en
   time_zone: Europe/Brussels

@@ -3,7 +3,10 @@
 directory:
   topics:
     - jobs
+  title: 'Ingenieur — Karriere Arbeitsleben Heiko Mell'
+  summary: 'RSS feed for Ingenieur — Karriere Arbeitsleben Heiko Mell.'
 channel:
+  title: 'Ingenieur — Karriere Arbeitsleben Heiko Mell'
   url: https://www.ingenieur.de/karriere/arbeitsleben/heiko-mell/
   language: de-DE
   ttl: 360

@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Nupi — News'
+  summary: 'RSS feed for Nupi — News.'
 channel:
+  title: 'Nupi — News'
   url: https://www.nupi.no/en
   language: en
   time_zone: Europe/Oslo

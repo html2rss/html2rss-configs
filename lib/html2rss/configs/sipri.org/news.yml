@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Sipri — News'
+  summary: 'RSS feed for Sipri — News.'
 channel:
+  title: 'Sipri — News'
   url: https://www.sipri.org/news
   language: en
   time_zone: UTC

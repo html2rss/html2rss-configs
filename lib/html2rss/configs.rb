@@ -3,6 +3,9 @@
 require 'html2rss/configs/version'
 require 'yaml'
 
+require_relative 'configs/catalog'
+require_relative 'configs/catalog_entry'
+
 module Html2rss
   ##
   # The namespace for this gem

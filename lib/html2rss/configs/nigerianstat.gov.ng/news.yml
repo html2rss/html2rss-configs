@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Nigerianstat — News'
+  summary: 'RSS feed for Nigerianstat — News.'
 channel:
+  title: 'Nigerianstat — News'
   url: https://nigerianstat.gov.ng/
   language: en
   time_zone: Africa/Lagos

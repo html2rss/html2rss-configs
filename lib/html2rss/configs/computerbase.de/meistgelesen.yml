@@ -2,8 +2,10 @@
 directory:
   topics:
     - tech
+  title: 'ComputerBase — Meistgelesen'
+  summary: 'Most-read tech articles from ComputerBase.'
 channel:
-  title: "computerbase.de: meistgelesen"
+  title: 'ComputerBase — Meistgelesen'
   url: https://www.computerbase.de
   time_zone: Europe/Berlin
   ttl: 360

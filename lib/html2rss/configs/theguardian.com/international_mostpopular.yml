@@ -2,9 +2,11 @@
 directory:
   topics:
     - news
+  title: 'The Guardian — International most popular'
+  summary: 'Most-read international stories from The Guardian.'
 channel:
   language: en
-  title: "theguardian.com: International most popular"
+  title: 'The Guardian — International most popular'
   url: https://www.theguardian.com/international
   time_zone: Europe/London
   ttl: 60

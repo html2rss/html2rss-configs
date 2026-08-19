@@ -3,7 +3,10 @@ directory:
   topics:
     - environment
     - civic
+  title: 'Fao — Newsroom'
+  summary: 'RSS feed for Fao — Newsroom.'
 channel:
+  title: 'Fao — Newsroom'
   url: https://www.fao.org/newsroom/en
   language: en
   time_zone: UTC

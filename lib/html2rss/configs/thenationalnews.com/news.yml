@@ -2,7 +2,10 @@
 directory:
   topics:
     - news
+  title: 'Thenationalnews — News'
+  summary: 'RSS feed for Thenationalnews — News.'
 channel:
+  title: 'Thenationalnews — News'
   url: https://www.thenationalnews.com/news/
   language: en
   time_zone: Asia/Dubai

@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - product
+  title: 'Asml — Press Releases'
+  summary: 'RSS feed for Asml — Press Releases.'
 channel:
+  title: 'Asml — Press Releases'
   url: https://www.asml.com/en/news/press-releases
   language: en
   time_zone: Europe/Amsterdam

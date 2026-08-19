@@ -3,9 +3,12 @@ directory:
   topics:
     - tech
     - product
+  title: 'Shopify — Blog'
+  summary: 'RSS feed for Shopify — Blog.'
 
 channel:
   language: en
+  title: 'Shopify — Blog'
   url: https://www.shopify.com/blog/latest
   time_zone: UTC
   ttl: 360

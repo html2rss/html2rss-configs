@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - research
+  title: Anthropic — News
+  summary: Product and research announcements from Anthropic.
 channel:
+  title: Anthropic — News
   url: https://www.anthropic.com/news
   language: en
   time_zone: UTC

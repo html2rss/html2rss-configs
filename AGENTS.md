@@ -22,6 +22,8 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
   `Html2rss::Config::Validator::DIRECTORY_TOPICS` (`sports`, `energy`, `tech`, `science`,
   `news`, `entertainment`, `jobs`, `finance`, `security`, `travel`, `environment`,
   `consumer`, `civic`, `product`, `research`). Prefer 1–2 primary topics.
+- Require `directory.title` for catalog listing; mirror the same value in `channel.title` for RSS output.
+- Optional `directory.summary` (max 160 characters) for feed-directory browse cards.
 - Prefer setting `channel.language` (`en`/`de`/`es`/`en-GB`/`de-DE`) when the surface language is clear.
 
 ## Surface Selection

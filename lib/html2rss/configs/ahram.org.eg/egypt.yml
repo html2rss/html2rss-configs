@@ -2,7 +2,10 @@
 directory:
   topics:
     - news
+  title: 'Ahram — Egypt'
+  summary: 'RSS feed for Ahram — Egypt.'
 channel:
+  title: 'Ahram — Egypt'
   url: https://english.ahram.org.eg/Portal/1/Egypt.aspx
   language: en
   time_zone: Africa/Cairo

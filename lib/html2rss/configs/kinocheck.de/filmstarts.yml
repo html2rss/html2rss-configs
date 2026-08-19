@@ -2,7 +2,10 @@
 directory:
   topics:
     - entertainment
+  title: 'Kinocheck — Filmstarts'
+  summary: 'RSS feed for Kinocheck — Filmstarts.'
 channel:
+  title: 'Kinocheck — Filmstarts'
   url: https://kinocheck.de/filmstarts
   time_zone: Europe/Berlin
   ttl: 1440

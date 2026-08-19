@@ -2,7 +2,10 @@
 directory:
   topics:
     - energy
+  title: 'Tennet — News'
+  summary: 'RSS feed for Tennet — News.'
 channel:
+  title: 'Tennet — News'
   url: https://www.tennet.eu/news
   language: en
   time_zone: Europe/Amsterdam

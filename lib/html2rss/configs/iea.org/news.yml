@@ -3,7 +3,10 @@ directory:
   topics:
     - energy
     - environment
+  title: 'Iea — News'
+  summary: 'RSS feed for Iea — News.'
 channel:
+  title: 'Iea — News'
   url: https://www.iea.org/news
   language: en
   time_zone: UTC

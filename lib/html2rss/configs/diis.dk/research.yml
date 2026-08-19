@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Diis — Research'
+  summary: 'RSS feed for Diis — Research.'
 channel:
+  title: 'Diis — Research'
   url: https://www.diis.dk/en
   language: en
   time_zone: Europe/Copenhagen

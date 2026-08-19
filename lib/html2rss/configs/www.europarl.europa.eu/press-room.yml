@@ -2,9 +2,12 @@
 directory:
   topics:
     - civic
+  title: 'European Parliament — Press Room'
+  summary: 'RSS feed for European Parliament — Press Room.'
 strategy: botasaurus
 
 channel:
+  title: 'European Parliament — Press Room'
   url: https://www.europarl.europa.eu/news/en/press-room
   language: en
   time_zone: UTC

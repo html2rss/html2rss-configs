@@ -2,7 +2,10 @@
 directory:
   topics:
     - news
+  title: 'Haaretz — Israel News'
+  summary: 'RSS feed for Haaretz — Israel News.'
 channel:
+  title: 'Haaretz — Israel News'
   url: https://www.haaretz.com/israel-news
   language: en
   time_zone: Asia/Jerusalem

@@ -3,7 +3,10 @@ directory:
   topics:
     - consumer
     - civic
+  title: 'Gob.mx — Profeco Prensa'
+  summary: 'RSS feed for Gob.mx — Profeco Prensa.'
 channel:
+  title: 'Gob.mx — Profeco Prensa'
   url: https://www.gob.mx/profeco/es/archivo/prensa
   language: es
   time_zone: America/Mexico_City

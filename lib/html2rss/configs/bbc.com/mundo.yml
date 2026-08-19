@@ -3,7 +3,10 @@
 directory:
   topics:
     - news
+  title: 'BBC — Mundo'
+  summary: 'RSS feed for BBC — Mundo.'
 channel:
+  title: 'BBC — Mundo'
   url: https://www.bbc.com/mundo
   language: es
   ttl: 360

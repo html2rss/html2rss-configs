@@ -2,7 +2,10 @@
 directory:
   topics:
     - civic
+  title: 'Faa — Newsroom'
+  summary: 'RSS feed for Faa — Newsroom.'
 channel:
+  title: 'Faa — Newsroom'
   url: https://www.faa.gov/newsroom
   language: en
   time_zone: UTC

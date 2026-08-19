@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Brookings — Articles'
+  summary: 'RSS feed for Brookings — Articles.'
 channel:
+  title: 'Brookings — Articles'
   url: https://www.brookings.edu/
   language: en
   time_zone: America/New_York

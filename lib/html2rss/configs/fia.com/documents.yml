@@ -3,8 +3,11 @@
 directory:
   topics:
     - sports
+  title: 'Fia — Documents'
+  summary: 'RSS feed for Fia — Documents.'
 channel:
   language: en
+  title: 'Fia — Documents'
   url: https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2026-2072
   ttl: 360
   time_zone: UTC

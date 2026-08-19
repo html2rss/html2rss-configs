@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - product
+  title: 'Grafana — Whatsnew'
+  summary: 'RSS feed for Grafana — Whatsnew.'
 channel:
+  title: 'Grafana — Whatsnew'
   url: https://grafana.com/docs/grafana/latest/whatsnew/
   language: en
   time_zone: UTC

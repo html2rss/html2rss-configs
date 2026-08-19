@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - product
+  title: 'Nokia — Newsroom'
+  summary: 'RSS feed for Nokia — Newsroom.'
 channel:
+  title: 'Nokia — Newsroom'
   url: https://www.nokia.com/newsroom/
   language: en
   time_zone: Europe/Helsinki

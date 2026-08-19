@@ -3,7 +3,10 @@ directory:
   topics:
     - news
     - travel
+  title: 'Teneriffa News — News'
+  summary: 'RSS feed for Teneriffa News — News.'
 channel:
+  title: 'Teneriffa News — News'
   url: https://www.teneriffa-news.com/news
   time_zone: "Europe/Lisbon"
   ttl: 720

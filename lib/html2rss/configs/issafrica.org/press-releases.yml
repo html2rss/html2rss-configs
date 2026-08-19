@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Issafrica — Press Releases'
+  summary: 'RSS feed for Issafrica — Press Releases.'
 channel:
+  title: 'Issafrica — Press Releases'
   url: https://issafrica.org/about-us/press-releases
   language: en
   time_zone: Africa/Johannesburg

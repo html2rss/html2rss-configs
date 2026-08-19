@@ -3,7 +3,10 @@ directory:
   topics:
     - science
     - research
+  title: 'Anu — News'
+  summary: 'RSS feed for Anu — News.'
 channel:
+  title: 'Anu — News'
   url: https://www.anu.edu.au/news/all-news
   language: en
   time_zone: Australia/Sydney

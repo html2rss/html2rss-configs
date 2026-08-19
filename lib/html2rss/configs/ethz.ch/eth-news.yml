@@ -3,9 +3,12 @@ directory:
   topics:
     - science
     - research
+  title: 'Ethz — Eth News'
+  summary: 'RSS feed for Ethz — Eth News.'
 strategy: botasaurus
 
 channel:
+  title: 'Ethz — Eth News'
   url: https://ethz.ch/en/news-and-events/eth-news.html
   language: en
   time_zone: Europe/Zurich

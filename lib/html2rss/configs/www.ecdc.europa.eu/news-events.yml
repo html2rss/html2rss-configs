@@ -3,7 +3,10 @@ directory:
   topics:
     - science
     - civic
+  title: 'ECDC — News Events'
+  summary: 'RSS feed for ECDC — News Events.'
 channel:
+  title: 'ECDC — News Events'
   url: https://www.ecdc.europa.eu/en/news-events
   language: en
   time_zone: UTC

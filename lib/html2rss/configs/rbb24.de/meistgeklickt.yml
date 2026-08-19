@@ -2,8 +2,10 @@
 directory:
   topics:
     - news
+  title: 'rbb24 — Meistgeklickt'
+  summary: 'Most-clicked stories from rbb24.'
 channel:
-  title: "rbb24.de: Das Beste"
+  title: 'rbb24 — Meistgeklickt'
   url: https://www.rbb24.de/das-beste/
   time_zone: Europe/Berlin
   ttl: 30

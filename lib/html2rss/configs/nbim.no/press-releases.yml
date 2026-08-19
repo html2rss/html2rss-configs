@@ -2,7 +2,10 @@
 directory:
   topics:
     - finance
+  title: 'Nbim — Press Releases'
+  summary: 'RSS feed for Nbim — Press Releases.'
 channel:
+  title: 'Nbim — Press Releases'
   url: https://www.nbim.no/en/news-and-insights/the-press/press-releases/
   language: en
   time_zone: Europe/Oslo

@@ -3,9 +3,12 @@ directory:
   topics:
     - tech
     - product
+  title: 'Apple — Newsroom'
+  summary: 'RSS feed for Apple — Newsroom.'
 strategy: botasaurus
 
 channel:
+  title: 'Apple — Newsroom'
   url: https://www.apple.com/newsroom/
   language: en
   time_zone: UTC

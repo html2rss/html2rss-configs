@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - research
+  title: 'Apple Machine Learning — Research'
+  summary: 'RSS feed for Apple Machine Learning — Research.'
 channel:
+  title: 'Apple Machine Learning — Research'
   url: https://machinelearning.apple.com/research/
   language: en
   time_zone: UTC

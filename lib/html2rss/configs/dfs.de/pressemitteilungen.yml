@@ -2,7 +2,10 @@
 directory:
   topics:
     - civic
+  title: 'Dfs — Pressemitteilungen'
+  summary: 'RSS feed for Dfs — Pressemitteilungen.'
 channel:
+  title: 'Dfs — Pressemitteilungen'
   url: https://www.dfs.de/homepage/de/medien/presse/
   time_zone: Europe/Berlin
   ttl: 1440

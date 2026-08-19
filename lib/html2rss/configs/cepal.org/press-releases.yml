@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - research
+  title: 'Cepal — Press Releases'
+  summary: 'RSS feed for Cepal — Press Releases.'
 channel:
+  title: 'Cepal — Press Releases'
   url: https://www.cepal.org/en/list/cepal_pr
   language: en
   time_zone: America/Santiago

@@ -3,7 +3,10 @@ directory:
   topics:
     - tech
     - product
+  title: 'Figma — Blog'
+  summary: 'RSS feed for Figma — Blog.'
 channel:
+  title: 'Figma — Blog'
   url: https://www.figma.com/blog/
   language: en
   time_zone: UTC
