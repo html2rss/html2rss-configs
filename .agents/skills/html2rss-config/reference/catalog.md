@@ -4,26 +4,26 @@ Every YAML in this repo is a catalog entry. Embedded serialization is owned by `
 
 ## Required fields
 
-| Field | Rule |
-| --- | --- |
+| Field              | Rule                                                           |
+| ------------------ | -------------------------------------------------------------- |
 | `directory.topics` | 1–2 values from controlled vocabulary — [topics.md](topics.md) |
-| `directory.title` | Human label: `{Organization} — {Feed surface}` (em dash) |
-| `channel.title` | Same string as `directory.title` (RSS and OPML) |
-| `channel.url` | Canonical list URL (may use parameters) |
-| `channel.language` | Set when the surface language is clear |
+| `directory.title`  | Human label: `{Organization} — {Feed surface}` (em dash)       |
+| `channel.title`    | Same string as `directory.title` (RSS and OPML)                |
+| `channel.url`      | Canonical list URL (may use parameters)                        |
+| `channel.language` | Set when the surface language is clear                         |
 
 ## Optional
 
-| Field | Rule |
-| --- | --- |
+| Field               | Rule                                                                                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `directory.summary` | One concrete sentence, max 160 characters — browse subtitle and search text. Say what the feed covers; do not write `RSS feed for {title}.` |
 
 ### Summary examples
 
-| Config path | `directory.summary` |
-| --- | --- |
-| `who.int/news.yml` | Official news and statements from the World Health Organization. |
-| `apple.com/newsroom.yml` | Product announcements and press releases from Apple. |
+| Config path               | `directory.summary`                                                   |
+| ------------------------- | --------------------------------------------------------------------- |
+| `who.int/news.yml`        | Official news and statements from the World Health Organization.      |
+| `apple.com/newsroom.yml`  | Product announcements and press releases from Apple.                  |
 | `github.com/releases.yml` | Release notes for a GitHub repository (owner and name as parameters). |
 
 ## Parameterized configs
@@ -35,11 +35,11 @@ Describe feed intent in `directory.title`, not the template URL.
 
 ## Title examples
 
-| Config path | `directory.title` |
-| --- | --- |
-| `anthropic.com/news.yml` | Anthropic — News |
-| `who.int/news.yml` | World Health Organization — News |
-| `apnews.com/hub.yml` | AP News — Top stories |
+| Config path              | `directory.title`                |
+| ------------------------ | -------------------------------- |
+| `anthropic.com/news.yml` | Anthropic — News                 |
+| `who.int/news.yml`       | World Health Organization — News |
+| `apnews.com/hub.yml`     | AP News — Top stories            |
 
 ## Verification
 
@@ -52,9 +52,9 @@ make validate
 
 ## Downstream consumers
 
-| Consumer | How it reads catalog data |
-| --- | --- |
-| `html2rss-web` | `GET /api/v1/configs` merges `Catalog.entries` with local `feeds.yml` entries that include `directory.title` |
-| Feed Directory (docs site) | Fetches catalog JSON from a running `html2rss-web` instance |
+| Consumer                   | How it reads catalog data                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `html2rss-web`             | `GET /api/v1/configs` merges `Catalog.entries` with local `feeds.yml` entries that include `directory.title` |
+| Feed Directory (docs site) | Fetches catalog JSON from a running `html2rss-web` instance                                                  |
 
 Do not duplicate catalog expansion logic outside `Html2rss::Configs::Catalog`.

@@ -96,11 +96,11 @@ Defer WordPress/national newsrooms that already ship `/feed` or `rel=alternate`.
 
 ## Selector patterns that worked
 
-| Pattern | Example |
-| -------- | ------- |
-| Drupal field link | `span.field-content a[href^="/latest-news/"]` (SADC) |
-| Card anchor + nested title | `a.card[href^="/iss-today/"]` + `h6.card-subtitle` (ISS) |
-| Heading link | `h4.title a[href*="/News/"]` (Ahram); `h4 a[href*="lang2.html"]` (PanaPress) |
-| Clean `aria-label` | `a[href*="/tea/news/"][aria-label]` + `extractor: attribute` / `attribute: aria-label` (EastAfrican) |
+| Pattern                    | Example                                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Drupal field link          | `span.field-content a[href^="/latest-news/"]` (SADC)                                                 |
+| Card anchor + nested title | `a.card[href^="/iss-today/"]` + `h6.card-subtitle` (ISS)                                             |
+| Heading link               | `h4.title a[href*="/News/"]` (Ahram); `h4 a[href*="lang2.html"]` (PanaPress)                         |
+| Clean `aria-label`         | `a[href*="/tea/news/"][aria-label]` + `extractor: attribute` / `attribute: aria-label` (EastAfrican) |
 
 Always set `enhance: false` on items unless you have proven need.
