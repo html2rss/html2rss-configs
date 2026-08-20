@@ -4,7 +4,7 @@ directory:
     - science
     - research
   title: "Chalmers — News"
-  summary: "RSS feed for Chalmers — News."
+  summary: "Research and university news from Chalmers University of Technology."
 strategy: botasaurus
 channel:
   title: "Chalmers — News"

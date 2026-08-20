@@ -3,10 +3,10 @@ directory:
   topics:
     - energy
     - environment
-  title: "Iea — News"
-  summary: "RSS feed for Iea — News."
+  title: "IEA — News"
+  summary: "Energy news and analysis from the International Energy Agency."
 channel:
-  title: "Iea — News"
+  title: "IEA — News"
   url: https://www.iea.org/news
   language: en
   time_zone: UTC

@@ -2,10 +2,10 @@
 directory:
   topics:
     - news
-  title: "News — Latest"
-  summary: "RSS feed for News — Latest."
+  title: "Xinhua — Latest news"
+  summary: "Latest English news from Xinhua News Agency."
 channel:
-  title: "News — Latest"
+  title: "Xinhua — Latest news"
   url: https://english.news.cn/list/latestnews.htm
   language: en
   time_zone: Asia/Shanghai

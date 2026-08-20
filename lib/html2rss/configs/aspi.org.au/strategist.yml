@@ -3,12 +3,12 @@ directory:
   topics:
     - civic
     - research
-  title: "Aspi — Strategist"
-  summary: "RSS feed for Aspi — Strategist."
+  title: "ASPI — The Strategist"
+  summary: "Strategic analysis and commentary from the Australian Strategic Policy Institute."
 strategy: botasaurus
 
 channel:
-  title: "Aspi — Strategist"
+  title: "ASPI — The Strategist"
   url: https://www.aspi.org.au/strategist-posts/
   language: en
   time_zone: Australia/Sydney

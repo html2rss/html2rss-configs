@@ -3,10 +3,10 @@ directory:
   topics:
     - science
     - research
-  title: "Tue — News"
-  summary: "RSS feed for Tue — News."
+  title: "TU Eindhoven — News"
+  summary: "University and research news from Eindhoven University of Technology."
 channel:
-  title: "Tue — News"
+  title: "TU Eindhoven — News"
   url: https://www.tue.nl/en/news-and-events/news-overview
   language: en
   time_zone: Europe/Amsterdam

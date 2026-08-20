@@ -3,10 +3,10 @@ directory:
   topics:
     - consumer
     - product
-  title: "Ikea — Newsroom"
-  summary: "RSS feed for Ikea — Newsroom."
+  title: "IKEA — Newsroom"
+  summary: "Global newsroom announcements from IKEA."
 channel:
-  title: "Ikea — Newsroom"
+  title: "IKEA — Newsroom"
   url: https://www.ikea.com/global/en/newsroom/
   language: en
   time_zone: Europe/Stockholm

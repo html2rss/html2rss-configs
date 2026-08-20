@@ -3,10 +3,10 @@ directory:
   topics:
     - news
     - civic
-  title: "Angop — Noticias"
-  summary: "RSS feed for Angop — Noticias."
+  title: "ANGOP — Notícias"
+  summary: "Notícias oficiais da Agência Angola Press."
 channel:
-  title: "Angop — Noticias"
+  title: "ANGOP — Notícias"
   url: https://www.angop.ao/
   language: pt
   time_zone: Africa/Luanda

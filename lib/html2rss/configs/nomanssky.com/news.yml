@@ -3,10 +3,10 @@
 directory:
   topics:
     - entertainment
-  title: "Nomanssky — News"
-  summary: "RSS feed for Nomanssky — News."
+  title: "No Man’s Sky — News"
+  summary: "Game updates and news for No Man’s Sky."
 channel:
-  title: "Nomanssky — News"
+  title: "No Man’s Sky — News"
   url: https://www.nomanssky.com/news/
   language: en-GB
   ttl: 360

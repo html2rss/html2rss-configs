@@ -3,7 +3,7 @@ directory:
   topics:
     - energy
   title: "Equinor — News"
-  summary: "RSS feed for Equinor — News."
+  summary: "Corporate and energy news from Equinor."
 channel:
   title: "Equinor — News"
   url: https://www.equinor.com/news

@@ -4,7 +4,7 @@ directory:
     - tech
     - product
   title: "Notion — Blog"
-  summary: "RSS feed for Notion — Blog."
+  summary: "Product updates and stories from the Notion blog."
 
 channel:
   title: "Notion — Blog"

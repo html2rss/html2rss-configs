@@ -3,12 +3,12 @@ directory:
   topics:
     - energy
     - civic
-  title: "Opec — Press Releases"
-  summary: "RSS feed for Opec — Press Releases."
+  title: "OPEC — Press releases"
+  summary: "Official press releases from OPEC."
 strategy: botasaurus
 
 channel:
-  title: "Opec — Press Releases"
+  title: "OPEC — Press releases"
   url: https://www.opec.org/press-releases.html
   language: en
   time_zone: Europe/Vienna

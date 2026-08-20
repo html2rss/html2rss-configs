@@ -2,11 +2,11 @@
 directory:
   topics:
     - sports
-  title: "Formula1 — Latest"
-  summary: "RSS feed for Formula1 — Latest."
+  title: "Formula 1 — Latest"
+  summary: "Latest Formula 1 news from the official Formula1.com site."
 channel:
   language: en
-  title: "Formula1 — Latest"
+  title: "Formula 1 — Latest"
   url: https://www.formula1.com/en/latest
   time_zone: UTC
   ttl: 120

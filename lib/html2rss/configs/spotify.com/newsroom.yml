@@ -3,7 +3,7 @@ directory:
   topics:
     - entertainment
   title: "Spotify — Newsroom"
-  summary: "RSS feed for Spotify — Newsroom."
+  summary: "Corporate and product announcements from Spotify Newsroom."
 
 channel:
   title: "Spotify — Newsroom"

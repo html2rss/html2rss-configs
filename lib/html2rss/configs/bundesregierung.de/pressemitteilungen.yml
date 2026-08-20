@@ -3,7 +3,7 @@ directory:
   topics:
     - civic
   title: "Bundesregierung — Pressemitteilungen"
-  summary: "RSS feed for Bundesregierung — Pressemitteilungen."
+  summary: "Offizielle Pressemitteilungen der deutschen Bundesregierung."
 strategy: botasaurus
 
 channel:

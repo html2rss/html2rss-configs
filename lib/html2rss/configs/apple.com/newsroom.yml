@@ -4,7 +4,7 @@ directory:
     - tech
     - product
   title: "Apple — Newsroom"
-  summary: "RSS feed for Apple — Newsroom."
+  summary: "Product announcements and press releases from Apple."
 strategy: botasaurus
 
 channel:

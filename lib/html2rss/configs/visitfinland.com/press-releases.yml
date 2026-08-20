@@ -2,11 +2,11 @@
 directory:
   topics:
     - travel
-  title: "Visitfinland — Press Releases"
-  summary: "RSS feed for Visitfinland — Press Releases."
+  title: "Visit Finland — Press releases"
+  summary: "Press releases from Visit Finland’s media centre."
 strategy: botasaurus
 channel:
-  title: "Visitfinland — Press Releases"
+  title: "Visit Finland — Press releases"
   url: https://media.visitfinland.com/en/media-press-releases/
   language: en
   time_zone: Europe/Helsinki

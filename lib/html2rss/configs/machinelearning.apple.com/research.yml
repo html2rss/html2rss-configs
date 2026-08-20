@@ -4,7 +4,7 @@ directory:
     - tech
     - research
   title: "Apple Machine Learning — Research"
-  summary: "RSS feed for Apple Machine Learning — Research."
+  summary: "Machine learning research publications from Apple."
 channel:
   title: "Apple Machine Learning — Research"
   url: https://machinelearning.apple.com/research/

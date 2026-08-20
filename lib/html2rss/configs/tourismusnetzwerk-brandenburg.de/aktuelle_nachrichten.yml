@@ -3,7 +3,7 @@ directory:
   topics:
     - travel
   title: "Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten"
-  summary: "RSS feed for Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten."
+  summary: "Aktuelle Nachrichten für den Tourismus in Brandenburg."
 channel:
   title: "Tourismusnetzwerk Brandenburg — Aktuelle Nachrichten"
   url: https://tourismusnetzwerk-brandenburg.de/

@@ -3,8 +3,8 @@ directory:
   topics:
     - tech
     - product
-  title: "Github — Releases"
-  summary: "RSS feed for Github — Releases."
+  title: "GitHub — Releases"
+  summary: "Release notes for a GitHub repository (owner and name as parameters)."
 parameters:
   username:
     type: string
@@ -15,7 +15,7 @@ parameters:
 
 channel:
   language: en
-  title: "Github — Releases"
+  title: "GitHub — Releases"
   url: https://github.com/%<username>s/%<repository>s/releases
   time_zone: UTC
   ttl: 720

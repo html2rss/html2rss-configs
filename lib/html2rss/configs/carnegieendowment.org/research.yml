@@ -3,12 +3,12 @@ directory:
   topics:
     - civic
     - research
-  title: "Carnegieendowment — Research"
-  summary: "RSS feed for Carnegieendowment — Research."
+  title: "Carnegie Endowment — Research"
+  summary: "Foreign policy research and analysis from the Carnegie Endowment."
 strategy: botasaurus
 
 channel:
-  title: "Carnegieendowment — Research"
+  title: "Carnegie Endowment — Research"
   url: https://carnegieendowment.org/research
   language: en
   time_zone: UTC

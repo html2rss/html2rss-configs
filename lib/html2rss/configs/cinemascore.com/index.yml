@@ -2,11 +2,11 @@
 directory:
   topics:
     - entertainment
-  title: "Cinemascore — Index"
-  summary: "RSS feed for Cinemascore — Index."
+  title: "CinemaScore — Audience grades"
+  summary: "Opening-night audience grades for new theatrical releases."
 channel:
   language: en
-  title: "Cinemascore — Index"
+  title: "CinemaScore — Audience grades"
   url: https://webapp.cinemascore.com/guest/surveys
   ttl: 720
   json: true

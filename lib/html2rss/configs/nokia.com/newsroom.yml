@@ -4,7 +4,7 @@ directory:
     - tech
     - product
   title: "Nokia — Newsroom"
-  summary: "RSS feed for Nokia — Newsroom."
+  summary: "Corporate newsroom announcements from Nokia."
 channel:
   title: "Nokia — Newsroom"
   url: https://www.nokia.com/newsroom/

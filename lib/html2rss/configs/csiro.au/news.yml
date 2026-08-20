@@ -3,10 +3,10 @@ directory:
   topics:
     - science
     - research
-  title: "Csiro — News"
-  summary: "RSS feed for Csiro — News."
+  title: "CSIRO — News"
+  summary: "Science and innovation news from Australia’s national science agency."
 channel:
-  title: "Csiro — News"
+  title: "CSIRO — News"
   url: https://www.csiro.au/en/news
   language: en
   time_zone: Australia/Sydney

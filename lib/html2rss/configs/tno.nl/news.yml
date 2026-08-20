@@ -3,10 +3,10 @@ directory:
   topics:
     - research
     - tech
-  title: "Tno — News"
-  summary: "RSS feed for Tno — News."
+  title: "TNO — News"
+  summary: "Research and innovation news from TNO in the Netherlands."
 channel:
-  title: "Tno — News"
+  title: "TNO — News"
   url: https://www.tno.nl/en/newsroom/news/
   language: en
   time_zone: Europe/Amsterdam

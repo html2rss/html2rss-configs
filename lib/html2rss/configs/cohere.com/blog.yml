@@ -4,7 +4,7 @@ directory:
     - tech
     - research
   title: "Cohere — Blog"
-  summary: "RSS feed for Cohere — Blog."
+  summary: "Product and research updates from Cohere."
 channel:
   title: "Cohere — Blog"
   url: https://cohere.com/blog

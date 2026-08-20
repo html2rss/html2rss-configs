@@ -2,10 +2,10 @@
 directory:
   topics:
     - civic
-  title: "Icrc — News"
-  summary: "RSS feed for Icrc — News."
+  title: "ICRC — News"
+  summary: "Humanitarian news from the International Committee of the Red Cross."
 channel:
-  title: "Icrc — News"
+  title: "ICRC — News"
   url: https://www.icrc.org/en/news
   language: en
   time_zone: Europe/Zurich

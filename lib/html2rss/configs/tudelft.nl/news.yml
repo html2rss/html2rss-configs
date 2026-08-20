@@ -3,10 +3,10 @@ directory:
   topics:
     - science
     - research
-  title: "Tudelft — News"
-  summary: "RSS feed for Tudelft — News."
+  title: "TU Delft — News"
+  summary: "University and research news from Delft University of Technology."
 channel:
-  title: "Tudelft — News"
+  title: "TU Delft — News"
   url: https://www.tudelft.nl/en/about-tu-delft/current
   language: en
   time_zone: Europe/Amsterdam

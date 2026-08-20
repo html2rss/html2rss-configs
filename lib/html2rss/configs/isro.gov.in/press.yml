@@ -3,10 +3,10 @@ directory:
   topics:
     - science
     - research
-  title: "Isro — Press"
-  summary: "RSS feed for Isro — Press."
+  title: "ISRO — Press"
+  summary: "Press releases from the Indian Space Research Organisation."
 channel:
-  title: "Isro — Press"
+  title: "ISRO — Press"
   url: https://www.isro.gov.in/Press.html
   language: en
   time_zone: Asia/Kolkata

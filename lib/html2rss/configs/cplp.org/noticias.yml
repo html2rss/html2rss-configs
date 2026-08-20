@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - news
-  title: "Cplp — Noticias"
-  summary: "RSS feed for Cplp — Noticias."
+  title: "CPLP — Notícias"
+  summary: "Notícias da Comunidade dos Países de Língua Portuguesa."
 channel:
-  title: "Cplp — Noticias"
+  title: "CPLP — Notícias"
   url: https://www.cplp.org/
   language: pt
   time_zone: Europe/Lisbon

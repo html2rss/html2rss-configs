@@ -3,7 +3,7 @@ directory:
   topics:
     - tech
   title: "Telenor — Newsroom"
-  summary: "RSS feed for Telenor — Newsroom."
+  summary: "Corporate newsroom updates from Telenor."
 channel:
   title: "Telenor — Newsroom"
   url: https://www.telenor.com/media/newsroom/

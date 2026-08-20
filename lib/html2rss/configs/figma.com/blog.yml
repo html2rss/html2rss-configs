@@ -4,7 +4,7 @@ directory:
     - tech
     - product
   title: "Figma — Blog"
-  summary: "RSS feed for Figma — Blog."
+  summary: "Product updates and design stories from Figma."
 channel:
   title: "Figma — Blog"
   url: https://www.figma.com/blog/

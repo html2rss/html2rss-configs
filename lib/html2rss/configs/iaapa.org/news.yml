@@ -2,11 +2,11 @@
 directory:
   topics:
     - entertainment
-  title: "Iaapa — News"
-  summary: "RSS feed for Iaapa — News."
+  title: "IAAPA — News"
+  summary: "Industry news from the International Association of Amusement Parks."
 channel:
   language: en
-  title: "Iaapa — News"
+  title: "IAAPA — News"
   url: https://iaapa.org/news-funworld
   time_zone: UTC
   ttl: 720

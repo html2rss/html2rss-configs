@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - news
-  title: "Caricom — News"
-  summary: "RSS feed for Caricom — News."
+  title: "CARICOM — News"
+  summary: "News and updates from the Caribbean Community (CARICOM)."
 channel:
-  title: "Caricom — News"
+  title: "CARICOM — News"
   url: https://caricom.org/
   language: en
   time_zone: America/Jamaica

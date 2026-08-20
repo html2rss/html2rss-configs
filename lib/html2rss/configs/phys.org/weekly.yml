@@ -2,11 +2,11 @@
 directory:
   topics:
     - science
-  title: "Phys — Weekly"
+  title: "Phys.org — Weekly"
   summary: "Top science news of the week from Phys.org."
 channel:
   language: en
-  title: "Phys — Weekly"
+  title: "Phys.org — Weekly"
   url: https://phys.org/weekly-news/
   time_zone: Europe/London
   ttl: 1440

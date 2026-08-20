@@ -2,10 +2,10 @@
 directory:
   topics:
     - civic
-  title: "Elysee — Actualites"
-  summary: "RSS feed for Elysee — Actualites."
+  title: "Élysée — Actualités"
+  summary: "Actualités officielles de la Présidence de la République française."
 channel:
-  title: "Elysee — Actualites"
+  title: "Élysée — Actualités"
   url: https://www.elysee.fr/toutes-les-actualites
   language: fr
   time_zone: Europe/Paris

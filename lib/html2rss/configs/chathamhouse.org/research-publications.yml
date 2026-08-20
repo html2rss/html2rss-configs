@@ -3,12 +3,12 @@ directory:
   topics:
     - civic
     - research
-  title: "Chathamhouse — Research Publications"
-  summary: "RSS feed for Chathamhouse — Research Publications."
+  title: "Chatham House — Research publications"
+  summary: "Research publications from the Royal Institute of International Affairs."
 strategy: botasaurus
 
 channel:
-  title: "Chathamhouse — Research Publications"
+  title: "Chatham House — Research publications"
   url: https://www.chathamhouse.org/publications/research-publications
   language: en
   time_zone: Europe/London

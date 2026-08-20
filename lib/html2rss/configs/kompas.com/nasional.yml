@@ -4,7 +4,7 @@ directory:
     - news
     - civic
   title: "Kompas — Nasional"
-  summary: "RSS feed for Kompas — Nasional."
+  summary: "Berita nasional dari Kompas.com."
 channel:
   title: "Kompas — Nasional"
   url: https://nasional.kompas.com/

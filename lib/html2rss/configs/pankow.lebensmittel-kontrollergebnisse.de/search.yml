@@ -4,10 +4,10 @@ directory:
   topics:
     - consumer
     - civic
-  title: "Pankow food inspections — Search"
-  summary: "RSS feed for Pankow food inspections — Search."
+  title: "Berlin-Pankow — Lebensmittelkontrollen"
+  summary: "Veröffentlichte Lebensmittel-Kontrollergebnisse für Berlin-Pankow."
 channel:
-  title: "Pankow food inspections — Search"
+  title: "Berlin-Pankow — Lebensmittelkontrollen"
   url: https://pankow.lebensmittel-kontrollergebnisse.de/Search
   language: de
   ttl: 360

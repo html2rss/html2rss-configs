@@ -4,7 +4,7 @@ directory:
     - tech
     - research
   title: "Meta AI — Blog"
-  summary: "RSS feed for Meta AI — Blog."
+  summary: "Research posts and product updates from Meta AI."
 channel:
   title: "Meta AI — Blog"
   url: https://ai.meta.com/blog/

@@ -2,10 +2,10 @@
 directory:
   topics:
     - civic
-  title: "Dfs — Pressemitteilungen"
-  summary: "RSS feed for Dfs — Pressemitteilungen."
+  title: "DFS — Pressemitteilungen"
+  summary: "Pressemitteilungen der Deutschen Flugsicherung (DFS)."
 channel:
-  title: "Dfs — Pressemitteilungen"
+  title: "DFS — Pressemitteilungen"
   url: https://www.dfs.de/homepage/de/medien/presse/
   time_zone: Europe/Berlin
   ttl: 1440

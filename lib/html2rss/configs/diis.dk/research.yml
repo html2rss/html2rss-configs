@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - research
-  title: "Diis — Research"
-  summary: "RSS feed for Diis — Research."
+  title: "DIIS — Research"
+  summary: "Research and analysis from the Danish Institute for International Studies."
 channel:
-  title: "Diis — Research"
+  title: "DIIS — Research"
   url: https://www.diis.dk/en
   language: en
   time_zone: Europe/Copenhagen

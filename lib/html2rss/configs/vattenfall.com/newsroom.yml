@@ -4,7 +4,7 @@ directory:
     - energy
     - environment
   title: "Vattenfall — Newsroom"
-  summary: "RSS feed for Vattenfall — Newsroom."
+  summary: "Corporate and energy news from Vattenfall."
 channel:
   title: "Vattenfall — Newsroom"
   url: https://group.vattenfall.com/press-and-media/newsroom

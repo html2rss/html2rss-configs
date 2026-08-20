@@ -2,10 +2,10 @@
 directory:
   topics:
     - civic
-  title: "Faa — Newsroom"
-  summary: "RSS feed for Faa — Newsroom."
+  title: "FAA — Newsroom"
+  summary: "News and announcements from the U.S. Federal Aviation Administration."
 channel:
-  title: "Faa — Newsroom"
+  title: "FAA — Newsroom"
   url: https://www.faa.gov/newsroom
   language: en
   time_zone: UTC

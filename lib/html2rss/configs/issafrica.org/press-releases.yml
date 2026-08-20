@@ -3,10 +3,10 @@ directory:
   topics:
     - civic
     - research
-  title: "Issafrica — Press Releases"
-  summary: "RSS feed for Issafrica — Press Releases."
+  title: "ISS Africa — Press releases"
+  summary: "Press releases from the Institute for Security Studies Africa."
 channel:
-  title: "Issafrica — Press Releases"
+  title: "ISS Africa — Press releases"
   url: https://issafrica.org/about-us/press-releases
   language: en
   time_zone: Africa/Johannesburg

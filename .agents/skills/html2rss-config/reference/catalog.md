@@ -16,7 +16,15 @@ Every YAML in this repo is a catalog entry. Embedded serialization is owned by `
 
 | Field | Rule |
 | --- | --- |
-| `directory.summary` | One sentence, max 160 characters — browse subtitle and search text |
+| `directory.summary` | One concrete sentence, max 160 characters — browse subtitle and search text. Say what the feed covers; do not write `RSS feed for {title}.` |
+
+### Summary examples
+
+| Config path | `directory.summary` |
+| --- | --- |
+| `who.int/news.yml` | Official news and statements from the World Health Organization. |
+| `apple.com/newsroom.yml` | Product announcements and press releases from Apple. |
+| `github.com/releases.yml` | Release notes for a GitHub repository (owner and name as parameters). |
 
 ## Parameterized configs
 

@@ -3,12 +3,12 @@ directory:
   topics:
     - science
     - research
-  title: "Ntu — News"
-  summary: "RSS feed for Ntu — News."
+  title: "NTU Singapore — News"
+  summary: "University and research news from Nanyang Technological University."
 strategy: botasaurus
 
 channel:
-  title: "Ntu — News"
+  title: "NTU Singapore — News"
   url: https://www.ntu.edu.sg/news
   language: en
   time_zone: Asia/Singapore

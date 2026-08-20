@@ -4,7 +4,7 @@ directory:
   topics:
     - news
   title: "BBC — Mundo"
-  summary: "RSS feed for BBC — Mundo."
+  summary: "Noticias en español de BBC Mundo."
 channel:
   title: "BBC — Mundo"
   url: https://www.bbc.com/mundo

@@ -3,10 +3,10 @@
 directory:
   topics:
     - news
-  title: "Newyorker — Magazine"
-  summary: "RSS feed for Newyorker — Magazine."
+  title: "The New Yorker — Magazine"
+  summary: "Current magazine stories from The New Yorker."
 channel:
-  title: "Newyorker — Magazine"
+  title: "The New Yorker — Magazine"
   url: https://www.newyorker.com/magazine
   language: en
   ttl: 360

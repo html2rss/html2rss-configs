@@ -4,7 +4,7 @@ directory:
     - civic
     - news
   title: "Akorda — Events"
-  summary: "RSS feed for Akorda — Events."
+  summary: "Official events and statements from the President of Kazakhstan."
 channel:
   title: "Akorda — Events"
   url: https://www.akorda.kz/en/events
