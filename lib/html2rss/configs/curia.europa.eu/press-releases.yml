@@ -2,9 +2,12 @@
 directory:
   topics:
     - civic
+  title: "Court of Justice of the EU — Press releases"
+  summary: "Press releases from the Court of Justice of the European Union."
 strategy: botasaurus
 
 channel:
+  title: "Court of Justice of the EU — Press releases"
   url: https://curia.europa.eu/jcms/jcms/Jo2_7052/
   language: en
   time_zone: Europe/Brussels

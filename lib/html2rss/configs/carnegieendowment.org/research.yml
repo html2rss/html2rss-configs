@@ -3,9 +3,12 @@ directory:
   topics:
     - civic
     - research
+  title: "Carnegie Endowment — Research"
+  summary: "Foreign policy research and analysis from the Carnegie Endowment."
 strategy: botasaurus
 
 channel:
+  title: "Carnegie Endowment — Research"
   url: https://carnegieendowment.org/research
   language: en
   time_zone: UTC

@@ -18,8 +18,11 @@ Add one curated config. SSOT details: [AGENTS.md](../../../../AGENTS.md).
 directory:
   topics:
     - tech
+  title: Example — News
+  summary: Short browse-card description (optional, max 160 characters).
 channel:
   url: https://example.com/news/
+  title: Example — News
   language: en
   time_zone: UTC
   ttl: 360
@@ -37,6 +40,7 @@ selectors:
 Notes:
 
 - Always include `directory.topics` (1–2) — see [topics.md](topics.md).
+- Set `directory.title` and mirror it in `channel.title` for catalog and RSS output.
 - Set `channel.language` when clear (`en` / `de` / `es` / …). Prefer a real region `time_zone` when obvious (`Africa/Johannesburg`, `Africa/Cairo`, …).
 - Add `strategy: botasaurus` only when Faraday cannot produce items (or Faraday is blocked by scheme/redirect). Keep `wait_timeout_seconds` **≤ 20**.
 - Parameterized URLs need a `parameters:` block with `type: string` and `default`.

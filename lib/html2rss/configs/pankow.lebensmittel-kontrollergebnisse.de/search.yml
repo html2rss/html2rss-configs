@@ -4,7 +4,10 @@ directory:
   topics:
     - consumer
     - civic
+  title: "Berlin-Pankow — Lebensmittelkontrollen"
+  summary: "Veröffentlichte Lebensmittel-Kontrollergebnisse für Berlin-Pankow."
 channel:
+  title: "Berlin-Pankow — Lebensmittelkontrollen"
   url: https://pankow.lebensmittel-kontrollergebnisse.de/Search
   language: de
   ttl: 360

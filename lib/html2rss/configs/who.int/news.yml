@@ -3,9 +3,12 @@ directory:
   topics:
     - science
     - civic
+  title: "WHO — News"
+  summary: "Official news and statements from the World Health Organization."
 strategy: botasaurus
 
 channel:
+  title: "WHO — News"
   url: https://www.who.int/news
   language: en
   time_zone: UTC

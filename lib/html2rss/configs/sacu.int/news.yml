@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - news
+  title: "SACU — News"
+  summary: "News from the Southern African Customs Union."
 channel:
+  title: "SACU — News"
   url: https://www.sacu.int/news/
   language: en
   time_zone: Africa/Windhoek

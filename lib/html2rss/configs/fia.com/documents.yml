@@ -3,8 +3,11 @@
 directory:
   topics:
     - sports
+  title: "FIA — Formula 1 documents"
+  summary: "Official Formula 1 championship documents from the FIA."
 channel:
   language: en
+  title: "FIA — Formula 1 documents"
   url: https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2026-2072
   ttl: 360
   time_zone: UTC

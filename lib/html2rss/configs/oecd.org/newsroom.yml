@@ -3,9 +3,12 @@ directory:
   topics:
     - finance
     - civic
+  title: "OECD — Newsroom"
+  summary: "Newsroom releases from the Organisation for Economic Co-operation and Development."
 strategy: botasaurus
 
 channel:
+  title: "OECD — Newsroom"
   url: https://www.oecd.org/en/about/newsroom.html
   language: en
   time_zone: UTC

@@ -4,12 +4,15 @@ directory:
   topics:
     - tech
     - news
+  title: "CNET — Section"
+  summary: "Tech news and reviews from a selectable CNET section."
 parameters:
   section:
     type: string
     default: "tech"
 
 channel:
+  title: "CNET — Section"
   url: https://www.cnet.com/%<section>s/
   language: en
   ttl: 360

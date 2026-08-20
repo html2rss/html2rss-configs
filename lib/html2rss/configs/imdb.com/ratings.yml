@@ -2,6 +2,8 @@
 directory:
   topics:
     - entertainment
+  title: "IMDb — User ratings"
+  summary: "Film and TV ratings from a selectable IMDb user list."
 strategy: botasaurus
 
 parameters:
@@ -11,6 +13,7 @@ parameters:
 
 channel:
   language: en
+  title: "IMDb — User ratings"
   url: https://www.imdb.com/user/%<user_id>s/ratings
   time_zone: UTC
   ttl: 1440

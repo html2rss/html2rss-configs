@@ -2,9 +2,12 @@
 directory:
   topics:
     - news
+  title: "PANA Press — Latest"
+  summary: "Latest African news from the Pan African News Agency."
 strategy: botasaurus
 
 channel:
+  title: "PANA Press — Latest"
   url: https://www.panapress.com/
   language: en
   time_zone: UTC

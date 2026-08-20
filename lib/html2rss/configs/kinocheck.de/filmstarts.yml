@@ -2,7 +2,10 @@
 directory:
   topics:
     - entertainment
+  title: "KinoCheck — Filmstarts"
+  summary: "Kommende und aktuelle Filmstarts in Deutschland."
 channel:
+  title: "KinoCheck — Filmstarts"
   url: https://kinocheck.de/filmstarts
   time_zone: Europe/Berlin
   ttl: 1440

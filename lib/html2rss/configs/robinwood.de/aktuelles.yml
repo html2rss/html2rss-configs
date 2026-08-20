@@ -2,7 +2,10 @@
 directory:
   topics:
     - environment
+  title: "ROBIN WOOD — Aktuelles"
+  summary: "Aktuelle Meldungen der Umweltschutzorganisation ROBIN WOOD."
 channel:
+  title: "ROBIN WOOD — Aktuelles"
   url: https://www.robinwood.de/was-gibt-es-neues
   time_zone: Europe/Berlin
   ttl: 720

@@ -3,12 +3,15 @@
 directory:
   topics:
     - news
+  title: "AP News — Hub"
+  summary: "Top stories from a selectable Associated Press news hub."
 parameters:
   section:
     type: string
     default: "news"
 
 channel:
+  title: "AP News — Hub"
   url: https://apnews.com/%<section>s
   language: en
   ttl: 120

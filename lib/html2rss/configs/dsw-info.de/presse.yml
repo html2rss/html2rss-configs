@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - consumer
+  title: "Deutsche Stiftung Weltbevölkerung — Presse"
+  summary: "Pressemitteilungen der Deutschen Stiftung Weltbevölkerung."
 channel:
+  title: "Deutsche Stiftung Weltbevölkerung — Presse"
   url: https://www.dsw-info.de/presse/pressemitteilungen-2026/
   time_zone: Europe/Berlin
   ttl: 720

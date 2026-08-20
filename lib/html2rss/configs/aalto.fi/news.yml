@@ -3,8 +3,11 @@ directory:
   topics:
     - science
     - research
+  title: "Aalto University — News"
+  summary: "Research and campus news from Aalto University in Finland."
 strategy: botasaurus
 channel:
+  title: "Aalto University — News"
   url: https://www.aalto.fi/en/news
   language: en
   time_zone: Europe/Helsinki

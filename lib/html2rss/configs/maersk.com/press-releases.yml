@@ -2,7 +2,10 @@
 directory:
   topics:
     - finance
+  title: "Maersk — Press releases"
+  summary: "Corporate press releases from Maersk."
 channel:
+  title: "Maersk — Press releases"
   url: https://www.maersk.com/news/category/press-releases
   language: en
   time_zone: Europe/Copenhagen

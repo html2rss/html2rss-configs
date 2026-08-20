@@ -2,7 +2,10 @@
 directory:
   topics:
     - energy
+  title: "TenneT — News"
+  summary: "Grid and energy news from transmission operator TenneT."
 channel:
+  title: "TenneT — News"
   url: https://www.tennet.eu/news
   language: en
   time_zone: Europe/Amsterdam

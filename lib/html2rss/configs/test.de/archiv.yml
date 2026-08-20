@@ -3,7 +3,10 @@
 directory:
   topics:
     - consumer
+  title: "Stiftung Warentest — Archiv"
+  summary: "Archivierte Tests und Meldungen von Stiftung Warentest."
 channel:
+  title: "Stiftung Warentest — Archiv"
   url: https://www.test.de/archiv/
   language: de
   ttl: 360

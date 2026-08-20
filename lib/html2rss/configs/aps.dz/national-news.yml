@@ -3,7 +3,10 @@ directory:
   topics:
     - news
     - civic
+  title: "APS — National news"
+  summary: "National news from Algeria’s official press agency (APS)."
 channel:
+  title: "APS — National news"
   url: https://www.aps.dz/en
   language: en
   time_zone: Africa/Algiers

@@ -3,12 +3,15 @@
 directory:
   topics:
     - jobs
+  title: "Webentwickler-Jobs — Region"
+  summary: "Webentwickler-Stellenangebote für eine wählbare Region in Deutschland."
 parameters:
   region:
     type: string
     default: "berlin"
 
 channel:
+  title: "Webentwickler-Jobs — Region"
   url: https://www.webentwickler-jobs.de/in/%<region>s
   language: de
   ttl: 360

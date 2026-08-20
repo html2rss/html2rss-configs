@@ -3,7 +3,10 @@ directory:
   topics:
     - environment
     - civic
+  title: "FAO — Newsroom"
+  summary: "News from the Food and Agriculture Organization of the United Nations."
 channel:
+  title: "FAO — Newsroom"
   url: https://www.fao.org/newsroom/en
   language: en
   time_zone: UTC

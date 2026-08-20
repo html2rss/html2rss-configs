@@ -3,7 +3,10 @@ directory:
   topics:
     - security
     - civic
+  title: "ENISA — News"
+  summary: "Cybersecurity news from the EU Agency for Cybersecurity (ENISA)."
 channel:
+  title: "ENISA — News"
   url: https://www.enisa.europa.eu/news
   language: en
   time_zone: UTC

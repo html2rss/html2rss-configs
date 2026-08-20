@@ -3,8 +3,11 @@
 directory:
   topics:
     - tech
+  title: "cutle.fish — Posts"
+  summary: "Personal writing and notes from cutle.fish."
 channel:
   language: en
+  title: "cutle.fish — Posts"
   url: https://cutle.fish/
   ttl: 360
   time_zone: UTC

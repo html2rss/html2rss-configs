@@ -3,7 +3,10 @@
 directory:
   topics:
     - news
+  title: "Stars and Stripes — Front page"
+  summary: "Independent news for the U.S. military community from Stars and Stripes."
 channel:
+  title: "Stars and Stripes — Front page"
   url: https://www.stripes.com/
   language: en
   ttl: 360

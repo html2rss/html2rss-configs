@@ -2,7 +2,10 @@
 directory:
   topics:
     - finance
+  title: "Norges Bank Investment Management — Press releases"
+  summary: "Press releases from Norway’s sovereign wealth fund manager."
 channel:
+  title: "Norges Bank Investment Management — Press releases"
   url: https://www.nbim.no/en/news-and-insights/the-press/press-releases/
   language: en
   time_zone: Europe/Oslo

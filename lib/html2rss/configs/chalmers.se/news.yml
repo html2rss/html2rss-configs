@@ -3,8 +3,11 @@ directory:
   topics:
     - science
     - research
+  title: "Chalmers — News"
+  summary: "Research and university news from Chalmers University of Technology."
 strategy: botasaurus
 channel:
+  title: "Chalmers — News"
   url: https://www.chalmers.se/en/current/news/
   language: en
   time_zone: Europe/Stockholm

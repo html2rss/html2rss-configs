@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - news
+  title: "CPLP — Notícias"
+  summary: "Notícias da Comunidade dos Países de Língua Portuguesa."
 channel:
+  title: "CPLP — Notícias"
   url: https://www.cplp.org/
   language: pt
   time_zone: Europe/Lisbon

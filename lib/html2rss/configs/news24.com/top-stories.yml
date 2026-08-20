@@ -2,7 +2,10 @@
 directory:
   topics:
     - news
+  title: "News24 — Top stories"
+  summary: "Top stories from South African news site News24."
 channel:
+  title: "News24 — Top stories"
   url: https://www.news24.com/
   language: en
   time_zone: Africa/Johannesburg

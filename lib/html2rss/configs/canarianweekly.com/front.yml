@@ -3,7 +3,10 @@ directory:
   topics:
     - news
     - travel
+  title: "Canarian Weekly — Front page"
+  summary: "English-language news from the Canary Islands."
 channel:
+  title: "Canarian Weekly — Front page"
   url: https://www.canarianweekly.com/
   time_zone: Europe/London
   ttl: 720

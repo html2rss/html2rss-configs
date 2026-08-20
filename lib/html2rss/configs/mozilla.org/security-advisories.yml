@@ -3,7 +3,10 @@ directory:
   topics:
     - security
     - tech
+  title: "Mozilla — Security advisories"
+  summary: "Security advisories for Mozilla products."
 channel:
+  title: "Mozilla — Security advisories"
   url: https://www.mozilla.org/en-US/security/advisories/
   language: en
   time_zone: UTC

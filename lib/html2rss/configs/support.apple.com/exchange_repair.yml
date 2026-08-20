@@ -3,8 +3,11 @@ directory:
   topics:
     - tech
     - security
+  title: "Apple Support — Service programs"
+  summary: "Apple repair and exchange service program announcements."
 channel:
   language: en
+  title: "Apple Support — Service programs"
   url: https://support.apple.com/service-programs
   time_zone: America/Los_Angeles
   ttl: 720

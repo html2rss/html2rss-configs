@@ -2,8 +2,11 @@
 directory:
   topics:
     - entertainment
+  title: "Spotify — Newsroom"
+  summary: "Corporate and product announcements from Spotify Newsroom."
 
 channel:
+  title: "Spotify — Newsroom"
   url: https://newsroom.spotify.com/
   language: en
   time_zone: UTC

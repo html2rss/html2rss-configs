@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem 'html2rss', '~> 0.26'
+gem 'html2rss', '~> 0.27'
 
 group :development do
   gem 'nokogiri'

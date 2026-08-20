@@ -2,7 +2,10 @@
 directory:
   topics:
     - civic
+  title: "ADFC — Pressemitteilungen"
+  summary: "Pressemitteilungen des Allgemeinen Deutschen Fahrrad-Clubs."
 channel:
+  title: "ADFC — Pressemitteilungen"
   url: https://www.adfc.de/presse/pressemitteilungen/
   time_zone: Europe/Berlin
   ttl: 720

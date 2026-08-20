@@ -2,7 +2,10 @@
 directory:
   topics:
     - civic
+  title: "ICJ — Press releases"
+  summary: "Press releases from the International Court of Justice."
 channel:
+  title: "ICJ — Press releases"
   url: https://www.icj-cij.org/press-releases
   language: en
   time_zone: UTC

@@ -2,9 +2,12 @@
 directory:
   topics:
     - news
+  title: "The East African — News"
+  summary: "Regional news from The East African."
 strategy: botasaurus
 
 channel:
+  title: "The East African — News"
   url: https://www.theeastafrican.co.ke/tea/news
   language: en
   time_zone: Africa/Nairobi

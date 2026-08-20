@@ -3,9 +3,12 @@ directory:
   topics:
     - civic
     - research
+  title: "IISS — Online analysis"
+  summary: "Strategic analysis from the International Institute for Strategic Studies."
 strategy: botasaurus
 
 channel:
+  title: "IISS — Online analysis"
   url: https://www.iiss.org/online-analysis
   language: en
   time_zone: Europe/London

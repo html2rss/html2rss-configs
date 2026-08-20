@@ -3,7 +3,10 @@ directory:
   topics:
     - entertainment
     - product
+  title: "LEGO — Press releases"
+  summary: "Official press releases from the LEGO Group."
 channel:
+  title: "LEGO — Press releases"
   url: https://www.lego.com/en-gb/aboutus/newsroom/press-releases
   language: en-GB
   time_zone: Europe/Copenhagen

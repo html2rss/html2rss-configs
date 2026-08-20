@@ -4,9 +4,12 @@ directory:
   topics:
     - tech
     - security
+  title: "Apple Support — Security releases"
+  summary: "Apple security update and release notes (HT201222 / related)."
 strategy: botasaurus
 
 channel:
+  title: "Apple Support — Security releases"
   url: https://support.apple.com/en-gb/100100
   language: en
   ttl: 360

@@ -3,7 +3,10 @@ directory:
   topics:
     - news
     - tech
+  title: "Nikkei Asia — Technology"
+  summary: "Asia technology business coverage from Nikkei Asia."
 channel:
+  title: "Nikkei Asia — Technology"
   url: https://asia.nikkei.com/business/technology
   language: en
   time_zone: Asia/Tokyo

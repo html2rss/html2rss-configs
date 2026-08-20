@@ -3,7 +3,10 @@ directory:
   topics:
     - civic
     - news
+  title: "Akorda — Events"
+  summary: "Official events and statements from the President of Kazakhstan."
 channel:
+  title: "Akorda — Events"
   url: https://www.akorda.kz/en/events
   language: en
   time_zone: Asia/Almaty

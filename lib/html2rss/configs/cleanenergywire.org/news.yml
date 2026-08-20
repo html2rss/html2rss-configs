@@ -3,8 +3,11 @@ directory:
   topics:
     - energy
     - environment
+  title: "Clean Energy Wire — News"
+  summary: "Journalism on Germany’s energy transition and climate policy."
 channel:
   language: en
+  title: "Clean Energy Wire — News"
   url: https://www.cleanenergywire.org/news
   time_zone: "Europe/Berlin"
   ttl: 360

@@ -2,9 +2,12 @@
 directory:
   topics:
     - civic
+  title: "IMO — Press briefings"
+  summary: "Press briefings from the International Maritime Organization."
 strategy: botasaurus
 
 channel:
+  title: "IMO — Press briefings"
   url: https://www.imo.org/en/MediaCentre/PressBriefings/Pages/default.aspx
   language: en
   time_zone: UTC

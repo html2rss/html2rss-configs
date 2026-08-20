@@ -2,8 +2,11 @@
 directory:
   topics:
     - jobs
+  title: "AcademicTransfer — Jobs"
+  summary: "Academic and research job listings in the Netherlands and beyond."
 strategy: botasaurus
 channel:
+  title: "AcademicTransfer — Jobs"
   url: https://www.academictransfer.com/en/jobs/
   language: en
   time_zone: Europe/Amsterdam
