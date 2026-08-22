@@ -44,7 +44,7 @@ Dry plan (no network): `batch_recon --dry-run --file candidates.tsv`
   --from-ledger tmp/html2rss-recon/ledger.tsv
 ```
 
-Write YAMLs only for `BUILD` rows under `lib/html2rss/configs/<registrable-domain>/`. Use MCP/`check_config` only when cache analysis is insufficient. Botasaurus scrape: thin/empty/blocked HTML only — one retry max (`wait_timeout_seconds` ≤ 20), then drop.
+Write YAMLs only for `BUILD` rows under `lib/html2rss/configs/<registrable-domain>/`. Use MCP/`check_config` only when cache analysis is insufficient. Botasaurus scrape: thin/empty/blocked HTML only — one retry max (`wait_timeout_seconds` ≤ 30, work budget), then drop.
 
 YAML notes: [new.md](new.md). Topics: [topics.md](topics.md).
 
