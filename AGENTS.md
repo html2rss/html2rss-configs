@@ -31,6 +31,9 @@ Rules:
 - **Rename workflow** — change `registry.id` to the new slug; add the old id to `aliases`; remove the alias in a later release when comfortable.
 
 ## Defaults
+
+Local development expects **Ruby 4.0** (`mise exec -- …` or `.ruby-version` when present). CI and release workflows run on Ruby 4.0 only.
+
 - Start from the cleanest article list the site offers, not the marketing homepage by default.
 - Prefer stable list/detail extraction over extracting every possible field.
 - If the site only becomes reliable on a narrower path, use that narrower path.
@@ -53,8 +56,15 @@ Rules:
 
 ## Release
 
-- Tag push runs `.github/workflows/release.yml`: `make registry-build -- --sign` uploads `dist/registry-bundle.tar.gz` to GitHub Releases.
-- Instances sync the official bundle via `html2rss-web` `Registry::Sync` (default channel `html2rss-official`).
+Publisher flow (`.github/workflows/release.yml`):
+
+1. Push a `v*` tag — the release job runs in the GitHub **`registry-release`** environment (requires maintainer approval before signing secrets are used).
+2. CI runs `make ready`, then `make registry-build -- --sign` with `REGISTRY_SIGNING_KEY` from environment secrets.
+3. The workflow verifies the tarball with `REGISTRY_PUBLIC_KEY_PEM` from the **`registry-release`** environment (operator-supplied public key PEM; must match `html2rss-web/config/registries.yml`), not the private signing key.
+4. `softprops/action-gh-release@v2` uploads `dist/registry-bundle.tar.gz` as a **draft** GitHub Release with generated notes.
+5. A maintainer reviews the draft release and clicks **Publish release** — instances only pick up published releases via `html2rss-web` `Registry::Sync` (default channel `html2rss-official`).
+
+Local bundle build (unsigned): `make registry-build`. Signing locally requires `REGISTRY_SIGNING_KEY` in the environment.
 
 ## Surface Selection
 
@@ -168,7 +178,7 @@ html2rss feed /abs/path/to/config.yml
 3. Registry bundle verification for changed configs:
 
 ```bash
-bundle exec rspec test/registry.spec.rb
+bundle exec rspec test/registry_build_spec.rb
 make registry-build
 ```
 

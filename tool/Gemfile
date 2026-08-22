@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'html2rss', path: '../../html2rss'
+gem 'html2rss', git: 'https://github.com/html2rss/html2rss.git', branch: 'feat/registry-v1'
 
 group :development do
   gem 'nokogiri'

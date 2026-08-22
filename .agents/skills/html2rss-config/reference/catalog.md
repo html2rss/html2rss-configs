@@ -65,7 +65,7 @@ Describe feed intent in `directory.title`, not the template URL.
 ## Verification
 
 ```bash
-bundle exec rspec test/registry.spec.rb
+bundle exec rspec test/registry_build_spec.rb
 make validate
 make registry-build
 ```

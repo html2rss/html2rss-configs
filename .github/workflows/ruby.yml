@@ -22,7 +22,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3
+          ruby-version: '4.0'
           bundler-cache: true
 
       - name: Run quality gate
@@ -40,7 +40,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3
+          ruby-version: '4.0'
           bundler-cache: true
 
       - name: setup remote origin
