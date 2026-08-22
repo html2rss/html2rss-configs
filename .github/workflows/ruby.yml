@@ -24,7 +24,6 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
-          working-directory: tool
 
       - name: Run quality gate
         run: make ready
@@ -43,7 +42,6 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
-          working-directory: tool
 
       - name: setup remote origin
         run: >-
