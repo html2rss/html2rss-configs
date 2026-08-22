@@ -19,7 +19,7 @@ One config quality loop at a time (multi-config PR only when the user asks).
 
 | Mode     | When                                               | Reference                        |
 | -------- | -------------------------------------------------- | -------------------------------- |
-| `new`    | Add YAML under `lib/html2rss/configs/<domain>/`    | [new.md](reference/new.md)       |
+| `new`    | Add YAML under `configs/<domain>/`    | [new.md](reference/new.md)       |
 | `repair` | Zero items, fetch fail, noisy feed                 | [repair.md](reference/repair.md) |
 | `expand` | Batch-add across topics                            | [batch.md](reference/batch.md)   |
 

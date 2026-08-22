@@ -12,7 +12,7 @@ Probes via `recon`, captures YAML via `capture` (draft — add catalog fields). 
 
 ## Manual fallback
 
-When automation fails: tool order per [SKILL.md](../SKILL.md); write YAML under `lib/html2rss/configs/<domain>/`; `scripts/check_config` (+ `--fetch` / `--botasaurus` as needed).
+When automation fails: tool order per [SKILL.md](../SKILL.md); write YAML under `configs/<domain>/`; `scripts/check_config` (+ `--fetch` / `--botasaurus` as needed).
 
 ## YAML skeleton
 

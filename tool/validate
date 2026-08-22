@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'html2rss'
+
+REPO_ROOT = File.expand_path('..', __dir__)
+CONFIGS_DIR = ENV.fetch('CONFIGS_DIR', File.join(REPO_ROOT, 'configs'))
+CONFIGS_GLOB = File.join(CONFIGS_DIR, '**', '*.yml')
+
+unless Html2rss::Config.respond_to?(:validate_yaml)
+  warn 'Error: installed html2rss gem does not support Config.validate_yaml.'
+  warn 'Run: bundle update html2rss'
+  exit 1
+end
+
+##
+# @param file [String]
+# @return [String]
+def display_path(file)
+  prefix = "#{CONFIGS_DIR}/"
+  return file.delete_prefix(prefix) if file.start_with?(prefix)
+
+  file.delete_prefix("#{REPO_ROOT}/")
+end
+
+files = Dir[CONFIGS_GLOB]
+failed = []
+
+files.each do |file|
+  result = Html2rss::Config.validate_yaml(file)
+
+  if result.success?
+    puts "ok   #{display_path(file)}"
+  else
+    puts "FAIL #{display_path(file)}"
+    result.errors.to_h.each do |key, messages|
+      Array(messages).each { |msg| warn "       #{key}: #{msg}" }
+    end
+    failed << file
+  end
+rescue Psych::Exception => error
+  puts "FAIL #{display_path(file)}"
+  warn "       parse: #{error.message}"
+  failed << file
+rescue StandardError => error
+  puts "FAIL #{display_path(file)}"
+  warn "       validation: #{error.class}: #{error.message}"
+  failed << file
+end
+
+puts
+if failed.empty?
+  puts "#{files.size} configs validated successfully."
+else
+  warn "#{failed.size}/#{files.size} configs failed validation."
+  exit 1
+end
