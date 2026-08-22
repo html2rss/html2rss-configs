@@ -1,7 +1,7 @@
 ---
 name: html2rss-config
 description: >-
-  Create or repair curated html2rss YAML feed configs in this repo (lib/html2rss/configs/),
+  Create or repair curated html2rss YAML feed configs in this repo (configs/),
   including directory.topics, directory.title, selectors, Faraday vs Botasaurus triage, RSS probe-before-write,
   and the AGENTS.md quality gate. Use when adding a new feed config, fixing a broken/zero-item
   config, tightening selectors, diagnosing fetch failures, or shipping a user-requested batch
@@ -17,7 +17,7 @@ Thin workflow skill for **one config quality loop at a time** (a multi-config PR
 
 | Mode     | When                                                     | Reference                                  |
 | -------- | -------------------------------------------------------- | ------------------------------------------ |
-| `new`    | Add a YAML under `lib/html2rss/configs/<domain>/`        | [reference/new.md](reference/new.md)       |
+| `new`    | Add a YAML under `configs/<domain>/`        | [reference/new.md](reference/new.md)       |
 | `repair` | Fix existing config (zero items, fetch fail, noisy feed) | [reference/repair.md](reference/repair.md) |
 
 Pick mode from the user ask. Grow later with more modes/references; keep this file short.
@@ -55,7 +55,7 @@ Run from repo root. Prefer these over ad‑hoc CLI glue:
 | [`scripts/analyze_html`](scripts/analyze_html)               | Selector hints from cached HTML / ledger (`--from-ledger`). No network.                                                                                                 |
 | [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe (HTML `rel=alternate` then path guesses). Exit `0` = none; `3` = found (consider drop). Under `set -e`, check `$?` — do not treat `3` as failure. |
 | [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. Resolves CLI via PATH or sibling `../html2rss`.                                             |
-| [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.                                                                                                    |
+| [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `test/support/botasaurus_fetch_configs.rb`.                                                                                                    |
 
 Examples:
 
@@ -76,7 +76,7 @@ From AGENTS.md Quality Gate, in order:
 2. `make validate` (this repo) when touching shared support files or multiple configs
 3. `make test` (non-fetch)
 4. Focused fetch via `scripts/check_config … --fetch` or:
-   - Faraday: `bundle exec rspec --tag fetch --example 'domain/file.yml' spec/html2rss/configs_dynamic_spec.rb`
+   - Faraday: `bundle exec rspec --tag fetch --example 'domain/file.yml' test/configs_dynamic_spec.rb`
    - Botasaurus: same with `BOTASAURUS_SCRAPER_URL=http://localhost:4010`
 5. If `strategy: botasaurus` (or fetch only works via Botasaurus): `scripts/register_botasaurus domain/file.yml` — **required**.
 

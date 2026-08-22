@@ -3,9 +3,9 @@
 require 'fileutils'
 require 'tmpdir'
 
-RSpec.describe 'bin/validate_configs' do # rubocop:disable RSpec/DescribeClass
-  let(:script_path) { File.expand_path('../../bin/validate_configs', __dir__) }
-  let(:config_path) { File.join('lib', 'html2rss', 'configs', 'example.com', 'search.yml') }
+RSpec.describe 'tool/validate' do
+  let(:script_path) { File.expand_path('../../tool/validate', __dir__) }
+  let(:config_path) { File.join('configs', 'example.com', 'search.yml') }
   let(:success_output) do
     a_string_including(
       "ok   #{config_path}",
@@ -28,12 +28,16 @@ RSpec.describe 'bin/validate_configs' do # rubocop:disable RSpec/DescribeClass
   end
 
   def write_config(dir)
-    FileUtils.mkdir_p(File.join(dir, File.dirname(config_path)))
+    FileUtils.mkdir_p(File.join(dir, 'configs', File.dirname(config_path.delete_prefix('configs/'))))
     File.write(File.join(dir, config_path), valid_config)
   end
 
   def run_script(dir)
-    Dir.chdir(dir) { load script_path }
+    configs_dir = File.join(dir, 'configs')
+    ENV['CONFIGS_DIR'] = configs_dir
+    load script_path
+  ensure
+    ENV.delete('CONFIGS_DIR')
   end
 
   def valid_config

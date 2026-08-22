@@ -31,10 +31,10 @@ RSpec.describe BotasaurusFetchConfigs do
 
   describe 'CONFIGS' do
     it 'includes all configs that use the botasaurus strategy' do
-      botasaurus_files = Dir.glob('lib/html2rss/configs/**/*.yml').select do |file|
+      botasaurus_files = Dir.glob('configs/**/*.yml').select do |file|
         YAML.load_file(file)['strategy'] == 'botasaurus'
       end
-      expected_configs = botasaurus_files.map { |file| file.sub('lib/html2rss/configs/', '') }.sort
+      expected_configs = botasaurus_files.map { |file| file.delete_prefix('configs/') }.sort
 
       expect(described_class::CONFIGS.sort).to eq(expected_configs)
     end

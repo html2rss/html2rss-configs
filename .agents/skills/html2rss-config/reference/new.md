@@ -7,7 +7,7 @@ Add one curated config. SSOT details: [AGENTS.md](../../../../AGENTS.md).
 1. Pick the cleanest list URL (newsroom / archive / category — not marketing homepage). Confirm with `curl -I -L` (canonical host; no HTTPS→HTTP downgrade unless you plan Botasaurus).
 2. Confirm no useful first-party RSS **for that exact URL** (else drop/defer). Use `scripts/probe_rss`. Exit `3` = feed found.
 3. Capture items via skill tool order (MCP → CLI → Botasaurus → Chrome). If `auto` is empty, still inspect HTML before assuming JS-only — see [pitfalls.md](pitfalls.md).
-4. Write YAML under `lib/html2rss/configs/<registrable-domain>/<name>.yml`.
+4. Write YAML under `configs/<registrable-domain>/<name>.yml`.
 5. Run `scripts/check_config …` (and `--fetch` / `--botasaurus` as needed); verify real `<item>` rows, not only the summary. `scripts/register_botasaurus` if Botasaurus-backed.
 6. Handoff per skill.
 

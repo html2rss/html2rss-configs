@@ -1,6 +1,6 @@
 # Catalog metadata (Feed Directory)
 
-Every YAML in this repo is a catalog entry. Embedded serialization is owned by `Html2rss::Configs::Catalog` — consumers call `Catalog.entries`; do not re-walk YAML in other repos.
+Every YAML in this repo is a catalog entry. Registry bundle serialization is owned by `Html2rss::Registry::CatalogBuilder` in the core `html2rss` gem — build with `make registry-build`; do not re-walk YAML in other repos.
 
 ## Required fields
 
@@ -44,17 +44,18 @@ Describe feed intent in `directory.title`, not the template URL.
 ## Verification
 
 ```bash
-bundle exec rspec spec/lib/html2rss/configs/catalog_spec.rb
+bundle exec rspec test/registry.spec.rb
 make validate
+make registry-build
 ```
 
-`Catalog.build_entry` raises `MissingDirectoryTitle` when `directory.title` is absent.
+`CatalogBuilder.build_entry` raises `MissingDirectoryTitle` when `directory.title` is absent.
 
 ## Downstream consumers
 
 | Consumer                   | How it reads catalog data                                                                                    |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `html2rss-web`             | `GET /api/v1/configs` merges `Catalog.entries` with local `feeds.yml` entries that include `directory.title` |
+| `html2rss-web`             | `GET /api/v1/configs` merges registry bundles with local `feeds.yml` entries that include `directory.title` |
 | Feed Directory (docs site) | Fetches catalog JSON from a running `html2rss-web` instance                                                  |
 
-Do not duplicate catalog expansion logic outside `Html2rss::Configs::Catalog`.
+Do not duplicate catalog expansion logic outside `Html2rss::Registry::CatalogBuilder`.

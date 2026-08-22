@@ -1,0 +1,37 @@
+name: Release
+
+"on":
+  push:
+    tags:
+      - '*'
+
+env:
+  BUNDLE_GEMFILE: tool/Gemfile
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+          working-directory: tool
+
+      - name: Build signed registry bundle
+        env:
+          REGISTRY_VERSION: ${{ github.ref_name }}
+          REGISTRY_SIGNING_KEY: ${{ secrets.REGISTRY_SIGNING_KEY }}
+        run: make registry-build -- --sign
+
+      - name: Upload release artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/registry-bundle.tar.gz
+          generate_release_notes: true

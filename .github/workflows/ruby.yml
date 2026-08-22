@@ -6,57 +6,35 @@ name: Ruby
   pull_request:
     branches: [master]
 
+env:
+  BUNDLE_GEMFILE: tool/Gemfile
+
 jobs:
-  lint:
+  ready:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
 
       - name: Install dependencies
         run: sudo apt-get install -yqq yamllint
 
-      - name: Install Node dependencies
-        run: npm ci --ignore-scripts --no-fund --no-audit
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
           bundler-cache: true
+          working-directory: tool
 
-      - name: Run linters
-        run: make lint
-
-      - name: Validate configs
-        run: make validate
-
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby: ["3.3"]
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
-
-      - name: Run tests
-        run: make test
+      - name: Run quality gate
+        run: make ready
 
   test_changed_configs:
     runs-on: ubuntu-latest
 
+    env:
+      BUNDLE_GEMFILE: tool/Gemfile
+
     steps:
       - uses: actions/checkout@v4
 
@@ -65,6 +43,7 @@ jobs:
         with:
           ruby-version: 3.3
           bundler-cache: true
+          working-directory: tool
 
       - name: setup remote origin
         run: >-

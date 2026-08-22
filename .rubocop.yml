@@ -3,17 +3,27 @@ plugins:
   - rubocop-performance
 
 AllCops:
-  DisplayCopNames: true
+  DisplayCopName: true
   NewCops: enable
+  TargetRubyVersion: 3.3
   Exclude:
     - vendor/**/*
+    - tool/Gemfile.lock
 
 Layout/ClassStructure:
   Enabled: true
 
 RSpec/DescribeClass:
   Exclude:
-    - "spec/html2rss/configs/**/*.yml_spec.rb"
+    - "test/**/*.yml_spec.rb"
+    - "test/configs_dynamic_spec.rb"
+    - "test/registry.spec.rb"
+    - "test/validate.spec.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "test/registry.spec.rb"
+    - "test/validate.spec.rb"
 
 Naming/RescuedExceptionsVariableName:
   PreferredName: error

@@ -6,16 +6,14 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   subject(:yaml) { YAML.safe_load_file(file_path) }
 
   let!(:file_path) do
-    File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
+    File.expand_path(File.join(__dir__, '..', '..', '..', 'configs', file_name))
   end
 
   let(:config) do
-    feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
-    config = {}.merge Html2rss::Configs.find_by_name(feed_name)
-    # Reuse runtime browser defaults so fetch specs exercise the same header shape as production.
+    loaded = YAML.safe_load_file(file_path, symbolize_names: true)
+    config = {}.merge(loaded)
     config[:headers] = Html2rss::Config::RequestHeaders.browser_defaults.merge(config.fetch(:headers, {}))
 
-    # Use provided params or extract defaults from parameters section
     if params
       config[:params] = params
     elsif config[:parameters]
