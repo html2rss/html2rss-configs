@@ -19,7 +19,7 @@ validate:
 test:
 	$(BUNDLE) rspec test
 
-registry-build:
+registry-build: validate
 	$(BUNDLE_RUBY) tool/registry-build
 
 test-fetch-changed-configs:

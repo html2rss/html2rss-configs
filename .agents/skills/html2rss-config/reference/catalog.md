@@ -71,7 +71,7 @@ Required on every config. Vocabulary SSOT: `Html2rss::Config::Validator::DIRECTO
 ## Verification
 
 ```bash
-bundle exec rspec test/registry.spec.rb
+bundle exec rspec test/registry_build_spec.rb
 make validate
 make registry-build
 ```

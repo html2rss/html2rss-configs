@@ -5,7 +5,7 @@ plugins:
 AllCops:
   DisplayCopName: true
   NewCops: enable
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 4.0
   Exclude:
     - vendor/**/*
     - tool/Gemfile.lock
@@ -17,13 +17,18 @@ RSpec/DescribeClass:
   Exclude:
     - "test/**/*.yml_spec.rb"
     - "test/configs_dynamic_spec.rb"
-    - "test/registry.spec.rb"
+    - "test/registry_build_spec.rb"
     - "test/validate.spec.rb"
 
 Metrics/BlockLength:
   Exclude:
-    - "test/registry.spec.rb"
+    - "test/registry_build_spec.rb"
     - "test/validate.spec.rb"
+    - "tool/registry-build"
+
+RSpec/ExampleLength:
+  Exclude:
+    - "test/registry_build_spec.rb"
 
 Naming/RescuedExceptionsVariableName:
   PreferredName: error

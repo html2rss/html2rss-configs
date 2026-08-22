@@ -4,11 +4,8 @@
 require 'bundler/setup'
 require 'fileutils'
 require 'optparse'
-require 'openssl'
-require 'rubygems/package'
-require 'stringio'
 require 'tmpdir'
-require 'zlib'
+require 'yaml'
 require 'html2rss'
 
 REPO_ROOT = File.expand_path('..', __dir__)
@@ -16,14 +13,33 @@ CONFIGS_DIR = File.join(REPO_ROOT, 'configs')
 DIST_DIR = File.join(REPO_ROOT, 'dist')
 
 ##
+# @param staging [String]
+# @param relative_path [String]
+# @return [void]
+def validate_config!(staging, relative_path)
+  absolute_path = File.join(staging, relative_path)
+  result = Html2rss::Config.validate_yaml(absolute_path)
+  return if result.success?
+
+  messages = result.errors.to_h.flat_map do |key, values|
+    Array(values).map { |message| "#{key}: #{message}" }
+  end
+  abort "Validation failed for #{relative_path}:\n  #{messages.join("\n  ")}"
+end
+
+##
+# @param staging [String]
 # @param relative_paths [Array<String>]
 # @return [void]
-def reject_duplicate_ids!(relative_paths)
-  ids = relative_paths.map { |path| Html2rss::Registry::CatalogBuilder.entry_id(path) }
+def reject_duplicate_ids!(staging, relative_paths)
+  ids = relative_paths.map do |relative_path|
+    config = YAML.safe_load_file(File.join(staging, relative_path), symbolize_names: true)
+    Html2rss::Registry::CatalogBuilder.entry_id(config, relative_path)
+  end
   duplicates = ids.group_by(&:itself).select { |_, group| group.size > 1 }.keys
   return if duplicates.empty?
 
-  abort "Duplicate config ids: #{duplicates.sort.join(', ')}"
+  abort "Duplicate registry.id values: #{duplicates.sort.join(', ')}"
 end
 
 ##
@@ -42,49 +58,9 @@ def enforce_build_limits!(staging, relative_paths)
     size
   end
 
-  return unless total_bytes > Html2rss::Registry::Archive::MAX_TARBALL_BYTES
+  return unless total_bytes > Html2rss::Registry::Archive::MAX_EXTRACT_BYTES
 
-  raise "Bundle exceeds max bytes (#{Html2rss::Registry::Archive::MAX_TARBALL_BYTES})"
-end
-
-##
-# @param staging [String]
-# @param manifest [Html2rss::Registry::Manifest]
-# @return [void]
-def sign_manifest!(staging, manifest)
-  private_key = OpenSSL::PKey.read(ENV.fetch('REGISTRY_SIGNING_KEY'))
-  signature = private_key.sign(nil, manifest.canonical_bytes)
-  File.write(
-    File.join(staging, Html2rss::Registry::Manifest::SIGNATURE_FILE),
-    [signature].pack('m0')
-  )
-end
-
-##
-# @param tar [Gem::Package::TarWriter]
-# @param source_dir [String]
-# @param root_dir [String]
-# @return [void]
-def add_tree_to_tar(tar, source_dir, root_dir)
-  Dir.glob(File.join(source_dir, '**', '*'), File::FNM_DOTMATCH).sort.each do |path|
-    next if File.directory?(path)
-
-    relative = path.delete_prefix("#{root_dir}/")
-    tar.add_file(relative, 0o644) { |io| io.write(File.binread(path)) }
-  end
-end
-
-##
-# @param source_dir [String]
-# @param output_path [String]
-# @return [void]
-def write_tar_gz(source_dir, output_path)
-  tar_data = StringIO.new
-  Gem::Package::TarWriter.new(tar_data) do |tar|
-    add_tree_to_tar(tar, source_dir, source_dir)
-  end
-
-  Zlib::GzipWriter.open(output_path) { |gz| gz.write(tar_data.string) }
+  raise "Bundle exceeds max bytes (#{Html2rss::Registry::Archive::MAX_EXTRACT_BYTES})"
 end
 
 options = {
@@ -112,10 +88,13 @@ abort "Missing configs directory: #{CONFIGS_DIR}" unless File.directory?(CONFIGS
 
 Dir.mktmpdir('registry-build') do |staging|
   FileUtils.cp_r(File.join(CONFIGS_DIR, '.'), File.join(staging, 'configs'))
-  relative_paths = Html2rss::Registry::CatalogBuilder.config_paths(staging).sort
+  relative_paths = Dir.glob(File.join(staging, 'configs', '**', '*.yml')).map do |absolute_path|
+    absolute_path.delete_prefix("#{staging}/")
+  end.sort
   abort 'No config files found under configs/' if relative_paths.empty?
 
-  reject_duplicate_ids!(relative_paths)
+  relative_paths.each { |relative_path| validate_config!(staging, relative_path) }
+  reject_duplicate_ids!(staging, relative_paths)
   enforce_build_limits!(staging, relative_paths)
 
   file_index = Html2rss::Registry::Manifest.file_index(staging, relative_paths)
@@ -127,10 +106,18 @@ Dir.mktmpdir('registry-build') do |staging|
   )
 
   File.write(File.join(staging, Html2rss::Registry::Manifest::MANIFEST_FILE), manifest.to_json)
-  sign_manifest!(staging, manifest) if options[:sign]
+  if options[:sign]
+    Html2rss::Registry::TestSupport.sign!(
+      manifest,
+      key_pem: ENV.fetch('REGISTRY_SIGNING_KEY'),
+      bundle_dir: staging
+    )
+  end
 
   FileUtils.mkdir_p(File.dirname(options[:output]))
-  write_tar_gz(staging, options[:output])
+  File.open(options[:output], 'wb') do |io|
+    Html2rss::Registry::Archive.pack_dir(staging, io:)
+  end
 end
 
 puts "Built #{options[:output]}"
