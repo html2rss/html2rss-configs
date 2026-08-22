@@ -16,7 +16,7 @@ Curated feed YAML for the [html2rss](https://html2rss.github.io) Feed Directory.
 
 ```bash
 make ready          # lint, validate all configs, run tests
-make registry-build # build unsigned bundle to dist/
+make registry-build # build local registry.v1 bundle to dist/ (unsigned; release CI signs with --sign)
 ```
 
 Single-file validation uses the core CLI from the sibling `html2rss` checkout:
