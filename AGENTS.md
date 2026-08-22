@@ -6,13 +6,31 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
 
 ## Scope
 
-- Source of truth here: `lib/html2rss/configs/`.
-- Do not hand-edit generated schema output.
+- Source of truth here: `configs/` (flat repo layout: `configs/`, `tool/`, `test/`).
+- Do not hand-edit generated schema output or signed bundle artifacts (`dist/`).
 - Keep config work separate from downstream docs, web, or example changes unless the task explicitly includes them.
 
-## Defaults
+## Feed identity (`registry.id`)
 
-- Use the registrable domain folder, not a subdomain folder, unless there is a strong existing reason.
+Every config **must** declare identity explicitly — never rely on filesystem path:
+
+```yaml
+registry:
+  id: europa.eu/europarl/press-room
+  aliases: []   # optional; previous ids after a rename
+directory:
+  title: "European Parliament — Press room"
+  topics: [civic]
+```
+
+Rules:
+
+- **`registry.id`** — unique within the bundle; slug path `org/surface[/variant]`; lowercase; `[a-z0-9._/-]`; no `www.` prefix.
+- **`registry.aliases`** — optional list of previous ids (same bundle only); resolved by `html2rss-web` at feed lookup; **not** listed in the catalog API.
+- **Filesystem path** — pick a sensible path under `configs/` (group by organization, not raw hostname folklore). Path does not define identity.
+- **Rename workflow** — change `registry.id` to the new slug; add the old id to `aliases`; remove the alias in a later release when comfortable.
+
+## Defaults
 - Start from the cleanest article list the site offers, not the marketing homepage by default.
 - Prefer stable list/detail extraction over extracting every possible field.
 - If the site only becomes reliable on a narrower path, use that narrower path.
@@ -28,9 +46,15 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
 
 ## Feed Directory catalog
 
-- **Serialization owner:** `Html2rss::Configs::Catalog` in `lib/html2rss/configs/catalog.rb` builds wire-ready entries from packaged YAML. Do not duplicate YAML walking in `html2rss-web` or the docs site.
-- **Entry type:** `Html2rss::Configs::CatalogEntry` (`Data.define`) — use `#to_h` for the v1 wire shape (`id`, `path`, `source`, `directory`, `channel`, `parameters`).
+- **Bundle build:** `make registry-build` (`tool/registry-build`) walks YAML, validates `registry.id`, and emits a signed `registry.v1` bundle (`manifest.json`, `manifest.sig`, `configs/`).
+- **Catalog serialization owner:** `Html2rss::Registry::CatalogBuilder` in the core `html2rss` gem — do not duplicate YAML walking in `html2rss-web` or the docs site.
+- **Wire shape:** domain entries from `CatalogBuilder`; `html2rss-web` adds `source: registry` and `registry: <registry_id>` at the HTTP layer.
 - **Agent reference:** [.agents/skills/html2rss-config/reference/catalog.md](.agents/skills/html2rss-config/reference/catalog.md).
+
+## Release
+
+- Tag push runs `.github/workflows/release.yml`: `make registry-build -- --sign` uploads `dist/registry-bundle.tar.gz` to GitHub Releases.
+- Instances sync the official bundle via `html2rss-web` `Registry::Sync` (default channel `html2rss-official`).
 
 ## Surface Selection
 
@@ -141,10 +165,11 @@ cd ../html2rss
 html2rss feed /abs/path/to/config.yml
 ```
 
-3. Catalog serialization for changed configs:
+3. Registry bundle verification for changed configs:
 
 ```bash
-bundle exec rspec spec/lib/html2rss/configs/catalog_spec.rb
+bundle exec rspec test/registry.spec.rb
+make registry-build
 ```
 
 4. Repo-wide validation in this repo:
@@ -164,14 +189,14 @@ make test
 - Faraday-backed candidate:
 
 ```bash
-bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
+bundle exec rspec --tag fetch --example 'example.com/feed.yml' test/configs_dynamic_spec.rb
 ```
 
 - Botasaurus-backed candidate:
 
 ```bash
 BOTASAURUS_SCRAPER_URL=http://localhost:4010 \
-bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
+bundle exec rspec --tag fetch --example 'example.com/feed.yml' test/configs_dynamic_spec.rb
 ```
 
 7. If fetch still fails, decide explicitly whether:
