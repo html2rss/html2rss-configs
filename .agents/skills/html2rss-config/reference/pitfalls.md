@@ -14,7 +14,7 @@ Present constraints for config campaigns (N≥1). Quality-gate commands stay in 
 
 - Faraday first.
 - Botasaurus only when Faraday returns zero/blocked items and the browser shows a real list.
-- Cap Botasaurus `wait_timeout_seconds` at **≤ 20**.
+- Cap Botasaurus `wait_timeout_seconds` at **≤ 30** (post-boot work budget; total scrape wall defaults to 45s separately).
 - One scrape retry on transient Botasaurus errors, then **DROP** with ledger evidence — no retry spirals.
 
 ## Authoring
@@ -81,7 +81,7 @@ Defer WordPress/national newsrooms that already ship `/feed` or `rel=alternate`.
 
 - Health: `GET http://localhost:4010/health` (root `/` is often 404 — that is normal).
 - Env: `BOTASAURUS_SCRAPER_URL=http://localhost:4010`.
-- **`wait_timeout_seconds` must be ≤ 20** (API validation). Values like 30/45 → HTTP **422**.
+- **`wait_timeout_seconds` must be ≤ 30** (API validation against the work budget). Values above 30 → HTTP **422**. Do not confuse with the **45s** default total scrape wall (boot + navigate + wait).
 - 504 / scrape timeout → remove brittle `wait_for_selector`, retry once, then drop if still unreliable.
 - Shipping `strategy: botasaurus` → always `scripts/register_botasaurus domain/file.yml`.
 

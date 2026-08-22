@@ -42,7 +42,7 @@ Notes:
 - Always include `directory.topics` (1–2) — see [topics.md](topics.md).
 - Set `directory.title` and mirror it in `channel.title` for catalog and RSS output.
 - Set `channel.language` when clear (`en` / `de` / `es` / …). Prefer a real region `time_zone` when obvious (`Africa/Johannesburg`, `Africa/Cairo`, …).
-- Add `strategy: botasaurus` only when Faraday cannot produce items (or Faraday is blocked by scheme/redirect). Keep `wait_timeout_seconds` **≤ 20**.
+- Add `strategy: botasaurus` only when Faraday cannot produce items (or Faraday is blocked by scheme/redirect). Keep `wait_timeout_seconds` **≤ 30** (work budget; total scrape timeout defaults to 45s).
 - Parameterized URLs need a `parameters:` block with `type: string` and `default`.
 - Prefer item-local selectors; anchor on article URL path fragments when possible.
 

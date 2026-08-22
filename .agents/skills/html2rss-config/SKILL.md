@@ -34,7 +34,7 @@ Pick mode from the user ask. Grow later with more modes/references; keep this fi
 
 1. **user-html2rss MCP** — `capture_config` / `scrape_url` / `inspect_url` / `validate_config` when discovery works.
 2. Else **core CLI** from PATH or sibling `../html2rss` — `scripts/check_config` resolves this (or raw `html2rss` / `bundle exec exe/html2rss`).
-3. **Botasaurus** when Faraday returns zero items or scheme/redirect blocks Faraday: `BOTASAURUS_SCRAPER_URL=http://localhost:4010` (health: `/health`). `wait_timeout_seconds` **≤ 20**.
+3. **Botasaurus** when Faraday returns zero items or scheme/redirect blocks Faraday: `BOTASAURUS_SCRAPER_URL=http://localhost:4010` (health: `/health`). `wait_timeout_seconds` **≤ 30** (work budget; total scrape wall 45s default).
 4. **Chrome MCP** only if Faraday + Botasaurus fail or the item boundary is unclear. Report Chrome outage in handoff if unavailable.
 
 If MCP discovery fails or the MCP process lacks `BOTASAURUS_SCRAPER_URL`, **skip MCP** and go straight to the CLI — do not burn the timebox retrying discovery.
