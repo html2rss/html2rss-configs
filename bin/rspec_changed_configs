@@ -28,8 +28,16 @@ failed = false
 test_files.each do |file|
   config_name = file.delete_prefix('configs/')
   puts "Testing changed config: #{config_name}"
-  failed ||= !system('bundle', 'exec', 'rspec', '--example', config_name, '--tag', 'fetch',
-                     'test/configs_dynamic_spec.rb', env: { 'BUNDLE_GEMFILE' => 'tool/Gemfile' })
+  bundle_gemfile = ENV.fetch('BUNDLE_GEMFILE', nil)
+  ENV['BUNDLE_GEMFILE'] = 'tool/Gemfile'
+  ok = system('bundle', 'exec', 'rspec', '--example', config_name, '--tag', 'fetch',
+              'test/configs_dynamic_spec.rb')
+  if bundle_gemfile.nil?
+    ENV.delete('BUNDLE_GEMFILE')
+  else
+    ENV['BUNDLE_GEMFILE'] = bundle_gemfile
+  end
+  failed ||= !ok
 end
 
 exit 1 if failed
