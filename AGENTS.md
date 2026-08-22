@@ -49,7 +49,7 @@ Local development expects **Ruby 4.0** (`mise exec -- …` or `.ruby-version` wh
 
 ## Feed Directory catalog
 
-- **Bundle build:** `make registry-build` (`tool/registry-build`) walks YAML, validates `registry.id`, and emits a signed `registry.v1` bundle (`manifest.json`, `manifest.sig`, `configs/`).
+- **Bundle build:** `make registry-build` (`tool/registry-build`) walks YAML, validates `registry.id`, and emits a `registry.v1` bundle (`manifest.json`, optional `manifest.sig`, `configs/`). Local builds are unsigned; release CI signs with `--sign`.
 - **Catalog serialization owner:** `Html2rss::Registry::CatalogBuilder` in the core `html2rss` gem — do not duplicate YAML walking in `html2rss-web` or the docs site.
 - **Wire shape:** domain entries from `CatalogBuilder`; `html2rss-web` adds `source: registry` and `registry: <registry_id>` at the HTTP layer.
 - **Agent reference:** [.agents/skills/html2rss-config/reference/catalog.md](.agents/skills/html2rss-config/reference/catalog.md).

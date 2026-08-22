@@ -70,7 +70,7 @@ make validate
 make registry-build
 ```
 
-`make registry-build` emits a signed `registry.v1` bundle; `Html2rss::Registry::CatalogBuilder.build_entry` raises `MissingDirectoryTitle` when `directory.title` is absent.
+`make registry-build` emits a `registry.v1` bundle (release CI signs with `--sign`); `Html2rss::Registry::CatalogBuilder.build_entry` raises `MissingDirectoryTitle` when `directory.title` is absent.
 
 ## Downstream pipeline
 
