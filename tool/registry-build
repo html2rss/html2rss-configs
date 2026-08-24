@@ -107,7 +107,7 @@ Dir.mktmpdir('registry-build') do |staging|
 
   File.write(File.join(staging, Html2rss::Registry::Manifest::MANIFEST_FILE), manifest.to_json)
   if options[:sign]
-    Html2rss::Registry::TestSupport.sign!(
+    Html2rss::Registry::Signer.sign!(
       manifest,
       key_pem: ENV.fetch('REGISTRY_SIGNING_KEY'),
       bundle_dir: staging
