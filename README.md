@@ -34,4 +34,5 @@ tool/      # validate, registry-build
 test/      # dynamic config specs + registry bundle spec
 ```
 
-Release tags trigger CI to sign and publish `registry-bundle.tar.gz`. Running `html2rss-web` instances sync that artifact (or mount a local bundle via `path:` in `config/registries.yml`).
+Release tags trigger CI to sign and publish `registry-bundle.tar.gz`. `html2rss-web` Docker images bake this artifact directly at build time, and live instances sync updates via network sync or mount local bundles via `path:`.
+

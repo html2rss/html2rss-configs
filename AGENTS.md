@@ -62,7 +62,7 @@ Publisher flow (`.github/workflows/release.yml`):
 2. CI runs `make ready`, then `make registry-build -- --sign` with `REGISTRY_SIGNING_KEY` from environment secrets.
 3. The workflow verifies the tarball with `REGISTRY_PUBLIC_KEY_PEM` from the **`registry-release`** environment (operator-supplied public key PEM; must match `html2rss-web/config/registries.yml`), not the private signing key.
 4. `softprops/action-gh-release@v2` uploads `dist/registry-bundle.tar.gz` as a **draft** GitHub Release with generated notes.
-5. A maintainer reviews the draft release and clicks **Publish release** — instances only pick up published releases via `html2rss-web` `Registry::Sync` (default channel `html2rss-official`).
+5. A maintainer reviews the draft release and clicks **Publish release** — web container builds bake the published release artifact, and live instances pick up updates via `html2rss-web` `Registry::Sync` (default channel `html2rss-official`).
 
 Local bundle build (unsigned): `make registry-build`. Signing locally requires `REGISTRY_SIGNING_KEY` in the environment.
 
