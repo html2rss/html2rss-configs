@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+# CI uses git until 0.28.0 is on RubyGems; local monorepo: BUNDLE_LOCAL__HTML2RSS=/path/to/html2rss
+gem 'html2rss', github: 'html2rss/html2rss', branch: 'feat/registry-v1'
+
+group :development do
+  gem 'nokogiri'
+  gem 'public_suffix'
+  gem 'rspec', '~> 3.0'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rspec'
+end

@@ -2,121 +2,37 @@
 
 # html2rss-configs
 
-This repository contains `html2rss` feed configurations for many websites.
+Curated feed YAML for the [html2rss](https://html2rss.github.io) Feed Directory. Configs live under `configs/`; releases ship as signed `registry.v1` bundles.
 
-## 🌐 Community & Resources
+## Quick links
 
-| Resource                              | Description                                                 | Link                                                               |
-| ------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------ |
-| **📚 Documentation & Feed Directory** | Complete guides, tutorials, and browse 100+ pre-built feeds | [html2rss.github.io](https://html2rss.github.io)                   |
-| **💬 Community Discussions**          | Get help, share ideas, and connect with other users         | [GitHub Discussions](https://github.com/orgs/html2rss/discussions) |
-| **📋 Project Board**                  | Track development progress and upcoming features            | [View Project Board](https://github.com/orgs/html2rss/projects)    |
-| **💖 Support Development**            | Help fund ongoing development and maintenance               | [Sponsor on GitHub](https://github.com/sponsors/gildesmarais)      |
+| Resource | Link |
+| --- | --- |
+| **Feed Directory** | [Browse pre-built feeds](https://html2rss.github.io/feed-directory) |
+| **Contributing** | [AGENTS.md](AGENTS.md) and [catalog reference](.agents/skills/html2rss-config/reference/catalog.md) |
+| **Documentation** | [html2rss.github.io](https://html2rss.github.io) |
 
-**Quick Start Options:**
-
-- **Need a specific feed?** → Browse the [feed directory](https://html2rss.github.io/feed-directory)
-- **Want to create feeds?** → Use the [web application](https://html2rss.github.io/web-application)
-- **Ruby Developer?** → Check out the [Ruby gem documentation](https://html2rss.github.io/ruby-gem)
-- **Want to contribute?** → See our [contributing guide](https://html2rss.github.io/get-involved/contributing)
-
-## Dynamic Parameters
-
-Parameterized configs should include a `parameters` section with default values:
-
-```yaml
-parameters:
-  query:
-    type: string
-    default: "technology"
-  category:
-    type: string
-    default: "news"
-
-channel:
-  url: https://example.com/search?q=%<query>s&cat=%<category>s
-  # ... rest of config
-```
-
-The `type` field specifies the parameter type (currently only `string` is supported), and `default` provides the default value used by this repository's validation and fetch tests.
-
-Notes:
-
-- Only configs that use `%<param>s` placeholders need a `parameters` section.
-- Callers can still override those defaults at runtime with `html2rss feed ... --params ...`.
-- Dynamic substitution applies to `channel` and `headers`; selectors are not parameterized by this feature.
-
-## Validation
-
-Use both schema-aware editing and runtime validation before committing:
+## Verify locally
 
 ```bash
-# Validate all configs with the runtime validator
-make validate
-
-# Validate a single config directly
-bundle exec html2rss validate lib/html2rss/configs/github.com/releases.yml
-
-# Export the current JSON Schema locally for editor use
-make schema
+make ready          # lint, validate all configs, run tests
+make registry-build # build local registry.v1 bundle to dist/ (unsigned; release CI signs with --sign)
 ```
 
-The JSON Schema is useful for editor autocompletion and basic structural checks. Runtime validation remains authoritative for merged defaults and cross-field rules.
-
-## Testing
-
-Uses **dynamic test generation** - no individual spec files needed!
+Single-file validation uses the core CLI from the sibling `html2rss` checkout:
 
 ```bash
-# Test all configs
-bundle exec rspec spec/html2rss/configs_dynamic_spec.rb
-
-# Test specific config
-make test-config CONFIG=github.com/releases.yml
-
-# Test domain
-make test-domain DOMAIN=github.com
-
-# Run live fetch tests for the full corpus
-make test-fetch-all-configs
-
-# Run the Botasaurus-backed fetch subset
-BOTASAURUS_SCRAPER_URL=http://localhost:4010 \
-make test-fetch-botasaurus-configs
+html2rss validate configs/github.com/releases.yml
+html2rss feed configs/github.com/releases.yml
 ```
 
-**Adding new configs**: Create the YAML file with top-level `directory.topics` (controlled vocabulary), run `make validate`, then run the generated tests. No dedicated spec file is needed.
+## Layout
 
-The fetch suite has two lanes:
-
-- `make test-fetch-all-configs` runs all `:fetch` examples. Configs marked as Botasaurus-backed are skipped unless `BOTASAURUS_SCRAPER_URL` is configured.
-- `make test-fetch-botasaurus-configs` runs only the Botasaurus-backed config subset and requires `BOTASAURUS_SCRAPER_URL`.
-
-**Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
-
-## Editor Setup (JSON Schema)
-
-Get inline validation and autocompletion when editing configs in your IDE.
-All config files already carry the schema modeline at the top:
-
-```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+```
+configs/   # feed YAML (each file declares registry.id)
+tool/      # validate, registry-build
+test/      # dynamic config specs + registry bundle spec
 ```
 
-Any editor with [yaml-language-server](https://github.com/redhat-developer/yaml-language-server)
-support (VS Code + [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml),
-Neovim, Helix, …) will automatically pick up the schema when opening a config file.
+Release tags trigger CI to sign and publish `registry-bundle.tar.gz`. `html2rss-web` Docker images bake this artifact directly at build time, and live instances sync updates via network sync or mount local bundles via `path:`.
 
-The included `.vscode/settings.json` additionally associates the schema with all
-configs via a glob pattern, so new files get validation before the modeline is added.
-
-> `make schema` writes `schema/html2rss-config.schema.json` locally — useful for
-> offline editing or when you want to pin against the currently installed gem version.
-
-## Documentation
-
-- [Selectors Reference](https://html2rss.github.io/ruby-gem/reference/selectors/)
-- [Dynamic Parameters](https://html2rss.github.io/ruby-gem/how-to/dynamic-parameters/)
-- [CLI Reference](https://html2rss.github.io/ruby-gem/reference/cli-reference/)
-- [Contributing Guide](https://html2rss.github.io/get-involved/contributing)
-- [Sponsorship Page](https://html2rss.github.io/get-involved/sponsoring)

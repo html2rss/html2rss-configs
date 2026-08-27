@@ -3,7 +3,7 @@
 
 # Validate + feed (+ optional focused fetch) for one curated config.
 # Usage (from repo root):
-#   .agents/skills/html2rss-config/scripts/check_config lib/html2rss/configs/domain/file.yml
+#   .agents/skills/html2rss-config/scripts/check_config configs/domain/file.yml
 #   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch
 #   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
 
@@ -18,7 +18,7 @@ def usage!
 end
 
 def repo_root
-  Pathname.new(__dir__).ascend.find { |p| (p / 'lib/html2rss/configs').directory? } ||
+  Pathname.new(__dir__).ascend.find { |p| (p / 'configs').directory? } ||
     abort('Could not find html2rss-configs repo root')
 end
 
@@ -27,14 +27,14 @@ def resolve_config(arg, root)
   candidates = []
   candidates << path if path.absolute?
   candidates << (root / path)
-  candidates << (root / 'lib/html2rss/configs' / path)
+  candidates << (root / 'configs' / path)
   found = candidates.find(&:file?)
   abort("Config not found: #{arg}") unless found
   found.expand_path
 end
 
 def feed_example_name(config_path, root)
-  config_path.relative_path_from(root / 'lib/html2rss/configs').to_s
+  config_path.relative_path_from(root / 'configs').to_s
 end
 
 def invoke_entry(entry, sibling)
@@ -86,7 +86,7 @@ config = resolve_config(ARGV.fetch(0), root)
 example = feed_example_name(config, root)
 cli = resolve_html2rss_invocation(root)
 cli_chdir = cli.first == 'bundle' ? (root.parent / 'html2rss').to_s : nil
-env = {}
+env = { 'BUNDLE_GEMFILE' => (root / 'tool/Gemfile').to_s }
 env['BOTASAURUS_SCRAPER_URL'] = ENV.fetch('BOTASAURUS_SCRAPER_URL', 'http://localhost:4010') if botasaurus
 
 Dir.chdir(root) do
@@ -101,7 +101,7 @@ Dir.chdir(root) do
 
   if fetch
     cmd = ['bundle', 'exec', 'rspec', '--tag', 'fetch', '--example', example,
-           'spec/html2rss/configs_dynamic_spec.rb']
+           'test/configs_dynamic_spec.rb']
     run!(*cmd, env: env)
   end
 end

@@ -6,13 +6,34 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
 
 ## Scope
 
-- Source of truth here: `lib/html2rss/configs/`.
-- Do not hand-edit generated schema output.
+- Source of truth here: `configs/` (flat repo layout: `configs/`, `tool/`, `test/`).
+- Do not hand-edit generated schema output or signed bundle artifacts (`dist/`).
 - Keep config work separate from downstream docs, web, or example changes unless the task explicitly includes them.
+
+## Feed identity (`registry.id`)
+
+Every config **must** declare identity explicitly — never rely on filesystem path:
+
+```yaml
+registry:
+  id: europa.eu/europarl/press-room
+  aliases: []   # optional; previous ids after a rename
+directory:
+  title: "European Parliament — Press room"
+  topics: [civic]
+```
+
+Rules:
+
+- **`registry.id`** — unique within the bundle; slug path `org/surface[/variant]`; lowercase; `[a-z0-9._/-]`; no `www.` prefix.
+- **`registry.aliases`** — optional list of previous ids (same bundle only); resolved by `html2rss-web` at feed lookup; **not** listed in the catalog API.
+- **Filesystem path** — pick a sensible path under `configs/` (group by organization, not raw hostname folklore). Path does not define identity.
+- **Rename workflow** — change `registry.id` to the new slug; add the old id to `aliases`; remove the alias in a later release when comfortable.
 
 ## Defaults
 
-- Use the registrable domain folder, not a subdomain folder, unless there is a strong existing reason.
+Local development expects **Ruby 4.0** (`mise exec -- …` or `.ruby-version` when present). CI and release workflows run on Ruby 4.0 only.
+
 - Start from the cleanest article list the site offers, not the marketing homepage by default.
 - Prefer stable list/detail extraction over extracting every possible field.
 - If the site only becomes reliable on a narrower path, use that narrower path.
@@ -28,9 +49,22 @@ Primary goal: add or repair configs that are stable, shippable, and easy to veri
 
 ## Feed Directory catalog
 
-- **Serialization owner:** `Html2rss::Configs::Catalog` in `lib/html2rss/configs/catalog.rb` builds wire-ready entries from packaged YAML. Do not duplicate YAML walking in `html2rss-web` or the docs site.
-- **Entry type:** `Html2rss::Configs::CatalogEntry` (`Data.define`) — use `#to_h` for the v1 wire shape (`id`, `path`, `source`, `directory`, `channel`, `parameters`).
+- **Bundle build:** `make registry-build` (`tool/registry-build`) walks YAML, validates `registry.id`, and emits a `registry.v1` bundle (`manifest.json`, optional `manifest.sig`, `configs/`). Local builds are unsigned; release CI signs with `--sign`.
+- **Catalog serialization owner:** `Html2rss::Registry::CatalogBuilder` in the core `html2rss` gem — do not duplicate YAML walking in `html2rss-web` or the docs site.
+- **Wire shape:** domain entries from `CatalogBuilder`; `html2rss-web` adds `source: registry` and `registry: <registry_id>` at the HTTP layer.
 - **Agent reference:** [.agents/skills/html2rss-config/reference/catalog.md](.agents/skills/html2rss-config/reference/catalog.md).
+
+## Release
+
+Publisher flow (`.github/workflows/release.yml`):
+
+1. Push a `v*` tag — the release job runs in the GitHub **`registry-release`** environment (requires maintainer approval before signing secrets are used).
+2. CI runs `make ready`, then `make registry-build -- --sign` with `REGISTRY_SIGNING_KEY` from environment secrets.
+3. The workflow verifies the tarball with `REGISTRY_PUBLIC_KEY_PEM` from the **`registry-release`** environment (operator-supplied public key PEM; must match `html2rss-web/config/registries.yml`), not the private signing key.
+4. `softprops/action-gh-release@v2` uploads `dist/registry-bundle.tar.gz` as a **draft** GitHub Release with generated notes.
+5. A maintainer reviews the draft release and clicks **Publish release** — web container builds bake the published release artifact, and live instances pick up updates via `html2rss-web` `Registry::Sync` (default channel `html2rss-official`).
+
+Local bundle build (unsigned): `make registry-build`. Signing locally requires `REGISTRY_SIGNING_KEY` in the environment.
 
 ## Surface Selection
 
@@ -141,10 +175,11 @@ cd ../html2rss
 html2rss feed /abs/path/to/config.yml
 ```
 
-3. Catalog serialization for changed configs:
+3. Registry bundle verification for changed configs:
 
 ```bash
-bundle exec rspec spec/lib/html2rss/configs/catalog_spec.rb
+bundle exec rspec test/registry_build_spec.rb
+make registry-build
 ```
 
 4. Repo-wide validation in this repo:
@@ -164,14 +199,14 @@ make test
 - Faraday-backed candidate:
 
 ```bash
-bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
+bundle exec rspec --tag fetch --example 'example.com/feed.yml' test/configs_dynamic_spec.rb
 ```
 
 - Botasaurus-backed candidate:
 
 ```bash
 BOTASAURUS_SCRAPER_URL=http://localhost:4010 \
-bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
+bundle exec rspec --tag fetch --example 'example.com/feed.yml' test/configs_dynamic_spec.rb
 ```
 
 7. If fetch still fails, decide explicitly whether:

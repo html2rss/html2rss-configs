@@ -33,7 +33,7 @@ Present constraints for config campaigns (N≥1). Quality-gate commands stay in 
 bundle exec rspec --tag fetch \
   --example 'domain/a.yml' \
   --example 'domain/b.yml' \
-  spec/html2rss/configs_dynamic_spec.rb
+  test/configs_dynamic_spec.rb
 ```
 
 Botasaurus lane: same command with `BOTASAURUS_SCRAPER_URL=http://localhost:4010`.

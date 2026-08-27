@@ -44,7 +44,7 @@ Dry plan (no network): `batch_recon --dry-run --file candidates.tsv`
   --from-ledger tmp/html2rss-recon/ledger.tsv
 ```
 
-Write YAMLs only for `BUILD` rows under `lib/html2rss/configs/<registrable-domain>/`. Use MCP/`check_config` only when cache analysis is insufficient. Botasaurus scrape: thin/empty/blocked HTML only — one retry max (`wait_timeout_seconds` ≤ 30, work budget), then drop.
+Write YAMLs only for `BUILD` rows under `configs/<registrable-domain>/`. Use MCP/`check_config` only when cache analysis is insufficient. Botasaurus scrape: thin/empty/blocked HTML only — one retry max (`wait_timeout_seconds` ≤ 30, work budget), then drop.
 
 YAML notes: [new.md](new.md). Topics: [topics.md](topics.md).
 
@@ -52,7 +52,7 @@ YAML notes: [new.md](new.md). Topics: [topics.md](topics.md).
 
 ```bash
 # offline validate (example: sibling CLI)
-html2rss validate lib/html2rss/configs/domain/*.yml
+html2rss validate configs/domain/*.yml
 
 # parallel feed checks (Faraday group)
 .agents/skills/html2rss-config/scripts/check_config domain/a.yml &
@@ -63,7 +63,7 @@ wait
 bundle exec rspec --tag fetch \
   --example 'domain/a.yml' \
   --example 'domain/b.yml' \
-  spec/html2rss/configs_dynamic_spec.rb
+  test/configs_dynamic_spec.rb
 ```
 
 ## Phase 3 — campaign gate
