@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - sports
+    - civic
+  title: "Court of Arbitration for Sport — Decisions & News"
+  summary: "Arbitration awards, Olympic disputes, and sports jurisprudence from CAS Lausanne."
+
+channel:
+  title: "Court of Arbitration for Sport — Decisions & News"
+  url: https://www.tas-cas.org/en/media/recent-decisions.html
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="item"]'
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

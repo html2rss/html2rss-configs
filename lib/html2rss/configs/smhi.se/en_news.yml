@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - environment
+    - science
+  title: "SMHI Sweden — News"
+  summary: "Swedish Meteorological and Hydrological Institute climate, ocean, and weather research."
+
+channel:
+  title: "SMHI Sweden — News"
+  url: https://www.smhi.se/en/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'li[class*="item"]'
+    enhance: false
+  title:
+    selector: "a"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

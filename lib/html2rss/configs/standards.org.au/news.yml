@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - product
+    - consumer
+  title: "Standards Australia — News & Insights"
+  summary: "National industry standards, safety codes, and technological benchmarks from Standards Australia."
+
+channel:
+  title: "Standards Australia — News & Insights"
+  url: https://www.standards.org.au/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="article"]'
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    extractor: href
+  published_at:
+    selector: "time"

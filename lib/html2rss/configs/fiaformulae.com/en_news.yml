@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - sports
+    - energy
+  title: "Formula E — Latest Championship News"
+  summary: "ABB FIA Formula E World Championship all-electric racing, teams, and race reports."
+
+channel:
+  title: "Formula E — Latest Championship News"
+  url: https://www.fiaformulae.com/en/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href*="/news/"]:has(h2, h3, h4, p, span)'
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    extractor: href
+  published_at:
+    selector: "time"

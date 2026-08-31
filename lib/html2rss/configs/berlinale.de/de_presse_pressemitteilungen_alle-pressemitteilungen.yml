@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - entertainment
+  title: "Berlinale — Internationale Filmfestspiele Berlin"
+  summary: "Wettbewerbsprogramm, Bären-Gewinner und Festivalneuigkeiten der Berlinale."
+
+channel:
+  title: "Berlinale — Internationale Filmfestspiele Berlin"
+  url: https://www.berlinale.de/de/presse/pressemitteilungen/alle-pressemitteilungen.html
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="item"]'
+    enhance: false
+  title:
+    selector: "a"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - consumer
+    - tech
+  title: "TÜV-Verband — Pressemitteilungen"
+  summary: "Fahrzeugsicherheit, Cybersecurity-Zertifizierungen und Technische Sicherheit."
+
+channel:
+  title: "TÜV-Verband — Pressemitteilungen"
+  url: https://www.tuev-verband.de/presse/pressemitteilungen
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'li[class*="item"]'
+    enhance: false
+  title:
+    selector: "a"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

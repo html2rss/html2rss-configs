@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - entertainment
+    - civic
+  title: "MAK Vienna — Applied Arts Museum Press"
+  summary: "Applied arts, contemporary design, and architectural exhibitions from MAK Vienna."
+
+channel:
+  title: "MAK Vienna — Applied Arts Museum Press"
+  url: https://www.mak.at/en/press
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="item"]'
+    enhance: false
+  title:
+    selector: 'a.title, a.heading, a[class*="title"], a[class*="heading"]'
+  url:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    extractor: href
+  published_at:
+    selector: "time"

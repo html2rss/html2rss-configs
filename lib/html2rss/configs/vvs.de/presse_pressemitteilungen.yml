@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - travel
+    - civic
+  title: "VVS Verkehrsverbund Stuttgart — Pressemitteilungen"
+  summary: "ÖPNV-Projekte, Digitaltickets und Verkehrsnetz in der Region Stuttgart."
+
+channel:
+  title: "VVS Verkehrsverbund Stuttgart — Pressemitteilungen"
+  url: https://www.vvs.de/presse/pressemitteilungen
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article"
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

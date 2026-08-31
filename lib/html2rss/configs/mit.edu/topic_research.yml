@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - research
+    - science
+  title: "MIT News — Research Discoveries"
+  summary: "Massachusetts Institute of Technology breakthroughs in computing, quantum physics, and materials."
+
+channel:
+  title: "MIT News — Research Discoveries"
+  url: https://news.mit.edu/topic/research
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article"
+    enhance: false
+  title:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+  url:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    extractor: href
+  published_at:
+    selector: "time"
