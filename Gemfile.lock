@@ -1,3 +1,30 @@
+GIT
+  remote: https://github.com/html2rss/html2rss
+  revision: 9ac61d13b96ff86cf2a843ba25e35584134696e1
+  ref: 9ac61d13
+  specs:
+    html2rss (0.28.0)
+      addressable (~> 2.7)
+      brotli
+      dry-validation
+      faraday (> 2.0.1, < 3.0)
+      faraday-follow_redirects
+      faraday-gzip (~> 3)
+      kramdown
+      mcp (~> 1.2)
+      mime-types (> 3.0)
+      nokogiri (>= 1.10, < 2.0)
+      rack (~> 3.0)
+      rackup (~> 2.0)
+      regexp_parser
+      reverse_markdown (~> 3.0)
+      rss
+      sanitize
+      thor
+      tzinfo
+      webrick (~> 1.9)
+      zeitwerk
+
 PATH
   remote: .
   specs:
@@ -62,27 +89,6 @@ GEM
     faraday-net_http (3.4.4)
       net-http (~> 0.5)
     hana (1.3.7)
-    html2rss (0.27.1)
-      addressable (~> 2.7)
-      brotli
-      dry-validation
-      faraday (> 2.0.1, < 3.0)
-      faraday-follow_redirects
-      faraday-gzip (~> 3)
-      kramdown
-      mcp (~> 1.2)
-      mime-types (> 3.0)
-      nokogiri (>= 1.10, < 2.0)
-      rack (~> 3.0)
-      rackup (~> 2.0)
-      regexp_parser
-      reverse_markdown (~> 3.0)
-      rss
-      sanitize
-      thor
-      tzinfo
-      webrick (~> 1.9)
-      zeitwerk
     json (2.21.2)
     json_schemer (2.5.0)
       bigdecimal
@@ -94,7 +100,7 @@ GEM
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
-    mcp (1.2.0)
+    mcp (1.4.0)
       json_schemer (>= 2.4)
     mime-types (3.7.0)
       logger
@@ -163,7 +169,7 @@ GEM
     sanitize (7.0.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.16.8)
-    simpleidn (0.2.3)
+    simpleidn (0.3.0)
     thor (1.5.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -181,7 +187,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  html2rss (~> 0.27)
+  html2rss!
   html2rss-configs!
   nokogiri
   public_suffix
