@@ -41,6 +41,12 @@ Describe feed intent in `directory.title`, not the template URL.
 | `who.int/news.yml`       | World Health Organization — News |
 | `apnews.com/hub.yml`     | AP News — Top stories            |
 
+## Topics
+
+Required on every config. Vocabulary SSOT: `Html2rss::Config::Validator::DIRECTORY_TOPICS`. Prefer **1–2**; do not invent strings.
+
+`sports`, `energy`, `tech`, `science`, `news`, `entertainment`, `jobs`, `finance`, `security`, `travel`, `environment`, `consumer`, `civic`, `product`, `research`, `health`, `culture`, `education`, `rights`, `transport`
+
 ## Verification
 
 ```bash

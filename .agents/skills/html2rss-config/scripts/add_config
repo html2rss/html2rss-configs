@@ -1,0 +1,494 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'optparse'
+require 'uri'
+require 'fileutils'
+require 'json'
+require 'nokogiri'
+require 'faraday'
+require 'faraday/follow_redirects'
+require 'public_suffix'
+require_relative 'html2rss_api'
+
+VALID_TOPICS = Html2rss::Config::Validator::DIRECTORY_TOPICS.freeze
+
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' \
+             'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+
+CONTAINER_CANDIDATES = [
+  # Design systems (French DSFR, German Bund, UK GOV.UK, Drupal, Bootstrap)
+  'div.fr-card',
+  'div.fr-tile',
+  'li.gem-c-document-list__item',
+  'div.gem-c-document-list__item',
+  'div.c-teaser',
+  'div.c-card',
+  'div.teaser',
+  'div.teaser-card',
+  'article.teaser',
+  'div.views-row',
+  'div.view-content > div',
+  'div.item-list ul > li',
+  'article',
+  'div.post',
+  'div.card',
+  'div.news-item',
+  'div.news-card',
+  'div.news-list-item',
+  'div.article-card',
+  'div.post-card',
+  'div.blog-card',
+  'div.listing-item',
+  'div.news-listing > div',
+  'div.vf-card',
+  'li.views-row',
+  'li.news-item',
+  'li.card',
+  'li.post',
+  'li.item',
+  'ul.news-list > li',
+  'ul.list-unstyled > li',
+  'ul[class*="news"] > li',
+  'ul[class*="list"] > li',
+  'table tbody tr',
+  'div[class*="news-item"]',
+  'div[class*="news-card"]',
+  'div[class*="article-card"]',
+  'div[class*="post-card"]',
+  'div[class*="teaser"]',
+  'div[class*="card"]',
+  'div[class*="post"]',
+  'div[class*="article"]',
+  'div[class*="item"]',
+  'div[class*="entry"]',
+  'div[class*="press"]',
+  'div[class*="media"]',
+  'li[class*="item"]',
+  'li[class*="card"]',
+  'a.fr-card__link',
+  'a.c-teaser__link',
+  'a[href^="/blog/"]:has(h2, h3, h4, p, span)',
+  'a[href^="/news/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/news/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/press/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/articles/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/article/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/posts/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/noticia/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/comunicado/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/actualite/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/releases/"]:has(h2, h3, h4, p, span)',
+  'a[href*="/story/"]:has(h2, h3, h4, p, span)',
+  'a[href^="/changelog/"]',
+  'a[href*="/news/"]',
+  'a[href*="/press-release"]',
+  'a[href*="/media-release"]'
+].freeze
+
+def try_capture_path(url, opts, domain, slug, target_dir, target_file)
+  capture_opts = { enhance: false, force: opts[:force] }
+  capture_opts[:topics] = opts[:topics] if opts[:topics]&.any?
+  capture_opts[:title] = opts[:title] if opts[:title]
+  capture_opts[:summary] = opts[:summary] if opts[:summary]
+
+  capture = Html2rssConfigApi.capture(url, **capture_opts)
+  if capture.native_feed? && !opts[:force]
+    return { status: :skipped, message: 'First-party RSS/Atom feed detected (use --force to override)', url: }
+  end
+  return nil unless capture.has_selectors && capture.articles_count >= 1
+
+  registry_id = Html2rssConfigApi.registry_id_for(domain, slug)
+  yaml_content = Html2rssConfigApi.inject_registry_id(capture.yaml, registry_id)
+  topics = (opts[:topics]&.any? ? opts[:topics] : capture.inferred_topics).select { |t| VALID_TOPICS.include?(t) }
+  topics = ['news'] if topics.empty?
+
+  unless opts[:dry_run]
+    FileUtils.mkdir_p(target_dir)
+    File.write(target_file, yaml_content)
+  end
+
+  rss = Html2rssConfigApi.apply_config_hash(capture.config).to_rss
+  first = rss.items.first
+
+  {
+    status: :ok,
+    file: target_file,
+    domain:,
+    topics:,
+    title: capture.channel_title,
+    items_count: capture.articles_count,
+    sample_title: first&.title.to_s.strip.gsub(/\s+/, ' '),
+    sample_link: first&.link.to_s,
+    yaml: yaml_content,
+    url:
+  }
+rescue StandardError
+  nil
+end
+
+def resolve_registrable_domain(url)
+  uri = URI.parse(url)
+  host = uri.host.to_s.downcase
+  domain = begin
+    PublicSuffix.parse(host).domain
+  rescue StandardError
+    host
+  end
+  [domain, host]
+end
+
+def generate_slug_from_url(url)
+  uri = URI.parse(url)
+  path_slug = uri.path.to_s.gsub(%r{^/|/$}, '').gsub(%r{[/_]+}, '_').downcase
+  path_slug = path_slug.sub(/\.(html?|php|aspx?)$/, '')
+  path_slug = 'news' if path_slug.empty?
+  path_slug
+end
+
+def infer_topics(url, title)
+  text = "#{url} #{title}".downcase
+  inferred = []
+  inferred << 'tech' if text =~ /tech|developer|software|cloud|api|compute|ai|data|model|hardware/
+  inferred << 'security' if text =~ /security|vulnerab|advis|threat|breach|cve|cert|patch|cyber/
+  inferred << 'science' if text =~ /science|space|astron|physics|bio|research|institut|discover|nature/
+  inferred << 'energy' if text =~ /energy|wind|solar|power|grid|renewab|oil|gas|hydro/
+  inferred << 'finance' if text =~ /financ|bank|invest|monetary|market|regulat|treasury|econom/
+  inferred << 'civic' if text =~ /govern|policy|council|parliament|un\.org|court|treaty|public/
+  inferred << 'environment' if text =~ /climat|environ|planet|sustainab|carbon|ecolog|earth/
+  inferred << 'consumer' if text =~ /consum|recall|safety|rating|test|product/
+  inferred << 'travel' if text =~ /travel|touris|destination|trip|flight|hotel|transit|rail/
+  inferred << 'sports' if text =~ /sport|olympic|racing|football|soccer|tennis|game/
+  inferred.empty? ? ['news'] : inferred.first(2)
+end
+
+def fetch_html(url)
+  conn = Faraday.new(ssl: { verify: false }, request: { open_timeout: 4, timeout: 8 }) do |f|
+    f.response :follow_redirects, limit: 3
+    f.adapter Faraday.default_adapter
+  end
+  res = conn.get(url, {}, {
+    'User-Agent' => USER_AGENT,
+    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language' => 'en-US,en;q=0.9,de;q=0.8'
+  })
+  [res.body.to_s, res.status]
+rescue StandardError
+  ['', 0]
+end
+
+def find_best_selector_set(url, doc)
+  CONTAINER_CANDIDATES.each do |item_sel|
+    nodes = doc.css(item_sel)
+    next unless nodes.size.between?(1, 150)
+
+    is_anchor_item = item_sel.start_with?('a[') || item_sel == 'a' || item_sel.start_with?('a.')
+
+    title_options = if is_anchor_item
+                      ['h1, h2, h3, h4, h5, h6', 'span[class*="title"], div[class*="title"], p[class*="title"]', 'p, span, strong', 'self']
+                    else
+                      ['h1 a, h2 a, h3 a, h4 a, h5 a, h6 a', 'h1, h2, h3, h4, h5, h6', 'a.govuk-link, a.fr-card__link, a.c-teaser__link', 'a.title, a.heading, a[class*="title"], a[class*="heading"]', 'a']
+                    end
+
+    url_options = if is_anchor_item
+                    [nil]
+                  else
+                    ['h1 a, h2 a, h3 a, h4 a, h5 a, h6 a', 'a.govuk-link, a.fr-card__link, a.c-teaser__link', 'a.title, a.heading, a[class*="title"], a[class*="heading"]', 'a']
+                  end
+
+    date_options = ['time', 'span.date, span[class*="date"], p[class*="date"]', nil]
+
+    title_options.each do |t_sel|
+      url_options.each do |u_sel|
+        items_valid = nodes.all? do |node|
+          t = if t_sel == 'self'
+                node.text.to_s.strip
+              elsif t_sel
+                node.at_css(t_sel)&.text.to_s.strip
+              else
+                node.text.to_s.strip
+              end
+          !t.empty? && t.length >= 4 && t !~ /^(read more|more|details|link|view|pdf|click here|learn more)$/i
+        end
+        next unless items_valid
+
+        urls = nodes.map do |node|
+          if u_sel.nil?
+            node['href']
+          else
+            node.at_css(u_sel)&.[]('href')
+          end
+        end
+        next if urls.any? { |u| u.to_s.strip.empty? }
+        next if nodes.size > 1 && urls.uniq.size < [nodes.size * 0.6, 2].min
+
+        date_options.each do |d_sel|
+          cfg = {
+            channel: { title: 'Test', url:, language: 'en', time_zone: 'UTC', ttl: 360 },
+            selectors: {
+              items: { selector: item_sel, enhance: false },
+              title: t_sel == 'self' ? {} : { selector: t_sel }
+            }
+          }
+
+          if u_sel.nil?
+            cfg[:selectors][:url] = { extractor: 'href' }
+          else
+            cfg[:selectors][:url] = { selector: u_sel, extractor: 'href' }
+          end
+
+          cfg[:selectors][:published_at] = { selector: d_sel } if d_sel
+
+          begin
+            rss = Html2rssConfigApi.apply_config_hash(cfg).to_rss
+            count = rss.items.count
+            next unless count >= 1
+
+            valid_titles = rss.items.all? do |i|
+              t = i.title.to_s.strip
+              !t.empty? && t.length >= 4 && t !~ /^(read more|more|details|link|view|pdf|click here|learn more)$/i
+            end
+            next unless valid_titles
+
+            valid_links = rss.items.all? { |i| !i.link.to_s.strip.empty? && i.link.to_s.start_with?('http') }
+            next unless valid_links
+
+            unique_links = rss.items.map(&:link).uniq
+            next if count > 1 && unique_links.size < [count * 0.6, 2].min
+
+            return {
+              items: item_sel,
+              title: t_sel == 'self' ? nil : t_sel,
+              url: u_sel,
+              date: d_sel,
+              count:,
+              sample_title: rss.items.first.title.to_s.strip.gsub(/\s+/, ' '),
+              sample_link: rss.items.first.link.to_s
+            }
+          rescue StandardError
+            next
+          end
+        end
+      end
+    end
+  end
+  nil
+end
+
+def process_single_url(url, opts)
+  url = url.strip
+  return { status: :error, message: 'Empty URL', url: } if url.empty?
+
+  unless opts[:force]
+    recon = Html2rssConfigApi.recon(url)
+    if recon.defer?
+      return { status: :skipped, message: "Native feed: #{recon.native_feed} (use --force to override)", url: }
+    end
+    if recon.drop?
+      return { status: :error, message: recon.notes.join('; '), url: }
+    end
+  end
+
+  domain, _host = resolve_registrable_domain(url)
+  slug = generate_slug_from_url(url)
+  file_name = "#{slug}.yml"
+  target_dir = File.join('lib', 'html2rss', 'configs', domain)
+  target_file = File.join(target_dir, file_name)
+
+  if File.exist?(target_file) && !opts[:force]
+    return { status: :skipped, message: "Config already exists at #{target_file}", url: }
+  end
+
+  captured = try_capture_path(url, opts, domain, slug, target_dir, target_file)
+  return captured if captured
+
+  html, status = fetch_html(url)
+  return { status: :error, message: "HTTP #{status} fetching URL", url: } unless (200..299).cover?(status)
+
+  doc = Nokogiri::HTML(html)
+
+  page_title = opts[:title] || doc.at_css('meta[property="og:site_name"]')&.[]('content') ||
+               doc.at_css('meta[property="og:title"]')&.[]('content') ||
+               doc.at_css('title')&.text&.strip ||
+               domain.capitalize
+  page_title = page_title.gsub(/\s+/, ' ').strip
+
+  topics = opts[:topics]&.any? ? opts[:topics] : infer_topics(url, page_title)
+  topics = topics.select { |t| VALID_TOPICS.include?(t) }
+  topics = ['news'] if topics.empty?
+
+  summary = opts[:summary] || "#{page_title} updates and announcements."
+  summary = summary[0..159]
+
+  selectors = find_best_selector_set(url, doc)
+  unless selectors
+    return { status: :error, message: 'Could not discover valid repeated article selectors on surface', url: }
+  end
+
+  yaml_lines = []
+  yaml_lines << '# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json'
+  yaml_lines << 'directory:'
+  yaml_lines << '  topics:'
+  topics.each { |t| yaml_lines << "    - #{t}" }
+  yaml_lines << "  title: #{page_title.inspect}"
+  yaml_lines << "  summary: #{summary.inspect}"
+  yaml_lines << ''
+  yaml_lines << 'channel:'
+  yaml_lines << "  title: #{page_title.inspect}"
+  yaml_lines << "  url: #{url}"
+  yaml_lines << '  language: en'
+  yaml_lines << '  time_zone: UTC'
+  yaml_lines << '  ttl: 360'
+  yaml_lines << 'selectors:'
+  yaml_lines << '  items:'
+  yaml_lines << "    selector: #{selectors[:items].inspect}"
+  yaml_lines << '    enhance: false'
+  yaml_lines << '  title:'
+  if selectors[:title]
+    yaml_lines << "    selector: #{selectors[:title].inspect}"
+  end
+  yaml_lines << '  url:'
+  if selectors[:url]
+    yaml_lines << "    selector: #{selectors[:url].inspect}"
+  end
+  yaml_lines << '    extractor: href'
+  if selectors[:date]
+    yaml_lines << '  published_at:'
+    yaml_lines << "    selector: #{selectors[:date].inspect}"
+  end
+  yaml_lines << ''
+  yaml_content = yaml_lines.join("\n")
+  registry_id = Html2rssConfigApi.registry_id_for(domain, file_name)
+  yaml_content = Html2rssConfigApi.inject_registry_id(yaml_content, registry_id)
+
+  unless opts[:dry_run]
+    FileUtils.mkdir_p(target_dir)
+    File.write(target_file, yaml_content)
+  end
+
+  {
+    status: :ok,
+    file: target_file,
+    domain:,
+    topics:,
+    title: page_title,
+    items_count: selectors[:count],
+    sample_title: selectors[:sample_title],
+    sample_link: selectors[:sample_link],
+    yaml: yaml_content,
+    url:
+  }
+end
+
+options = {
+  topics: [],
+  title: nil,
+  summary: nil,
+  force: false,
+  dry_run: false,
+  json: false,
+  file: nil,
+  ledger: nil
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = 'Usage: add_config [options] [URL]'
+
+  opts.on('-u', '--url URL', 'Target listing/article URL') { |v| options[:url] = v }
+  opts.on('-f', '--file PATH', 'Batch file (one URL per line or TSV: [slug\\t]URL[\\ttitle][\\ttopics][\\tsummary])') { |v| options[:file] = v }
+  opts.on('-t', '--topics TOPICS', 'Comma-separated directory topics') { |v| options[:topics] = v.split(',').map(&:strip) }
+  opts.on('--title TITLE', 'Directory & Channel title override') { |v| options[:title] = v }
+  opts.on('--summary SUMMARY', 'Directory summary (max 160 chars)') { |v| options[:summary] = v }
+  opts.on('--ledger PATH', 'Path to save detailed JSON ledger') { |v| options[:ledger] = v }
+  opts.on('--force', 'Force config creation even if native RSS probe detects feed') { options[:force] = true }
+  opts.on('--dry-run', 'Synthesize and test without writing to disk') { options[:dry_run] = true }
+  opts.on('--json', 'Output results as JSON') { options[:json] = true }
+  opts.on('-h', '--help', 'Show help') do
+    puts opts
+    exit 0
+  end
+end
+
+parser.parse!
+options[:url] ||= ARGV[0]
+
+if options[:url].nil? && options[:file].nil?
+  puts parser
+  exit 1
+end
+
+results = []
+
+if options[:file]
+  lines = File.readlines(options[:file]).map(&:strip).reject { |l| l.empty? || l.start_with?('#') }
+  puts "=== Starting Batch Ingestion of #{lines.size} Candidate Feeds from #{options[:file]} ==="
+  puts "Timestamp: #{Time.now.utc}"
+
+  lines.each_with_index do |line, idx|
+    parts = line.split("\t").map(&:strip)
+    line_opts = options.dup
+
+    url = parts.find { |p| p.start_with?('http://', 'https://') } || parts[0]
+    host_name = begin
+                  URI.parse(url).host
+                rescue StandardError
+                  url
+                end
+
+    print format("[%03d/%03d] Probing %-45s ... ", idx + 1, lines.size, host_name)
+    $stdout.flush
+
+    if parts.size >= 3
+      if parts[0].start_with?('http://', 'https://')
+        line_opts[:title] = parts[1] unless parts[1].to_s.empty?
+        line_opts[:topics] = parts[2].split(',').map(&:strip) unless parts[2].to_s.empty?
+        line_opts[:summary] = parts[3] if parts[3] && !parts[3].empty?
+      else
+        line_opts[:topics] = parts[2].split(',').map(&:strip) unless parts[2].to_s.empty?
+        line_opts[:title] = parts[3] if parts[3] && !parts[3].empty?
+        line_opts[:summary] = parts[4] if parts[4] && !parts[4].empty?
+      end
+    end
+
+    res = process_single_url(url, line_opts)
+    results << res
+
+    if res[:status] == :ok
+      puts "✅ OK (#{res[:items_count]} items) -> #{res[:file]}"
+    elsif res[:status] == :skipped
+      puts "⚠️  SKIPPED: #{res[:message]}"
+    else
+      puts "❌ ERROR: #{res[:message]}"
+    end
+  end
+
+  puts "\n=== Batch Run Summary ==="
+  puts "Total Processed: #{results.size}"
+  puts "Successes (Config Created): #{results.count { |r| r[:status] == :ok }}"
+  puts "Skipped (First-party RSS): #{results.count { |r| r[:status] == :skipped }}"
+  puts "Errors / Dropped: #{results.count { |r| r[:status] == :error }}"
+elsif options[:url]
+  results << process_single_url(options[:url], options)
+end
+
+if options[:ledger]
+  FileUtils.mkdir_p(File.dirname(options[:ledger]))
+  File.write(options[:ledger], JSON.pretty_generate(results))
+  puts "Saved detailed ledger to #{options[:ledger]}"
+end
+
+if options[:json]
+  puts JSON.pretty_generate(results)
+elsif !options[:file]
+  results.each do |r|
+    if r[:status] == :ok
+      puts "✅ [OK #{r[:items_count]} items] #{r[:file]} (#{r[:topics].join(', ')})"
+      puts "   Title: #{r[:title]}"
+      puts "   Sample: #{r[:sample_title]} -> #{r[:sample_link]}"
+    elsif r[:status] == :skipped
+      puts "⚠️  [SKIPPED] #{r[:url]}: #{r[:message]}"
+    else
+      puts "❌ [ERROR] #{r[:url]}: #{r[:message]}"
+    end
+  end
+end

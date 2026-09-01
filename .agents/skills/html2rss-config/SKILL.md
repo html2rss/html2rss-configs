@@ -1,87 +1,53 @@
 ---
 name: html2rss-config
 description: >-
-  Create or repair curated html2rss YAML feed configs in this repo (lib/html2rss/configs/),
-  including directory.topics, directory.title, selectors, Faraday vs Botasaurus triage, RSS probe-before-write,
-  and the AGENTS.md quality gate. Use when adding a new feed config, fixing a broken/zero-item
-  config, tightening selectors, diagnosing fetch failures, or shipping a user-requested batch
-  of configs (still one quality loop each). Do not use for html2rss gem core, html2rss-web,
-  or docs-only work.
+  Create or repair curated html2rss YAML configs in this repo. Router only —
+  quality gate and defaults live in AGENTS.md; mode deltas in reference/.
 ---
 
 # html2rss-config
 
-Thin workflow skill for **one config quality loop at a time** (a multi-config PR is OK only when the user asks). Quality-gate SSOT: repo root [`AGENTS.md`](../../../AGENTS.md). Do not duplicate that gate here. Campaign traps: [reference/pitfalls.md](reference/pitfalls.md). Batch pipeline (N=1 and N>1): [reference/batch.md](reference/batch.md).
+One config quality loop at a time (multi-config PR only when the user asks).
+
+| Doc                                              | Role                                                 |
+| ------------------------------------------------ | ---------------------------------------------------- |
+| [`AGENTS.md`](../../../AGENTS.md)                | Quality gate, surface/selector defaults, MCP summary |
+| [curation-verbs.md](reference/curation-verbs.md) | CLI/MCP verb table + stale-catalog fix               |
+| [pitfalls.md](reference/pitfalls.md)             | Invariants (batch campaigns or quality issues only)  |
 
 ## Modes
 
-| Mode     | When                                                     | Reference                                  |
-| -------- | -------------------------------------------------------- | ------------------------------------------ |
-| `new`    | Add a YAML under `lib/html2rss/configs/<domain>/`        | [reference/new.md](reference/new.md)       |
-| `repair` | Fix existing config (zero items, fetch fail, noisy feed) | [reference/repair.md](reference/repair.md) |
-
-Pick mode from the user ask. Grow later with more modes/references; keep this file short.
+| Mode     | When                                               | Reference                        |
+| -------- | -------------------------------------------------- | -------------------------------- |
+| `new`    | Add YAML under `lib/html2rss/configs/<domain>/`    | [new.md](reference/new.md)       |
+| `repair` | Zero items, fetch fail, noisy feed                 | [repair.md](reference/repair.md) |
+| `expand` | Batch-add across topics                            | [batch.md](reference/batch.md)   |
 
 ## Before any write
 
-1. Read [`AGENTS.md`](../../../AGENTS.md) (surface selection, selectors, drop rules).
-2. Confirm canonical URL (`curl -I -L`); prefer **registrable-domain** folder. Watch for HTTPS→HTTP downgrades (Faraday will refuse).
-3. Assign `directory.topics` (1–2) — see [reference/topics.md](reference/topics.md).
-4. Write `directory.title`, optional `directory.summary`, and mirror `channel.title` — see [reference/catalog.md](reference/catalog.md).
-5. Probe **that exact surface** with `scripts/probe_rss`. Exit `3` = first-party feed → drop/defer unless curated value is clearly higher. See [pitfalls.md](reference/pitfalls.md).
+Follow [`AGENTS.md`](../../../AGENTS.md) defaults. Then: canonical URL (`curl -I -L`), [catalog](reference/catalog.md) metadata (includes topics), `scripts/probe_rss` on the **exact** `channel.url` (exit `3` → defer/drop).
 
-## Tool order
+## Tools
 
-1. **user-html2rss MCP** — `capture_config` / `scrape_url` / `inspect_url` / `validate_config` when discovery works.
-2. Else **core CLI** from PATH or sibling `../html2rss` — `scripts/check_config` resolves this (or raw `html2rss` / `bundle exec exe/html2rss`).
-3. **Botasaurus** when Faraday returns zero items or scheme/redirect blocks Faraday: `BOTASAURUS_SCRAPER_URL=http://localhost:4010` (health: `/health`). `wait_timeout_seconds` **≤ 30** (work budget; total scrape wall 45s default).
-4. **Chrome MCP** only if Faraday + Botasaurus fail or the item boundary is unclear. Report Chrome outage in handoff if unavailable.
+MCP/CLI verbs → [curation-verbs.md](reference/curation-verbs.md) (journeys, envelope, catalog-mismatch fix). Quality gate → AGENTS.md.
 
-If MCP discovery fails or the MCP process lacks `BOTASAURUS_SCRAPER_URL`, **skip MCP** and go straight to the CLI — do not burn the timebox retrying discovery.
-
-## Fast path (quick)
-
-Soft budget: one tight loop per site (~3–4 minutes of wall effort). Faraday → Botasaurus → Chrome. If still zero/noisy → **stop**, report drop/defer with evidence, unless the user says keep going.
-
-Minimal selectors first: `items`, `title`, `url`. Omit brittle optional fields. Set `enhance: false` when chrome leaks in. Prefer nested title / `aria-label` over whole-card text.
+**MCP broken but CLI works?** Treat as stale Cursor tool catalog, not bad selectors — use `html2rss inspect|recon|capture|test|apply|scrape` or scripts below until the catalog shows bare verb names.
 
 ## Scripts
 
-Run from repo root. Prefer these over ad‑hoc CLI glue:
+Run from repo root:
 
-| Script                                                       | Purpose                                                                                                                                                                 |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`scripts/batch_recon`](scripts/batch_recon)                 | Parallel redirect + RSS + HTML cache → `BUILD`/`DEFER`/`DROP` ledger (`--file` TSV or URL args).                                                                        |
-| [`scripts/analyze_html`](scripts/analyze_html)               | Selector hints from cached HTML / ledger (`--from-ledger`). No network.                                                                                                 |
-| [`scripts/probe_rss`](scripts/probe_rss)                     | First-party RSS probe (HTML `rel=alternate` then path guesses). Exit `0` = none; `3` = found (consider drop). Under `set -e`, check `$?` — do not treat `3` as failure. |
-| [`scripts/check_config`](scripts/check_config)               | `validate` + `feed` (fail on 0 items); optional `--fetch` / `--botasaurus`. Resolves CLI via PATH or sibling `../html2rss`.                                             |
-| [`scripts/register_botasaurus`](scripts/register_botasaurus) | Idempotent sorted add to `spec/support/botasaurus_fetch_configs.rb`.                                                                                                    |
+| Script                                               | Purpose                                                      |
+| ---------------------------------------------------- | ------------------------------------------------------------ |
+| [`add_config`](scripts/add_config)                   | Automated create (single URL or `--file`)                    |
+| [`batch_recon`](scripts/batch_recon)                 | Parallel recon → BUILD/DEFER/DROP ledger                     |
+| [`analyze_html`](scripts/analyze_html)               | Selector hints from cached HTML / ledger                     |
+| [`probe_rss`](scripts/probe_rss)                     | Native RSS via `recon` (exit `3` = found)                    |
+| [`check_config`](scripts/check_config)               | CLI `validate` + `test`; optional `--fetch` / `--botasaurus` |
+| [`register_botasaurus`](scripts/register_botasaurus) | Register Botasaurus-backed configs for fetch specs           |
 
-Examples:
-
-```bash
-.agents/skills/html2rss-config/scripts/batch_recon --cache-dir tmp/html2rss-recon --file candidates.tsv
-.agents/skills/html2rss-config/scripts/analyze_html --from-ledger tmp/html2rss-recon/ledger.tsv
-.agents/skills/html2rss-config/scripts/probe_rss 'https://example.com/news/'
-.agents/skills/html2rss-config/scripts/check_config domain/file.yml
-.agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
-.agents/skills/html2rss-config/scripts/register_botasaurus domain/file.yml
-```
-
-## Done checklist
-
-From AGENTS.md Quality Gate, in order:
-
-1. Prefer `scripts/check_config <path>` (or raw `html2rss validate` + `feed`)
-2. `make validate` (this repo) when touching shared support files or multiple configs
-3. `make test` (non-fetch)
-4. Focused fetch via `scripts/check_config … --fetch` or:
-   - Faraday: `bundle exec rspec --tag fetch --example 'domain/file.yml' spec/html2rss/configs_dynamic_spec.rb`
-   - Botasaurus: same with `BOTASAURUS_SCRAPER_URL=http://localhost:4010`
-5. If `strategy: botasaurus` (or fetch only works via Botasaurus): `scripts/register_botasaurus domain/file.yml` — **required**.
+Gem facades (`recon`, `capture`, `test`, `apply`): [`scripts/html2rss_api.rb`](scripts/html2rss_api.rb).
 
 ## Handoff
 
-Report: mode, files changed, accepted vs dropped/deferred + why, topics, Faraday vs Botasaurus, Chrome MCP availability, commands + exit honesty, residual risks (selector drift, localization, Botasaurus dependence).
-
-Do not push or open a PR unless the user asks. Commits only when the user asks (global commit rules).
+Mode, files changed, accepted vs dropped/deferred, strategy, commands run, residual risks. No commit/PR unless asked.
