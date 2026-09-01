@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - environment
+    - science
+  title: "IPCC — News & Media"
+  summary: "Comprehensive climate change assessment reports, author meetings, and IPCC releases."
+
+channel:
+  title: "IPCC — News & Media"
+  url: https://www.ipcc.ch/news/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "div.post-preview"
+    enhance: false
+  title:
+    selector: "h4 a"
+  url:
+    selector: "h4 a"
+    extractor: href
+  published_at:
+    selector: "h6"

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - science
+    - research
+  title: "EMBL — News"
+  summary: "Molecular biology discoveries, structural biology breakthroughs, and scientific publications."
+
+channel:
+  title: "EMBL — News"
+  url: https://www.embl.org/news/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article.vf-card"
+    enhance: false
+  title:
+    selector: "h3.vf-card__heading a"
+  url:
+    selector: "h3.vf-card__heading a"
+    extractor: href
+  published_at:
+    selector: "time.vf-summary__date"

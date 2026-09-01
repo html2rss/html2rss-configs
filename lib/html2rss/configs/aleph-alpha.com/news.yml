@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+  title: "Aleph Alpha — News"
+  summary: "Sovereign European AI foundation model research and product announcements."
+
+channel:
+  title: "Aleph Alpha — News"
+  url: https://aleph-alpha.com/en/blog/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href*="/blog/"]:has(h2), a[href*="/blog/"]:has(h3)'
+    enhance: false
+  title:
+    selector: "h2, h3"
+  url:
+    extractor: href

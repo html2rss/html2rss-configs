@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - civic
+    - news
+  title: "United Nations — Press Releases"
+  summary: "Security Council meetings, General Assembly resolutions, and global diplomatic briefings."
+
+channel:
+  title: "United Nations — Press Releases"
+  url: https://press.un.org/en
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article.node--type-press-release, div.views-row:has(h3)"
+    enhance: false
+  title:
+    selector: "h3 a, h3"
+  url:
+    selector: "h3 a, a"
+    extractor: href
+  published_at:
+    selector: "time"

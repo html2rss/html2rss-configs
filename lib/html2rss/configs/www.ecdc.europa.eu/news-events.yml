@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - science
+    - health
     - civic
   title: "ECDC — News and events"
   summary: "News and events from the European Centre for Disease Prevention and Control."

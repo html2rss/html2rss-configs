@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - product
+  title: "Figure AI — News"
+  summary: "Autonomous humanoid robotics milestones, commercial partnerships, and engineering updates."
+
+channel:
+  title: "Figure AI — News"
+  url: https://www.figure.ai/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "a.article-list-item"
+    enhance: false
+  title:
+    selector: ".article-list-item__heading, h1, h2, h3"
+  url:
+    extractor: href
+  published_at:
+    selector: "time"

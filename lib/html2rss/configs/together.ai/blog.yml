@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+  title: "Together AI — Blog"
+  summary: "Open source AI models, cloud GPU cluster updates, and inference acceleration research."
+
+channel:
+  title: "Together AI — Blog"
+  url: https://www.together.ai/blog
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href^="/blog/"]:has(p)'
+    enhance: false
+  title:
+    selector: "p"
+  url:
+    extractor: href

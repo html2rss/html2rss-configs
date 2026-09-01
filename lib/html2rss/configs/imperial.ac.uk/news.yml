@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - science
+    - education
     - research
   title: "Imperial College London — News"
   summary: "Research and university news from Imperial College London."
