@@ -17,9 +17,9 @@ selectors:
     selector: "div.views-row:has(h3), article:has(h3)"
     enhance: false
   title:
-    selector: "h3 a, h3"
+    selector: "h3 a"
   url:
-    selector: "h3 a, a"
+    selector: "h3 a"
     extractor: href
   published_at:
     selector: "time"

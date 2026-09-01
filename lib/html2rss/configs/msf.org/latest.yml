@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: a.card__title-link
-    enhance: false
+    enhance: true
   title:
     extractor: text
   url:

@@ -14,7 +14,7 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: "p.news-title, div.glider-card-title"
+    selector: "p.news-title"
     enhance: false
   title:
     selector: "a"

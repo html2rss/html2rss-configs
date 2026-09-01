@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: 'a.listing-item[href*="/news/articles/"]'
-    enhance: false
+    enhance: true
   title:
     selector: .listing-item__title
   url:

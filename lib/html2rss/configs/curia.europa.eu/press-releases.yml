@@ -16,7 +16,7 @@ channel:
 request:
   botasaurus:
     wait_for_selector: li.curia-itemlist-item
-    wait_timeout_seconds: 20
+    wait_timeout_seconds: 30
 selectors:
   items:
     selector: li.curia-itemlist-item
