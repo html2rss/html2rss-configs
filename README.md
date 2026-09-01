@@ -43,7 +43,7 @@ The `type` field specifies the parameter type (currently only `string` is suppor
 Notes:
 
 - Only configs that use `%<param>s` placeholders need a `parameters` section.
-- Callers can still override those defaults at runtime with `html2rss feed ... --params ...`.
+- Callers can still override those defaults at runtime with `html2rss apply ... --params ...` (`feed` is a CLI alias).
 - Dynamic substitution applies to `channel` and `headers`; selectors are not parameterized by this feature.
 
 ## Validation

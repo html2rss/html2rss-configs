@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Validate + feed (+ optional focused fetch) for one curated config.
+# validate → test (+ optional focused fetch). Mirrors MCP golden path steps.
 # Usage (from repo root):
 #   .agents/skills/html2rss-config/scripts/check_config lib/html2rss/configs/domain/file.yml
 #   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch
 #   .agents/skills/html2rss-config/scripts/check_config domain/file.yml --fetch --botasaurus
 
+require 'json'
 require 'open3'
 require 'pathname'
 
@@ -19,7 +20,7 @@ end
 
 def repo_root
   Pathname.new(__dir__).ascend.find { |p| (p / 'lib/html2rss/configs').directory? } ||
-    abort('Could not find html2rss-configs repo root')
+    abort('Could not find html2rss-configs repo root (expected lib/html2rss/configs/)')
 end
 
 def resolve_config(arg, root)
@@ -33,8 +34,10 @@ def resolve_config(arg, root)
   found.expand_path
 end
 
-def feed_example_name(config_path, root)
+def config_example_name(config_path, root)
   config_path.relative_path_from(root / 'lib/html2rss/configs').to_s
+rescue StandardError
+  config_path.basename.to_s
 end
 
 def invoke_entry(entry, sibling)
@@ -54,7 +57,6 @@ def sibling_html2rss_invocation(root)
     MSG
 end
 
-# Prefer PATH `html2rss`, then sibling ../html2rss (exe via bundle, then bin).
 def resolve_html2rss_invocation(root)
   return ['html2rss'] unless `command -v html2rss 2>/dev/null`.strip.empty?
 
@@ -71,10 +73,6 @@ def run!(*cmd, env: {}, quiet: false, chdir: nil)
   out
 end
 
-def count_items(rss)
-  rss.scan(/<item[\s>]/i).size
-end
-
 usage! if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
 
 fetch = ARGV.delete('--fetch')
@@ -83,7 +81,7 @@ usage! unless ARGV.size == 1
 
 root = repo_root
 config = resolve_config(ARGV.fetch(0), root)
-example = feed_example_name(config, root)
+example = config_example_name(config, root)
 cli = resolve_html2rss_invocation(root)
 cli_chdir = cli.first == 'bundle' ? (root.parent / 'html2rss').to_s : nil
 env = {}
@@ -91,17 +89,21 @@ env['BOTASAURUS_SCRAPER_URL'] = ENV.fetch('BOTASAURUS_SCRAPER_URL', 'http://loca
 
 Dir.chdir(root) do
   run!(*cli, 'validate', config.to_s, env: env, chdir: cli_chdir)
-  rss = run!(*cli, 'feed', config.to_s, env: env, quiet: true, chdir: cli_chdir)
-  items = count_items(rss)
-  puts "items #{items}"
-  abort('Feed produced zero <item> elements') if items.zero?
+  test_json = run!(*cli, 'test', config.to_s, '--json', env: env, quiet: true, chdir: cli_chdir)
+  result = JSON.parse(test_json)
+  abort("Test failed: #{result['error_message'] || 'unknown'}") unless result['success']
 
-  titles = rss.scan(%r{<title>(.*?)</title>}m).flatten.drop(1).first(5)
-  titles.each { |t| puts "  - #{t.gsub(/<!\[CDATA\[|\]\]>/, '').strip}" }
+  items = result['item_count'].to_i
+  puts "items #{items}"
+  abort('Test reported zero items') if items.zero?
+
+  result.fetch('sample_items', []).first(5).each do |item|
+    puts "  - #{item['title']}"
+  end
 
   if fetch
-    cmd = ['bundle', 'exec', 'rspec', '--tag', 'fetch', '--example', example,
-           'spec/html2rss/configs_dynamic_spec.rb']
+    spec_file = (root / 'spec/html2rss/configs_dynamic_spec.rb').file? ? 'spec/html2rss/configs_dynamic_spec.rb' : 'test/configs_dynamic_spec.rb'
+    cmd = ['bundle', 'exec', 'rspec', '--tag', 'fetch', '--example', example, spec_file]
     run!(*cmd, env: env)
   end
 end

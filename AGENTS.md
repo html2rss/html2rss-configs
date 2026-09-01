@@ -69,6 +69,18 @@ Useful patterns:
 - Keep selectors item-local when possible.
 - Do not add complexity to recover weak optional fields.
 
+## html2rss MCP
+
+Prefer `user-html2rss` when the tool catalog shows **bare verbs** (`inspect`, `capture`, …). Same words as CLI and [curation-verbs.md](.agents/skills/html2rss-config/reference/curation-verbs.md).
+
+**Journeys:** scrape (now) · capture → test → apply (YAML) · inspect → recon (build?). Follow each result’s `next_step` / `guidance`; `capture` YAML is a draft until catalog fields are added.
+
+**Setup:** `BOTASAURUS_SCRAPER_URL` on the MCP process (`mcp.json`), not only your shell. Read `html2rss://runtime` when `next_step` is `read_runtime`.
+
+**After gem upgrade:** If old names (`inspect_url`, `capture_config`) still appear in Cursor or calls return `-32602`, the server may be fine — **reload MCP / Cursor** until the catalog matches. Until then, use CLI (`html2rss …` from `../html2rss`) or skill scripts — authoritative fallback.
+
+**Strategy:** `scrape`/`capture` + `auto` run Faraday → Botasaurus (don’t retry `faraday` after `auto`). `inspect` + `auto` uses Faraday only; pin `botasaurus` for JS-heavy inspect.
+
 ## Chrome MCP
 
 Use Chrome MCP when the static HTML is unclear, the page is hydrated, or Faraday fetch returns zero items while the browser shows a valid list.
@@ -85,7 +97,7 @@ If Chrome MCP is unavailable (`Transport closed` or page-lock errors), do this r
 
 1. Kill stale Chrome MCP processes (`pkill -9 -f 'chrome-devtools-mcp|Chrome for Testing'`).
 2. Retry Chrome MCP once before continuing.
-3. If still unavailable, continue with `curl -I -L`, runtime `feed`, and HTML inspection in a temporary file.
+3. If still unavailable, continue with `curl -I -L`, `html2rss apply`, and HTML inspection in a temporary file.
 4. Explicitly report Chrome MCP outage in the final handoff.
 
 ## Botasaurus
@@ -116,7 +128,7 @@ Assume the `html2rss` CLI is available on `PATH` when working against the siblin
 2. Inspect the DOM in Chrome MCP before writing selectors.
 3. Create the YAML with the schema modeline and minimal selectors.
 4. Validate the single file with the core CLI.
-5. Generate a live feed with the core CLI.
+5. Generate a live feed with `html2rss apply`.
 6. Tighten selectors until the feed output is clean.
 7. Run repo validation and non-fetch tests.
 8. Run the appropriate fetch lane:
@@ -138,8 +150,10 @@ html2rss validate /abs/path/to/config.yml
 
 ```bash
 cd ../html2rss
-html2rss feed /abs/path/to/config.yml
+html2rss apply /abs/path/to/config.yml
 ```
+
+(`feed` is a CLI alias for `apply`.)
 
 3. Catalog serialization for changed configs:
 
@@ -190,7 +204,7 @@ curl -I -L -s https://example.com | sed -n '1,20p'
 ```
 
 - compare behavior in both runtimes:
-  - core repo (`../html2rss`) via `html2rss feed`
+  - core repo (`../html2rss`) via `html2rss apply`
   - configs repo fetch lane (`bundle exec rspec --tag fetch --example ...`)
 - if selectors are valid in core but fetch lane still returns zero items, treat this as request-strategy/runtime mismatch, not selector success.
 - in that case: prefer Botasaurus-backed verification if available; otherwise mark as downgraded/deferred with evidence.
@@ -200,7 +214,7 @@ curl -I -L -s https://example.com | sed -n '1,20p'
 Use the core CLI as the authority for single-config debugging. The quickest loop is:
 
 1. `validate`
-2. `feed`
+2. `apply`
 3. inspect the RSS for zero items, nav/footer leakage, duplicates, relative URLs, or noisy descriptions
 4. adjust selectors
 5. rerun
@@ -214,13 +228,13 @@ Additional high-value checks:
 - Remove optional fields first when quality drops (`categories`, synthetic IDs, weak descriptions) before adding selector complexity.
 - Set `enhance: false` early if enhancement starts pulling nav/hero/market widgets.
 
-## Auto-Source
+## Scrape (reconnaissance)
 
-Use `auto` for reconnaissance, not as proof that a config is ready.
+Use `scrape` for reconnaissance, not as proof that a config is ready. CLI alias: `auto`.
 
 ```bash
 cd ../html2rss
-html2rss auto 'https://example.com'
+html2rss scrape 'https://example.com'
 ```
 
 Use it to:
@@ -229,7 +243,7 @@ Use it to:
 - compare Faraday and Botasaurus behavior quickly
 - decide whether a site belongs in the curated set at all
 
-Do not ship raw auto-sourced output without manual tightening.
+Do not ship raw scrape output without manual tightening into a curated config.
 
 ## Drop Or Downgrade
 
@@ -257,3 +271,16 @@ When finishing config work, report:
 - residual risks, especially selector drift, localization dependence, or Botasaurus dependence
 - whether Chrome MCP was available during validation
 - whether focused fetch specs matched core runtime behavior
+
+## Contributor notes
+
+Config workflow router: [.agents/skills/html2rss-config/SKILL.md](.agents/skills/html2rss-config/SKILL.md) (links to mode refs; does not duplicate this gate).
+
+Stale CLI/MCP verb drift check:
+
+```bash
+rg -n 'html2rss (feed|auto)\b|capture_config|inspect_url|scrape_url|test_config|apply_config|batch_scrape_urls|batch_inspect_urls' \
+  --glob '!**/configs/**' --glob '!lib/html2rss/configs/**' AGENTS.md README.md .agents/ spec/
+```
+
+Exclude `bin/validate_configs` (repo script name). Prefer `apply` / `scrape` and bare MCP verb names in docs.

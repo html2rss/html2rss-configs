@@ -17,14 +17,15 @@ end
 
 def repo_root
   Pathname.new(__dir__).ascend.find { |p| (p / 'spec/support/botasaurus_fetch_configs.rb').file? } ||
-    abort('Could not find html2rss-configs repo root')
+    abort('Could not find html2rss-configs repo root (expected spec/support/botasaurus_fetch_configs.rb)')
 end
 
 def normalize_name(arg, root)
   rel = arg.to_s.split('lib/html2rss/configs/', 2).last.delete_prefix('/').delete_prefix('./')
   abort('Expected something like domain/file.yml') unless rel.match?(%r{\A[^/]+/.+\.yml\z})
 
-  warn "Warning: missing #{root / 'lib/html2rss/configs' / rel}" unless (root / 'lib/html2rss/configs' / rel).file?
+  target = root / 'lib/html2rss/configs' / rel
+  warn "Warning: missing #{target}" unless target.file?
   rel
 end
 
