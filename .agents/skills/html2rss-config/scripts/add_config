@@ -6,8 +6,8 @@ require 'uri'
 require 'fileutils'
 require 'json'
 require 'nokogiri'
-require 'faraday'
-require 'faraday/follow_redirects'
+require 'httpx'
+require 'httpx/plugins/follow_redirects'
 require 'public_suffix'
 require_relative 'html2rss_api'
 
@@ -163,15 +163,18 @@ def infer_topics(url, title)
 end
 
 def fetch_html(url)
-  conn = Faraday.new(ssl: { verify: false }, request: { open_timeout: 4, timeout: 8 }) do |f|
-    f.response :follow_redirects, limit: 3
-    f.adapter Faraday.default_adapter
-  end
-  res = conn.get(url, {}, {
-    'User-Agent' => USER_AGENT,
-    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language' => 'en-US,en;q=0.9,de;q=0.8'
+  session = HTTPX.plugin(:follow_redirects).with(
+    ssl: { verify_mode: OpenSSL::SSL::VERIFY_NONE },
+    timeout: { connect_timeout: 4, request_timeout: 8 },
+    max_redirects: 3
+  )
+  res = session.get(url, headers: {
+    'user-agent' => USER_AGENT,
+    'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'accept-language' => 'en-US,en;q=0.9,de;q=0.8'
   })
+  return ['', 0] if res.is_a?(HTTPX::ErrorResponse)
+
   [res.body.to_s, res.status]
 rescue StandardError
   ['', 0]

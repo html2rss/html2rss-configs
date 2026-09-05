@@ -19,14 +19,14 @@ Invariants for `new` / `repair` / batch campaigns. Quality gate: [AGENTS.md](../
 - Run `probe_rss` / `batch_recon` on the same URL as `channel.url`, not just the homepage.
 - Exit `3` / ledger `DEFER` → native RSS found; defer unless curated value is clearly higher.
 
-## Faraday vs JS
+## Static HTTP vs JS
 
 - `html2rss scrape` returning 0 items ≠ empty HTML — fetch HTML before declaring Botasaurus-only.
 - Prefer nested title selectors (`h6`, `aria-label`) over whole-card text.
 
 ## Redirects and schemes
 
-- Faraday rejects HTTPS→HTTP downgrades; confirm with `curl -I -L`.
+- Default HTTP strategy rejects HTTPS→HTTP downgrades; confirm with `curl -I -L`.
 - If only stable surface downgrades: try Botasaurus once, then drop.
 
 ## Botasaurus
@@ -39,7 +39,7 @@ Invariants for `new` / `repair` / batch campaigns. Quality gate: [AGENTS.md](../
 ## MCP / CLI drift
 
 - Cursor catalog stale after gem upgrade: old `*_url` tool names, `-32602` on calls, new `inspect` “not found” — reload MCP/Cursor; use CLI until catalog shows bare verbs ([curation-verbs.md](curation-verbs.md)).
-- `scrape` with `auto`: do not retry explicit `faraday` after empty auto (chain already ran).
+- `scrape` with `auto`: do not retry explicit `default` after empty auto (chain already ran).
 
 ## Selectors
 

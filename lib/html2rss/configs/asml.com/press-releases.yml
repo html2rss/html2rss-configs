@@ -16,6 +16,6 @@ selectors:
     selector: 'a.related-content-card[href*="/en/news/press-releases/20"]'
     enhance: false
   title:
-    selector: span.related-content-card-title
+    selector: .related-content-card-title
   url:
     extractor: href
