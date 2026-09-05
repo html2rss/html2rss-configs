@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+  title: "Scale AI — Blog"
+  summary: "Research papers, ML benchmarks, and data infrastructure insights."
+
+channel:
+  title: "Scale AI — Blog"
+  url: https://scale.com/blog
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href^="/blog/"]:has(h3), a[href^="/blog/"]:has(h2)'
+    enhance: false
+  title:
+    selector: "h3, h2"
+  url:
+    extractor: href

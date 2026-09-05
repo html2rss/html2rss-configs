@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - news
+    - health
     - civic
   title: "Médecins Sans Frontières — Latest"
   summary: "Latest field and advocacy updates from Médecins Sans Frontières."
@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: a.card__title-link
-    enhance: false
+    enhance: true
   title:
     extractor: text
   url:

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - product
+  title: "Resend — Changelog"
+  summary: "Email API infrastructure releases, deliverability updates, and SDK changelogs."
+
+channel:
+  title: "Resend — Changelog"
+  url: https://resend.com/changelog
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href^="/changelog/"]'
+    enhance: false
+  title:
+    selector: "h2, h3, strong"
+  url:
+    extractor: href

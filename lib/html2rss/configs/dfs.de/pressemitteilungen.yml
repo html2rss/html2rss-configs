@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - civic
+    - transport
+    - tech
   title: "DFS — Pressemitteilungen"
   summary: "Pressemitteilungen der Deutschen Flugsicherung (DFS)."
 channel:
@@ -13,6 +14,7 @@ channel:
 selectors:
   items:
     selector: ".article-teaser-list article"
+    enhance: false
   title:
     selector: ".headline"
   url:

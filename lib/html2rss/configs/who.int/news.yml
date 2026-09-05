@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - science
+    - health
     - civic
   title: "WHO — News"
   summary: "Official news and statements from the World Health Organization."
@@ -20,7 +20,7 @@ request:
 selectors:
   items:
     selector: 'a.link-container[href*="/news/item/"]'
-    enhance: false
+    enhance: true
   title:
     extractor: attribute
     attribute: aria-label

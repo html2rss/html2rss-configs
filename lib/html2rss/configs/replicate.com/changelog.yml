@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - product
+  title: "Replicate — Changelog"
+  summary: "Model hosting updates, platform features, and API changelog entries."
+
+channel:
+  title: "Replicate — Changelog"
+  url: https://replicate.com/changelog
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href^="/changelog/20"]'
+    enhance: false
+  title:
+    selector: "h2, h3, span"
+  url:
+    extractor: href
+  published_at:
+    selector: "time"

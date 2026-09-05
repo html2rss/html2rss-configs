@@ -1,21 +1,23 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - transport
+    - finance
     - civic
-  title: "FAA — Newsroom"
-  summary: "News and announcements from the U.S. Federal Aviation Administration."
+  title: "FDIC — Press Releases"
+  summary: "Banking supervision reports, deposit insurance updates, and regulatory enforcement."
+
 channel:
-  title: "FAA — Newsroom"
-  url: https://www.faa.gov/newsroom
+  title: "FDIC — Press Releases"
+  url: https://www.fdic.gov/news/press-releases
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: '.views-row a[href^="/newsroom/"]'
+    selector: "p.news-title"
     enhance: false
   title:
-    extractor: text
+    selector: "a"
   url:
+    selector: "a"
     extractor: href
