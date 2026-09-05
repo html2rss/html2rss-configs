@@ -4,16 +4,14 @@ directory:
     - civic
     - news
   title: Bundeskanzleramt Österreich — Nachrichten
-  summary:
-    Ministerratsbeschlüsse und Regierungserklärungen aus dem Bundeskanzleramt
-    Österreich.
+  summary: Austrian federal government news releases and announcements.
 channel:
   title: Bundeskanzleramt Österreich — Nachrichten
-  url: https://www.bundeskanzleramt.gv.at/bundeskanzleramt/nachrichten-der-bundesregierung.html
-  language: en
-  time_zone: UTC
+  url: https://www.bundeskanzleramt.gv.at/bundeskanzleramt/nachrichten-der-bundesregierung/2026.html
+  language: de
+  time_zone: Europe/Vienna
   ttl: 360
 selectors:
   items:
-    selector: div.card
+    selector: a[href*="/nachrichten-der-bundesregierung/2026/"]
     enhance: true

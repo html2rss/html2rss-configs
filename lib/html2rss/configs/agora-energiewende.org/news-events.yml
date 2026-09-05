@@ -11,9 +11,9 @@ channel:
   title: Agora Energiewende — News & Events
   url: https://www.agora-energiewende.org/news-events
   language: en
-  time_zone: UTC
+  time_zone: Europe/Berlin
   ttl: 360
 selectors:
   items:
-    selector: a[href*="/news-events/"][href*="-"]
+    selector: .teaser a
     enhance: true

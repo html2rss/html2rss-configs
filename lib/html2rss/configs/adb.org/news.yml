@@ -3,17 +3,17 @@ directory:
   topics:
     - finance
     - civic
-  title: Asian Development Bank — Newsroom
+  title: Asian Development Bank — News Releases
   summary:
     Development financing updates and press releases from the Asian Development
     Bank.
 channel:
-  title: Asian Development Bank — Newsroom
-  url: https://www.adb.org/news
+  title: Asian Development Bank — News Releases
+  url: https://www.adb.org/news/releases
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: a[href*="/news/"][href*="-"]
+    selector: h3 a[href^="/news/"]
     enhance: true

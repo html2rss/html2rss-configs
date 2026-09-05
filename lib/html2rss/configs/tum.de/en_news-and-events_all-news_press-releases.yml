@@ -11,9 +11,17 @@ channel:
   title: Technical University of Munich — Press Releases
   url: https://www.tum.de/en/news-and-events/all-news/press-releases
   language: en
-  time_zone: UTC
+  time_zone: Europe/Berlin
   ttl: 360
 selectors:
   items:
-    selector: ul[class*="list"] > li a
-    enhance: true
+    selector: div.listitemnews
+  title:
+    selector: h4
+  url:
+    selector: a[href*="/press-releases/details/"]
+    extractor: href
+  description:
+    selector: .listitemnews__text
+  published_at:
+    selector: .listitemnews__date

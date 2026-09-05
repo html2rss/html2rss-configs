@@ -11,10 +11,15 @@ channel:
   title: CSEM Switzerland — News & Innovation
   url: https://www.csem.ch/en/news/
   language: en
-  time_zone: UTC
+  time_zone: Europe/Zurich
   ttl: 360
 selectors:
   items:
-    selector: main article > a
-    enhance: true
-strategy: botasaurus
+    selector: main article.item
+  title:
+    selector: h3
+  url:
+    selector: a
+    extractor: href
+  description:
+    selector: p

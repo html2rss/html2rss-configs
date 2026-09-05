@@ -9,12 +9,9 @@ channel:
   title: Universitat Oberta de Catalunya — Newsroom
   url: https://www.uoc.edu/en/news
   language: en
-  time_zone: UTC
+  time_zone: Europe/Madrid
   ttl: 360
 selectors:
   items:
-    selector:
-      main > div > section > div > section > div > div > div > div > div >
-      div
+    selector: article.uoc-bcard
     enhance: true
-strategy: faraday
