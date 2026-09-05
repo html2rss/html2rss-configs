@@ -1,15 +1,11 @@
-GIT
-  remote: https://github.com/html2rss/html2rss
-  revision: 9ac61d13b96ff86cf2a843ba25e35584134696e1
-  ref: 9ac61d13
+PATH
+  remote: ../html2rss
   specs:
-    html2rss (0.28.0)
+    html2rss (0.29.1)
       addressable (~> 2.7)
       brotli
       dry-validation
-      faraday (> 2.0.1, < 3.0)
-      faraday-follow_redirects
-      faraday-gzip (~> 3)
+      httpx (~> 1.8)
       kramdown
       mcp (~> 1.2)
       mime-types (> 3.0)
@@ -17,7 +13,6 @@ GIT
       rack (~> 3.0)
       rackup (~> 2.0)
       regexp_parser
-      reverse_markdown (~> 3.0)
       rss
       sanitize
       thor
@@ -77,18 +72,10 @@ GEM
       dry-initializer (~> 3.2)
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
-    faraday (2.14.3)
-      faraday-net_http (>= 2.0, < 3.5)
-      json
-      logger
-    faraday-follow_redirects (0.5.0)
-      faraday (>= 1, < 3)
-    faraday-gzip (3.1.0)
-      faraday (>= 2.0, < 3)
-      zlib (~> 3.0)
-    faraday-net_http (3.4.4)
-      net-http (~> 0.5)
     hana (1.3.7)
+    http-2 (1.2.2)
+    httpx (1.8.3)
+      http-2 (>= 1.2.0)
     json (2.21.2)
     json_schemer (2.5.0)
       bigdecimal
@@ -106,8 +93,6 @@ GEM
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
     mime-types-data (3.2026.0701)
-    net-http (0.9.1)
-      uri (>= 0.11.1)
     nokogiri (1.19.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.4-x86_64-darwin)
@@ -126,8 +111,6 @@ GEM
       rack (>= 3)
     rainbow (3.1.1)
     regexp_parser (2.12.0)
-    reverse_markdown (3.0.2)
-      nokogiri
     rexml (3.4.4)
     rspec (3.13.2)
       rspec-core (~> 3.13.0)
@@ -174,10 +157,8 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
-    uri (1.1.1)
     webrick (1.9.2)
     zeitwerk (2.8.3)
-    zlib (3.2.3)
 
 PLATFORMS
   arm64-darwin-23
