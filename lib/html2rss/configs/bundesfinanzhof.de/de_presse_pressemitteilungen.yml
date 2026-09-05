@@ -9,17 +9,15 @@ directory:
 channel:
   title: "Bundesfinanzhof — Pressemitteilungen"
   url: https://www.bundesfinanzhof.de/de/presse/pressemitteilungen/
-  language: en
-  time_zone: UTC
+  language: de
+  time_zone: Europe/Berlin
   ttl: 360
 selectors:
   items:
-    selector: "article"
+    selector: "ul.o-article-list > li > article"
     enhance: false
   title:
-    selector: "h1, h2, h3, h4, h5, h6"
+    selector: "h2.m-article__headline"
   url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    selector: "a.a-link--arrowed"
     extractor: href
-  published_at:
-    selector: "time"
