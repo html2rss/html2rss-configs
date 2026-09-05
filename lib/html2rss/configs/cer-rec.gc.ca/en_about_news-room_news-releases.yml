@@ -3,23 +3,17 @@ directory:
   topics:
     - energy
     - environment
-  title: "Canada Energy Regulator — News Releases"
-  summary: "Pipeline safety, energy infrastructure approvals, and energy export data from Canada."
-
+  title: Canada Energy Regulator — News Releases
+  summary:
+    Pipeline safety, energy infrastructure approvals, and energy export data
+    from Canada.
 channel:
-  title: "Canada Energy Regulator — News Releases"
+  title: Canada Energy Regulator — News Releases
   url: https://www.cer-rec.gc.ca/en/about/news-room/news-releases/
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: 'ul[class*="list"] > li'
-    enhance: false
-  title:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: ul[class*="list"] > li a
+    enhance: true

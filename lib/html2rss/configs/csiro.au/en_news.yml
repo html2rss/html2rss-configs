@@ -3,23 +3,18 @@ directory:
   topics:
     - science
     - research
-  title: "CSIRO — News Highlights"
-  summary: "Australian national science agency research across agriculture, energy, space, and environment."
-
+  title: CSIRO — News Highlights
+  summary:
+    Australian national science agency research across agriculture, energy,
+    space, and environment.
 channel:
-  title: "CSIRO — News Highlights"
+  title: CSIRO — News Highlights
   url: https://www.csiro.au/en/news
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "div.card"
-    enhance: false
-  title:
-    selector: "h1, h2, h3, h4, h5, h6"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: main > div > div
+    enhance: true
+strategy: faraday

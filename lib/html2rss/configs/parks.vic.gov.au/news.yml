@@ -3,23 +3,18 @@ directory:
   topics:
     - environment
     - travel
-  title: "Parks Victoria — News & Media"
-  summary: "Bushland conservation, park access updates, and wildlife projects across Victoria Australia."
-
+  title: Parks Victoria — News & Media
+  summary:
+    Bushland conservation, park access updates, and wildlife projects across
+    Victoria Australia.
 channel:
-  title: "Parks Victoria — News & Media"
+  title: Parks Victoria — News & Media
   url: https://www.parks.vic.gov.au/news
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: 'li[class*="item"]'
-    enhance: false
-  title:
-    selector: "a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div.col-sm-10
+    enhance: true
+strategy: faraday

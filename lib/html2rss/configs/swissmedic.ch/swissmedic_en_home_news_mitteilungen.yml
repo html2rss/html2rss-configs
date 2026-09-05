@@ -3,23 +3,17 @@ directory:
   topics:
     - science
     - consumer
-  title: "Swissmedic — Media Releases"
-  summary: "Swiss Agency for Therapeutic Products medicine authorizations and medical device surveillance."
-
+  title: Swissmedic — Media Releases
+  summary:
+    Swiss Agency for Therapeutic Products medicine authorizations and medical
+    device surveillance.
 channel:
-  title: "Swissmedic — Media Releases"
+  title: Swissmedic — Media Releases
   url: https://www.swissmedic.ch/swissmedic/en/home/news/mitteilungen.html
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="teaser"]'
-    enhance: false
-  title:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div[class*="teaser"]
+    enhance: true

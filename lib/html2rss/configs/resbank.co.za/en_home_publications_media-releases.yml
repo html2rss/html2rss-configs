@@ -3,23 +3,18 @@ directory:
   topics:
     - finance
     - civic
-  title: "South African Reserve Bank — Media Releases"
-  summary: "Monetary Policy Committee statements and banking regulation updates from SARB South Africa."
-
+  title: South African Reserve Bank — Media Releases
+  summary:
+    Monetary Policy Committee statements and banking regulation updates from
+    SARB South Africa.
 channel:
-  title: "South African Reserve Bank — Media Releases"
+  title: South African Reserve Bank — Media Releases
   url: https://www.resbank.co.za/en/home/publications/media-releases
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="item"]'
-    enhance: false
-  title:
-    selector: "a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div
+    enhance: true
+strategy: faraday

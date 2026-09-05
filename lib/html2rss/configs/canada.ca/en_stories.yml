@@ -3,23 +3,18 @@ directory:
   topics:
     - science
     - research
-  title: "NRC Canada — Research Stories"
-  summary: "Industrial research, quantum computing, and metrology innovations from NRC Canada."
-
+  title: NRC Canada — Research Stories
+  summary:
+    Industrial research, quantum computing, and metrology innovations from
+    NRC Canada.
 channel:
-  title: "NRC Canada — Research Stories"
+  title: NRC Canada — Research Stories
   url: https://www.nrc.canada.ca/en/stories
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: main > section > div > article > div > div > div
+    enhance: true
+strategy: faraday

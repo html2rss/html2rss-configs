@@ -3,23 +3,18 @@ directory:
   topics:
     - research
     - science
-  title: "University of Edinburgh — Newsroom"
-  summary: "Scottish research innovations, medical science, and artificial intelligence discoveries from Edinburgh."
-
+  title: University of Edinburgh — Newsroom
+  summary:
+    Scottish research innovations, medical science, and artificial intelligence
+    discoveries from Edinburgh.
 channel:
-  title: "University of Edinburgh — Newsroom"
+  title: University of Edinburgh — Newsroom
   url: https://www.ed.ac.uk/news
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div.card
+    enhance: true
+strategy: faraday

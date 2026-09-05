@@ -3,23 +3,18 @@ directory:
   topics:
     - environment
     - science
-  title: "UNEP-WCMC — Biodiversity Conservation News"
-  summary: "World Conservation Monitoring Centre biodiversity data, species assessments, and marine protected areas."
-
+  title: UNEP-WCMC — Biodiversity Conservation News
+  summary:
+    World Conservation Monitoring Centre biodiversity data, species assessments,
+    and marine protected areas.
 channel:
-  title: "UNEP-WCMC — Biodiversity Conservation News"
+  title: UNEP-WCMC — Biodiversity Conservation News
   url: https://www.unep-wcmc.org/en/news
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1, h2, h3, h4, h5, h6"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: li.listing-grid__item
+    enhance: true
+strategy: faraday

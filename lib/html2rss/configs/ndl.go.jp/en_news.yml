@@ -3,23 +3,18 @@ directory:
   topics:
     - entertainment
     - research
-  title: "National Diet Library Japan — News & Events"
-  summary: "Parliamentary library collections, bibliographic data, and preservation news from NDL Japan."
-
+  title: National Diet Library Japan — News & Events
+  summary:
+    Parliamentary library collections, bibliographic data, and preservation
+    news from NDL Japan.
 channel:
-  title: "National Diet Library Japan — News & Events"
+  title: National Diet Library Japan — News & Events
   url: https://www.ndl.go.jp/en/news/
   language: en
-  time_zone: UTC
+  time_zone: Asia/Tokyo
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1, h2, h3, h4, h5, h6"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: a[href*="/en/news/fy"]
+    enhance: true
+strategy: botasaurus

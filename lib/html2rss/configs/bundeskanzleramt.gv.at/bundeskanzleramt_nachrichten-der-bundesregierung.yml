@@ -3,23 +3,17 @@ directory:
   topics:
     - civic
     - news
-  title: "Bundeskanzleramt Österreich — Nachrichten"
-  summary: "Ministerratsbeschlüsse und Regierungserklärungen aus dem Bundeskanzleramt Österreich."
-
+  title: Bundeskanzleramt Österreich — Nachrichten
+  summary:
+    Ministerratsbeschlüsse und Regierungserklärungen aus dem Bundeskanzleramt
+    Österreich.
 channel:
-  title: "Bundeskanzleramt Österreich — Nachrichten"
+  title: Bundeskanzleramt Österreich — Nachrichten
   url: https://www.bundeskanzleramt.gv.at/bundeskanzleramt/nachrichten-der-bundesregierung.html
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "div.card"
-    enhance: false
-  title:
-    selector: "h1, h2, h3, h4, h5, h6"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div.card
+    enhance: true
