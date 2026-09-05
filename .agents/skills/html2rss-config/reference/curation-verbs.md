@@ -32,8 +32,8 @@ Batch: `batch_inspect`, `batch_recon`, `batch_scrape`. CLI aliases: `feed` → `
 
 | Tool | `strategy: auto` behavior |
 | --- | --- |
-| `scrape`, `capture` | Faraday → Botasaurus fallback — **do not** retry explicit `faraday` after `auto` |
-| `inspect` | Faraday only (cheap); pin `botasaurus` when you need browser rendering |
+| `scrape`, `capture` | Default (HTTPX) → Botasaurus fallback — **do not** retry explicit `default` after `auto` |
+| `inspect` | Default only (cheap); pin `botasaurus` when you need browser rendering |
 
 ## Configs-repo note
 

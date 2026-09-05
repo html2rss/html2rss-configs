@@ -79,11 +79,11 @@ Prefer `user-html2rss` when the tool catalog shows **bare verbs** (`inspect`, `c
 
 **After gem upgrade:** If old names (`inspect_url`, `capture_config`) still appear in Cursor or calls return `-32602`, the server may be fine — **reload MCP / Cursor** until the catalog matches. Until then, use CLI (`html2rss …` from `../html2rss`) or skill scripts — authoritative fallback.
 
-**Strategy:** `scrape`/`capture` + `auto` run Faraday → Botasaurus (don’t retry `faraday` after `auto`). `inspect` + `auto` uses Faraday only; pin `botasaurus` for JS-heavy inspect.
+**Strategy:** `scrape`/`capture` + `auto` run default (HTTPX) → Botasaurus (don’t retry `default` after `auto`). `inspect` + `auto` uses default only; pin `botasaurus` for JS-heavy inspect.
 
 ## Chrome MCP
 
-Use Chrome MCP when the static HTML is unclear, the page is hydrated, or Faraday fetch returns zero items while the browser shows a valid list.
+Use Chrome MCP when the static HTML is unclear, the page is hydrated, or default fetch returns zero items while the browser shows a valid list.
 
 Recommended sequence:
 
@@ -105,7 +105,7 @@ If Chrome MCP is unavailable (`Transport closed` or page-lock errors), do this r
 Use Botasaurus when:
 
 - the page is JS-rendered
-- Faraday fetch returns zero items but Chrome shows a valid repeated list
+- default fetch returns zero items but Chrome shows a valid repeated list
 - the site is bot-sensitive enough that static fetch is unreliable
 
 Local Botasaurus notes:
@@ -132,7 +132,7 @@ Assume the `html2rss` CLI is available on `PATH` when working against the siblin
 6. Tighten selectors until the feed output is clean.
 7. Run repo validation and non-fetch tests.
 8. Run the appropriate fetch lane:
-   - plain fetch for static or Faraday-backed configs
+   - plain fetch for static or default-backed configs
    - Botasaurus fetch for JS-heavy or Botasaurus-backed configs
 
 ## Quality Gate
@@ -175,7 +175,7 @@ make test
 
 6. Focused fetch verification:
 
-- Faraday-backed candidate:
+- Default-backed candidate:
 
 ```bash
 bundle exec rspec --tag fetch --example 'example.com/feed.yml' spec/html2rss/configs_dynamic_spec.rb
@@ -219,7 +219,7 @@ Use the core CLI as the authority for single-config debugging. The quickest loop
 4. adjust selectors
 5. rerun
 
-If Botasaurus works but Faraday does not, keep the config narrow and classify it as Botasaurus-backed instead of trying to rescue it with brittle tweaks.
+If Botasaurus works but default strategy does not, keep the config narrow and classify it as Botasaurus-backed instead of trying to rescue it with brittle tweaks.
 
 Additional high-value checks:
 
@@ -240,7 +240,7 @@ html2rss scrape 'https://example.com'
 Use it to:
 
 - discover likely repeated item selectors
-- compare Faraday and Botasaurus behavior quickly
+- compare default and Botasaurus behavior quickly
 - decide whether a site belongs in the curated set at all
 
 Do not ship raw scrape output without manual tightening into a curated config.

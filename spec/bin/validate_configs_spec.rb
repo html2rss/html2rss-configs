@@ -20,6 +20,28 @@ RSpec.describe 'bin/validate_configs' do # rubocop:disable RSpec/DescribeClass
     end
   end
 
+  it 'fails validation when config violates schema' do
+    Dir.mktmpdir do |dir|
+      FileUtils.mkdir_p(File.join(dir, File.dirname(config_path)))
+      File.write(File.join(dir, config_path), 'channel: {}')
+
+      expect { run_script(dir) }.to raise_error(SystemExit) do |error|
+        expect(error.status).to eq(1)
+      end
+    end
+  end
+
+  it 'fails validation when YAML is malformed' do
+    Dir.mktmpdir do |dir|
+      FileUtils.mkdir_p(File.join(dir, File.dirname(config_path)))
+      File.write(File.join(dir, config_path), 'invalid: [yaml: {')
+
+      expect { run_script(dir) }.to raise_error(SystemExit) do |error|
+        expect(error.status).to eq(1)
+      end
+    end
+  end
+
   def with_temp_config
     Dir.mktmpdir do |dir|
       write_config(dir)

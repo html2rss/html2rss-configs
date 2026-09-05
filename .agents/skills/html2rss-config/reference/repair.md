@@ -6,7 +6,7 @@ Fix one existing config. Runtime debugging: [AGENTS.md](../../../../AGENTS.md) �
 
 1. Read YAML: `channel.url`, selectors, `strategy`.
 2. `scripts/check_config <path>` (or `html2rss validate` + `apply`).
-3. Zero items on Faraday → Botasaurus (`check_config … --botasaurus`); if works → `strategy: botasaurus` + `register_botasaurus`.
+3. Zero items on default strategy → Botasaurus (`check_config … --botasaurus`); if works → `strategy: botasaurus` + `register_botasaurus`.
 4. Still wrong → Chrome MCP snapshot; confirm item boundary and post-redirect URL.
 5. CLI `apply` OK but fetch spec fails → request-strategy mismatch; prefer Botasaurus or drop.
 6. Botasaurus 422/504 → [pitfalls.md](pitfalls.md).
