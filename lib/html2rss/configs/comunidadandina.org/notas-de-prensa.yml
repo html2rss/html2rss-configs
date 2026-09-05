@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - civic
+    - news
+  title: "Comunidad Andina — Notas de Prensa"
+  summary: "Integración subregional andina, comercio y desarrollo de la CAN."
+
+channel:
+  title: "Comunidad Andina — Notas de Prensa"
+  url: https://www.comunidadandina.org/notas-de-prensa/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="item"]'
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

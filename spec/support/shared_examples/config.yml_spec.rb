@@ -115,7 +115,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   end
 
   context "when fetching #{params}", :fetch do
-    subject(:feed) { Html2rss.feed(config.dup) }
+    subject(:rss) { Html2rss.apply(config.dup).to_rss }
 
     before do
       next unless config[:strategy].to_s == 'botasaurus'
@@ -125,7 +125,7 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     end
 
     it 'has positive amount of items' do
-      expect(feed.items.count).to be_positive, <<~MSG
+      expect(rss.items.count).to be_positive, <<~MSG
         No items fetched.
         Check the feed URL and selectors in `#{file_name}`.
 
@@ -133,14 +133,14 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
         #{config}
 
         # resulted in RSS:
-        #{feed}
+        #{rss}
       MSG
     end
   end
 
   context "when fetching #{params} / item", :fetch do
     subject(:item) do
-      items = Html2rss.feed(config.dup).items
+      items = Html2rss.apply(config.dup).to_rss.items
 
       expect(items.count).not_to be_zero, "Zero items fetched for `#{file_name}`"
 

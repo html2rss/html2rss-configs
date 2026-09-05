@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - civic
+    - news
+  title: "BMEIA Österreich — Europäische und internationale Angelegenheiten"
+  summary: "Außenpolitik, Botschaftsmeldungen, Reisehinweise und Entwicklungszusammenarbeit Österreichs."
+
+channel:
+  title: "BMEIA Österreich — Europäische und internationale Angelegenheiten"
+  url: https://www.bmeia.gv.at/ministerium/presse/aktuelles
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'li[class*="item"]'
+    enhance: false
+  title:
+    selector: "a"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

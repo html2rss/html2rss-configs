@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - environment
+    - science
+  title: "World Meteorological Organization — Global Weather & Climate News"
+  summary: "UN global weather data, Greenhouse Gas Bulletin, and State of the Global Climate reports."
+
+channel:
+  title: "World Meteorological Organization — Global Weather & Climate News"
+  url: https://wmo.int/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "div.views-row"
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - science
+    - consumer
+  title: "SAHPRA — South African Health Products Authority"
+  summary: "Health product regulation, clinical trial authorizations, and safety alerts in South Africa."
+
+channel:
+  title: "SAHPRA — South African Health Products Authority"
+  url: https://www.sahpra.org.za/press-releases/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="post"]'
+    enhance: false
+  title:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+  url:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    extractor: href
+  published_at:
+    selector: "time"

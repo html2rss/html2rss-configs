@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - civic
+    - news
+  title: "Land Berlin — Pressemitteilungen"
+  summary: "Meldungen des Senats von Berlin, Stadtentwicklung, Kultur und Wirtschaft."
+
+channel:
+  title: "Land Berlin — Pressemitteilungen"
+  url: https://www.berlin.de/presse/pressemitteilungen/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "table tbody tr"
+    enhance: false
+  title:
+    selector: "a"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

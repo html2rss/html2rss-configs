@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - finance
+    - civic
+  title: "IRAS Singapore — Inland Revenue Newsroom"
+  summary: "Tax policy updates, GST adjustments, corporate tax incentives, and digital tax services."
+
+channel:
+  title: "IRAS Singapore — Inland Revenue Newsroom"
+  url: https://www.iras.gov.sg/news-events/newsroom
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article"
+    enhance: false
+  title:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+  url:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    extractor: href
+  published_at:
+    selector: "time"

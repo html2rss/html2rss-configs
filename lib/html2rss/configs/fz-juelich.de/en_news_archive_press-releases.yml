@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+  title: "Forschungszentrum Jülich — Press Releases"
+  summary: "Supercomputing (JUPITER exascale), brain research, and green hydrogen systems."
+
+channel:
+  title: "Forschungszentrum Jülich — Press Releases"
+  url: https://www.fz-juelich.de/en/news/archive/press-releases
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "li.item"
+    enhance: false
+  title:
+    selector: "a"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

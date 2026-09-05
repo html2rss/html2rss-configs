@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - civic
+    - news
+  title: "Landesregierung Baden-Württemberg — Pressemitteilungen"
+  summary: "Meldungen des Staatsministeriums Baden-Württemberg, Wirtschaft, Umwelt und Kultur."
+
+channel:
+  title: "Landesregierung Baden-Württemberg — Pressemitteilungen"
+  url: https://www.baden-wuerttemberg.de/de/service/presse/pressemitteilungen
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article.teaser"
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"

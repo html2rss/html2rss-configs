@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - civic
+  title: "IMDA Singapore — Infocomm Media Authority"
+  summary: "Digital economy blueprints, 5G standalone networks, and AI governance frameworks in Singapore."
+
+channel:
+  title: "IMDA Singapore — Infocomm Media Authority"
+  url: https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/press-releases
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'a[href*="/press-release"]'
+    enhance: false
+  title:
+    selector: "p, span, strong"
+  url:
+    extractor: href
+  published_at:
+    selector: "time"

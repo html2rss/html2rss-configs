@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - research
+  title: "Alan Turing Institute — News & Research"
+  summary: "Artificial intelligence and data science breakthrough research from the UK Alan Turing Institute."
+
+channel:
+  title: "Alan Turing Institute — News & Research"
+  url: https://www.turing.ac.uk/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: "article"
+    enhance: false
+  title:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+  url:
+    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    extractor: href
+  published_at:
+    selector: "time"

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - entertainment
+    - civic
+  title: "Gallerie degli Uffizi — News & Events"
+  summary: "Renaissance art exhibitions, restoration updates, and cultural announcements from Le Gallerie degli Uffizi."
+
+channel:
+  title: "Gallerie degli Uffizi — News & Events"
+  url: https://www.uffizi.it/en/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: 'div[class*="item"]'
+    enhance: false
+  title:
+    selector: "h1, h2, h3, h4, h5, h6"
+  url:
+    selector: "a"
+    extractor: href
+  published_at:
+    selector: "time"
