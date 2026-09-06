@@ -3,23 +3,25 @@ directory:
   topics:
     - tech
     - research
-  title: "Technical University of Munich — Press Releases"
-  summary: "Robotics, aerospace, green tech, and engineering breakthroughs from TU Munich Germany."
-
+  title: Technical University of Munich — Press Releases
+  summary:
+    Robotics, aerospace, green tech, and engineering breakthroughs from TU
+    Munich Germany.
 channel:
-  title: "Technical University of Munich — Press Releases"
+  title: Technical University of Munich — Press Releases
   url: https://www.tum.de/en/news-and-events/all-news/press-releases
   language: en
-  time_zone: UTC
+  time_zone: Europe/Berlin
   ttl: 360
 selectors:
   items:
-    selector: 'ul[class*="news"] > li'
-    enhance: false
+    selector: div.listitemnews
   title:
-    selector: "a"
+    selector: h4
   url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    selector: a[href*="/press-releases/details/"]
     extractor: href
+  description:
+    selector: .listitemnews__text
   published_at:
-    selector: "time"
+    selector: .listitemnews__date

@@ -3,23 +3,16 @@ directory:
   topics:
     - finance
     - civic
-  title: "Hong Kong Monetary Authority — Press Releases"
-  summary: "Monetary base, banking stability, and exchange fund releases from the HKMA."
-
+  title: Hong Kong Monetary Authority — Press Releases
+  summary: Monetary base, banking stability, and exchange fund releases from the HKMA.
 channel:
-  title: "Hong Kong Monetary Authority — Press Releases"
+  title: Hong Kong Monetary Authority — Press Releases
   url: https://www.hkma.gov.hk/eng/news-and-media/press-releases/
   language: en
-  time_zone: UTC
+  time_zone: Asia/Hong_Kong
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="item"]'
-    enhance: false
-  title:
-    selector: "a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: a[href*="/press-releases/20"]
+    enhance: true
+strategy: botasaurus

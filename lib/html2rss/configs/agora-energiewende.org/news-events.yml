@@ -3,23 +3,17 @@ directory:
   topics:
     - energy
     - environment
-  title: "Agora Energiewende — News & Events"
-  summary: "Decarbonisation roadmaps, power sector transformation, and climate neutrality strategies."
-
+  title: Agora Energiewende — News & Events
+  summary:
+    Decarbonisation roadmaps, power sector transformation, and climate neutrality
+    strategies.
 channel:
-  title: "Agora Energiewende — News & Events"
+  title: Agora Energiewende — News & Events
   url: https://www.agora-energiewende.org/news-events
   language: en
-  time_zone: UTC
+  time_zone: Europe/Berlin
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: .teaser a
+    enhance: true

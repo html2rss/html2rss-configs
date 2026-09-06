@@ -3,23 +3,15 @@ directory:
   topics:
     - research
     - science
-  title: "University of Edinburgh — Newsroom"
-  summary: "Scottish research innovations, medical science, and artificial intelligence discoveries from Edinburgh."
-
+  title: University of Edinburgh — Latest News
+  summary: Research and university news from the University of Edinburgh.
 channel:
-  title: "University of Edinburgh — Newsroom"
-  url: https://www.ed.ac.uk/news
+  title: University of Edinburgh — Latest News
+  url: https://www.ed.ac.uk/news/latest
   language: en
-  time_zone: UTC
+  time_zone: Europe/London
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div.card
+    enhance: true

@@ -3,23 +3,15 @@ directory:
   topics:
     - research
     - tech
-  title: "Universitat Oberta de Catalunya — Newsroom"
-  summary: "Digital education, e-learning research, and knowledge transfer from UOC."
-
+  title: Universitat Oberta de Catalunya — Newsroom
+  summary: Digital education, e-learning research, and knowledge transfer from UOC.
 channel:
-  title: "Universitat Oberta de Catalunya — Newsroom"
+  title: Universitat Oberta de Catalunya — Newsroom
   url: https://www.uoc.edu/en/news
   language: en
-  time_zone: UTC
+  time_zone: Europe/Madrid
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1, h2, h3, h4, h5, h6"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: article.uoc-bcard
+    enhance: true

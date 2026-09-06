@@ -3,23 +3,17 @@ directory:
   topics:
     - civic
     - news
-  title: "Conseil Constitutionnel France — Actualités"
-  summary: "Décisions de conformité, déclarations et actualités du Conseil constitutionnel de France."
-
+  title: Conseil Constitutionnel France — Actualités
+  summary:
+    Décisions de conformité, déclarations et actualités du Conseil constitutionnel
+    de France.
 channel:
-  title: "Conseil Constitutionnel France — Actualités"
+  title: Conseil Constitutionnel France — Actualités
   url: https://www.conseil-constitutionnel.fr/actualites
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "h1, h2, h3, h4, h5, h6"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div[class*="item"] a
+    enhance: true

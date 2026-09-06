@@ -3,23 +3,23 @@ directory:
   topics:
     - tech
     - research
-  title: "CSEM Switzerland — News & Innovation"
-  summary: "Microtechnology, photovoltaics, and precision manufacturing innovations from CSEM Switzerland."
-
+  title: CSEM Switzerland — News & Innovation
+  summary:
+    Microtechnology, photovoltaics, and precision manufacturing innovations
+    from CSEM Switzerland.
 channel:
-  title: "CSEM Switzerland — News & Innovation"
+  title: CSEM Switzerland — News & Innovation
   url: https://www.csem.ch/en/news/
   language: en
-  time_zone: UTC
+  time_zone: Europe/Zurich
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
+    selector: main article.item
   title:
-    selector: "h1, h2, h3, h4, h5, h6"
+    selector: h3
   url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
+    selector: a
     extractor: href
-  published_at:
-    selector: "time"
+  description:
+    selector: p

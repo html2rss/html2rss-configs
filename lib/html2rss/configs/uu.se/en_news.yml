@@ -3,23 +3,17 @@ directory:
   topics:
     - research
     - science
-  title: "Uppsala University — News Highlights"
-  summary: "Pharmaceutical science, energy storage, and historical research from Uppsala Sweden."
-
+  title: Uppsala University — News Highlights
+  summary:
+    Pharmaceutical science, energy storage, and historical research from Uppsala
+    Sweden.
 channel:
-  title: "Uppsala University — News Highlights"
+  title: Uppsala University — News Highlights
   url: https://www.uu.se/en/news
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: "article"
-    enhance: false
-  title:
-    selector: "a"
-  url:
-    selector: "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a"
-    extractor: href
-  published_at:
-    selector: "time"
+    selector: div.card
+    enhance: true
