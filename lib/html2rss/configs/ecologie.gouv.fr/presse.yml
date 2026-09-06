@@ -17,4 +17,3 @@ selectors:
   items:
     selector: div.fr-col
     enhance: true
-strategy: faraday

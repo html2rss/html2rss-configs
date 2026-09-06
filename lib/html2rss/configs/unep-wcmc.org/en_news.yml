@@ -17,4 +17,3 @@ selectors:
   items:
     selector: li.listing-grid__item
     enhance: true
-strategy: faraday
