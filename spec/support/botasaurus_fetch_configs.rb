@@ -12,9 +12,11 @@ module BotasaurusFetchConfigs
     chathamhouse.org/research-publications.yml
     curia.europa.eu/press-releases.yml
     ethz.ch/eth-news.yml
+    hkma.gov.hk/eng_news-and-media_press-releases.yml
     iiss.org/online-analysis.yml
     imdb.com/ratings.yml
     imo.org/press-briefings.yml
+    ndl.go.jp/en_news.yml
     ntu.edu.sg/news.yml
     occrp.org/news.yml
     oecd.org/newsroom.yml

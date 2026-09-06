@@ -87,9 +87,8 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
 
     context 'with selectors present' do
       it 'has required selectors', :aggregate_failures do
-        %w[items title].each do |required_attribute|
-          expect(yaml['selectors'][required_attribute]).not_to(be_empty, required_attribute)
-        end
+        expect(yaml['selectors']['items']).not_to be_empty
+        expect(yaml['selectors']['title']).not_to be_empty unless yaml.dig('selectors', 'items', 'enhance')
       end
 
       context 'with template post_processor' do

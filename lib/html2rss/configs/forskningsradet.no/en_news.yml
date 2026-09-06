@@ -17,4 +17,3 @@ selectors:
   items:
     selector: main > div > div > div
     enhance: true
-strategy: faraday
