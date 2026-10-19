@@ -1,32 +1,8 @@
-GIT
-  remote: https://github.com/html2rss/html2rss
-  revision: 4260c842a5632fbef712cf3bee3a4fddcfee3654
-  ref: 4260c842
-  specs:
-    html2rss (0.29.1)
-      addressable (~> 2.7)
-      brotli
-      dry-validation
-      httpx (~> 1.8)
-      kramdown
-      mcp (~> 1.2)
-      mime-types (> 3.0)
-      nokogiri (>= 1.10, < 2.0)
-      rack (~> 3.0)
-      rackup (~> 2.0)
-      regexp_parser
-      rss
-      sanitize
-      thor
-      tzinfo
-      webrick (~> 1.9)
-      zeitwerk
-
 PATH
   remote: .
   specs:
     html2rss-configs (0.2.0)
-      html2rss
+      html2rss (~> 0.31)
 
 GEM
   remote: https://rubygems.org/
@@ -75,6 +51,24 @@ GEM
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
     hana (1.3.7)
+    html2rss (0.31.0)
+      addressable (~> 2.7)
+      brotli
+      dry-validation
+      httpx (~> 1.8)
+      kramdown
+      mcp (~> 1.2)
+      mime-types (> 3.0)
+      nokogiri (>= 1.10, < 2.0)
+      rack (~> 3.0)
+      rackup (~> 2.0)
+      regexp_parser
+      rss
+      sanitize
+      thor
+      tzinfo
+      webrick (~> 1.9)
+      zeitwerk
     http-2 (1.2.2)
     httpx (1.8.3)
       http-2 (>= 1.2.0)
@@ -170,7 +164,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  html2rss!
+  html2rss (~> 0.31)
   html2rss-configs!
   nokogiri
   public_suffix
@@ -180,4 +174,4 @@ DEPENDENCIES
   rubocop-rspec
 
 BUNDLED WITH
-   2.6.6
+  4.0.21

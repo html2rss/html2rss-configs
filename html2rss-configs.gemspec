@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description = 'Configs which contain information how to generate RSS items from websites.'
   spec.homepage = 'https://github.com/html2rss/html2rss-configs'
   spec.license = 'MIT'
-  spec.required_ruby_version = '>= 3.1'
+  spec.required_ruby_version = '>= 3.3'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -42,5 +42,5 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'html2rss'
+  spec.add_dependency 'html2rss', '~> 0.31'
 end
