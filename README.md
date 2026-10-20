@@ -1,4 +1,4 @@
-![html2rss logo](https://github.com/html2rss/html2rss/raw/master/support/logo.png)
+![html2rss logo](https://html2rss.github.io/assets/logo.png)
 
 # html2rss-configs
 
