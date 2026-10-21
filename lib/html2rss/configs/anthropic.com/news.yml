@@ -13,9 +13,18 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'ul[class*="PublicationList"] > li > a[href^="/news/"]'
+    selector: 'li[data-listing-row^="article-"]'
     enhance: false
   title:
-    selector: '[class*="__title"]'
+    selector: 'a[class*="__title-link"] h3, h3'
+  description:
+    selector: 'div[class*="__description"] p'
   url:
+    selector: 'a[class*="__title-link"]'
     extractor: href
+  published_at:
+    selector: "time"
+  categories:
+    - category
+  category:
+    selector: 'div[class*="__category"] a'
