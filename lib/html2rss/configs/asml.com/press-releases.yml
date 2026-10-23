@@ -5,17 +5,22 @@ directory:
     - product
   title: "ASML — Press releases"
   summary: "Corporate press releases from semiconductor equipment maker ASML."
+strategy: botasaurus
+
 channel:
   title: "ASML — Press releases"
-  url: https://www.asml.com/en/news/press-releases
+  url: https://investor.asml.com/news/press-releases-and-announcements
   language: en
   time_zone: Europe/Amsterdam
   ttl: 360
 selectors:
   items:
-    selector: 'a.related-content-card[href*="/en/news/press-releases/20"]'
+    selector: div.node--nir-news--nir-widget-list
     enhance: false
   title:
-    selector: .related-content-card-title
+    selector: .nir-widget--news--headline a
   url:
+    selector: .nir-widget--news--headline a
     extractor: href
+  published_at:
+    selector: .nir-widget--news--date-time

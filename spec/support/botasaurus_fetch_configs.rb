@@ -5,6 +5,7 @@ module BotasaurusFetchConfigs
     aalto.fi/news.yml
     academictransfer.com/jobs.yml
     apple.com/newsroom.yml
+    asml.com/press-releases.yml
     aspi.org.au/strategist.yml
     bundesregierung.de/pressemitteilungen.yml
     carnegieendowment.org/research.yml
