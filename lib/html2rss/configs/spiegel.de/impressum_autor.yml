@@ -18,20 +18,9 @@ channel:
 selectors:
   items:
     selector: '[data-block-el="articleTeaser"] > article'
+    enhance: false
   title:
-    selector: "h2"
-  prefixed_title:
     selector: "h2"
   url:
     selector: "section > a"
     extractor: "href"
-  description:
-    selector: ".leading-loose"
-  published_at:
-    selector: "footer"
-    extractor: text
-    post_process:
-      - name: substring
-        start: 0
-        end: -5
-      - name: parse_time

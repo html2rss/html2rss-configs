@@ -15,13 +15,14 @@ channel:
   ttl: 360
 request:
   botasaurus:
-    wait_for_selector: "td.NewsItemHeadline a"
+    wait_for_selector: "td.NewsItemText"
     wait_timeout_seconds: 20
 selectors:
   items:
-    selector: "td.NewsItemHeadline a"
+    selector: "td.NewsItemText"
     enhance: false
   title:
-    extractor: text
+    selector: a
   url:
+    selector: a
     extractor: href
