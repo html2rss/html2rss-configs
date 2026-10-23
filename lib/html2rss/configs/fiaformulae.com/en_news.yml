@@ -14,11 +14,10 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'a[href*="/news/"]:has(h2, h3, h4, p, span)'
+    selector: article.article-card_articleCard__4IED5
     enhance: false
   title:
-    selector: "h1, h2, h3, h4, h5, h6"
+    selector: h2, h3, h4
   url:
+    selector: a
     extractor: href
-  published_at:
-    selector: "time"
