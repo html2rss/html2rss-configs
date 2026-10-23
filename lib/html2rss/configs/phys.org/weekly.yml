@@ -13,6 +13,7 @@ channel:
 selectors:
   items:
     selector: ".sorted-news-list .sorted-article-content"
+    enhance: false
   title:
     selector: "h4"
   category:
