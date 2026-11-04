@@ -23,7 +23,7 @@ module Helper
   # @return [String, nil]
   def self.url_to_host_name(url)
     Html2rss::Url.for_channel(url)&.host
-  rescue ArgumentError
+  rescue Html2rss::Url::InvalidUrlError
     nil
   end
 
