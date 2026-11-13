@@ -77,8 +77,6 @@ Prefer `user-html2rss` when the tool catalog shows **bare verbs** (`inspect`, `c
 
 **Setup:** `BOTASAURUS_SCRAPER_URL` on the MCP process (`mcp.json`), not only your shell. Read `html2rss://runtime` when `next_step` is `read_runtime`.
 
-**After gem upgrade:** If old names (`inspect_url`, `capture_config`) still appear in Cursor or calls return `-32602`, the server may be fine — **reload MCP / Cursor** until the catalog matches. Until then, use CLI (`html2rss …` from `../html2rss`) or skill scripts — authoritative fallback.
-
 **Strategy:** `scrape`/`capture` + `auto` run default (HTTPX) → Botasaurus (don’t retry `default` after `auto`). `inspect` + `auto` uses default only; pin `botasaurus` for JS-heavy inspect.
 
 ## Chrome MCP
@@ -125,7 +123,7 @@ Assume the `html2rss` CLI is available on `PATH` when working against the siblin
 ## Fast Path
 
 1. Find the cleanest stable candidate URL.
-2. Inspect the DOM in Chrome MCP before writing selectors.
+2. Inspect the page before writing selectors (`inspect` / `capture`; Chrome MCP when the static HTML is unclear or hydrated).
 3. Create the YAML with the schema modeline and minimal selectors.
 4. Validate the single file with the core CLI.
 5. Generate a live feed with `html2rss apply`.
