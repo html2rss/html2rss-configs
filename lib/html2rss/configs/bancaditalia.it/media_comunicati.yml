@@ -14,12 +14,10 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="item"]'
+    selector: "li:has(a.bdi-result-title)"
     enhance: false
   title:
-    selector: "a"
+    selector: "a.bdi-result-title"
   url:
-    selector: "a"
+    selector: "a.bdi-result-title"
     extractor: href
-  published_at:
-    selector: "time"

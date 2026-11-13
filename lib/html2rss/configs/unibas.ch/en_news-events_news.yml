@@ -14,12 +14,11 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="media"]'
+    selector: 'a[href^="/en/News-Events/News/"]'
     enhance: false
   title:
-    selector: "h1, h2, h3, h4, h5, h6"
+    selector: "h2"
+  description:
+    selector: "p"
   url:
-    selector: "a"
     extractor: href
-  published_at:
-    selector: "time"

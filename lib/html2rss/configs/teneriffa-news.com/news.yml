@@ -15,16 +15,16 @@ selectors:
   items:
     selector: ".main-content article"
   title:
-    selector: "h2"
+    selector: ".tn-h3"
   url:
     selector: "a"
     extractor: "href"
   img_url:
     selector: "img"
     extractor: "attribute"
-    attribute: "data-lazy-src"
+    attribute: "src"
   description:
-    selector: ".excerpt"
+    selector: ".card-excerpt"
     post_process:
       - name: template
         string: |

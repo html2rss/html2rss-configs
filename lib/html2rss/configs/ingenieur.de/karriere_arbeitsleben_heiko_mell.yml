@@ -13,11 +13,9 @@ channel:
   time_zone: UTC
 selectors:
   items:
-    selector: ".section > .ing-teaser"
+    selector: "article.post-teaser-small"
   title:
-    selector: ".ing-teaser__headline"
+    selector: "h3"
   url:
-    selector: a:first
+    selector: "a.is-fullsize-link"
     extractor: href
-  description:
-    selector: ".ing-teaser__excerpt"
