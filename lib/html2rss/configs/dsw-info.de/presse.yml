@@ -7,22 +7,19 @@ directory:
   summary: "Pressemitteilungen der Deutschen Stiftung Weltbevölkerung."
 channel:
   title: "Deutsche Stiftung Weltbevölkerung — Presse"
-  url: https://www.dsw-info.de/presse/pressemitteilungen-2026/
+  url: https://www.dsw-info.de/presse/pressemitteilungen
   time_zone: Europe/Berlin
   ttl: 720
   language: de
 selectors:
   items:
-    selector: "main .frame.cet-menu ul > li"
+    selector: "a.card-link"
     enhance: false
   title:
-    selector: "a"
+    selector: "h4"
   url:
-    selector: "a"
-    extractor: "href"
+    extractor: href
   published_at:
-    selector: ".vd small"
-    post_process:
-      - name: parse_time
+    selector: "time"
   description:
-    selector: ".bt small"
+    selector: ".teaser-text"

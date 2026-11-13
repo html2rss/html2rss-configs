@@ -15,5 +15,11 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: main > div > div > div
-    enhance: true
+    selector: "a.card"
+    enhance: false
+  title:
+    selector: "h3"
+  url:
+    extractor: href
+  published_at:
+    selector: "time"

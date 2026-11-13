@@ -7,13 +7,13 @@ directory:
   summary: "Corporate and energy news from Vattenfall."
 channel:
   title: "Vattenfall — Newsroom"
-  url: https://group.vattenfall.com/press-and-media/newsroom
+  url: https://group.vattenfall.com/press-and-media
   language: en
   time_zone: Europe/Stockholm
   ttl: 360
 selectors:
   items:
-    selector: 'a.main-link[href*="/press-and-media/newsroom/20"]'
+    selector: 'a.main-link[href*="/press-and-media/"]'
     enhance: false
   title:
     extractor: text

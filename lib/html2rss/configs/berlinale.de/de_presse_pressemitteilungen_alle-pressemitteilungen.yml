@@ -13,12 +13,10 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="item"]'
+    selector: ".lr__content"
     enhance: false
   title:
-    selector: "a"
+    selector: "h2 a"
   url:
-    selector: "a"
+    selector: "h2 a"
     extractor: href
-  published_at:
-    selector: "time"
