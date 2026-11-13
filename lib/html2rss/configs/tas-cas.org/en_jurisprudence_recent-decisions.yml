@@ -8,18 +8,26 @@ directory:
 
 channel:
   title: "Court of Arbitration for Sport — Decisions & News"
-  url: https://www.tas-cas.org/en/media/recent-decisions.html
+  url: https://www.tas-cas.org/en/jurisprudence/recent-decisions
   language: en
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="item"]'
+    selector: 'a[href$=".pdf"]'
     enhance: false
   title:
-    selector: "h1, h2, h3, h4, h5, h6"
+    selector: ".quick-link-text"
   url:
-    selector: "a"
     extractor: href
-  published_at:
-    selector: "time"
+    post_process:
+      - name: gsub
+        pattern: "/en/jurisprudence/generated"
+        replacement: "/generated"
+  enclosure:
+    extractor: href
+    content_type: application/pdf
+    post_process:
+      - name: gsub
+        pattern: "/en/jurisprudence/generated"
+        replacement: "/generated"
