@@ -20,14 +20,6 @@ selectors:
     selector: ".quick-link-text"
   url:
     extractor: href
-    post_process:
-      - name: gsub
-        pattern: "/en/jurisprudence/generated"
-        replacement: "/generated"
   enclosure:
     extractor: href
     content_type: application/pdf
-    post_process:
-      - name: gsub
-        pattern: "/en/jurisprudence/generated"
-        replacement: "/generated"
