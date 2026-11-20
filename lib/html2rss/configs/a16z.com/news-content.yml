@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - tech
+    - finance
+  title: "a16z — News and content"
+  summary: "Essays, investment announcements and podcasts from Andreessen Horowitz."
+channel:
+  title: "a16z — News and content"
+  url: https://a16z.com/news-content/
+  language: en
+  time_zone: UTC
+  ttl: 720
+selectors:
+  items:
+    selector: "main [data-feed-item]"
+    enhance: false
+  title:
+    selector: "h4 a"
+  url:
+    selector: "h4 a"
+    extractor: href
