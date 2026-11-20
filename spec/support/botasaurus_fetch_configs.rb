@@ -23,6 +23,7 @@ module BotasaurusFetchConfigs
     oecd.org/newsroom.yml
     opec.org/press-releases.yml
     panapress.com/latest.yml
+    pei.de/news.yml
     stackoverflow.com/hot_network_questions.yml
     support.apple.com/en_gb_ht201222.yml
     tap.info.tn/politics.yml
