@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - education
+  title: "Canva — Learn"
+  summary: "Design, marketing and branding guides from the Canva Learn blog."
+channel:
+  title: "Canva — Learn"
+  url: https://www.canva.com/learn/
+  language: en
+  time_zone: UTC
+  ttl: 1440
+selectors:
+  items:
+    selector: "article"
+    enhance: false
+  title:
+    selector: "h2, h3"
+  url:
+    selector: "a:has(h2), a:has(h3)"
+    extractor: href
