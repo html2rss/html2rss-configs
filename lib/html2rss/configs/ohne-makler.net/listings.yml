@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - consumer
+  title: "ohne-makler.net — Property listings"
+  summary: "Commission-free property listings for sale and rent from private owners (city as parameter)."
+parameters:
+  city:
+    type: string
+    default: "berlin"
+
+channel:
+  title: "ohne-makler.net — Property listings"
+  url: https://www.ohne-makler.net/immobilien/%<city>s/
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 360
+  description: "Commission-free property listings in %<city>s on ohne-makler.net."
+selectors:
+  items:
+    selector: "a[data-om-id]"
+    enhance: false
+  title:
+    selector: "h4"
+  url:
+    extractor: href
