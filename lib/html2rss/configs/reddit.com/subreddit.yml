@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
+    - tech
+  title: "Reddit — Subreddit posts"
+  summary: "Posts from a subreddit by hot, new, top, rising or best (r and sort as parameters; r=popular for the front page)."
+strategy: botasaurus
+
+parameters:
+  r:
+    type: string
+    default: "programming"
+  sort:
+    type: string
+    default: "new"
+
+channel:
+  title: "Reddit — Subreddit posts"
+  url: https://www.reddit.com/r/%<r>s/%<sort>s/?feedViewType=compactView
+  language: en
+  time_zone: UTC
+  ttl: 360
+  description: "%<sort>s posts in r/%<r>s."
+request:
+  botasaurus:
+    scroll: true
+    wait_for_selector: "shreddit-post"
+    wait_timeout_seconds: 20
+selectors:
+  items:
+    selector: "shreddit-post"
+    enhance: false
+  title:
+    extractor: attribute
+    attribute: post-title
+  url:
+    extractor: attribute
+    attribute: permalink
+  author:
+    extractor: attribute
+    attribute: author
+  published_at:
+    extractor: attribute
+    attribute: created-timestamp
