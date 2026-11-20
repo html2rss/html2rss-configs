@@ -6,6 +6,9 @@ name: Ruby
   pull_request:
     branches: [master]
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
