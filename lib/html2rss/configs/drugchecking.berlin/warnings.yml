@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - health
+  title: "Drug-Checking Berlin — Substance warnings"
+  summary: "Current warnings about contaminated or mislabelled substances found by the Berlin drug-checking service."
+channel:
+  title: "Drug-Checking Berlin — Substance warnings"
+  url: https://drugchecking.berlin/aktuelle-warnungen
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 360
+selectors:
+  items:
+    selector: ".js-filter > div:nth-child(-n+30)"
+    enhance: false
+  title:
+    selector: "p.uk-text-center"
+  url:
+    selector: "a[uk-toggle]"
+    extractor: href
+  description:
+    selector: ".uk-modal-dialog"
+    extractor: html
+    post_process:
+      - name: sanitize_html

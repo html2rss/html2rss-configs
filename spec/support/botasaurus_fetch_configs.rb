@@ -7,6 +7,7 @@ module BotasaurusFetchConfigs
     apple.com/newsroom.yml
     asml.com/press-releases.yml
     aspi.org.au/strategist.yml
+    booking.com/articles.yml
     bundesregierung.de/pressemitteilungen.yml
     carnegieendowment.org/research.yml
     chalmers.se/news.yml
@@ -23,6 +24,8 @@ module BotasaurusFetchConfigs
     oecd.org/newsroom.yml
     opec.org/press-releases.yml
     panapress.com/latest.yml
+    pei.de/news.yml
+    reddit.com/subreddit.yml
     stackoverflow.com/hot_network_questions.yml
     support.apple.com/en_gb_ht201222.yml
     tap.info.tn/politics.yml

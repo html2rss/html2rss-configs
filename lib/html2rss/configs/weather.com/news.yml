@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
+    - environment
+  title: "The Weather Channel — News"
+  summary: "Severe weather, storm and climate news and explainer videos from weather.com."
+channel:
+  title: "The Weather Channel — News"
+  url: https://weather.com/news
+  language: en
+  time_zone: America/New_York
+  ttl: 180
+selectors:
+  items:
+    selector: "a[href^='/20']"
+    enhance: false
+  title:
+    selector: "h2, h3, h4"
+  url:
+    extractor: href
