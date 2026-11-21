@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - news
+    - civic
+  title: "BFU — Nachrichten"
+  summary: "Meldungen und Medieninformationen der Bundesstelle für Flugunfalluntersuchung."
+channel:
+  title: "BFU — Nachrichten"
+  url: https://www.bfu-web.de/DE/Home/home_node.html
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 720
+selectors:
+  items:
+    selector: "#content .wrapper-teaser > .teaser"
+    enhance: false
+  title:
+    selector: "h1 a"
+  url:
+    selector: "h1 a"
+    extractor: href
