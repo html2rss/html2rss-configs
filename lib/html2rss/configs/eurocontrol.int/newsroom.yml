@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - transport
+    - travel
+  title: "EUROCONTROL — Newsroom"
+  summary: "News and press releases from EUROCONTROL on European air traffic management."
+channel:
+  title: "EUROCONTROL — Newsroom"
+  url: https://www.eurocontrol.int/newsroom
+  language: en
+  time_zone: Europe/Brussels
+  ttl: 720
+selectors:
+  items:
+    selector: ".card:has(.card-footer a[href])"
+    enhance: false
+  title:
+    selector: ".field--promo-title h3"
+  url:
+    selector: ".card-footer a"
+    extractor: href
+  published_at:
+    selector: ".field--publication-date time"
+    extractor: attribute
+    attribute: datetime

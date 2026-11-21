@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - transport
+    - tech
+  title: "MTU Aero Engines — Pressemitteilungen"
+  summary: "Aktuelle Pressemitteilungen von MTU Aero Engines zu Triebwerken, Geschäftszahlen und Aufträgen."
+channel:
+  title: "MTU Aero Engines — Pressemitteilungen"
+  url: https://www.mtu.de/de/newsroom/presse/aktuelle-presseinformationen/
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 720
+selectors:
+  items:
+    selector: ".news-list-view .article"
+    enhance: false
+  title:
+    selector: ".newsheader-with-date a"
+  url:
+    selector: ".newsheader-with-date a"
+    extractor: href
+  description:
+    selector: ".teaser-text p"
+  published_at:
+    selector: ".news-list-date"
+    post_process:
+      - name: parse_time
