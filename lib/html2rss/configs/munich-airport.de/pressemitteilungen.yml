@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
 directory:
   topics:
-    - news
+    - transport
     - travel
   title: "Flughafen München — Pressemitteilungen"
   summary: "Pressemitteilungen des Flughafens München zu Betrieb, Verkehr, Projekten und Unternehmensnachrichten."
