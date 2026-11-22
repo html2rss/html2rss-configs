@@ -18,13 +18,10 @@ DIST_DIR = File.join(REPO_ROOT, 'dist')
 # @return [void]
 def validate_config!(staging, relative_path)
   absolute_path = File.join(staging, relative_path)
-  result = Html2rss::Config.validate_yaml(absolute_path)
+  result = Html2rss.validate(absolute_path)
   return if result.success?
 
-  messages = result.errors.to_h.flat_map do |key, values|
-    Array(values).map { |message| "#{key}: #{message}" }
-  end
-  abort "Validation failed for #{relative_path}:\n  #{messages.join("\n  ")}"
+  abort "Validation failed for #{relative_path}:\n  #{result.issues.join("\n  ")}"
 end
 
 ##

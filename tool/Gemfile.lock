@@ -1,15 +1,13 @@
 GIT
   remote: https://github.com/html2rss/html2rss.git
-  revision: 5044272b9dcf404a1ef550e0496508cd6ce5687e
+  revision: aa43a9a78640e4dc8fa2dd6d914a7fcb9d58f335
   branch: feat/registry-v1
   specs:
-    html2rss (0.28.0)
+    html2rss (0.35.0)
       addressable (~> 2.7)
       brotli
       dry-validation
-      faraday (> 2.0.1, < 3.0)
-      faraday-follow_redirects
-      faraday-gzip (~> 3)
+      httpx (~> 1.8)
       kramdown
       mcp (~> 1.2)
       mime-types (> 3.0)
@@ -17,7 +15,6 @@ GIT
       rack (~> 3.0)
       rackup (~> 2.0)
       regexp_parser
-      reverse_markdown (~> 3.0)
       rss
       sanitize
       thor
@@ -71,18 +68,10 @@ GEM
       dry-initializer (~> 3.2)
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
-    faraday (2.14.3)
-      faraday-net_http (>= 2.0, < 3.5)
-      json
-      logger
-    faraday-follow_redirects (0.5.0)
-      faraday (>= 1, < 3)
-    faraday-gzip (3.1.0)
-      faraday (>= 2.0, < 3)
-      zlib (~> 3.0)
-    faraday-net_http (3.4.4)
-      net-http (~> 0.5)
     hana (1.3.7)
+    http-2 (1.3.0)
+    httpx (1.9.1)
+      http-2 (>= 1.2.0)
     json (2.21.2)
     json_schemer (2.5.0)
       bigdecimal
@@ -100,8 +89,6 @@ GEM
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
     mime-types-data (3.2026.0701)
-    net-http (0.9.1)
-      uri (>= 0.11.1)
     nokogiri (1.19.4-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.19.4-aarch64-linux-musl)
@@ -130,8 +117,6 @@ GEM
       rack (>= 3)
     rainbow (3.1.1)
     regexp_parser (2.12.0)
-    reverse_markdown (3.0.2)
-      nokogiri
     rexml (3.4.4)
     rspec (3.13.2)
       rspec-core (~> 3.13.0)
@@ -181,10 +166,8 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
-    uri (1.1.1)
     webrick (1.9.2)
     zeitwerk (2.8.3)
-    zlib (3.2.3)
 
 PLATFORMS
   aarch64-linux-gnu
@@ -222,12 +205,10 @@ CHECKSUMS
   dry-schema (1.16.0) sha256=cd3aaeabc0f1af66ec82a29096d4c4fb92a0a58b9dae29a22b1bbceb78985727
   dry-types (1.9.1) sha256=baebeecdb9f8395d6c9d227b62011279440943e3ef2468fe8ccc1ba11467f178
   dry-validation (1.11.1) sha256=70900bb5a2d911c8aab566d3e360c6bff389b8bf92ea8e04885ce51c41ff8085
-  faraday (2.14.3) sha256=1882247e6766615c8220b4392bf1d27f6ebb63d8e28267587cef1fb0bf37f278
-  faraday-follow_redirects (0.5.0) sha256=5cde93c894b30943a5d2b93c2fe9284216a6b756f7af406a1e55f211d97d10ad
-  faraday-gzip (3.1.0) sha256=320783690be169f9b7ddde11598b77156951343753f66a9ab98b1f6694433ff8
-  faraday-net_http (3.4.4) sha256=0e78af151747ed1b00f33e25973b4bc220d7f16c00c39676817c8b12331eb588
   hana (1.3.7) sha256=5425db42d651fea08859811c29d20446f16af196308162894db208cac5ce9b0d
-  html2rss (0.28.0)
+  html2rss (0.35.0)
+  http-2 (1.3.0) sha256=58fc8636c2b937b651853e9f6d9ada9fdaa8bf80b5a7d0333ce15653e5ca6ac1
+  httpx (1.9.1) sha256=06396e98dc99edfd37859910c77303c7eacd29d76f20d1f6b8b1bea3dfec99a9
   json (2.21.2) sha256=1f1d3b7cf2b3ba1a69beca0bb6db13d5438b80bff3cd54cdaaa620b9b07c1c6a
   json_schemer (2.5.0) sha256=2f01fb4cce721a4e08dd068fc2030cffd0702a7f333f1ea2be6e8991f00ae396
   kramdown (2.5.2) sha256=1ba542204c66b6f9111ff00dcc26075b95b220b07f2905d8261740c82f7f02fa
@@ -237,7 +218,6 @@ CHECKSUMS
   mcp (1.3.0) sha256=9395aa3a054eb8986b7714ec8abb25b533729af896f4875da4c4cb7a3024fbae
   mime-types (3.7.0) sha256=dcebf61c246f08e15a4de34e386ebe8233791e868564a470c3fe77c00eed5e56
   mime-types-data (3.2026.0701) sha256=cd8811e1fb89d836499ba0582368a10ee74cef929ba956d1d5ddca045e6a730f
-  net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
   nokogiri (1.19.4-aarch64-linux-gnu) sha256=1269fb644a6de405057a53dd5c762b1209b43ca7424f839454d3dbc677c31a8f
   nokogiri (1.19.4-aarch64-linux-musl) sha256=35c65b9ce72b3bb03207bdbe7067915019dc18c1b9b59139684bd6690fdd01af
   nokogiri (1.19.4-arm-linux-gnu) sha256=a301313e38bb065d68239e79734bcd6f56fb6efaacebde29e9abf2a4735340ca
@@ -255,7 +235,6 @@ CHECKSUMS
   rackup (2.3.1) sha256=6c79c26753778e90983761d677a48937ee3192b3ffef6bc963c0950f94688868
   rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
   regexp_parser (2.12.0) sha256=35a916a1d63190ab5c9009457136ae5f3c0c7512d60291d0d1378ba18ce08ebb
-  reverse_markdown (3.0.2) sha256=818ebb92ce39dbb1a291690dd1ec9a6d62530d4725296b17e9c8f668f9a5b8af
   rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
   rspec (3.13.2) sha256=206284a08ad798e61f86d7ca3e376718d52c0bc944626b2349266f239f820587
   rspec-core (3.13.6) sha256=a8823c6411667b60a8bca135364351dda34cd55e44ff94c4be4633b37d828b2d
@@ -274,10 +253,8 @@ CHECKSUMS
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   unicode-display_width (3.2.0) sha256=0cdd96b5681a5949cdbc2c55e7b420facae74c4aaf9a9815eee1087cb1853c42
   unicode-emoji (4.2.0) sha256=519e69150f75652e40bf736106cfbc8f0f73aa3fb6a65afe62fefa7f80b0f80f
-  uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
   webrick (1.9.2) sha256=beb4a15fc474defed24a3bda4ffd88a490d517c9e4e6118c3edce59e45864131
   zeitwerk (2.8.3) sha256=2c85125a8467ce069e20123d1e709a08955c9d29c118c25b46b7b7fafdbb92e5
-  zlib (3.2.3) sha256=5bd316698b32f31a64ab910a8b6c282442ca1626a81bbd6a1674e8522e319c20
 
 BUNDLED WITH
   4.0.17

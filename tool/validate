@@ -8,12 +8,6 @@ REPO_ROOT = File.expand_path('..', __dir__)
 CONFIGS_DIR = ENV.fetch('CONFIGS_DIR', File.join(REPO_ROOT, 'configs'))
 CONFIGS_GLOB = File.join(CONFIGS_DIR, '**', '*.yml')
 
-unless Html2rss::Config.respond_to?(:validate_yaml)
-  warn 'Error: installed html2rss gem does not support Config.validate_yaml.'
-  warn 'Run: bundle update html2rss'
-  exit 1
-end
-
 ##
 # @param file [String]
 # @return [String]
@@ -28,15 +22,13 @@ files = Dir[CONFIGS_GLOB]
 failed = []
 
 files.each do |file|
-  result = Html2rss::Config.validate_yaml(file)
+  result = Html2rss.validate(file)
 
   if result.success?
     puts "ok   #{display_path(file)}"
   else
     puts "FAIL #{display_path(file)}"
-    result.errors.to_h.each do |key, messages|
-      Array(messages).each { |msg| warn "       #{key}: #{msg}" }
-    end
+    result.issues.each { |issue| warn "       #{issue}" }
     failed << file
   end
 rescue Psych::Exception => error
