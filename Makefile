@@ -1,60 +1,50 @@
-default: lint validate test
+BUNDLE = BUNDLE_GEMFILE=tool/Gemfile bundle exec
+BUNDLE_RUBY = BUNDLE_GEMFILE=tool/Gemfile bundle exec ruby
+
+.PHONY: default check ready lint validate test registry-build test-fetch-changed-configs test-fetch-all-configs test-fetch-botasaurus-configs test-config test-domain lintfix
+
+default: check
+
+check: validate
+
 ready: lint validate test
 
 lint:
-	yamllint lib/html2rss/configs/ .github/
-	bundle exec rubocop -P --cache false -f quiet
-	./node_modules/.bin/prettier --check lib/**/*.yml .github/**/*.yml README.md
+	yamllint configs/ .github/
+	$(BUNDLE) rubocop -P --cache false -f quiet
 
 validate:
-	bundle exec ruby bin/validate_configs
-
-schema:
-	mkdir -p schema
-	bundle exec html2rss schema --write schema/html2rss-config.schema.json
+	$(BUNDLE_RUBY) tool/validate
 
 test:
-	bundle exec rspec
+	$(BUNDLE) rspec test
+
+registry-build: validate
+	$(BUNDLE_RUBY) tool/registry-build
 
 test-fetch-changed-configs:
 	bin/rspec_changed_configs
 
 test-fetch-all-configs:
-	bundle exec rspec --tag fetch spec/html2rss/configs_dynamic_spec.rb
+	$(BUNDLE) rspec --tag fetch test/configs_dynamic_spec.rb
 
 test-fetch-botasaurus-configs:
 	bin/rspec_botasaurus_configs
 
-test-all: test test-fetch-all-configs
-
-# Dynamic test commands
 test-config:
 	@if [ -z "$(CONFIG)" ]; then \
 		echo "Usage: make test-config CONFIG=github.com/releases.yml"; \
 		echo "       make test-config CONFIG=github.com"; \
 		exit 1; \
 	fi
-	bundle exec rspec --example "$(CONFIG)" spec/html2rss/configs_dynamic_spec.rb
+	$(BUNDLE) rspec --example "$(CONFIG)" test/configs_dynamic_spec.rb
 
 test-domain:
 	@if [ -z "$(DOMAIN)" ]; then \
 		echo "Usage: make test-domain DOMAIN=github.com"; \
 		exit 1; \
 	fi
-	bundle exec rspec --example "$(DOMAIN)" spec/html2rss/configs_dynamic_spec.rb
-
-# Migration commands
-migrate-tests:
-	bin/migrate_to_dynamic_tests
-
-restore-tests:
-	@if [ -d "spec/html2rss/configs_backup" ]; then \
-		cp -r spec/html2rss/configs_backup/* spec/html2rss/configs/; \
-		echo "✅ Restored tests from backup"; \
-	else \
-		echo "❌ No backup found"; \
-	fi
+	$(BUNDLE) rspec --example "$(DOMAIN)" test/configs_dynamic_spec.rb
 
 lintfix:
-	bundle exec rubocop -a
-	./node_modules/.bin/prettier --write lib/**/*.yml .github/**/*.yml README.md
+	$(BUNDLE) rubocop -a

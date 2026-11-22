@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: roblox.com/newsroom
+directory:
+  topics:
+    - entertainment
+    - tech
+  title: "Roblox — Newsroom"
+  summary: "Company news, platform updates and engineering posts from the Roblox newsroom."
+channel:
+  title: "Roblox — Newsroom"
+  url: https://about.roblox.com/newsroom
+  language: en
+  time_zone: UTC
+  ttl: 720
+selectors:
+  items:
+    selector: "a[class^='PreviewCard_preview-card']"
+    enhance: false
+  title:
+    selector: "h3"
+  url:
+    extractor: href
+  categories:
+    - category
+  category:
+    selector: "h4"

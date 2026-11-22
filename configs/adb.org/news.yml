@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: adb.org/news
+directory:
+  topics:
+    - finance
+    - civic
+  title: Asian Development Bank — News Releases
+  summary:
+    Development financing updates and press releases from the Asian Development
+    Bank.
+channel:
+  title: Asian Development Bank — News Releases
+  url: https://www.adb.org/news/releases
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: h3 a[href^="/news/"]
+    enhance: true

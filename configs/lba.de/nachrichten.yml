@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: lba.de/nachrichten
+directory:
+  topics:
+    - transport
+    - civic
+  title: "Luftfahrt-Bundesamt — Nachrichten"
+  summary: "Aktuelle Mitteilungen des Luftfahrt-Bundesamtes zu Regulierung, Drohnen und Luftfahrtbetrieb."
+channel:
+  title: "Luftfahrt-Bundesamt — Nachrichten"
+  url: https://www.lba.de/DE/Home/Nachrichten/nachrichten_node.html
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 720
+selectors:
+  items:
+    selector: "#content table tbody tr:has(a[href*='Startseite_Nachrichten'])"
+    enhance: false
+  title:
+    selector: "td:nth-child(2) a"
+  url:
+    selector: "td:nth-child(2) a"
+    extractor: href
+  published_at:
+    selector: "td:first-child"
+    post_process:
+      - name: parse_time

@@ -1,0 +1,62 @@
+name: Release
+
+"on":
+  push:
+    tags:
+      - 'v*'
+
+env:
+  BUNDLE_GEMFILE: tool/Gemfile
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: registry-release
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get install -yqq yamllint
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+
+      - name: Run quality gate
+        run: make ready
+
+      - name: Build signed registry bundle
+        env:
+          REGISTRY_VERSION: ${{ github.ref_name }}
+          REGISTRY_SIGNING_KEY: ${{ secrets.REGISTRY_SIGNING_KEY }}
+        run: make registry-build -- --sign
+
+      - name: Verify release artifact
+        env:
+          REGISTRY_PUBLIC_KEY_ID: html2rss:registry:2026
+          REGISTRY_PUBLIC_KEY_PEM: ${{ secrets.REGISTRY_PUBLIC_KEY_PEM }}
+        run: |
+          bundle exec ruby -rhtml2rss -ropenssl -rtmpdir -e "
+            Dir.mktmpdir do |dir|
+              File.open('dist/registry-bundle.tar.gz', 'rb') do |io|
+                Html2rss::Registry::Archive.extract!(io, into: dir)
+              end
+              public_key = OpenSSL::PKey.read(ENV.fetch('REGISTRY_PUBLIC_KEY_PEM'))
+              public_keys = { ENV.fetch('REGISTRY_PUBLIC_KEY_ID') => public_key }
+              bundle = Html2rss::Registry::Bundle.load(dir, trust: :signed, public_keys:)
+              abort 'empty catalog' if bundle.catalog_entries.empty?
+              puts \"Verified #{bundle.catalog_entries.size} catalog entries\"
+            end
+          "
+
+      - name: Upload release artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/registry-bundle.tar.gz
+          generate_release_notes: true
+          draft: true

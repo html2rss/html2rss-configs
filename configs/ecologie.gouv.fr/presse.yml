@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: ecologie.gouv.fr/presse
+directory:
+  topics:
+    - environment
+    - energy
+  title: Transition Écologique — Espace Presse
+  summary:
+    Décarbonation, énergies renouvelables, transports propres et biodiversité
+    en France.
+channel:
+  title: Transition Écologique — Espace Presse
+  url: https://www.ecologie.gouv.fr/presse
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: div.fr-col
+    enhance: true

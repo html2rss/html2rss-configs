@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-CONFIG_PATH = %r{\Alib/html2rss/configs/.+/.+\.yml\z}
+CONFIG_PATH = %r{\Aconfigs/.+/.+\.yml\z}
 SCHEMA_MODELINE = /\A[+-]# yaml-language-server: \$schema=/
 
 def comment_only_change?(file)
@@ -26,9 +26,18 @@ end
 failed = false
 
 test_files.each do |file|
-  config_name = file.sub('lib/html2rss/configs/', '')
+  config_name = file.delete_prefix('configs/')
   puts "Testing changed config: #{config_name}"
-  failed ||= !system("bundle exec rspec --example '#{config_name}' --tag fetch spec/html2rss/configs_dynamic_spec.rb")
+  bundle_gemfile = ENV.fetch('BUNDLE_GEMFILE', nil)
+  ENV['BUNDLE_GEMFILE'] = 'tool/Gemfile'
+  ok = system('bundle', 'exec', 'rspec', '--example', config_name, '--tag', 'fetch',
+              'test/configs_dynamic_spec.rb')
+  if bundle_gemfile.nil?
+    ENV.delete('BUNDLE_GEMFILE')
+  else
+    ENV['BUNDLE_GEMFILE'] = bundle_gemfile
+  end
+  failed ||= !ok
 end
 
 exit 1 if failed

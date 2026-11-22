@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: ucl.ac.uk/news
+directory:
+  topics:
+    - research
+    - science
+  title: UCL — News Highlights
+  summary:
+    Interdisciplinary science, public health findings, and academic publications
+    from University College London.
+channel:
+  title: UCL — News Highlights
+  url: https://www.ucl.ac.uk/news
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: main article a
+    enhance: true

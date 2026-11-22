@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: munich-airport.de/pressemitteilungen
+directory:
+  topics:
+    - transport
+    - travel
+  title: "Flughafen München — Pressemitteilungen"
+  summary: "Pressemitteilungen des Flughafens München zu Betrieb, Verkehr, Projekten und Unternehmensnachrichten."
+channel:
+  title: "Flughafen München — Pressemitteilungen"
+  url: https://www.munich-airport.de/pressemitteilungen-88963
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 720
+selectors:
+  items:
+    selector: "ul.block-news-feed-list li.pi-et-news-feed"
+    enhance: false
+  title:
+    selector: "h3"
+    post_process:
+      - name: gsub
+        pattern: "^Presse:\\s*"
+        replacement: ""
+  url:
+    selector: "a.newsfeed-item-link"
+    extractor: href
+  description:
+    selector: "p"
+  published_at:
+    selector: "time"
+    extractor: attribute
+    attribute: datetime
+    post_process:
+      - name: parse_time

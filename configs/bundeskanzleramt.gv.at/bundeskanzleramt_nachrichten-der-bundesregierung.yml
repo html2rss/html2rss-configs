@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: bundeskanzleramt.gv.at/bundeskanzleramt_nachrichten-der-bundesregierung
+directory:
+  topics:
+    - civic
+    - news
+  title: Bundeskanzleramt Österreich — Nachrichten
+  summary: Austrian federal government news releases and announcements.
+channel:
+  title: Bundeskanzleramt Österreich — Nachrichten
+  url: https://www.bundeskanzleramt.gv.at/bundeskanzleramt/nachrichten-der-bundesregierung/2026.html
+  language: de
+  time_zone: Europe/Vienna
+  ttl: 360
+selectors:
+  items:
+    selector: a[href*="/nachrichten-der-bundesregierung/2026/"]
+    enhance: true

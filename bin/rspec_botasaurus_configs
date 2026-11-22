@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative '../spec/support/botasaurus_fetch_configs'
+require_relative '../test/support/botasaurus_fetch_configs'
 
 unless BotasaurusFetchConfigs.botasaurus_env_configured?
   warn 'BOTASAURUS_SCRAPER_URL is required for botasaurus fetch tests.'
@@ -13,6 +13,6 @@ BotasaurusFetchConfigs::CONFIGS.each do |config|
   args << '--example'
   args << config
 end
-args << 'spec/html2rss/configs_dynamic_spec.rb'
+args << 'test/configs_dynamic_spec.rb'
 
-exec(*args)
+exec({ 'BUNDLE_GEMFILE' => 'tool/Gemfile' }, *args)
