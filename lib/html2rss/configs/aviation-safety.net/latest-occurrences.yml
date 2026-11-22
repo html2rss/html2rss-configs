@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+directory:
+  topics:
+    - transport
+  title: "Aviation Safety Network — Latest occurrences"
+  summary: "Latest aircraft accidents and incidents worldwide, with type, operator, location, fatalities and damage."
+strategy: botasaurus
+
+channel:
+  title: "Aviation Safety Network — Latest occurrences"
+  url: https://aviation-safety.net/
+  language: en
+  time_zone: UTC
+  ttl: 360
+request:
+  botasaurus:
+    wait_for_selector: "table.hp td.list"
+    wait_timeout_seconds: 20
+selectors:
+  items:
+    selector: "table.hp tr:has(td.list a[href*='/wikibase/'])"
+    enhance: false
+  aircraft:
+    selector: "td:nth-child(2)"
+  operator:
+    selector: "td:nth-child(4)"
+  fatalities:
+    selector: "td:nth-child(5)"
+  location:
+    selector: "td:nth-child(6)"
+  damage:
+    selector: "td:nth-child(8)"
+  title:
+    post_process:
+      - name: template
+        string: "%{aircraft} — %{operator}, %{location}"
+  url:
+    selector: "td:first-child a"
+    extractor: href
+  description:
+    post_process:
+      - name: template
+        string: "Fatalities: %{fatalities} · Damage: %{damage}"
+  published_at:
+    selector: "td:first-child a"
+    post_process:
+      - name: parse_time

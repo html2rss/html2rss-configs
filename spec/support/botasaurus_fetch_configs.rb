@@ -7,6 +7,7 @@ module BotasaurusFetchConfigs
     apple.com/newsroom.yml
     asml.com/press-releases.yml
     aspi.org.au/strategist.yml
+    aviation-safety.net/latest-occurrences.yml
     booking.com/articles.yml
     bundesregierung.de/pressemitteilungen.yml
     carnegieendowment.org/research.yml
