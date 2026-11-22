@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: devurls.com/links
+directory:
+  topics:
+    - tech
+  title: "devurls — Developer links"
+  summary: "Latest programming links aggregated by devurls.com from developer news sites and blogs."
+channel:
+  title: "devurls — Developer links"
+  url: https://devurls.com/
+  language: en
+  time_zone: UTC
+  ttl: 180
+selectors:
+  items:
+    selector: ".publisher-link:has(.link a)"
+    enhance: false
+  title:
+    selector: ".link a"
+  url:
+    selector: ".link a"
+    extractor: href

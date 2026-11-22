@@ -313,7 +313,7 @@ Stale CLI/MCP verb drift check:
 
 ```bash
 rg -n 'html2rss (feed|auto)\b|capture_config|inspect_url|scrape_url|test_config|apply_config|batch_scrape_urls|batch_inspect_urls' \
-  --glob '!**/configs/**' --glob '!lib/html2rss/configs/**' AGENTS.md README.md .agents/ spec/
+  --glob '!**/configs/**' AGENTS.md README.md .agents/ test/
 ```
 
 Exclude `bin/validate_configs` (repo script name). Prefer `apply` / `scrape` and bare MCP verb names in docs.

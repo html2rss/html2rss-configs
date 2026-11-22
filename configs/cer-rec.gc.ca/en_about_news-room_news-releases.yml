@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: cer-rec.gc.ca/en_about_news-room_news-releases
+directory:
+  topics:
+    - energy
+    - environment
+  title: Canada Energy Regulator — News Releases
+  summary:
+    Pipeline safety, energy infrastructure approvals, and energy export data
+    from Canada.
+channel:
+  title: Canada Energy Regulator — News Releases
+  url: https://www.cer-rec.gc.ca/en/about/news-room/news-releases/
+  language: en
+  time_zone: UTC
+  ttl: 360
+selectors:
+  items:
+    selector: ul[class*="list"] > li a
+    enhance: true

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: telegram.org/blog
+directory:
+  topics:
+    - tech
+    - product
+  title: "Telegram — Blog"
+  summary: "Feature releases and product announcements from the Telegram blog."
+channel:
+  title: "Telegram — Blog"
+  url: https://telegram.org/blog
+  language: en
+  time_zone: UTC
+  ttl: 720
+selectors:
+  items:
+    selector: "a.dev_blog_card_link_wrap"
+    enhance: false
+  title:
+    selector: "h4.dev_blog_card_title"
+  url:
+    extractor: href
+  description:
+    selector: ".dev_blog_card_lead"
+    post_process:
+      - name: gsub
+        pattern: "/\\u00A0/"
+        replacement: " "

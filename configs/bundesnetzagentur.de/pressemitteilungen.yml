@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: bundesnetzagentur.de/pressemitteilungen
+directory:
+  topics:
+    - civic
+    - consumer
+  title: "Bundesnetzagentur — Pressemitteilungen"
+  summary: "Pressemitteilungen der Bundesnetzagentur zu Energie, Telekommunikation, Post und Bahn, inklusive Aufsichtsverfahren."
+channel:
+  title: "Bundesnetzagentur — Pressemitteilungen"
+  url: https://www.bundesnetzagentur.de/DE/Allgemeines/Presse/Pressemitteilungen/start.html
+  language: de
+  time_zone: Europe/Berlin
+  ttl: 720
+selectors:
+  items:
+    selector: "table.textualData tbody tr"
+    enhance: false
+  title:
+    selector: "a.titleLink"
+  url:
+    selector: "a.titleLink"
+    extractor: href
+  published_at:
+    selector: "td:first-child"
+    post_process:
+      - name: parse_time

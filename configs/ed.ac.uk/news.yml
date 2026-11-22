@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/html2rss/html2rss/refs/heads/master/schema/html2rss-config.schema.json
+registry:
+  id: ed.ac.uk/news
+directory:
+  topics:
+    - research
+    - science
+  title: University of Edinburgh — Latest News
+  summary: Research and university news from the University of Edinburgh.
+channel:
+  title: University of Edinburgh — Latest News
+  url: https://www.ed.ac.uk/news/latest
+  language: en
+  time_zone: Europe/London
+  ttl: 360
+selectors:
+  items:
+    selector: div.card
+    enhance: true
