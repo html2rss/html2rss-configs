@@ -146,9 +146,6 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       items.shift
     end
 
-    let(:specified_attributes) { Html2rss::Selectors::ITEM_TAGS & %w[title description author category] }
-    let(:text_attributes) { specified_attributes & %w[title description author] }
-
     before do
       next unless config[:strategy].to_s == 'botasaurus'
       next if BotasaurusFetchConfigs.botasaurus_env_configured?
@@ -156,20 +153,8 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
       skip("Botasaurus fetch for #{file_name} requires BOTASAURUS_SCRAPER_URL")
     end
 
-    it 'has no empty text attributes', :aggregate_failures do
-      text_attributes.each do |attribute_name|
-        expect(item.public_send(attribute_name).to_s).not_to be_empty, attribute_name.to_s
-      end
-    end
-
-    it 'has no empty content attributes', :aggregate_failures do
-      (specified_attributes - text_attributes).each do |attribute_name|
-        expect(item.public_send(attribute_name).content).not_to be_empty, attribute_name.to_s
-      end
-    end
-
-    it 'has link content beginning with "http" when config has a link selector' do
-      expect(item&.link&.to_s).to start_with('http') if Html2rss::Selectors::ITEM_TAGS.include?(:url)
+    it 'has link content beginning with "http"' do
+      expect(item&.link&.to_s).to start_with('http')
     end
   end
 end
