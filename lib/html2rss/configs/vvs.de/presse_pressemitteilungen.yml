@@ -9,7 +9,7 @@ directory:
 channel:
   title: "VVS Verkehrsverbund Stuttgart — Pressemitteilungen"
   url: https://www.vvs.de/presse/pressemitteilungen
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:

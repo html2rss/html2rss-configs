@@ -9,7 +9,7 @@ directory:
 channel:
   title: "ÖBB — Presseportal"
   url: https://presse.oebb.at/de/
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:

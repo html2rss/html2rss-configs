@@ -9,7 +9,7 @@ directory:
 channel:
   title: "Hans-Böckler-Stiftung — Pressemitteilungen"
   url: https://www.boeckler.de/de/pressemitteilungen-2675.htm
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:

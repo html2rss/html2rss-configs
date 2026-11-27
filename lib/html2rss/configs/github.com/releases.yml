@@ -22,10 +22,14 @@ channel:
   description: "Releases of %<username>s/%<repository>s on github.com."
 selectors:
   items:
-    selector: ".repository-content section"
+    selector: "section[data-release-anchor]"
     enhance: false
   title:
-    selector: 'a[href*="/releases/tag/"]'
+    selector: 'span.f1 a[href*="/releases/tag/"]'
   url:
-    selector: 'a[href*="/releases/tag/"]'
+    selector: 'span.f1 a[href*="/releases/tag/"]'
     extractor: "href"
+  published_at:
+    selector: "relative-time"
+    extractor: "attribute"
+    attribute: "datetime"

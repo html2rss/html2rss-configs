@@ -9,7 +9,7 @@ directory:
 channel:
   title: "Ville de Lyon — Actualités Municipales"
   url: https://www.lyon.fr/actualites
-  language: en
+  language: fr
   time_zone: UTC
   ttl: 360
 selectors:

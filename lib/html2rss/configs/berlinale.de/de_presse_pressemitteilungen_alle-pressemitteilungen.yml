@@ -8,7 +8,7 @@ directory:
 channel:
   title: "Berlinale — Internationale Filmfestspiele Berlin"
   url: https://www.berlinale.de/de/presse/pressemitteilungen/alle-pressemitteilungen.html
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:
@@ -16,7 +16,7 @@ selectors:
     selector: ".lr__content"
     enhance: false
   title:
-    selector: "h2 a"
+    selector: "h2"
   url:
     selector: "h2 a"
     extractor: href

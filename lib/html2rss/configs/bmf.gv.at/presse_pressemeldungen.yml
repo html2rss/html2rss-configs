@@ -9,7 +9,7 @@ directory:
 channel:
   title: "BMF Österreich — Bundesministerium für Finanzen"
   url: https://www.bmf.gv.at/presse/pressemeldungen.html
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:

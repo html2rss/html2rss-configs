@@ -1,0 +1,72 @@
+name: Fetch all configs
+
+"on":
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: fetch-all-configs
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Fetch every config
+        continue-on-error: true
+        run: >-
+          bundle exec rspec --tag fetch spec/html2rss/configs_dynamic_spec.rb
+          --format progress --format json --out fetch.json
+
+      - name: Report failing configs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          ruby -rjson -e '
+            examples = JSON.parse(File.read("fetch.json")).fetch("examples")
+            failed = examples.select { |e| e["status"] == "failed" }
+                             .map { |e| e["full_description"][/\AHtml2rss::Configs (\S+)/, 1] }
+                             .uniq.sort
+            File.write("failed.txt", failed.join("\n"))
+          '
+          title="Weekly fetch: configs returning no items"
+          issue=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+
+          if [ ! -s failed.txt ]; then
+            echo "All configs fetched." >> "$GITHUB_STEP_SUMMARY"
+            [ -n "$issue" ] && gh issue close "$issue" --comment "All configs fetched in $RUN_URL."
+            exit 0
+          fi
+
+          {
+            echo "$(wc -l < failed.txt | tr -d ' ') configs failed the fetch spec in $RUN_URL."
+            echo
+            echo "A failure can be a moved listing, a selector that no longer matches, or a site blocking the CI runner. Re-run one locally with:"
+            echo
+            echo "\`bundle exec rspec --tag fetch --example <config> spec/html2rss/configs_dynamic_spec.rb\`"
+            echo
+            sed "s/^/- \`/; s/\$/\`/" failed.txt
+          } > body.md
+          cat body.md >> "$GITHUB_STEP_SUMMARY"
+
+          if [ -n "$issue" ]; then
+            gh issue edit "$issue" --body-file body.md
+          else
+            gh issue create --title "$title" --body-file body.md
+          fi
