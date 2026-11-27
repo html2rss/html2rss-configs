@@ -9,7 +9,7 @@ directory:
 channel:
   title: "Comunidad Andina — Notas de Prensa"
   url: https://www.comunidadandina.org/notas-de-prensa/
-  language: en
+  language: es
   time_zone: UTC
   ttl: 360
 selectors:

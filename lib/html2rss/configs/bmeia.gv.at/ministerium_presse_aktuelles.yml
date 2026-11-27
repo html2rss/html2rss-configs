@@ -9,7 +9,7 @@ directory:
 channel:
   title: "BMEIA Österreich — Europäische und internationale Angelegenheiten"
   url: https://www.bmeia.gv.at/ministerium/presse/aktuelles
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:

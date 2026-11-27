@@ -10,7 +10,7 @@ directory:
 channel:
   title: Conseil Constitutionnel France — Actualités
   url: https://www.conseil-constitutionnel.fr/actualites
-  language: en
+  language: fr
   time_zone: UTC
   ttl: 360
 selectors:
