@@ -171,7 +171,7 @@ make validate
 make test
 ```
 
-6. Focused fetch verification:
+6. Focused fetch verification. The fetch spec runs `FetchCheck` (`tooling/fetch_check.rb`): at least 3 items, absolute links, and no navigation or footer titles. A site that refuses the fetch (CDN block, anti-bot page) is skipped, not failed; confirm those locally.
 
 - Default-backed candidate:
 

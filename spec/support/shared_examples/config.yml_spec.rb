@@ -9,26 +9,6 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
     File.expand_path(File.join(__dir__, '..', '..', '..', 'lib', 'html2rss', 'configs', file_name))
   end
 
-  let(:config) do
-    feed_name = file_path.split(File::Separator)[-2..].join(File::Separator)
-    config = {}.merge Html2rss::Configs.find_by_name(feed_name)
-    # Reuse runtime browser defaults so fetch specs exercise the same header shape as production.
-    config[:headers] = Html2rss::Config::RequestHeaders.browser_defaults.merge(config.fetch(:headers, {}))
-
-    # Use provided params or extract defaults from parameters section
-    if params
-      config[:params] = params
-    elsif config[:parameters]
-      default_params = {}
-      config[:parameters].each do |param_name, param_config|
-        default_params[param_name] = param_config[:default] if param_config[:default]
-      end
-      config[:params] = default_params unless default_params.empty?
-    end
-
-    config
-  end
-
   context 'with the file' do
     let(:host_name) { Helper.url_to_host_name yaml['channel']['url'] }
     let(:domain_name) { Helper.url_to_registrable_domain yaml['channel']['url'] }
@@ -114,47 +94,15 @@ RSpec.shared_examples 'config.yml' do |file_name, params|
   end
 
   context "when fetching #{params}", :fetch do
-    subject(:rss) { Html2rss.apply(config.dup).to_rss }
+    subject(:check) { FetchCheck.call(file_name, params) }
 
-    before do
-      next unless config[:strategy].to_s == 'botasaurus'
-      next if BotasaurusFetchConfigs.botasaurus_env_configured?
+    it 'ships enough real articles' do
+      skip(check.problems.join('; ')) if check.blocked? || check.skipped?
 
-      skip("Botasaurus fetch for #{file_name} requires BOTASAURUS_SCRAPER_URL")
-    end
-
-    it 'has positive amount of items' do
-      expect(rss.items.count).to be_positive, <<~MSG
-        No items fetched.
-        Check the feed URL and selectors in `#{file_name}`.
-
-        # #{file_name}
-        #{config}
-
-        # resulted in RSS:
-        #{rss}
+      expect(check.problems).to be_empty, <<~MSG
+        `#{file_name}` fetched #{check.item_count} items:
+        #{check.problems.map { |problem| "- #{problem}" }.join("\n")}
       MSG
-    end
-  end
-
-  context "when fetching #{params} / item", :fetch do
-    subject(:item) do
-      items = Html2rss.apply(config.dup).to_rss.items
-
-      expect(items.count).not_to be_zero, "Zero items fetched for `#{file_name}`"
-
-      items.shift
-    end
-
-    before do
-      next unless config[:strategy].to_s == 'botasaurus'
-      next if BotasaurusFetchConfigs.botasaurus_env_configured?
-
-      skip("Botasaurus fetch for #{file_name} requires BOTASAURUS_SCRAPER_URL")
-    end
-
-    it 'has link content beginning with "http"' do
-      expect(item&.link&.to_s).to start_with('http')
     end
   end
 end
