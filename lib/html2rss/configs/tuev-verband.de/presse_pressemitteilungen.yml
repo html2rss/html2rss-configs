@@ -9,17 +9,15 @@ directory:
 channel:
   title: "TÜV-Verband — Pressemitteilungen"
   url: https://www.tuev-verband.de/presse/pressemitteilungen
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:
   items:
-    selector: 'li[class*="item"]'
+    selector: "div.tuev-search-result"
     enhance: false
   title:
-    selector: "a"
+    selector: "h2.results-topic a"
   url:
-    selector: "a"
+    selector: "h2.results-topic a"
     extractor: href
-  published_at:
-    selector: "time"
