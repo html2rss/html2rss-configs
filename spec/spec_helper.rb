@@ -6,6 +6,7 @@ require 'tzinfo'
 require 'html2rss'
 require 'html2rss/configs'
 
+Dir['./tooling/**/*.rb'].each { |f| require f }
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 Zeitwerk::Loader.eager_load_all
