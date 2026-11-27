@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "article.ecl-content-item"
-    enhance: false
+    enhance: true
   title:
     selector: ".ecl-content-block__title a"
     extractor: text

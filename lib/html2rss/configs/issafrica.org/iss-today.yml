@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: 'a.card[href^="/iss-today/"]'
-    enhance: false
+    enhance: true
   title:
     selector: h6.card-subtitle
   url:

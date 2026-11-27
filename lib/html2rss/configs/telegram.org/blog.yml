@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: "a.dev_blog_card_link_wrap"
-    enhance: false
+    enhance: true
   title:
     selector: "h4.dev_blog_card_title"
   url:

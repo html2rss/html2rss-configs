@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: 'a[href^="/changelog/"]'
-    enhance: false
+    enhance: true
   title:
     selector: "h2, h3, strong"
   url:

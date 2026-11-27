@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "ul.o-article-list > li > article"
-    enhance: false
+    enhance: true
   title:
     selector: "h2.m-article__headline"
   url:

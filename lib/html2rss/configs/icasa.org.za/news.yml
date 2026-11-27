@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "div.news"
-    enhance: false
+    enhance: true
   title:
     selector: ".newHeading"
   url:

@@ -13,7 +13,7 @@ channel:
 selectors:
   items:
     selector: 'a.link-wrap.teaser-wrap[href*="/media/newsroom/"]'
-    enhance: false
+    enhance: true
   title:
     selector: h2
   url:
