@@ -9,7 +9,7 @@ directory:
 channel:
   title: "Banca d'Italia — Comunicati Stampa"
   url: https://www.bancaditalia.it/media/comunicati/
-  language: en
+  language: it
   time_zone: UTC
   ttl: 360
 selectors:

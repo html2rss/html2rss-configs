@@ -9,7 +9,7 @@ directory:
 channel:
   title: "Land Berlin — Pressemitteilungen"
   url: https://www.berlin.de/presse/pressemitteilungen/
-  language: en
+  language: de
   time_zone: UTC
   ttl: 360
 selectors:

@@ -14,12 +14,12 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="item"]'
+    selector: "main .box"
     enhance: false
   title:
-    selector: "a"
+    selector: ".show-headline"
+  description:
+    selector: ".show-header"
   url:
     selector: "a"
     extractor: href
-  published_at:
-    selector: "time"
