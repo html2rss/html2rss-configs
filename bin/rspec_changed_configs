@@ -23,12 +23,15 @@ if test_files.empty?
   exit 0
 end
 
-failed = false
-
-test_files.each do |file|
+failed = test_files.filter_map do |file|
   config_name = file.sub('lib/html2rss/configs/', '')
   puts "Testing changed config: #{config_name}"
-  failed ||= !system("bundle exec rspec --example '#{config_name}' --tag fetch spec/html2rss/configs_dynamic_spec.rb")
+  passed = system("bundle exec rspec --example '#{config_name}' --tag fetch spec/html2rss/configs_dynamic_spec.rb")
+  config_name unless passed
 end
 
-exit 1 if failed
+exit 0 if failed.empty?
+
+puts "Fetch failed for #{failed.size} of #{test_files.size} changed configs:"
+failed.each { |name| puts "  #{name}" }
+exit 1
