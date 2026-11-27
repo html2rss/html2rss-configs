@@ -55,7 +55,7 @@ Use both schema-aware editing and runtime validation before committing:
 make validate
 
 # Validate a single config directly
-bundle exec html2rss validate lib/html2rss/configs/github.com/releases.yml
+bundle exec html2rss validate lib/html2rss/configs/reddit.com/subreddit.yml
 
 # Export the current JSON Schema locally for editor use
 make schema
@@ -72,10 +72,10 @@ Uses **dynamic test generation** - no individual spec files needed!
 bundle exec rspec spec/html2rss/configs_dynamic_spec.rb
 
 # Test specific config
-make test-config CONFIG=github.com/releases.yml
+make test-config CONFIG=reddit.com/subreddit.yml
 
 # Test domain
-make test-domain DOMAIN=github.com
+make test-domain DOMAIN=reddit.com
 
 # Run live fetch tests for the full corpus
 make test-fetch-all-configs

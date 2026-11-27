@@ -28,6 +28,6 @@ echo "    make lint         # yamllint, rubocop, prettier"
 echo "    make validate     # validate all configs against the html2rss schema"
 echo "    make test         # run rspec"
 echo
-echo "    make test-config CONFIG=github.com/releases.yml   # test a single config"
-echo "    make test-domain DOMAIN=github.com                # test all configs for a domain"
+echo "    make test-config CONFIG=reddit.com/subreddit.yml   # test a single config"
+echo "    make test-domain DOMAIN=reddit.com                # test all configs for a domain"
 echo "    make schema                                        # write schema locally (optional)"
