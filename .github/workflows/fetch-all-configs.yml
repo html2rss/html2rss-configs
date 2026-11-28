@@ -16,7 +16,18 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
+
+    services:
+      botasaurus:
+        image: html2rss/botasaurus-scrape-api:latest
+        ports:
+          - 4010:4010
+
+    env:
+      BOTASAURUS_SCRAPER_URL: http://localhost:4010
+      GH_TOKEN: ${{ github.token }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
     steps:
       - uses: actions/checkout@v4
@@ -27,46 +38,38 @@ jobs:
           ruby-version: 3.3
           bundler-cache: true
 
-      - name: Fetch every config
-        continue-on-error: true
-        run: >-
-          bundle exec rspec --tag fetch spec/html2rss/configs_dynamic_spec.rb
-          --format progress --format json --out fetch.json
-
-      - name: Report failing configs
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      - name: Wait for Botasaurus
         run: |
-          ruby -rjson -e '
-            examples = JSON.parse(File.read("fetch.json")).fetch("examples")
-            failed = examples.select { |e| e["status"] == "failed" }
-                             .map { |e| e["full_description"][/\AHtml2rss::Configs (\S+)/, 1] }
-                             .uniq.sort
-            File.write("failed.txt", failed.join("\n"))
-          '
-          title="Weekly fetch: configs returning no items"
-          issue=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+          for _ in $(seq 1 60); do
+            [ "$(curl -s -o /dev/null -w '%{http_code}' "$BOTASAURUS_SCRAPER_URL")" != "000" ] && exit 0
+            sleep 2
+          done
+          echo "::warning::Botasaurus did not answer; its configs will fail this week."
 
-          if [ ! -s failed.txt ]; then
-            echo "All configs fetched." >> "$GITHUB_STEP_SUMMARY"
-            [ -n "$issue" ] && gh issue close "$issue" --comment "All configs fetched in $RUN_URL."
+      - name: Fetch every config
+        id: report
+        run: |
+          gh issue list --label fetch-report --state all --limit 1 --json body --jq '.[0].body // ""' > previous.md
+          echo "status=$(bundle exec bin/fetch_report --previous previous.md --out report.md --progress)" >> "$GITHUB_OUTPUT"
+
+      - name: Publish the report issue
+        env:
+          STATUS: ${{ steps.report.outputs.status }}
+        run: |
+          { echo "Run: $RUN_URL"; echo; cat report.md; } > body.md
+          cat body.md >> "$GITHUB_STEP_SUMMARY"
+          issue=$(gh issue list --label fetch-report --state all --limit 1 --json number --jq '.[0].number // empty')
+
+          if [ -z "$issue" ]; then
+            [ "$STATUS" = clear ] && exit 0
+            gh label create fetch-report --color BFD4F2 --description "Weekly config fetch report" 2>/dev/null || true
+            gh issue create --label fetch-report --title "Weekly config fetch report" --body-file body.md
             exit 0
           fi
 
-          {
-            echo "$(wc -l < failed.txt | tr -d ' ') configs failed the fetch spec in $RUN_URL."
-            echo
-            echo "A failure can be a moved listing, a selector that no longer matches, or a site blocking the CI runner. Re-run one locally with:"
-            echo
-            echo "\`bundle exec rspec --tag fetch --example <config> spec/html2rss/configs_dynamic_spec.rb\`"
-            echo
-            sed "s/^/- \`/; s/\$/\`/" failed.txt
-          } > body.md
-          cat body.md >> "$GITHUB_STEP_SUMMARY"
-
-          if [ -n "$issue" ]; then
-            gh issue edit "$issue" --body-file body.md
+          gh issue edit "$issue" --body-file body.md
+          if [ "$STATUS" = clear ]; then
+            gh issue close "$issue" --comment "Nothing failing or stale in $RUN_URL." 2>/dev/null || true
           else
-            gh issue create --title "$title" --body-file body.md
+            gh issue reopen "$issue" 2>/dev/null || true
           fi

@@ -92,6 +92,8 @@ The fetch suite has two lanes:
 - `make test-fetch-all-configs` runs all `:fetch` examples. Configs marked as Botasaurus-backed are skipped unless `BOTASAURUS_SCRAPER_URL` is configured.
 - `make test-fetch-botasaurus-configs` runs only the Botasaurus-backed config subset and requires `BOTASAURUS_SCRAPER_URL`.
 
+**Weekly fetch report**: every Monday, `.github/workflows/fetch-all-configs.yml` runs `bin/fetch_report` against all configs, with Botasaurus as a service. The result goes into one issue labelled `fetch-report`. A config failing for 13 weeks, or with no item newer than 12 months, is listed as due for removal; removal happens by PR. Run it locally with `bin/fetch_report --out report.md --progress`.
+
 **Config folder convention**: Place configs under the registrable domain folder (e.g., `example.com/` or `bbc.co.uk/`). Legacy subdomain folders (e.g., `news.example.com/`) are allowed but not preferred.
 
 ## Editor Setup (JSON Schema)

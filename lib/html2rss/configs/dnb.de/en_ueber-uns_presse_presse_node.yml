@@ -14,12 +14,10 @@ channel:
   ttl: 360
 selectors:
   items:
-    selector: 'div[class*="teaser"]'
+    selector: 'div[class*="teaser"]:has(a[href*="/Presse/AktuellePM/"])'
     enhance: false
   title:
     selector: "h1, h2, h3, h4, h5, h6"
   url:
-    selector: "a"
+    selector: 'a[href*="/Presse/AktuellePM/"]'
     extractor: href
-  published_at:
-    selector: "time"

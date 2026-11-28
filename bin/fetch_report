@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Fetches every config and writes the weekly report as Markdown.
+# Prints "actionable" when a config is failing or stale, otherwise "clear".
+
+require 'bundler/setup'
+require 'date'
+require 'optparse'
+require_relative '../tooling/fetch_check'
+require_relative '../tooling/fetch_report'
+
+options = { jobs: 8 }
+OptionParser.new do |parser|
+  parser.banner = 'Usage: bin/fetch_report --out REPORT.md [--previous ISSUE.md] [--jobs N] [--progress]'
+  parser.on('--out FILE', 'Write the Markdown report here') { |file| options[:out] = file }
+  parser.on('--previous FILE', "Last report, for each failing config's first failing day") do |file|
+    options[:previous] = file
+  end
+  parser.on('--jobs N', Integer, 'Configs fetched at once (default 8)') { |jobs| options[:jobs] = jobs }
+  parser.on('--progress', 'Print each config status to stderr') { options[:progress] = true }
+end.parse!
+abort 'bin/fetch_report: --out is required' unless options[:out]
+
+config_dir = File.expand_path('../lib/html2rss/configs', __dir__)
+queue = Queue.new
+Dir.glob('**/*.yml', base: config_dir).each { |file_name| queue << file_name }
+queue.close
+
+results = Array.new(options[:jobs]) do
+  Thread.new do
+    checked = []
+    while (file_name = queue.pop)
+      checked << FetchCheck.call(file_name)
+      $stderr.puts("#{checked.last.status.to_s.ljust(7)} #{file_name}") if options[:progress] # rubocop:disable Style/StderrPuts -- progress, not a warning
+    end
+    checked
+  end
+end.flat_map(&:value)
+
+previous = options[:previous] && File.exist?(options[:previous]) ? File.read(options[:previous]) : nil
+report = FetchReport.new(results, failing_since: FetchReport.failing_since_from(previous), today: Date.today)
+File.write(options[:out], report.to_markdown)
+puts report.actionable? ? 'actionable' : 'clear'
