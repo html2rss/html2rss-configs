@@ -13,7 +13,7 @@ require_relative '../tooling/fetch_report'
 
 options = { jobs: 8 }
 OptionParser.new do |parser|
-  parser.banner = 'Usage: bin/fetch_report --out REPORT.md --status STATUS [--previous ISSUE.md] [--jobs N] [--progress]'
+  parser.banner = 'Usage: bin/fetch_report --out REPORT.md --status FILE [--previous ISSUE.md] [--jobs N] [--progress]'
   parser.on('--out FILE', 'Write the Markdown report here') { |file| options[:out] = file }
   parser.on('--status FILE', 'Write "actionable" or "clear"') { |file| options[:status] = file }
   parser.on('--previous FILE', "Last report, for each failing config's first failing day") do |file|
