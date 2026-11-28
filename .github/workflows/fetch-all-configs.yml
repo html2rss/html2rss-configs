@@ -26,6 +26,8 @@ jobs:
 
     env:
       BOTASAURUS_SCRAPER_URL: http://localhost:4010
+      # Chrome boot plus a 20s wait_for_selector overruns the 30s default; Botasaurus caps a scrape at 45s.
+      HTML2RSS_TOTAL_TIMEOUT_SECONDS: "60"
       GH_TOKEN: ${{ github.token }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
