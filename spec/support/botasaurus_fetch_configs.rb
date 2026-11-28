@@ -4,7 +4,6 @@ module BotasaurusFetchConfigs
   CONFIGS = %w[
     aalto.fi/news.yml
     academictransfer.com/jobs.yml
-    apple.com/newsroom.yml
     asml.com/press-releases.yml
     aspi.org.au/strategist.yml
     aviation-safety.net/latest-occurrences.yml
@@ -21,7 +20,6 @@ module BotasaurusFetchConfigs
     imo.org/press-briefings.yml
     ndl.go.jp/en_news.yml
     ntu.edu.sg/news.yml
-    occrp.org/news.yml
     oecd.org/newsroom.yml
     opec.org/press-releases.yml
     panapress.com/latest.yml

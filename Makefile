@@ -30,15 +30,15 @@ test-all: test test-fetch-all-configs
 # Dynamic test commands
 test-config:
 	@if [ -z "$(CONFIG)" ]; then \
-		echo "Usage: make test-config CONFIG=github.com/releases.yml"; \
-		echo "       make test-config CONFIG=github.com"; \
+		echo "Usage: make test-config CONFIG=reddit.com/subreddit.yml"; \
+		echo "       make test-config CONFIG=reddit.com"; \
 		exit 1; \
 	fi
 	bundle exec rspec --example "$(CONFIG)" spec/html2rss/configs_dynamic_spec.rb
 
 test-domain:
 	@if [ -z "$(DOMAIN)" ]; then \
-		echo "Usage: make test-domain DOMAIN=github.com"; \
+		echo "Usage: make test-domain DOMAIN=reddit.com"; \
 		exit 1; \
 	fi
 	bundle exec rspec --example "$(DOMAIN)" spec/html2rss/configs_dynamic_spec.rb
