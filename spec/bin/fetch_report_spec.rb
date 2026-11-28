@@ -7,6 +7,7 @@ RSpec.describe 'bin/fetch_report' do # rubocop:disable RSpec/DescribeClass
   let(:script_path) { File.expand_path('../../bin/fetch_report', __dir__) }
   let(:dir) { Dir.mktmpdir }
   let(:out) { File.join(dir, 'report.md') }
+  let(:status) { File.join(dir, 'status.txt') }
   let(:failing_file) { 'kcl.ac.uk/news.yml' }
 
   before do
@@ -25,7 +26,8 @@ RSpec.describe 'bin/fetch_report' do # rubocop:disable RSpec/DescribeClass
   end
 
   it 'checks every config and reports the failing one as actionable', :aggregate_failures do
-    expect { run_script('--out', out, '--jobs', '2') }.to output("actionable\n").to_stdout
+    run_script('--out', out, '--status', status, '--jobs', '2')
+    expect(File.read(status)).to eq('actionable')
     expect(FetchCheck).to have_received(:call).exactly(Html2rss::Configs.file_names.size).times
     expect(File.read(out)).to include("## Failing (1)\n", "`#{failing_file}` since #{Date.today}")
   end
@@ -34,7 +36,8 @@ RSpec.describe 'bin/fetch_report' do # rubocop:disable RSpec/DescribeClass
     previous = File.join(dir, 'previous.md')
     File.write(previous, %(<!-- fetch-report-state {"failing_since":{"#{failing_file}":"2026-01-05"}} -->))
 
-    expect { run_script('--out', out, '--previous', previous) }.to output("actionable\n").to_stdout
+    run_script('--out', out, '--status', status, '--previous', previous)
+    expect(File.read(status)).to eq('actionable')
     expect(File.read(out)).to include("`#{failing_file}` since 2026-01-05")
   end
 end

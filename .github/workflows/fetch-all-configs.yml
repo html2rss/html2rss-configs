@@ -50,7 +50,8 @@ jobs:
         id: report
         run: |
           gh issue list --label fetch-report --state all --limit 1 --json body --jq '.[0].body // ""' > previous.md
-          echo "status=$(bundle exec bin/fetch_report --previous previous.md --out report.md --progress)" >> "$GITHUB_OUTPUT"
+          bundle exec bin/fetch_report --previous previous.md --out report.md --status status.txt --progress
+          echo "status=$(cat status.txt)" >> "$GITHUB_OUTPUT"
 
       - name: Publish the report issue
         env:
