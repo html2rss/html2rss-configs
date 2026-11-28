@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "div.post-preview"
-    enhance: false
+    enhance: true
   title:
     selector: "h4 a"
   url:

@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: ".card"
-    enhance: false
+    enhance: true
   title:
     selector: h3
   url:

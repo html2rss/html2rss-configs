@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "article.PostAjaxFilter-card"
-    enhance: false
+    enhance: true
   title:
     selector: ".PostAjaxFilter-card-title a"
   url:

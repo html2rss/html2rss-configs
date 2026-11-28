@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: "table.textualData tbody tr"
-    enhance: false
+    enhance: true
   title:
     selector: "a.titleLink"
   url:

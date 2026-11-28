@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: '.views-row a[href^="/newsroom/"]'
-    enhance: false
+    enhance: true
   title:
     extractor: text
   url:

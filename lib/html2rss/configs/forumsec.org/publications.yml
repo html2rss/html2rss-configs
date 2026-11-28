@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: 'a.card__image[href^="/publications/"][aria-label]'
-    enhance: false
+    enhance: true
   title:
     extractor: attribute
     attribute: aria-label

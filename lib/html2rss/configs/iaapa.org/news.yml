@@ -10,7 +10,7 @@ channel:
   url: https://iaapa.org/news-funworld
   time_zone: UTC
   ttl: 720
-enhance: false
+enhance: true
 selectors:
   items:
     selector: ".views-row > article"

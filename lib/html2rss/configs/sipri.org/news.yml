@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: 'h3.field-content a[href^="/news/20"]'
-    enhance: false
+    enhance: true
   title:
     extractor: text
   url:

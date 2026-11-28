@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "article.node--type-press-release, div.views-row:has(h3)"
-    enhance: false
+    enhance: true
   title:
     selector: "h3 a"
   url:

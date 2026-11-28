@@ -13,7 +13,7 @@ channel:
 selectors:
   items:
     selector: ".bdst_presslist .bdst_presslist__block"
-    enhance: false
+    enhance: true
   title:
     selector: "a"
   url:

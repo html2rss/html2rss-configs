@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: "a.article-list-item"
-    enhance: false
+    enhance: true
   title:
     selector: ".article-list-item__heading, h1, h2, h3"
   url:

@@ -13,7 +13,7 @@ channel:
 selectors:
   items:
     selector: "article.node--view-mode-teaser"
-    enhance: false
+    enhance: true
   title:
     selector: "h2"
   url:

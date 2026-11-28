@@ -15,7 +15,7 @@ channel:
 selectors:
   items:
     selector: article.article--index
-    enhance: false
+    enhance: true
   title:
     selector: '.blogPost a[href*="/blog/"]:not([href*="/topics/"])'
   url:

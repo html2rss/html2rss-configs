@@ -14,7 +14,7 @@ channel:
 selectors:
   items:
     selector: 'a[href^="/blog/"][class*="flex-1"]'
-    enhance: false
+    enhance: true
   title:
     selector: "> p:first-of-type"
   url:

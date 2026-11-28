@@ -13,7 +13,7 @@ channel:
 selectors:
   items:
     selector: 'article.ecl-content-item a[href$="_en"]'
-    enhance: false
+    enhance: true
   title:
     extractor: text
   url:
