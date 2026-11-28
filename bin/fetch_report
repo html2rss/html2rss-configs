@@ -8,6 +8,7 @@
 require 'bundler/setup'
 require 'date'
 require 'optparse'
+require_relative '../tooling/botasaurus_fetch_configs'
 require_relative '../tooling/fetch_check'
 require_relative '../tooling/fetch_report'
 
@@ -19,17 +20,20 @@ OptionParser.new do |parser|
   parser.on('--previous FILE', "Last report, for each failing config's first failing day") do |file|
     options[:previous] = file
   end
-  parser.on('--jobs N', Integer, 'Configs fetched at once (default 8)') { |jobs| options[:jobs] = jobs }
+  parser.on('--jobs N', Integer, 'Non-Botasaurus configs fetched at once (default 8)') { |jobs| options[:jobs] = jobs }
   parser.on('--progress', 'Print each config status to stderr') { options[:progress] = true }
 end.parse!
 abort 'bin/fetch_report: --out and --status are required' unless options[:out] && options[:status]
 
 config_dir = File.expand_path('../lib/html2rss/configs', __dir__)
-queue = Queue.new
-Dir.glob('**/*.yml', base: config_dir).each { |file_name| queue << file_name }
-queue.close
+# One Botasaurus service renders one page at a time; parallel requests time out in its queue.
+botasaurus_files, plain_files = Dir.glob('**/*.yml', base: config_dir).partition do |file_name|
+  BotasaurusFetchConfigs::CONFIGS.include?(file_name)
+end
 
-results = Array.new(options[:jobs]) do
+queue_of = ->(file_names) { Queue.new.tap { |queue| file_names.each { |file_name| queue << file_name } }.close }
+
+worker = lambda do |queue|
   Thread.new do
     checked = []
     while (file_name = queue.pop)
@@ -38,7 +42,12 @@ results = Array.new(options[:jobs]) do
     end
     checked
   end
-end.flat_map(&:value)
+end
+
+plain_queue = queue_of.call(plain_files)
+workers = Array.new(options[:jobs]) { worker.call(plain_queue) }
+workers << worker.call(queue_of.call(botasaurus_files))
+results = workers.flat_map(&:value)
 
 previous = options[:previous] && File.exist?(options[:previous]) ? File.read(options[:previous]) : nil
 report = FetchReport.new(results, failing_since: FetchReport.failing_since_from(previous), today: Date.today)
